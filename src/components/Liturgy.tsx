@@ -6,7 +6,9 @@ import { getReadingsForDate } from '../utils/lectionary';
 import { Translation, CompletedData, OfficeType } from '../types';
 import { BibleReading } from './BibleReading';
 import { Section } from './Section';
-import { Check } from 'lucide-react';
+import { SheetMusic } from './SheetMusic';
+import { hymns } from '../content/hymn-data';
+import { Check, Music } from 'lucide-react';
 
 interface LiturgyProps {
     office: OfficeType;
@@ -33,6 +35,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
     const [useAthanasianCreed, setUseAthanasianCreed] = useState(false);
     const [usePriestlyAbsolution, setUsePriestlyAbsolution] = useState(false);
+    const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
+    
+    const toggleHymn = (id: string, e: any) => {
+        e.stopPropagation(); // prevent parent onClick
+        setHymnMode(prev => ({ ...prev, [id]: !prev[id] }));
+    };
     
     const isAshWedOrGoodFri = isAshWednesdayOrGoodFriday(selectedDate);
     const isSunday = selectedDate.getDay() === 0;
@@ -48,6 +56,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const handleNextSentence = () => setSentenceIdx(i => (i + 1) % openingSentences.length);
 
     
+    const activeCanticle1 = office === 'morning' ? (useBenedicite ? 'benedicite' : 'teDeum') : (useAlternativeEveningCanticle1 ? 'cantate' : 'magnificat');
+    const activeCanticle2 = office === 'morning' ? (useAlternativeCanticle2 ? 'jubilate' : 'benedictus') : (useAlternativeCanticle2 ? 'deusMisereatur' : 'nuncDimittis');
+
     // Group benedicite into stanzas of 3
     const benediciteGroups = [];
     for (let i = 0; i < benediciteVerses.length; i += 3) {
@@ -139,22 +150,35 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
 
              {/* Venite (Morning only, unless Ash Wed/Good Fri) */}
              {office === 'morning' && !isAshWedOrGoodFri && (
-                 <Section title="Venite, exultemus Domino" rubric="Psalm 95.">
-                     <div className="space-y-1 leading-relaxed">
-                        <p>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</p>
-                        <p>Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.</p>
-                        <p>For the Lord is a great God : and a great King above all gods.</p>
-                        <p>In his hand are all the corners of the earth : and the strength of the hills is his also.</p>
-                        <p>The sea is his, and he made it : and his hands prepared the dry land.</p>
-                        <p>O come, let us worship, and fall down : and kneel before the Lord our Maker.</p>
-                        <p>For he is the Lord our God : and we are the people of his pasture, and the sheep of his hand.</p>
-                        <p>To day if ye will hear his voice, harden not your hearts : as in the provocation, and as in the day of temptation in the wilderness;</p>
-                        <p>When your fathers tempted me : proved me, and saw my works.</p>
-                        <p>Forty years long was I grieved with this generation, and said : It is a people that do err in their hearts, for they have not known my ways;</p>
-                        <p>Unto whom I sware in my wrath : that they should not enter into my rest.</p>
-                        <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                        <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
-                     </div>
+                 <Section 
+                     title="Venite, exultemus Domino" 
+                     rubric="Psalm 95."
+                     leftAction={
+                         <button onClick={(e) => toggleHymn('venite', e)} className="text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                             <Music size={12} />
+                             {hymnMode['venite'] ? "Prose Text" : "Hymn Version"}
+                         </button>
+                     }
+                 >
+                     {hymnMode['venite'] ? (
+                         <SheetMusic abc={hymns.venite.abc} extraVerses={hymns.venite.extraVerses} />
+                     ) : (
+                         <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                            <p>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</p>
+                            <p>Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.</p>
+                            <p>For the Lord is a great God : and a great King above all gods.</p>
+                            <p>In his hand are all the corners of the earth : and the strength of the hills is his also.</p>
+                            <p>The sea is his, and he made it : and his hands prepared the dry land.</p>
+                            <p>O come, let us worship, and fall down : and kneel before the Lord our Maker.</p>
+                            <p>For he is the Lord our God : and we are the people of his pasture, and the sheep of his hand.</p>
+                            <p>To day if ye will hear his voice, harden not your hearts : as in the provocation, and as in the day of temptation in the wilderness;</p>
+                            <p>When your fathers tempted me : proved me, and saw my works.</p>
+                            <p>Forty years long was I grieved with this generation, and said : It is a people that do err in their hearts, for they have not known my ways;</p>
+                            <p>Unto whom I sware in my wrath : that they should not enter into my rest.</p>
+                            <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
+                            <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                         </div>
+                     )}
                  </Section>
              )}
 
@@ -178,8 +202,16 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section 
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
                  rubric={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
+                 leftAction={
+                     <button onClick={(e) => toggleHymn('canticle1', e)} className="text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                         <Music size={12} />
+                         {hymnMode['canticle1'] ? "Prose Text" : "Hymn Version"}
+                     </button>
+                 }
              >
-                 {office === 'morning' ? (
+                 {hymnMode['canticle1'] ? (
+                     <SheetMusic abc={hymns[activeCanticle1].abc} extraVerses={hymns[activeCanticle1].extraVerses} />
+                 ) : office === 'morning' ? (
                      <div className="cursor-pointer select-none" onClick={() => setUseBenedicite(!useBenedicite)}>
                         {!useBenedicite ? (
                             <div className="animate-in fade-in duration-500">
@@ -243,7 +275,16 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
                  rubric={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
+                 leftAction={
+                     <button onClick={(e) => toggleHymn('canticle2', e)} className="text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                         <Music size={12} />
+                         {hymnMode['canticle2'] ? "Prose Text" : "Hymn Version"}
+                     </button>
+                 }
              >
+                 {hymnMode['canticle2'] ? (
+                     <SheetMusic abc={hymns[activeCanticle2].abc} extraVerses={hymns[activeCanticle2].extraVerses} />
+                 ) : (
                  <div className="cursor-pointer select-none" onClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}>
                      {office === 'morning' ? (
                          !useAlternativeCanticle2 ? (
@@ -289,6 +330,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          )
                      )}
                  </div>
+                 )}
              </Section>
 
              {/* Creed */}

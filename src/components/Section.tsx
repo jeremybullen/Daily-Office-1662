@@ -3,11 +3,12 @@ import { ReactNode } from 'react';
 interface SectionProps {
   title?: ReactNode;
   rubric?: ReactNode;
+  leftAction?: ReactNode;
   children: ReactNode;
   className?: string;
 }
 
-export function Section({ title, rubric, children, className = '' }: SectionProps) {
+export function Section({ title, rubric, leftAction, children, className = '' }: SectionProps) {
   return (
     <div className={`flex flex-col md:flex-row gap-2 md:gap-12 mb-12 md:mb-16 ${className}`}>
       <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
@@ -19,6 +20,11 @@ export function Section({ title, rubric, children, className = '' }: SectionProp
         {rubric && (
           <div className="rubric text-sm space-y-2 opacity-90">
             {rubric}
+          </div>
+        )}
+        {leftAction && (
+          <div className="mt-3 md:mt-4 flex md:justify-end">
+            {leftAction}
           </div>
         )}
       </div>
