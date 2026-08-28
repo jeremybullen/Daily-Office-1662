@@ -37,7 +37,7 @@ export function CalendarPicker({ selectedDate, onSelectDate, completedData, onCl
     const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
     return (
-        <div className="absolute top-16 left-4 sm:left-6 w-80 bg-[var(--bg-color)] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-4 z-50">
+        <div className="w-80 bg-[var(--bg-color)] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-4">
             <div className="flex items-center justify-between mb-4">
                 <button onClick={prevMonth} className="p-2 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors">
                     <ChevronLeft size={18} />

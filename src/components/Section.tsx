@@ -6,14 +6,18 @@ interface SectionProps {
   leftAction?: ReactNode;
   children: ReactNode;
   className?: string;
+  onTitleClick?: () => void;
 }
 
-export function Section({ title, rubric, leftAction, children, className = '' }: SectionProps) {
+export function Section({ title, rubric, leftAction, children, className = '', onTitleClick }: SectionProps) {
   return (
     <div className={`flex flex-col md:flex-row gap-2 md:gap-12 mb-12 md:mb-16 ${className}`}>
       <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
         {title && (
-          <h3 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-80 mb-2">
+          <h3 
+            className={`font-semibold text-xs md:text-sm uppercase tracking-widest opacity-80 mb-2 ${onTitleClick ? 'cursor-pointer hover:opacity-100 underline decoration-dotted underline-offset-4' : ''}`}
+            onClick={onTitleClick}
+          >
             {title}
           </h3>
         )}

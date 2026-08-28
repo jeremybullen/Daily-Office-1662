@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { openingSentences, exhortation, confession, absolutionSubstitute, priestlyAbsolution, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace } from '../content/liturgy-data';
+import { openingSentences, exhortation, confession, absolutionSubstitute, priestlyAbsolution, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers, generalThanksgiving } from '../content/liturgy-data';
 import { isAshWednesdayOrGoodFriday } from '../utils/liturgyHelpers';
 import { getReadingsForDate } from '../utils/lectionary';
 import { Translation, CompletedData, OfficeType } from '../types';
@@ -55,6 +55,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
     const [useAthanasianCreed, setUseAthanasianCreed] = useState(false);
     const [usePriestlyAbsolution, setUsePriestlyAbsolution] = useState(false);
+    const [useAmericanStatePrayers, setUseAmericanStatePrayers] = useState(true);
     const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
     
     const toggleHymn = (id: string, e: any) => {
@@ -108,8 +109,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
 
              
              {/* Sentences */}
-             <Section title="The Opening Sentence" rubric={openingSentences[sentenceIdx].citation}>
-                <div className="cursor-pointer select-none" onClick={handleNextSentence}>
+             <Section title="The Opening Sentence" rubric={openingSentences[sentenceIdx].citation} onTitleClick={handleNextSentence}>
+                <div className="select-none">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={sentenceIdx}
@@ -125,9 +126,11 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Exhortation */}
-             <Section title="The Exhortation">
-                 <p>{isSunday ? exhortation.full : exhortation.short}</p>
-             </Section>
+             {!settings.useShortForm && (
+                 <Section title="The Exhortation">
+                     <p>{isSunday ? exhortation.full : exhortation.short}</p>
+                 </Section>
+             )}
 
              {/* Confession */}
              <Section 
@@ -141,8 +144,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section 
                  title={usePriestlyAbsolution ? "The Absolution" : "The Collect for Pardon"}
                  rubric={usePriestlyAbsolution ? "To be pronounced by the Priest alone, standing; the people still kneeling." : "Substituted for the Absolution for private devotion."}
+                 onTitleClick={() => setUsePriestlyAbsolution(!usePriestlyAbsolution)}
              >
-                 <div className="cursor-pointer select-none" onClick={() => setUsePriestlyAbsolution(!usePriestlyAbsolution)}>
+                 <div className="select-none">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={usePriestlyAbsolution ? 'priestly' : 'substitute'}
@@ -178,7 +182,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Venite (Morning only, unless Ash Wed/Good Fri) */}
-             {office === 'morning' && !isAshWedOrGoodFri && (
+             {office === 'morning' && !isAshWedOrGoodFri && !settings.useShortForm && (
                  <Section 
                      title="Venite, exultemus Domino" 
                      rubric="Psalm 95."
@@ -212,22 +216,31 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              )}
 
              {/* Psalms */}
-             <BibleReading 
-                 title="The Psalms of the Day" 
-                 rubric={readings.psalms}
-                 passage={readings.psalms} 
-                 translation={translation} 
-             />
+             {settings.useShortForm ? (
+                 <BibleReading 
+                     title="The Psalm" 
+                     rubric={displayedPsalm}
+                     passage={displayedPsalm} 
+                     translation={translation}
+                     onTitleClick={handlePsalmClick}
+                 />
+             ) : (
+                 <BibleReading 
+                     title="The Psalms of the Day" 
+                     rubric={readings.psalms}
+                     passage={readings.psalms} 
+                     translation={translation} 
+                 />
+             )}
              {/* First Lesson (or Single Lesson) */}
              {settings.useShortForm ? (
-                 <div className="cursor-pointer" onClick={() => updateSettings({ shortLessonPreference: settings.shortLessonPreference === 'OT' ? 'NT' : 'OT' })}>
-                     <BibleReading 
+                 <BibleReading 
                          title="The Lesson" 
-                         rubric={`${displayedLesson} (Click to change)`}
+                         rubric={displayedLesson}
                          passage={displayedLesson} 
                          translation={translation} 
+                         onTitleClick={() => updateSettings({ shortLessonPreference: settings.shortLessonPreference === 'OT' ? 'NT' : 'OT' })}
                      />
-                 </div>
              ) : (
                  <BibleReading 
                      title="The First Lesson" 
@@ -241,6 +254,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <Section 
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
                  rubric={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
+                 onTitleClick={office === 'morning' ? () => setUseBenedicite(!useBenedicite) : () => setUseAlternativeEveningCanticle1(!useAlternativeEveningCanticle1)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle1', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                          <Music size={12} />
@@ -251,7 +265,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  {hymnMode['canticle1'] ? (
                      <SheetMusic imageUrl={hymns[activeCanticle1].imageUrl} extraVerses={hymns[activeCanticle1].extraVerses} />
                  ) : office === 'morning' ? (
-                     <div className="cursor-pointer select-none" onClick={() => setUseBenedicite(!useBenedicite)}>
+                     <div className="select-none">
                         {!useBenedicite ? (
                             <div className="animate-in fade-in duration-500">
                                 <div className="space-y-1 leading-relaxed">
@@ -276,7 +290,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                         )}
                      </div>
                  ) : (
-                     <div className="cursor-pointer select-none" onClick={() => setUseAlternativeEveningCanticle1(!useAlternativeEveningCanticle1)}>
+                     <div className="select-none">
                          {!useAlternativeEveningCanticle1 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
                                 <p>My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour.</p>
@@ -313,6 +327,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
                  rubric={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
+                 onTitleClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle2', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                          <Music size={12} />
@@ -323,7 +338,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  {hymnMode['canticle2'] ? (
                      <SheetMusic imageUrl={hymns[activeCanticle2].imageUrl} extraVerses={hymns[activeCanticle2].extraVerses} />
                  ) : (
-                 <div className="cursor-pointer select-none" onClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}>
+                 <div className="select-none">
                      {office === 'morning' ? (
                          !useAlternativeCanticle2 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
@@ -376,8 +391,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section 
                  title={useAthanasianCreed ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
                  rubric={useAthanasianCreed ? "Quicunque vult." : ""}
+                 onTitleClick={() => setUseAthanasianCreed(!useAthanasianCreed)}
              >
-                 <div className="cursor-pointer select-none" onClick={() => setUseAthanasianCreed(!useAthanasianCreed)}>
+                 <div className="select-none">
                      {!useAthanasianCreed ? (
                          <div className="animate-in fade-in duration-500">
                              <p>{apostlesCreed}</p>
@@ -463,13 +479,58 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  )}
              </Section>
 
+             {/* State Prayers & Thanksgiving (Long Form) */}
+             {!settings.useShortForm && (
+                 <>
+
+                     {useAmericanStatePrayers ? (
+                         <Section 
+                            title="A Prayer for the President and all in Civil Authority" 
+                            onTitleClick={() => setUseAmericanStatePrayers(false)}
+                         >
+                             <div className="select-none animate-in fade-in duration-500">
+                                 <p>{statePrayers.president}</p>
+                             </div>
+                         </Section>
+                     ) : (
+                         <>
+                             <Section 
+                                title="A Prayer for the King's Majesty"
+                                onTitleClick={() => setUseAmericanStatePrayers(true)}
+                             >
+                                 <div className="select-none animate-in fade-in duration-500">
+                                     <p>{statePrayers.kingsMajesty}</p>
+                                 </div>
+                             </Section>
+                             
+                             <Section 
+                                title="A Prayer for the Royal Family"
+                                onTitleClick={() => setUseAmericanStatePrayers(true)}
+                             >
+                                 <div className="select-none animate-in fade-in duration-500">
+                                     <p>{statePrayers.royalFamily}</p>
+                                 </div>
+                             </Section>
+                         </>
+                     )}
+                     
+                     <Section title="A Prayer for the Clergy and People">
+                         <p>{statePrayers.clergyAndPeople}</p>
+                     </Section>
+                     
+                     <Section title="A General Thanksgiving" rubric="To be said by the Minister alone.">
+                         <p>{generalThanksgiving}</p>
+                     </Section>
+                 </>
+             )}
+
              {/* Prayer of St Chrysostom */}
              <Section title="A Prayer of Saint Chrysostom">
                  <p>{stChrysostom}</p>
              </Section>
 
              {/* The Grace */}
-             <Section title="The Grace" rubric="2 Corinthians 13.">
+             <Section title="The Grace" rubric="2 Corinthians 13:14">
                  <p>{theGrace}</p>
              </Section>
              

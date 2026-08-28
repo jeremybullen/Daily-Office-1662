@@ -12,16 +12,16 @@ interface BibleReadingProps {
     rubric?: ReactNode;
     passage: string;
     translation: Translation;
+    onTitleClick?: () => void;
 }
 
-export function BibleReading({ title, rubric, passage, translation }: BibleReadingProps) {
+export function BibleReading({ title, rubric, passage, translation, onTitleClick }: BibleReadingProps) {
     const [passages, setPassages] = useState<Passage[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         let isMounted = true;
-
         async function fetchPassage() {
             setLoading(true);
             setError(null);
@@ -50,14 +50,13 @@ export function BibleReading({ title, rubric, passage, translation }: BibleReadi
         if (passage) {
             fetchPassage();
         }
-
         return () => {
             isMounted = false;
         };
     }, [passage, translation]);
 
     return (
-        <Section title={title} rubric={rubric}>
+        <Section title={title} rubric={rubric} onTitleClick={onTitleClick}>
             {loading ? (
                 <div className="flex items-center py-4">
                     <div className="animate-pulse flex space-x-2 opacity-50">

@@ -47,17 +47,38 @@ export function Header({ office, setOffice, settings, updateSettings, selectedDa
         className={`fixed top-0 w-full z-40 transition-transform duration-500 ease-in-out glass-header ${isHidden ? '-translate-y-full' : 'translate-y-0'}`}
       >
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div 
-            className="truncate pr-2 cursor-pointer flex items-center gap-2 select-none group"
-            onClick={() => setCalendarOpen(!calendarOpen)}
-          >
-            <div>
-              <p className="font-semibold text-base sm:text-lg leading-tight truncate group-hover:opacity-80 transition-opacity">Daily Office</p>
-              <div className="flex items-center gap-1 opacity-75 group-hover:opacity-100 transition-opacity">
-                <p className="text-[10px] sm:text-xs truncate">{displayDate}</p>
-                <ChevronDown size={12} className={`transition-transform duration-300 ${calendarOpen ? 'rotate-180' : ''}`} />
+          <div className="relative">
+            <div 
+              className="truncate pr-2 cursor-pointer flex items-center gap-2 select-none group"
+              onClick={() => setCalendarOpen(!calendarOpen)}
+            >
+              <div>
+                <p className="font-semibold text-base sm:text-lg leading-tight truncate group-hover:opacity-80 transition-opacity">Daily Office</p>
+                <div className="flex items-center gap-1 opacity-75 group-hover:opacity-100 transition-opacity">
+                  <p className="text-[10px] sm:text-xs truncate">{displayDate}</p>
+                  <ChevronDown size={12} className={`transition-transform duration-300 ${calendarOpen ? 'rotate-180' : ''}`} />
+                </div>
               </div>
             </div>
+            
+            <AnimatePresence>
+              {calendarOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 mt-2 z-50"
+                >
+                  <CalendarPicker 
+                    selectedDate={selectedDate} 
+                    onSelectDate={onSelectDate} 
+                    completedData={completedData} 
+                    onClose={() => setCalendarOpen(false)} 
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
           
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -79,25 +100,6 @@ export function Header({ office, setOffice, settings, updateSettings, selectedDa
             
           </div>
         </div>
-        
-        {/* Calendar Dropdown */}
-        <AnimatePresence>
-          {calendarOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              <CalendarPicker 
-                selectedDate={selectedDate} 
-                onSelectDate={onSelectDate} 
-                completedData={completedData} 
-                onClose={() => setCalendarOpen(false)} 
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
         
       </header>
 
