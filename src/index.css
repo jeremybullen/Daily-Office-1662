@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+:root {
+  --bg-color: #F9F6EE;
+  --text-color: #1C1C1C;
+  --rubric-color: #8B0000;
+  --inset-bg: #EAE5D9;
+  --header-bg: rgba(249, 246, 238, 0.85);
+  --border-color: #D1CFC7;
+}
+
+.dark {
+  --bg-color: #0F172A;
+  --text-color: #E2E8F0;
+  --rubric-color: #FCA5A5; /* Softer, readable dark red */
+  --inset-bg: #1E293B;
+  --header-bg: rgba(15, 23, 42, 0.85);
+  --border-color: #334155;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-serif);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.rubric {
+  color: var(--rubric-color);
+  font-style: italic;
+}
+
+.glass-header {
+  background-color: var(--header-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.inset-block {
+  background-color: var(--inset-bg);
+  border: 1px solid var(--border-color);
+}
+
+/* Custom scrollbar for textareas */
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}

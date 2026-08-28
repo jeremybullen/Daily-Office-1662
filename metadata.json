@@ -1,0 +1,6 @@
+{
+  "name": "1662 Daily Office",
+  "description": "A beautifully crafted, private reading experience for the 1662 Book of Common Prayer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
