@@ -27,7 +27,13 @@ export function BibleReading({ title, rubric, passage, translation, onTitleClick
             setError(null);
             try {
                 const res = await fetch(`/api/bible?passage=${encodeURIComponent(passage)}&translation=${translation}`);
-                const data = await res.json();
+                let data;
+                const rawText = await res.text();
+                try {
+                    data = JSON.parse(rawText);
+                } catch (e) {
+                    throw new Error(`Failed to parse server response: ${rawText.substring(0, 50)}...`);
+                }
                 
                 if (!res.ok) {
                     throw new Error(data.error || "Failed to fetch passage");

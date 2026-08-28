@@ -21,7 +21,7 @@ async function startServer() {
       const err = await response.json().catch(() => ({})) as any;
       throw new Error(err.error || `Bible API responded with ${response.status}`);
     }
-    const data = await response.json() as any;
+    let data; try { data = await response.json() as any; } catch(e) { throw new Error("Invalid JSON from Bible API or Bolls API"); }
     if (data.verses) {
       return data.verses.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/\n+/g, " ").trim()}`).join(" ");
     }
@@ -46,7 +46,7 @@ async function startServer() {
       for (let c = startChap; c <= endChap; c++) {
           const res = await fetch(`https://bolls.life/get-text/${trans.toUpperCase()}/${bookId}/${c}/`);
           if (!res.ok) throw new Error(`Bolls API responded with ${res.status}`);
-          const data = await res.json() as any;
+          let data; try { data = await res.json() as any; } catch(e) { throw new Error("Invalid JSON from Bolls API"); }
           let filtered = data;
           if (c === startChap) {
               filtered = filtered.filter((v: any) => v.verse >= startVerse);
@@ -73,7 +73,7 @@ async function startServer() {
     
     const response = await fetch(`https://bolls.life/get-text/${trans.toUpperCase()}/${bookId}/${chapter}/`);
     if (!response.ok) throw new Error(`Bolls API responded with ${response.status}`);
-    const data = await response.json() as any;
+    let data; try { data = await response.json() as any; } catch(e) { throw new Error("Invalid JSON from Bible API or Bolls API"); }
     
     let filtered = data;
     if (startVerse !== null && endVerse !== null) {
