@@ -22,7 +22,10 @@ async function startServer() {
       throw new Error(err.error || `Bible API responded with ${response.status}`);
     }
     const data = await response.json() as any;
-    return data.text.trim();
+    if (data.verses) {
+      return data.verses.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/\n+/g, " ").trim()}`).join(" ");
+    }
+    return data.text.replace(/\n+/g, " ").trim();
   }
 
   // Helper to fetch a single query from bolls.life
@@ -51,7 +54,7 @@ async function startServer() {
           if (c === endChap) {
               filtered = filtered.filter((v: any) => v.verse <= endVerse);
           }
-          allText.push(filtered.map((v: any) => v.text.replace(/<[^>]+>/g, '').trim()).join(" "));
+          allText.push(filtered.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/<[^>]+>/g, '').trim()}`).join(" "));
       }
       return allText.join(" ");
     }
@@ -77,7 +80,7 @@ async function startServer() {
       filtered = data.filter((v: any) => v.verse >= startVerse && v.verse <= endVerse);
     }
     
-    return filtered.map((v: any) => v.text.replace(/<[^>]+>/g, '').trim()).join(" ");
+    return filtered.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/<[^>]+>/g, '').trim()}`).join(" ");
   }
 
   // API Route for Bible Readings

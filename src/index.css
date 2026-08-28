@@ -59,3 +59,11 @@ textarea::-webkit-scrollbar-thumb {
   background-color: var(--border-color);
   border-radius: 4px;
 }
+
+.scripture-text sup {
+  font-size: 0.65em;
+  font-weight: 600;
+  opacity: 0.6;
+  margin-right: 0.2rem;
+  margin-left: 0.1rem;
+}

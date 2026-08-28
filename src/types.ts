@@ -7,6 +7,8 @@ export interface AppSettings {
   theme: Theme;
   fontSize: FontSize;
   translation: Translation;
+  useShortForm: boolean;
+  shortLessonPreference: 'OT' | 'NT';
 }
 
 export type CompletedData = Record<string, { morning?: boolean, evening?: boolean }>;

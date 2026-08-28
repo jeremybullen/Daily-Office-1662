@@ -78,8 +78,8 @@ export function BibleReading({ title, rubric, passage, translation }: BibleReadi
                             {passages.length > 1 && (
                                 <h4 className="font-bold text-lg mb-4 opacity-70">{p.reference}</h4>
                             )}
-                            <div className="whitespace-pre-wrap leading-loose">
-                                {p.text}
+                            <div className="leading-loose scripture-text">
+                                <span dangerouslySetInnerHTML={{ __html: p.text }} />
                             </div>
                         </div>
                     ))}

@@ -25,9 +25,11 @@ interface LiturgyProps {
     selectedDate: Date;
     completedData: CompletedData;
     onToggleCompleted: () => void;
+    settings: AppSettings;
+    updateSettings: (newSettings: Partial<AppSettings>) => void;
 }
 
-export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted }: LiturgyProps) {
+export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings }: LiturgyProps) {
 
     const [sentenceIdx, setSentenceIdx] = useState(0);
     const [useBenedicite, setUseBenedicite] = useState(false);
@@ -154,7 +156,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      title="Venite, exultemus Domino" 
                      rubric="Psalm 95."
                      leftAction={
-                         <button onClick={(e) => toggleHymn('venite', e)} className="text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                         <button onClick={(e) => toggleHymn('venite', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                              <Music size={12} />
                              {hymnMode['venite'] ? "Prose Text" : "Hymn Version"}
                          </button>
@@ -189,21 +191,28 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  passage={readings.psalms} 
                  translation={translation} 
              />
-
-             {/* First Lesson */}
-             <BibleReading 
-                 title="The First Lesson" 
-                 rubric={readings.firstLesson}
-                 passage={readings.firstLesson} 
-                 translation={translation} 
-             />
-
-             {/* Canticle 1 */}
-             <Section 
+             {settings.useShortForm && (
+                 <div className="flex justify-center mb-8">
+                     <div className="bg-black/5 dark:bg-white/10 rounded-full p-1 flex text-xs font-semibold tracking-wider">
+                         <button onClick={() => updateSettings({ shortLessonPreference: 'OT' })} className={`px-4 py-1.5 rounded-full transition-colors ${settings.shortLessonPreference === 'OT' ? 'bg-[var(--text-color)] text-[var(--bg-color)]' : 'opacity-60 hover:opacity-100'}`}>OLD TESTAMENT</button>
+                         <button onClick={() => updateSettings({ shortLessonPreference: 'NT' })} className={`px-4 py-1.5 rounded-full transition-colors ${settings.shortLessonPreference === 'NT' ? 'bg-[var(--text-color)] text-[var(--bg-color)]' : 'opacity-60 hover:opacity-100'}`}>NEW TESTAMENT</button>
+                     </div>
+                 </div>
+             )}
+             {/* First Lesson and Canticle 1 */}
+             {(!settings.useShortForm || settings.shortLessonPreference === 'OT') && (
+                 <>
+                     <BibleReading 
+                         title="The First Lesson" 
+                         rubric={readings.firstLesson}
+                         passage={readings.firstLesson} 
+                         translation={translation} 
+                     />
+                     <Section 
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
                  rubric={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
                  leftAction={
-                     <button onClick={(e) => toggleHymn('canticle1', e)} className="text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                     <button onClick={(e) => toggleHymn('canticle1', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                          <Music size={12} />
                          {hymnMode['canticle1'] ? "Prose Text" : "Hymn Version"}
                      </button>
@@ -262,21 +271,22 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      </div>
                  )}
              </Section>
-
-             {/* Second Lesson */}
-             <BibleReading 
-                 title="The Second Lesson" 
-                 rubric={readings.secondLesson}
-                 passage={readings.secondLesson} 
-                 translation={translation} 
-             />
-
-             {/* Canticle 2 */}
-             <Section 
+                 </>
+             )}
+             {/* Second Lesson and Canticle 2 */}
+             {(!settings.useShortForm || settings.shortLessonPreference === 'NT') && (
+                 <>
+                     <BibleReading 
+                         title="The Second Lesson" 
+                         rubric={readings.secondLesson}
+                         passage={readings.secondLesson} 
+                         translation={translation} 
+                     />
+                     <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
                  rubric={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
                  leftAction={
-                     <button onClick={(e) => toggleHymn('canticle2', e)} className="text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                     <button onClick={(e) => toggleHymn('canticle2', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                          <Music size={12} />
                          {hymnMode['canticle2'] ? "Prose Text" : "Hymn Version"}
                      </button>
@@ -332,7 +342,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  </div>
                  )}
              </Section>
-
+                 </>
+             )}
              {/* Creed */}
              <Section 
                  title={useAthanasianCreed ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
@@ -370,10 +381,10 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Lord's Prayer 2 */}
              <Section 
                  title="The Lord's Prayer"
-                 action={
+                 leftAction={
                      <button 
                          onClick={() => toggleHymnMode('lordsPrayer')}
-                         className="text-xs font-semibold tracking-wider uppercase opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2"
+                         className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10"
                      >
                          <Music size={14} />
                          {hymnMode['lordsPrayer'] ? "Prose Text" : "Hymn Version"}

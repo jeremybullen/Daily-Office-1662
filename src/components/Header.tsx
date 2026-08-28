@@ -28,6 +28,7 @@ export function Header({ office, setOffice, settings, updateSettings, selectedDa
 
   const cycleTheme = () => updateSettings({ theme: settings.theme === 'light' ? 'dark' : 'light' });
   const cycleTranslation = () => updateSettings({ translation: settings.translation === 'KJV' ? 'ESV' : 'KJV' });
+  const cycleForm = () => updateSettings({ useShortForm: !settings.useShortForm });
   const cycleFontSize = () => {
     const sizes: FontSize[] = ['text-base', 'text-lg', 'text-xl', 'text-2xl'];
     const idx = sizes.indexOf(settings.fontSize);
@@ -60,6 +61,9 @@ export function Header({ office, setOffice, settings, updateSettings, selectedDa
           </div>
           
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <button onClick={cycleForm} className="px-2.5 h-8 text-[11px] font-semibold tracking-wide rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+              {settings.useShortForm ? 'SHORT' : 'FULL'}
+            </button>
             <button onClick={cycleOffice} className="px-2.5 h-8 text-[11px] font-semibold tracking-wide rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
               {displayOffice}
             </button>

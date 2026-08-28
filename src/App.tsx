@@ -9,7 +9,9 @@ export default function App() {
   const [settings, setSettings] = useLocalStorage<AppSettings>('bcp-settings', {
     theme: 'light',
     fontSize: 'text-lg',
-    translation: 'KJV'
+    translation: 'KJV',
+    useShortForm: false,
+    shortLessonPreference: 'OT'
   });
   
   const [currentOffice, setCurrentOffice] = useState<OfficeType>(getCurrentOfficeType());
@@ -61,6 +63,8 @@ export default function App() {
         selectedDate={selectedDate}
         completedData={completedData}
         onToggleCompleted={toggleCompleted}
+        settings={settings}
+        updateSettings={updateSettings}
       />
     </div>
   );
