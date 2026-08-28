@@ -29,9 +29,27 @@ interface LiturgyProps {
     updateSettings: (newSettings: Partial<AppSettings>) => void;
 }
 
+
+function parsePsalms(str: string) {
+    if (str.startsWith('Psalms ')) str = str.replace('Psalms ', '');
+    if (str.startsWith('Psalm ')) str = str.replace('Psalm ', '');
+    if (str.includes(':')) return ['Psalm ' + str];
+    if (str.includes('-')) {
+        const parts = str.split('-');
+        const start = parseInt(parts[0]);
+        const end = parseInt(parts[1]);
+        const arr = [];
+        for (let i = start; i <= end; i++) arr.push('Psalm ' + i);
+        return arr;
+    }
+    if (str.includes(',')) return str.split(',').map(s => 'Psalm ' + s.trim());
+    return ['Psalm ' + str];
+}
+
 export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings }: LiturgyProps) {
 
     const [sentenceIdx, setSentenceIdx] = useState(0);
+    const [shortPsalmIndex, setShortPsalmIndex] = useState(0);
     const [useBenedicite, setUseBenedicite] = useState(false);
     const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(false);
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
@@ -54,6 +72,15 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const isCompleted = completedData[dateKey]?.[office] ?? false;
 
     const readings = useMemo(() => getReadingsForDate(selectedDate, office), [office, selectedDate]);
+    
+    const allPsalms = useMemo(() => parsePsalms(readings.psalms), [readings.psalms]);
+    const displayedPsalm = settings.useShortForm ? allPsalms[shortPsalmIndex % allPsalms.length] : readings.psalms;
+    
+    const handlePsalmClick = () => {
+        if (settings.useShortForm) setShortPsalmIndex(prev => prev + 1);
+    };
+    
+    const displayedLesson = settings.shortLessonPreference === 'OT' ? readings.firstLesson : readings.secondLesson;
 
     const handleNextSentence = () => setSentenceIdx(i => (i + 1) % openingSentences.length);
 
@@ -191,23 +218,26 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  passage={readings.psalms} 
                  translation={translation} 
              />
-             {settings.useShortForm && (
-                 <div className="flex justify-center mb-8">
-                     <div className="bg-black/5 dark:bg-white/10 rounded-full p-1 flex text-xs font-semibold tracking-wider">
-                         <button onClick={() => updateSettings({ shortLessonPreference: 'OT' })} className={`px-4 py-1.5 rounded-full transition-colors ${settings.shortLessonPreference === 'OT' ? 'bg-[var(--text-color)] text-[var(--bg-color)]' : 'opacity-60 hover:opacity-100'}`}>OLD TESTAMENT</button>
-                         <button onClick={() => updateSettings({ shortLessonPreference: 'NT' })} className={`px-4 py-1.5 rounded-full transition-colors ${settings.shortLessonPreference === 'NT' ? 'bg-[var(--text-color)] text-[var(--bg-color)]' : 'opacity-60 hover:opacity-100'}`}>NEW TESTAMENT</button>
-                     </div>
-                 </div>
-             )}
-             {/* First Lesson and Canticle 1 */}
-             {(!settings.useShortForm || settings.shortLessonPreference === 'OT') && (
-                 <>
+             {/* First Lesson (or Single Lesson) */}
+             {settings.useShortForm ? (
+                 <div className="cursor-pointer" onClick={() => updateSettings({ shortLessonPreference: settings.shortLessonPreference === 'OT' ? 'NT' : 'OT' })}>
                      <BibleReading 
-                         title="The First Lesson" 
-                         rubric={readings.firstLesson}
-                         passage={readings.firstLesson} 
+                         title="The Lesson" 
+                         rubric={`${displayedLesson} (Click to change)`}
+                         passage={displayedLesson} 
                          translation={translation} 
                      />
+                 </div>
+             ) : (
+                 <BibleReading 
+                     title="The First Lesson" 
+                     rubric={readings.firstLesson}
+                     passage={readings.firstLesson} 
+                     translation={translation} 
+                 />
+             )}
+             
+             {/* Canticle 1 */}
                      <Section 
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
                  rubric={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
@@ -271,10 +301,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      </div>
                  )}
              </Section>
-                 </>
-             )}
              {/* Second Lesson and Canticle 2 */}
-             {(!settings.useShortForm || settings.shortLessonPreference === 'NT') && (
+             {!settings.useShortForm && (
                  <>
                      <BibleReading 
                          title="The Second Lesson" 
@@ -379,7 +407,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
              
              {/* Lord's Prayer 2 */}
-             <Section 
+             {!settings.useShortForm && (
+                 <Section 
                  title="The Lord's Prayer"
                  leftAction={
                      <button 
@@ -399,6 +428,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      </div>
                  )}
              </Section>
+             )}
 
              {/* Suffrages */}
              <Section title="The Suffrages">
