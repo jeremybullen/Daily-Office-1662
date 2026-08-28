@@ -161,7 +161,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      }
                  >
                      {hymnMode['venite'] ? (
-                         <SheetMusic abc={hymns.venite.abc} extraVerses={hymns.venite.extraVerses} />
+                         <SheetMusic imageUrl={hymns.venite.imageUrl} extraVerses={hymns.venite.extraVerses} />
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
                             <p>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</p>
@@ -210,7 +210,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['canticle1'] ? (
-                     <SheetMusic abc={hymns[activeCanticle1].abc} extraVerses={hymns[activeCanticle1].extraVerses} />
+                     <SheetMusic imageUrl={hymns[activeCanticle1].imageUrl} extraVerses={hymns[activeCanticle1].extraVerses} />
                  ) : office === 'morning' ? (
                      <div className="cursor-pointer select-none" onClick={() => setUseBenedicite(!useBenedicite)}>
                         {!useBenedicite ? (
@@ -283,7 +283,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['canticle2'] ? (
-                     <SheetMusic abc={hymns[activeCanticle2].abc} extraVerses={hymns[activeCanticle2].extraVerses} />
+                     <SheetMusic imageUrl={hymns[activeCanticle2].imageUrl} extraVerses={hymns[activeCanticle2].extraVerses} />
                  ) : (
                  <div className="cursor-pointer select-none" onClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}>
                      {office === 'morning' ? (
@@ -368,8 +368,25 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
              
              {/* Lord's Prayer 2 */}
-             <Section title="The Lord's Prayer">
-                 <p>{lordsPrayer}</p>
+             <Section 
+                 title="The Lord's Prayer"
+                 action={
+                     <button 
+                         onClick={() => toggleHymnMode('lordsPrayer')}
+                         className="text-xs font-semibold tracking-wider uppercase opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2"
+                     >
+                         <Music size={14} />
+                         {hymnMode['lordsPrayer'] ? "Prose Text" : "Hymn Version"}
+                     </button>
+                 }
+             >
+                 {hymnMode['lordsPrayer'] ? (
+                     <SheetMusic imageUrl={hymns.lordsPrayer.imageUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
+                 ) : (
+                     <div className="animate-in fade-in duration-500">
+                         <p>{lordsPrayer}</p>
+                     </div>
+                 )}
              </Section>
 
              {/* Suffrages */}

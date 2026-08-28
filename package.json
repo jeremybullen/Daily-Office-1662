@@ -15,7 +15,6 @@
     "@google/genai": "^2.4.0",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
-    "abcjs": "^6.7.0",
     "d3": "^7.9.0",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.2.0",

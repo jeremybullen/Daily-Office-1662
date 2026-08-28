@@ -1,33 +1,25 @@
-import { useEffect, useId } from 'react';
-import abcjs from 'abcjs';
-
-interface SheetMusicProps {
-    abc: string;
-    extraVerses: string[][];
+export interface SheetMusicProps {
+    imageUrl: string | string[];
+    extraVerses?: string[][];
 }
 
-export function SheetMusic({ abc, extraVerses }: SheetMusicProps) {
-    const rawId = useId();
-    // ABCJS needs a valid DOM id without colons
-    const id = `abc-${rawId.replace(/:/g, '')}`;
-
-    useEffect(() => {
-        abcjs.renderAbc(id, abc, {
-            responsive: 'resize',
-            add_classes: true,
-            paddingtop: 15,
-            paddingbottom: 15,
-            paddingright: 15,
-            paddingleft: 15,
-        });
-    }, [abc, id]);
-
+export function SheetMusic({ imageUrl, extraVerses }: SheetMusicProps) {
+    const images = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
+    
     return (
         <div className="animate-in fade-in duration-500">
-            <div 
-                id={id} 
-                className="w-full bg-[#FCFBF8] text-black rounded shadow-sm border border-[var(--border-color)] overflow-x-auto mb-6"
-            ></div>
+            <div className="w-full bg-[#FCFBF8] text-black rounded shadow-sm border border-[var(--border-color)] overflow-hidden mb-6 flex flex-col items-center">
+                {images.length > 0 && images[0] ? (
+                    images.map((img, i) => (
+                        <img key={i} src={img} alt={`Hymn sheet music page ${i + 1}`} className="w-full max-w-2xl object-contain mix-blend-multiply" />
+                    ))
+                ) : (
+                    <div className="p-8 text-center opacity-60 italic">
+                        <p>Sheet music image not yet uploaded.</p>
+                        <p className="text-sm mt-2">Add image to the public/hymns folder.</p>
+                    </div>
+                )}
+            </div>
             
             {extraVerses && extraVerses.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 mt-4">
