@@ -4,14 +4,30 @@ const bookMap: Record<string, number> = {
 
 // Helper to fetch a single query from bible-api.com
 async function fetchFromBibleApi(query: string, trans: string) {
-  const response = await fetch(`https://bible-api.com/${encodeURIComponent(query)}?translation=${trans}`);
+  let apiQuery = query;
+  let startVerse: number | null = null;
+  
+  // If the query specifies a starting verse but no ending verse (e.g., "Ezekiel 3:15"), 
+  // fetch the whole chapter and filter to the end.
+  const singleVerseMatch = query.match(/^(\d?\s*[a-zA-Z\s]+?)\s+(\d+):(\d+)$/);
+  if (singleVerseMatch) {
+     apiQuery = `${singleVerseMatch[1]} ${singleVerseMatch[2]}`;
+     startVerse = parseInt(singleVerseMatch[3]);
+  }
+
+  const response = await fetch(`https://bible-api.com/${encodeURIComponent(apiQuery)}?translation=${trans}`);
   if (!response.ok) {
     const err = await response.json().catch(() => ({})) as any;
     throw new Error(err.error || `Bible API responded with ${response.status}`);
   }
   let data; try { data = await response.json() as any; } catch(e) { throw new Error("Invalid JSON from Bible API"); }
+  
   if (data.verses) {
-    return data.verses.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/\n+/g, " ").trim()}`).join(" ");
+    let verses = data.verses;
+    if (startVerse !== null) {
+      verses = verses.filter((v: any) => v.verse >= startVerse);
+    }
+    return verses.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/\n+/g, " ").trim()}`).join(" ");
   }
   return data.text.replace(/\n+/g, " ").trim();
 }
@@ -58,15 +74,15 @@ async function fetchFromBollsApi(query: string, trans: string) {
   
   const chapter = parseInt(match[2]);
   const startVerse = match[3] ? parseInt(match[3]) : null;
-  const endVerse = match[4] ? parseInt(match[4]) : (startVerse !== null ? startVerse : null);
+  const endVerse = match[4] ? parseInt(match[4]) : null;
   
   const response = await fetch(`https://bolls.life/get-text/${trans.toUpperCase()}/${bookId}/${chapter}/`);
   if (!response.ok) throw new Error(`Bolls API responded with ${response.status}`);
   let data; try { data = await response.json() as any; } catch(e) { throw new Error("Invalid JSON from Bolls API"); }
   
   let filtered = data;
-  if (startVerse !== null && endVerse !== null) {
-    filtered = data.filter((v: any) => v.verse >= startVerse && v.verse <= endVerse);
+  if (startVerse !== null) {
+    filtered = data.filter((v: any) => v.verse >= startVerse && (endVerse !== null ? v.verse <= endVerse : true));
   }
   
   return filtered.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/<[^>]+>/g, '').trim()}`).join(" ");
