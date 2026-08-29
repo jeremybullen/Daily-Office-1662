@@ -5,7 +5,7 @@ export interface Hymn {
 
 export const hymns: Record<string, Hymn> = {
     lordsPrayer: {
-        imageUrl: ['/hymns/Lord\'s Prayer 1.jpg', '/hymns/Lord\'s Prayer 2.JPG'],
+        imageUrl: ['/hymns/lords-prayer-1.jpg', '/hymns/lords-prayer-2.jpg'],
         extraVerses: []
     },
     venite: {
@@ -17,15 +17,15 @@ export const hymns: Record<string, Hymn> = {
         ]
     },
     teDeum: {
-        imageUrl: '/hymns/Te Deum.png',
+        imageUrl: '/hymns/te-deum.png',
         extraVerses: []
     },
     benedicite: {
-        imageUrl: '/hymns/Benedicte.JPG',
+        imageUrl: '/hymns/benedicte.jpg',
         extraVerses: []
     },
     jubilate: {
-        imageUrl: '/hymns/Psalm 100.png',
+        imageUrl: '/hymns/psalm-100.png',
         extraVerses: []
     },
     benedictus: {
@@ -33,19 +33,19 @@ export const hymns: Record<string, Hymn> = {
         extraVerses: []
     },
     magnificat: {
-        imageUrl: '/hymns/Song of Mary.png',
+        imageUrl: '/hymns/song-of-mary.png',
         extraVerses: []
     },
     cantate: {
-        imageUrl: '/hymns/Psalm 98.png',
+        imageUrl: '/hymns/psalm-98.png',
         extraVerses: []
     },
     nuncDimittis: {
-        imageUrl: '/hymns/Nunc Dimittis.png',
+        imageUrl: '/hymns/nunc-dimittis.png',
         extraVerses: []
     },
     deusMisereatur: {
-        imageUrl: '/hymns/Psalm 67.jpg',
+        imageUrl: '/hymns/psalm-67.jpg',
         extraVerses: []
     }
 };
