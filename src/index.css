@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
