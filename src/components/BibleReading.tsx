@@ -1,6 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import { Translation } from '../types';
 import { Section } from './Section';
+import { fetchPassages } from '../lib/bible-api';
 
 interface Passage {
     reference: string;
@@ -22,25 +23,15 @@ export function BibleReading({ title, rubric, passage, translation, onTitleClick
 
     useEffect(() => {
         let isMounted = true;
+
         async function fetchPassage() {
             setLoading(true);
             setError(null);
             try {
-                const res = await fetch(`/api/bible?passage=${encodeURIComponent(passage)}&translation=${translation}`);
-                let data;
-                const rawText = await res.text();
-                try {
-                    data = JSON.parse(rawText);
-                } catch (e) {
-                    throw new Error(`Failed to parse server response: ${rawText.substring(0, 50)}...`);
-                }
-                
-                if (!res.ok) {
-                    throw new Error(data.error || "Failed to fetch passage");
-                }
+                const data = await fetchPassages(passage, translation);
                 
                 if (isMounted) {
-                    setPassages(data.passages || []);
+                    setPassages(data || []);
                 }
             } catch (err: any) {
                 if (isMounted) {
@@ -56,6 +47,7 @@ export function BibleReading({ title, rubric, passage, translation, onTitleClick
         if (passage) {
             fetchPassage();
         }
+
         return () => {
             isMounted = false;
         };
