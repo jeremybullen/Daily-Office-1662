@@ -11,12 +11,13 @@ interface Passage {
 interface BibleReadingProps {
     title: string;
     rubric?: ReactNode;
+    metadata?: ReactNode;
     passage: string;
     translation: Translation;
     onTitleClick?: () => void;
 }
 
-export function BibleReading({ title, rubric, passage, translation, onTitleClick }: BibleReadingProps) {
+export function BibleReading({ title, rubric, metadata, passage, translation, onTitleClick }: BibleReadingProps) {
     const [passages, setPassages] = useState<Passage[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -54,7 +55,7 @@ export function BibleReading({ title, rubric, passage, translation, onTitleClick
     }, [passage, translation]);
 
     return (
-        <Section title={title} rubric={rubric} onTitleClick={onTitleClick}>
+        <Section title={title} rubric={rubric} metadata={metadata} onTitleClick={onTitleClick}>
             {loading ? (
                 <div className="flex items-center py-4">
                     <div className="animate-pulse flex space-x-2 opacity-50">
