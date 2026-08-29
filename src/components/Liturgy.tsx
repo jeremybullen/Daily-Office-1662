@@ -1,3 +1,4 @@
+import { P } from './GlossaryText';
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { openingSentences, exhortation, confession, absolutionSubstitute, priestlyAbsolution, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers, generalThanksgiving } from '../content/liturgy-data';
@@ -102,14 +103,14 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                 <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-4">The Order for {office === 'morning' ? 'Morning' : 'Evening'} Prayer</h1>
                 {(readings.feastName || isSunday) && (
                     <div className="flex flex-col items-center justify-center space-y-1.5">
-                        <p className="rubric font-semibold text-sm tracking-widest uppercase">{readings.feastName || readings.liturgicalWeek}</p>
+                        <P className="font-semibold opacity-60 text-sm tracking-widest uppercase">{readings.feastName || readings.liturgicalWeek}</P>
                     </div>
                 )}
              </div>
 
              
              {/* Sentences */}
-             <Section title="The Opening Sentence" rubric={openingSentences[sentenceIdx].citation} onTitleClick={handleNextSentence}>
+             <Section title="The Opening Sentence" metadata={openingSentences[sentenceIdx].citation} onTitleClick={handleNextSentence}>
                 <div className="select-none">
                     <AnimatePresence mode="wait">
                         <motion.p
@@ -128,7 +129,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Exhortation */}
              {!settings.useShortForm && (
                  <Section title="The Exhortation">
-                     <p>{isSunday ? exhortation.full : exhortation.short}</p>
+                     <P>{isSunday ? exhortation.full : exhortation.short}</P>
                  </Section>
              )}
 
@@ -137,7 +138,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  title="A General Confession"
                  rubric="To be said of the whole Congregation after the Minister, all kneeling."
              >
-                 <p>{confession}</p>
+                 <P>{confession}</P>
              </Section>
 
              {/* Absolution (Replaced) */}
@@ -166,7 +167,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  title="The Lord's Prayer"
                  rubric="Then the Minister shall kneel, and say the Lord's Prayer with an audible voice; the people also kneeling, and repeating it with him, both here, and wheresoever else it is used in Divine Service."
              >
-                 <p>{lordsPrayer}</p>
+                 <P>{lordsPrayer}</P>
              </Section>
 
              {/* Versicles */}
@@ -174,8 +175,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <div className="space-y-4">
                      {initialVersicles.map((v, i) => (
                          <div key={i}>
-                            <p className="text-opacity-90">{v.v}</p>
-                            <p className="font-bold">{v.r}</p>
+                            <P className="text-opacity-90">{v.v}</P>
+                            <P className="font-bold">{v.r}</P>
                          </div>
                      ))}
                  </div>
@@ -185,7 +186,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {office === 'morning' && !isAshWedOrGoodFri && !settings.useShortForm && (
                  <Section 
                      title="Venite, exultemus Domino" 
-                     rubric="Psalm 95."
+                     metadata="Psalm 95."
                      leftAction={
                          <button onClick={(e) => toggleHymn('venite', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                              <Music size={12} />
@@ -197,19 +198,19 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          <SheetMusic imageUrl={hymns.venite.imageUrl} extraVerses={hymns.venite.extraVerses} />
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                            <p>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</p>
-                            <p>Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.</p>
-                            <p>For the Lord is a great God : and a great King above all gods.</p>
-                            <p>In his hand are all the corners of the earth : and the strength of the hills is his also.</p>
-                            <p>The sea is his, and he made it : and his hands prepared the dry land.</p>
-                            <p>O come, let us worship, and fall down : and kneel before the Lord our Maker.</p>
-                            <p>For he is the Lord our God : and we are the people of his pasture, and the sheep of his hand.</p>
-                            <p>To day if ye will hear his voice, harden not your hearts : as in the provocation, and as in the day of temptation in the wilderness;</p>
-                            <p>When your fathers tempted me : proved me, and saw my works.</p>
-                            <p>Forty years long was I grieved with this generation, and said : It is a people that do err in their hearts, for they have not known my ways;</p>
-                            <p>Unto whom I sware in my wrath : that they should not enter into my rest.</p>
-                            <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                            <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                            <P>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</P>
+                            <P>Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.</P>
+                            <P>For the Lord is a great God : and a great King above all gods.</P>
+                            <P>In his hand are all the corners of the earth : and the strength of the hills is his also.</P>
+                            <P>The sea is his, and he made it : and his hands prepared the dry land.</P>
+                            <P>O come, let us worship, and fall down : and kneel before the Lord our Maker.</P>
+                            <P>For he is the Lord our God : and we are the people of his pasture, and the sheep of his hand.</P>
+                            <P>To day if ye will hear his voice, harden not your hearts : as in the provocation, and as in the day of temptation in the wilderness;</P>
+                            <P>When your fathers tempted me : proved me, and saw my works.</P>
+                            <P>Forty years long was I grieved with this generation, and said : It is a people that do err in their hearts, for they have not known my ways;</P>
+                            <P>Unto whom I sware in my wrath : that they should not enter into my rest.</P>
+                            <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                            <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                          </div>
                      )}
                  </Section>
@@ -219,7 +220,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {settings.useShortForm ? (
                  <BibleReading 
                      title="The Psalm" 
-                     rubric={displayedPsalm}
+                     metadata={displayedPsalm}
                      passage={displayedPsalm} 
                      translation={translation}
                      onTitleClick={handlePsalmClick}
@@ -227,7 +228,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              ) : (
                  <BibleReading 
                      title="The Psalms of the Day" 
-                     rubric={readings.psalms}
+                     metadata={readings.psalms}
                      passage={readings.psalms} 
                      translation={translation} 
                  />
@@ -236,7 +237,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {settings.useShortForm ? (
                  <BibleReading 
                          title="The Lesson" 
-                         rubric={displayedLesson}
+                         metadata={displayedLesson}
                          passage={displayedLesson} 
                          translation={translation} 
                          onTitleClick={() => updateSettings({ shortLessonPreference: settings.shortLessonPreference === 'OT' ? 'NT' : 'OT' })}
@@ -244,7 +245,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              ) : (
                  <BibleReading 
                      title="The First Lesson" 
-                     rubric={readings.firstLesson}
+                     metadata={readings.firstLesson}
                      passage={readings.firstLesson} 
                      translation={translation} 
                  />
@@ -253,7 +254,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Canticle 1 */}
                      <Section 
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
-                 rubric={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
+                 metadata={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
                  onTitleClick={office === 'morning' ? () => setUseBenedicite(!useBenedicite) : () => setUseAlternativeEveningCanticle1(!useAlternativeEveningCanticle1)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle1', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
@@ -269,7 +270,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                         {!useBenedicite ? (
                             <div className="animate-in fade-in duration-500">
                                 <div className="space-y-1 leading-relaxed">
-                                    {teDeum.map((verse, i) => <p key={i}>{verse}</p>)}
+                                    {teDeum.map((verse, i) => <P key={i}>{verse}</P>)}
                                 </div>
                             </div>
                         ) : (
@@ -277,14 +278,14 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 {benediciteGroups.map((group, i) => (
                                     <div key={i} className="mb-4 sm:mb-5">
                                         <div className="space-y-0.5 sm:space-y-1 mb-1.5">
-                                            {group.map((v, j) => <p key={j} className="leading-relaxed">{v}</p>)}
+                                            {group.map((v, j) => <P key={j} className="leading-relaxed">{v}</P>)}
                                         </div>
-                                        <p className="font-bold opacity-90 leading-relaxed">{benediciteRefrain}</p>
+                                        <P className="font-bold opacity-90 leading-relaxed">{benediciteRefrain}</P>
                                     </div>
                                 ))}
                                 <div className="mt-5">
-                                    <p className="leading-relaxed">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                    <p className="leading-relaxed font-bold mt-0.5">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                    <P className="leading-relaxed">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                    <P className="leading-relaxed font-bold mt-0.5">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                                 </div>
                             </div>
                         )}
@@ -293,23 +294,23 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <div className="select-none">
                          {!useAlternativeEveningCanticle1 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                                <p>My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour.</p>
-                                <p>For he hath regarded : the lowliness of his hand-maiden.</p>
-                                <p>For behold, from henceforth : all generations shall call me blessed.</p>
-                                <p>For he that is mighty hath magnified me : and holy is his Name.</p>
-                                <p>And his mercy is on them that fear him : throughout all generations.</p>
-                                <p>He hath shewed strength with his arm : he hath scattered the proud in the imagination of their hearts.</p>
-                                <p>He hath put down the mighty from their seat : and hath exalted the humble and meek.</p>
-                                <p>He hath filled the hungry with good things : and the rich he hath sent empty away.</p>
-                                <p>He remembering his mercy hath holpen his servant Israel : as he promised to our forefathers, Abraham and his seed, for ever.</p>
-                                <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                <P>My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour.</P>
+                                <P>For he hath regarded : the lowliness of his hand-maiden.</P>
+                                <P>For behold, from henceforth : all generations shall call me blessed.</P>
+                                <P>For he that is mighty hath magnified me : and holy is his Name.</P>
+                                <P>And his mercy is on them that fear him : throughout all generations.</P>
+                                <P>He hath shewed strength with his arm : he hath scattered the proud in the imagination of their hearts.</P>
+                                <P>He hath put down the mighty from their seat : and hath exalted the humble and meek.</P>
+                                <P>He hath filled the hungry with good things : and the rich he hath sent empty away.</P>
+                                <P>He remembering his mercy hath holpen his servant Israel : as he promised to our forefathers, Abraham and his seed, for ever.</P>
+                                <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                                 {cantateDomino.map((verse, i) => <p key={i}>{verse}</p>)}
-                                 <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                 <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                 {cantateDomino.map((verse, i) => <P key={i}>{verse}</P>)}
+                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          )}
                      </div>
@@ -320,13 +321,13 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <>
                      <BibleReading 
                          title="The Second Lesson" 
-                         rubric={readings.secondLesson}
+                         metadata={readings.secondLesson}
                          passage={readings.secondLesson} 
                          translation={translation} 
                      />
                      <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
-                 rubric={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
+                 metadata={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
                  onTitleClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle2', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
@@ -342,43 +343,43 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      {office === 'morning' ? (
                          !useAlternativeCanticle2 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                                 <p>Blessed be the Lord God of Israel : for he hath visited, and redeemed his people;</p>
-                                 <p>And hath raised up a mighty salvation for us : in the house of his servant David;</p>
-                                 <p>As he spake by the mouth of his holy Prophets : which have been since the world began;</p>
-                                 <p>That we should be saved from our enemies : and from the hands of all that hate us;</p>
-                                 <p>To perform the mercy promised to our forefathers : and to remember his holy Covenant;</p>
-                                 <p>To perform the oath which he sware to our forefather Abraham : that he would give us;</p>
-                                 <p>That we being delivered out of the hands of our enemies : might serve him without fear;</p>
-                                 <p>In holiness and righteousness before him : all the days of our life.</p>
-                                 <p>And thou, Child, shalt be called the Prophet of the Highest : for thou shalt go before the face of the Lord to prepare his ways;</p>
-                                 <p>To give knowledge of salvation unto his people : for the remission of their sins,</p>
-                                 <p>Through the tender mercy of our God : whereby the day-spring from on high hath visited us;</p>
-                                 <p>To give light to them that sit in darkness, and in the shadow of death : and to guide our feet into the way of peace.</p>
-                                 <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                 <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                 <P>Blessed be the Lord God of Israel : for he hath visited, and redeemed his people;</P>
+                                 <P>And hath raised up a mighty salvation for us : in the house of his servant David;</P>
+                                 <P>As he spake by the mouth of his holy Prophets : which have been since the world began;</P>
+                                 <P>That we should be saved from our enemies : and from the hands of all that hate us;</P>
+                                 <P>To perform the mercy promised to our forefathers : and to remember his holy Covenant;</P>
+                                 <P>To perform the oath which he sware to our forefather Abraham : that he would give us;</P>
+                                 <P>That we being delivered out of the hands of our enemies : might serve him without fear;</P>
+                                 <P>In holiness and righteousness before him : all the days of our life.</P>
+                                 <P>And thou, Child, shalt be called the Prophet of the Highest : for thou shalt go before the face of the Lord to prepare his ways;</P>
+                                 <P>To give knowledge of salvation unto his people : for the remission of their sins,</P>
+                                 <P>Through the tender mercy of our God : whereby the day-spring from on high hath visited us;</P>
+                                 <P>To give light to them that sit in darkness, and in the shadow of death : and to guide our feet into the way of peace.</P>
+                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                                 {jubilateDeo.map((verse, i) => <p key={i}>{verse}</p>)}
-                                 <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                 <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                 {jubilateDeo.map((verse, i) => <P key={i}>{verse}</P>)}
+                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          )
                      ) : (
                          !useAlternativeCanticle2 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                                 <p>Lord, now lettest thou thy servant depart in peace : according to thy word.</p>
-                                 <p>For mine eyes have seen : thy salvation,</p>
-                                 <p>Which thou hast prepared : before the face of all people;</p>
-                                 <p>To be a light to lighten the Gentiles : and to be the glory of thy people Israel.</p>
-                                 <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                 <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                 <P>Lord, now lettest thou thy servant depart in peace : according to thy word.</P>
+                                 <P>For mine eyes have seen : thy salvation,</P>
+                                 <P>Which thou hast prepared : before the face of all people;</P>
+                                 <P>To be a light to lighten the Gentiles : and to be the glory of thy people Israel.</P>
+                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                                 {deusMisereatur.map((verse, i) => <p key={i}>{verse}</p>)}
-                                 <p className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</p>
-                                 <p className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</p>
+                                 {deusMisereatur.map((verse, i) => <P key={i}>{verse}</P>)}
+                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          )
                      )}
@@ -390,17 +391,17 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Creed */}
              <Section 
                  title={useAthanasianCreed ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
-                 rubric={useAthanasianCreed ? "Quicunque vult." : ""}
+                 metadata={useAthanasianCreed ? "Quicunque vult." : ""}
                  onTitleClick={() => setUseAthanasianCreed(!useAthanasianCreed)}
              >
                  <div className="select-none">
                      {!useAthanasianCreed ? (
                          <div className="animate-in fade-in duration-500">
-                             <p>{apostlesCreed}</p>
+                             <P>{apostlesCreed}</P>
                          </div>
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
-                             {athanasianCreed.map((verse, i) => <p key={i}>{verse}</p>)}
+                             {athanasianCreed.map((verse, i) => <P key={i}>{verse}</P>)}
                          </div>
                      )}
                  </div>
@@ -410,14 +411,14 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section title="The Lesser Litany">
                  <div className="space-y-4">
                      <div>
-                         <p>The Lord be with you.</p>
-                         <p className="font-bold">And with thy spirit.</p>
+                         <P>The Lord be with you.</P>
+                         <P className="font-bold">And with thy spirit.</P>
                      </div>
-                     <p className="rubric">Let us pray.</p>
+                     <P>Let us pray.</P>
                      <div>
-                         <p>Lord, have mercy upon us.</p>
-                         <p className="font-bold">Christ, have mercy upon us.</p>
-                         <p>Lord, have mercy upon us.</p>
+                         <P>Lord, have mercy upon us.</P>
+                         <P className="font-bold">Christ, have mercy upon us.</P>
+                         <P>Lord, have mercy upon us.</P>
                      </div>
                  </div>
              </Section>
@@ -440,7 +441,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <SheetMusic imageUrl={hymns.lordsPrayer.imageUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
                  ) : (
                      <div className="animate-in fade-in duration-500">
-                         <p>{lordsPrayer}</p>
+                         <P>{lordsPrayer}</P>
                      </div>
                  )}
              </Section>
@@ -451,31 +452,31 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <div className="space-y-4">
                      {suffrages.map((v, i) => (
                          <div key={i}>
-                            <p className="text-opacity-90">{v.v}</p>
-                            <p className="font-bold">{v.r}</p>
+                            <P className="text-opacity-90">{v.v}</P>
+                            <P className="font-bold">{v.r}</P>
                          </div>
                      ))}
                  </div>
              </Section>
 
              {/* Collects */}
-             <Section title="The Collect of the Day" rubric={readings.feastName || readings.liturgicalWeek}>
-                 <p>{readings.collect}</p>
+             <Section title="The Collect of the Day" metadata={readings.feastName || readings.liturgicalWeek}>
+                 <P>{readings.collect}</P>
              </Section>
                  
-             <Section title="The Second Collect" rubric={office === 'morning' ? "For Peace." : "For Peace."}>
+             <Section title="The Second Collect" metadata={office === 'morning' ? "For Peace." : "For Peace."}>
                  {office === 'morning' ? (
-                     <p>O God, who art the author of peace and lover of concord, in knowledge of whom standeth our eternal life, whose service is perfect freedom: Defend us thy humble servants in all assaults of our enemies; that we, surely trusting in thy defence, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen.</p>
+                     <P>O God, who art the author of peace and lover of concord, in knowledge of whom standeth our eternal life, whose service is perfect freedom: Defend us thy humble servants in all assaults of our enemies; that we, surely trusting in thy defence, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen.</P>
                  ) : (
-                     <p>O God, from whom all holy desires, all good counsels, and all just works do proceed: Give unto thy servants that peace which the world cannot give; that both our hearts may be set to obey thy commandments, and also that by thee we being defended from the fear of our enemies may pass our time in rest and quietness; through the merits of Jesus Christ our Saviour. Amen.</p>
+                     <P>O God, from whom all holy desires, all good counsels, and all just works do proceed: Give unto thy servants that peace which the world cannot give; that both our hearts may be set to obey thy commandments, and also that by thee we being defended from the fear of our enemies may pass our time in rest and quietness; through the merits of Jesus Christ our Saviour. Amen.</P>
                  )}
              </Section>
 
-             <Section title="The Third Collect" rubric={office === 'morning' ? "For Grace." : "For Aid against all Perils."}>
+             <Section title="The Third Collect" metadata={office === 'morning' ? "For Grace." : "For Aid against all Perils."}>
                  {office === 'morning' ? (
-                     <p>O Lord, our heavenly Father, Almighty and everlasting God, who hast safely brought us to the beginning of this day: Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings may be ordered by thy governance, to do always that is righteous in thy sight; through Jesus Christ our Lord. Amen.</p>
+                     <P>O Lord, our heavenly Father, Almighty and everlasting God, who hast safely brought us to the beginning of this day: Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings may be ordered by thy governance, to do always that is righteous in thy sight; through Jesus Christ our Lord. Amen.</P>
                  ) : (
-                     <p>Lighten our darkness, we beseech thee, O Lord; and by thy great mercy defend us from all perils and dangers of this night; for the love of thy only Son, our Saviour, Jesus Christ. Amen.</p>
+                     <P>Lighten our darkness, we beseech thee, O Lord; and by thy great mercy defend us from all perils and dangers of this night; for the love of thy only Son, our Saviour, Jesus Christ. Amen.</P>
                  )}
              </Section>
 
@@ -489,7 +490,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                             onTitleClick={() => setUseAmericanStatePrayers(false)}
                          >
                              <div className="select-none animate-in fade-in duration-500">
-                                 <p>{statePrayers.president}</p>
+                                 <P>{statePrayers.president}</P>
                              </div>
                          </Section>
                      ) : (
@@ -499,7 +500,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 onTitleClick={() => setUseAmericanStatePrayers(true)}
                              >
                                  <div className="select-none animate-in fade-in duration-500">
-                                     <p>{statePrayers.kingsMajesty}</p>
+                                     <P>{statePrayers.kingsMajesty}</P>
                                  </div>
                              </Section>
                              
@@ -508,30 +509,30 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 onTitleClick={() => setUseAmericanStatePrayers(true)}
                              >
                                  <div className="select-none animate-in fade-in duration-500">
-                                     <p>{statePrayers.royalFamily}</p>
+                                     <P>{statePrayers.royalFamily}</P>
                                  </div>
                              </Section>
                          </>
                      )}
                      
                      <Section title="A Prayer for the Clergy and People">
-                         <p>{statePrayers.clergyAndPeople}</p>
+                         <P>{statePrayers.clergyAndPeople}</P>
                      </Section>
                      
                      <Section title="A General Thanksgiving" rubric="To be said by the Minister alone.">
-                         <p>{generalThanksgiving}</p>
+                         <P>{generalThanksgiving}</P>
                      </Section>
                  </>
              )}
 
              {/* Prayer of St Chrysostom */}
              <Section title="A Prayer of Saint Chrysostom">
-                 <p>{stChrysostom}</p>
+                 <P>{stChrysostom}</P>
              </Section>
 
              {/* The Grace */}
-             <Section title="The Grace" rubric="2 Corinthians 13:14">
-                 <p>{theGrace}</p>
+             <Section title="The Grace" metadata="2 Corinthians 13:14">
+                 <P>{theGrace}</P>
              </Section>
              
              <div className="py-8 flex justify-center">
