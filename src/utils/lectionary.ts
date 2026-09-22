@@ -226,7 +226,7 @@ export function getReadingsForDate(date: Date, office: 'morning' | 'evening'): D
     if (day === 31) day = 30;
     
     const dayOfYear = getDayOfYear(date);
-    const psalms = office === 'morning' ? psalmsByDay[day - 1].m : psalmsByDay[day - 1].e;
+    const psalmDay = day === 31 ? 30 : day;    const psalms = office === 'morning' ? psalmsByDay[psalmDay - 1].m : psalmsByDay[psalmDay - 1].e;
     
     const firstLesson = getAccurateDailyLesson(date, office, 'first');
     const secondLesson = getAccurateDailyLesson(date, office, 'second');

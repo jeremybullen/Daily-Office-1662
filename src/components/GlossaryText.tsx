@@ -78,6 +78,6 @@ export const processNode = (node: ReactNode): ReactNode => {
   return node;
 };
 
-export const P = ({ children, className = '' }: { children: ReactNode, className?: string }) => {
-  return <p className={className}>{processNode(children)}</p>;
+export const P = ({ children, className = '', ...props }: React.ComponentProps<'p'>) => {
+  return <p className={className} {...props}>{processNode(children)}</p>;
 };

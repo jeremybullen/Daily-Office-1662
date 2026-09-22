@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { openingSentences, exhortation, confession, absolutionSubstitute, priestlyAbsolution, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers, generalThanksgiving } from '../content/liturgy-data';
 import { isAshWednesdayOrGoodFriday } from '../utils/liturgyHelpers';
 import { getReadingsForDate } from '../utils/lectionary';
-import { Translation, CompletedData, OfficeType } from '../types';
+import { Translation, CompletedData, OfficeType, AppSettings } from '../types';
 import { BibleReading } from './BibleReading';
 import { Section } from './Section';
 import { SheetMusic } from './SheetMusic';
@@ -59,8 +59,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const [useAmericanStatePrayers, setUseAmericanStatePrayers] = useState(true);
     const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
     
-    const toggleHymn = (id: string, e: any) => {
-        e.stopPropagation(); // prevent parent onClick
+    const toggleHymn = (id: string, e?: any) => {
+        if (e && e.stopPropagation) e.stopPropagation(); // prevent parent onClick
         setHymnMode(prev => ({ ...prev, [id]: !prev[id] }));
     };
     
@@ -166,8 +166,21 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section 
                  title="The Lord's Prayer"
                  rubric="Then the Minister shall kneel, and say the Lord's Prayer with an audible voice; the people also kneeling, and repeating it with him, both here, and wheresoever else it is used in Divine Service."
+                 leftAction={
+                     <button 
+                         onClick={(e) => toggleHymn('lordsPrayer', e)}
+                         className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10"
+                     >
+                         <Music size={12} />
+                         {hymnMode['lordsPrayer'] ? "Prose Text" : "Hymn Version"}
+                     </button>
+                 }
              >
-                 <P>{lordsPrayer}</P>
+                 {hymnMode['lordsPrayer'] ? (
+                     <SheetMusic imageUrl={hymns.lordsPrayer.imageUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
+                 ) : (
+                     <P>{lordsPrayer}</P>
+                 )}
              </Section>
 
              {/* Versicles */}
@@ -429,10 +442,10 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  title="The Lord's Prayer"
                  leftAction={
                      <button 
-                         onClick={() => toggleHymnMode('lordsPrayer')}
+                         onClick={(e) => toggleHymn('lordsPrayer', e)}
                          className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10"
                      >
-                         <Music size={14} />
+                         <Music size={12} />
                          {hymnMode['lordsPrayer'] ? "Prose Text" : "Hymn Version"}
                      </button>
                  }

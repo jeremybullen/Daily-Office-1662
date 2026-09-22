@@ -5,11 +5,11 @@ export interface Hymn {
 
 export const hymns: Record<string, Hymn> = {
     lordsPrayer: {
-        imageUrl: ['/hymns/lords-prayer-1.jpg', '/hymns/lords-prayer-2.jpg'],
+        imageUrl: "/hymns/Lord's%20Prayer.jpg",
         extraVerses: []
     },
     venite: {
-        imageUrl: '',
+        imageUrl: '/hymns/Psalm%2095.png',
         extraVerses: [
             ["2. The depths of earth are in his hand,", "Her secret wealth at his command;", "The strength of hills that reach the sky,", "Subjected to his empire lie."],
             ["3. The rolling ocean's vast abyss", "By the same sovereign right is his;", "'Tis moved by his almighty hand,", "That formed and fixed the solid land."],
