@@ -12,7 +12,16 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
   const [currentPartIndex, setCurrentPartIndex] = useState(0);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [currentRole, setCurrentRole] = useState<'call' | 'response' | null>(null);
-  const [rate, setRate] = useState<number>(0.95);
+  const [rate, setRate] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('bcp-tts-rate');
+      if (saved) {
+        const val = parseFloat(saved);
+        if (!isNaN(val) && val >= 0.5 && val <= 2.5) return val;
+      }
+    }
+    return 1.0;
+  });
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [ministerVoiceUri, setMinisterVoiceUri] = useState<string>(() => {
     return (typeof window !== 'undefined' ? localStorage.getItem('bcp-tts-minister-voice') : null) || '';
@@ -32,12 +41,13 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     sectionIdx: 0,
     partIdx: 0,
     sentenceIdx: 0,
-    rate: 0.95,
+    rate: 1.0,
     sections: [] as LiturgySpeechSection[],
     voicePair: { minister: null, people: null, isDistinct: false } as VoicePair
   });
 
   // Keep references to prevent Chromium garbage collection of SpeechSynthesisUtterance
+  const currentUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const activeUtterancesRef = useRef<SpeechSynthesisUtterance[]>([]);
   const stallTimerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -101,6 +111,11 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
 
   const cancelSpeech = useCallback(() => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      if (currentUtteranceRef.current) {
+        currentUtteranceRef.current.onend = null;
+        currentUtteranceRef.current.onerror = null;
+        currentUtteranceRef.current = null;
+      }
       window.speechSynthesis.cancel();
     }
     activeUtterancesRef.current = [];
@@ -191,13 +206,22 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
 
     setCurrentRole(part.role);
 
-    // Cancel any previous
-    window.speechSynthesis.cancel();
+    // Cancel any previous and null out callbacks to avoid race conditions
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      if (currentUtteranceRef.current) {
+        currentUtteranceRef.current.onend = null;
+        currentUtteranceRef.current.onerror = null;
+        currentUtteranceRef.current = null;
+      }
+    }
 
     const utterance = new SpeechSynthesisUtterance(sentenceToSpeak);
+    currentUtteranceRef.current = utterance;
     activeUtterancesRef.current.push(utterance);
 
-    utterance.rate = currentRate;
+    // Explicitly apply and clamp speed rate (standard range 0.5 to 2.0, default 1.0)
+    const effectiveRate = Math.max(0.5, Math.min(2.0, stateRef.current.rate || 1.0));
+    utterance.rate = effectiveRate;
 
     // Apply call vs response voices
     if (part.role === 'response') {
@@ -215,6 +239,10 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     }
 
     utterance.onend = () => {
+      // If this utterance was superseded, do nothing
+      if (currentUtteranceRef.current !== utterance) return;
+      currentUtteranceRef.current = null;
+
       // Clean up reference
       const idx = activeUtterancesRef.current.indexOf(utterance);
       if (idx > -1) activeUtterancesRef.current.splice(idx, 1);
@@ -235,6 +263,10 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     };
 
     utterance.onerror = (e) => {
+      // If this utterance was superseded, do nothing
+      if (currentUtteranceRef.current !== utterance) return;
+      currentUtteranceRef.current = null;
+
       if (e.error === 'interrupted' || e.error === 'canceled') return;
       console.warn('SpeechSynthesis error:', e);
       // Advance on error so playback does not stall
@@ -339,12 +371,20 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
   }, [cancelSpeech, speakCurrent]);
 
   const changeRate = useCallback((newRate: number) => {
-    setRate(newRate);
-    stateRef.current.rate = newRate;
-    // If currently playing, restart current sentence with new rate
+    const clamped = Math.max(0.5, Math.min(2.0, Number(newRate.toFixed(2))));
+    setRate(clamped);
+    stateRef.current.rate = clamped;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('bcp-tts-rate', String(clamped));
+    }
+    // If currently playing, cancel and restart sentence with new rate after brief delay
     if (stateRef.current.isPlaying && !stateRef.current.isPaused) {
       cancelSpeech();
-      speakCurrent();
+      setTimeout(() => {
+        if (stateRef.current.isPlaying && !stateRef.current.isPaused) {
+          speakCurrent();
+        }
+      }, 50);
     }
   }, [cancelSpeech, speakCurrent]);
 

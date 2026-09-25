@@ -79,9 +79,17 @@ export function AudioPlayer({
   if (!isOpen) return null;
 
   const cycleSpeed = () => {
-    const speeds = [0.85, 0.95, 1.05, 1.15];
-    const currentIndex = speeds.findIndex(s => Math.abs(s - rate) < 0.04);
-    const nextIndex = (currentIndex + 1) % speeds.length;
+    const speeds = [0.75, 1.0, 1.25, 1.5, 1.75];
+    let bestIdx = 0;
+    let minDiff = Infinity;
+    for (let i = 0; i < speeds.length; i++) {
+      const diff = Math.abs(speeds[i] - rate);
+      if (diff < minDiff) {
+        minDiff = diff;
+        bestIdx = i;
+      }
+    }
+    const nextIndex = (bestIdx + 1) % speeds.length;
     onChangeRate(speeds[nextIndex]);
   };
 
@@ -256,6 +264,30 @@ export function AudioPlayer({
                   </div>
                 </div>
 
+                {/* Speed Controls Row in Drawer */}
+                <div className="pt-2 mt-2 border-t border-black/5 dark:border-white/5 flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-semibold opacity-75">Reading Speed</span>
+                    <span className="text-[11px] font-mono font-medium opacity-90">{rate.toFixed(2).replace(/\.?0+$/, '')}x</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    {[0.75, 1.0, 1.25, 1.5, 1.75].map((spd) => (
+                      <button
+                        key={spd}
+                        type="button"
+                        onClick={() => onChangeRate(spd)}
+                        className={`flex-1 py-1 rounded-md text-[11px] font-medium transition-all ${
+                          Math.abs(spd - rate) < 0.05
+                            ? 'bg-amber-600 text-white dark:bg-amber-500 dark:text-black font-semibold shadow-xs'
+                            : 'bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100'
+                        }`}
+                      >
+                        {spd === 0.75 ? '0.75x' : spd === 1.0 ? '1.0x' : `${spd}x`}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="text-[10px] opacity-60 pt-2 flex items-center justify-between">
                   <span>
                     {hasDistinctVoices
@@ -274,10 +306,10 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={cycleSpeed}
-              title="Change speech rate"
-              className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors"
+              title="Click to cycle speed (0.75x, 1.0x, 1.25x, 1.5x, 1.75x)"
+              className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors cursor-pointer"
             >
-              {rate.toFixed(2).replace(/\.00$/, '')}x
+              {rate.toFixed(2).replace(/\.?0+$/, '')}x
             </button>
 
             {/* Playback Controls */}
