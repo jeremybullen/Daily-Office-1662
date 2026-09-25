@@ -695,6 +695,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  isPaused={speech.isPaused}
                  currentSectionTitle={speech.currentSectionTitle}
                  currentRole={speech.currentRole}
+                 currentMediaType={speech.currentMediaType}
+                 playbackMode={speech.playbackMode}
+                 onChangePlaybackMode={speech.setPlaybackMode}
                  currentSectionIndex={speech.currentSectionIndex}
                  totalSections={speech.totalSections}
                  rate={speech.rate}

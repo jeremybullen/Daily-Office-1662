@@ -26,6 +26,7 @@ import {
 } from '../content/liturgy-data';
 import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
+import { LITURGICAL_AUDIO_FILES } from './liturgicalAudioManifest';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -64,6 +65,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-opening-sentence',
     title: 'The Opening Sentence',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-opening-sentence'],
     parts: [{ text: sentence.text, role: 'call' }]
   });
 
@@ -72,6 +74,7 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-exhortation',
       title: 'The Exhortation',
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-exhortation'],
       parts: [{ text: exhortation.full, role: 'call' }]
     });
   }
@@ -80,6 +83,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-confession',
     title: 'A General Confession',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-confession'],
     parts: [{ text: confession, role: 'call' }]
   });
 
@@ -87,6 +91,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-absolution',
     title: usePriestlyAbsolution ? 'The Absolution' : 'The Collect for Pardon',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-absolution'],
     parts: [
       { text: usePriestlyAbsolution ? priestlyAbsolution : absolutionSubstitute, role: 'call' }
     ]
@@ -96,6 +101,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-absolution-amen',
     title: 'The Response',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-absolution-amen'],
     parts: [{ text: 'Amen.', role: 'response' }]
   });
 
@@ -103,6 +109,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-lords-prayer-1',
     title: "The Lord's Prayer",
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-lords-prayer-1'],
     parts: [{ text: lordsPrayer, role: 'call' }]
   });
 
@@ -110,6 +117,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-versicles',
     title: 'The Versicles',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-versicles'],
     parts: [
       { text: initialVersicles[0].v, role: 'call' },
       { text: initialVersicles[0].r, role: 'response' },
@@ -127,6 +135,7 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-venite',
       title: 'Venite, exultemus Domino',
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-venite'],
       parts: [
         ...venite.map(verse => ({ text: verse, role: 'call' as const })),
         { text: gloriaPatriCall, role: 'call' },
@@ -139,6 +148,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-psalms',
     title: settings.useShortForm ? 'The Psalm' : 'The Psalms of the Day',
+    isDynamic: true,
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-psalms');
@@ -155,6 +165,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-first-lesson',
     title: settings.useShortForm ? 'The Lesson' : 'The First Lesson',
+    isDynamic: true,
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-first-lesson');
@@ -173,6 +184,7 @@ export function buildLiturgySpeechSections({
       sections.push({
         id: 'tts-canticle-1',
         title: 'Te Deum Laudamus',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-te-deum'],
         parts: teDeum.map(verse => ({ text: verse, role: 'call' as const }))
       });
     } else {
@@ -187,6 +199,7 @@ export function buildLiturgySpeechSections({
       sections.push({
         id: 'tts-canticle-1',
         title: 'Benedicite, omnia opera',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-benedicite'],
         parts: benParts
       });
     }
@@ -196,6 +209,7 @@ export function buildLiturgySpeechSections({
       sections.push({
         id: 'tts-canticle-1',
         title: 'Magnificat',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-magnificat'],
         parts: [
           ...magnificat.map(verse => ({ text: verse, role: 'call' as const })),
           { text: gloriaPatriCall, role: 'call' },
@@ -206,6 +220,7 @@ export function buildLiturgySpeechSections({
       sections.push({
         id: 'tts-canticle-1',
         title: 'Cantate Domino',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-cantate'],
         parts: [
           ...cantateDomino.map(verse => ({ text: verse, role: 'call' as const })),
           { text: gloriaPatriCall, role: 'call' },
@@ -220,6 +235,7 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-second-lesson',
       title: 'The Second Lesson',
+      isDynamic: true,
       parts: [],
       getParts: () => {
         const container = document.getElementById('tts-second-lesson');
@@ -238,6 +254,7 @@ export function buildLiturgySpeechSections({
         sections.push({
           id: 'tts-canticle-2',
           title: 'Benedictus',
+          audioSrc: LITURGICAL_AUDIO_FILES['tts-benedictus'],
           parts: [
             ...benedictus.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -248,6 +265,7 @@ export function buildLiturgySpeechSections({
         sections.push({
           id: 'tts-canticle-2',
           title: 'Jubilate Deo',
+          audioSrc: LITURGICAL_AUDIO_FILES['tts-jubilate'],
           parts: [
             ...jubilateDeo.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -260,6 +278,7 @@ export function buildLiturgySpeechSections({
         sections.push({
           id: 'tts-canticle-2',
           title: 'Nunc Dimittis',
+          audioSrc: LITURGICAL_AUDIO_FILES['tts-nunc-dimittis'],
           parts: [
             ...nuncDimittis.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -270,6 +289,7 @@ export function buildLiturgySpeechSections({
         sections.push({
           id: 'tts-canticle-2',
           title: 'Deus Misereatur',
+          audioSrc: LITURGICAL_AUDIO_FILES['tts-deus-misereatur'],
           parts: [
             ...deusMisereatur.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -285,12 +305,14 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-creed',
       title: "The Apostles' Creed",
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-creed-apostles'],
       parts: [{ text: apostlesCreed, role: 'call' }]
     });
   } else {
     sections.push({
       id: 'tts-creed',
       title: 'The Creed of Saint Athanasius',
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-creed-athanasian'],
       parts: athanasianCreed.map(verse => ({ text: verse, role: 'call' as const }))
     });
   }
@@ -299,6 +321,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-lesser-litany',
     title: 'The Lesser Litany',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-lesser-litany'],
     parts: [
       { text: 'The Lord be with you.', role: 'call' },
       { text: 'And with thy spirit.', role: 'response' },
@@ -314,6 +337,7 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-lords-prayer-2',
       title: "The Lord's Prayer",
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-lords-prayer-2'],
       parts: [{ text: lordsPrayer, role: 'call' }]
     });
   }
@@ -322,6 +346,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-suffrages',
     title: 'The Suffrages',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-suffrages'],
     parts: suffrages.flatMap(s => [
       { text: s.v, role: 'call' as const },
       { text: s.r, role: 'response' as const }
@@ -333,6 +358,7 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-collect-day',
       title: 'The Collect of the Day',
+      isDynamic: true,
       parts: [{ text: readings.collect, role: 'call' }]
     });
   }
@@ -345,6 +371,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-collect-second',
     title: 'The Second Collect',
+    audioSrc: office === 'morning' ? LITURGICAL_AUDIO_FILES['tts-collect-peace-morning'] : LITURGICAL_AUDIO_FILES['tts-collect-peace-evening'],
     parts: [{ text: secondCollect, role: 'call' }]
   });
 
@@ -356,6 +383,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-collect-third',
     title: 'The Third Collect',
+    audioSrc: office === 'morning' ? LITURGICAL_AUDIO_FILES['tts-collect-grace-morning'] : LITURGICAL_AUDIO_FILES['tts-collect-aid-evening'],
     parts: [{ text: thirdCollect, role: 'call' }]
   });
 
@@ -365,6 +393,7 @@ export function buildLiturgySpeechSections({
       sections.push({
         id: 'tts-state-prayers',
         title: 'Prayer for Civil Authority',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-president'],
         parts: [
           { text: statePrayers.president, role: 'call' },
           { text: statePrayers.clergyAndPeople, role: 'call' }
@@ -374,6 +403,7 @@ export function buildLiturgySpeechSections({
       sections.push({
         id: 'tts-state-prayers',
         title: 'State Prayers',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-king'],
         parts: [
           { text: statePrayers.kingsMajesty, role: 'call' },
           { text: statePrayers.royalFamily, role: 'call' },
@@ -387,6 +417,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-st-chrysostom',
     title: 'A Prayer of Saint Chrysostom',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-st-chrysostom'],
     parts: [{ text: stChrysostom, role: 'call' }]
   });
 
@@ -394,6 +425,7 @@ export function buildLiturgySpeechSections({
   sections.push({
     id: 'tts-the-grace',
     title: 'The Grace',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-the-grace'],
     parts: [{ text: theGrace, role: 'call' }]
   });
 

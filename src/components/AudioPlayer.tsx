@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
-import { Play, Pause, SkipBack, SkipForward, X, Volume2, Users, User, SlidersHorizontal, RotateCcw, VolumeX } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, X, Volume2, Users, User, SlidersHorizontal, RotateCcw, Disc3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { PlaybackMode, CurrentMediaType } from '../hooks/useLiturgicalSpeech';
 
 interface AudioPlayerProps {
   isOpen: boolean;
@@ -8,6 +9,9 @@ interface AudioPlayerProps {
   isPaused: boolean;
   currentSectionTitle: string;
   currentRole: 'call' | 'response' | null;
+  currentMediaType: CurrentMediaType;
+  playbackMode: PlaybackMode;
+  onChangePlaybackMode: (mode: PlaybackMode) => void;
   currentSectionIndex: number;
   totalSections: number;
   rate: number;
@@ -34,6 +38,9 @@ export function AudioPlayer({
   isPaused,
   currentSectionTitle,
   currentRole,
+  currentMediaType,
+  playbackMode,
+  onChangePlaybackMode,
   currentSectionIndex,
   totalSections,
   rate,
@@ -116,9 +123,17 @@ export function AudioPlayer({
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              {/* Call vs Response voice indicator */}
-              {currentRole && (
-                <div className={`flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full font-medium tracking-wide transition-colors ${
+              {/* Media source badge (Recording vs TTS) */}
+              {currentMediaType === 'recording' ? (
+                <span 
+                  title="Playing authentic audio recording" 
+                  className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 font-medium tracking-wide"
+                >
+                  <Disc3 size={11} className={isPlaying && !isPaused ? 'animate-spin' : ''} />
+                  <span>Recording</span>
+                </span>
+              ) : currentMediaType === 'tts' && currentRole ? (
+                <div className={`flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-medium tracking-wide transition-colors ${
                   currentRole === 'response'
                     ? 'bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-500/20'
                     : 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/20'
@@ -135,7 +150,7 @@ export function AudioPlayer({
                     </>
                   )}
                 </div>
-              )}
+              ) : null}
 
               {/* Close / Dismiss */}
               <button
@@ -152,7 +167,7 @@ export function AudioPlayer({
             </div>
           </div>
 
-          {/* Voice Settings Accordion Panel */}
+          {/* Voice & Audio Settings Accordion Panel */}
           <AnimatePresence>
             {settingsOpen && (
               <motion.div
@@ -162,10 +177,49 @@ export function AudioPlayer({
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden border-b border-black/10 dark:border-white/10 pb-3 mb-1 text-xs"
               >
+                {/* Playback Mode Switcher */}
+                <div className="pb-2.5 mb-2.5 border-b border-black/5 dark:border-white/5">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[11px] font-semibold opacity-80">Playback Mode</span>
+                    <span className="text-[10px] font-medium opacity-60">
+                      {playbackMode === 'hybrid' ? 'Recordings + Dynamic TTS' : 'TTS Only'}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-1.5 p-0.5 rounded-lg bg-black/5 dark:bg-white/10">
+                    <button
+                      type="button"
+                      onClick={() => onChangePlaybackMode('hybrid')}
+                      className={`py-1 px-2 rounded-md text-[11px] font-medium transition-all text-center cursor-pointer ${
+                        playbackMode === 'hybrid'
+                          ? 'bg-white dark:bg-slate-800 text-[var(--text-color)] shadow-xs font-semibold'
+                          : 'opacity-70 hover:opacity-100'
+                      }`}
+                    >
+                      🎵 Hybrid (Recordings + Lessons)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onChangePlaybackMode('tts-only')}
+                      className={`py-1 px-2 rounded-md text-[11px] font-medium transition-all text-center cursor-pointer ${
+                        playbackMode === 'tts-only'
+                          ? 'bg-white dark:bg-slate-800 text-[var(--text-color)] shadow-xs font-semibold'
+                          : 'opacity-70 hover:opacity-100'
+                      }`}
+                    >
+                      🗣️ Speech Synthesis Only
+                    </button>
+                  </div>
+                  <p className="text-[10px] opacity-60 mt-1.5 leading-snug">
+                    {playbackMode === 'hybrid'
+                      ? 'Plays audio recordings for invariant canticles & prayers, switching to Speech Synthesis for daily changing scripture lessons & psalms.'
+                      : 'Uses browser speech synthesis for the entire office.'}
+                  </p>
+                </div>
+
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-black/5 dark:border-white/5">
                   <div className="flex items-center gap-1.5 font-medium opacity-80">
                     <SlidersHorizontal size={13} />
-                    <span>Voice Selection</span>
+                    <span>Speech Synthesis Voices</span>
                   </div>
                   <button
                     type="button"
@@ -174,7 +228,7 @@ export function AudioPlayer({
                     className="flex items-center gap-1 text-[11px] opacity-60 hover:opacity-100 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer"
                   >
                     <RotateCcw size={11} />
-                    <span>Reset to Auto</span>
+                    <span>Reset Voices</span>
                   </button>
                 </div>
 
@@ -265,7 +319,7 @@ export function AudioPlayer({
                 </div>
 
                 {/* Speed Controls Row in Drawer */}
-                <div className="pt-2 mt-2 border-t border-black/5 dark:border-white/5 flex flex-col gap-1.5">
+                <div className="pt-2.5 mt-2.5 border-t border-black/5 dark:border-white/5 flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-semibold opacity-75">Reading Speed</span>
                     <span className="text-[11px] font-mono font-medium opacity-90">{rate.toFixed(2).replace(/\.?0+$/, '')}x</span>
@@ -292,7 +346,7 @@ export function AudioPlayer({
                   <span>
                     {hasDistinctVoices
                       ? '✓ Two distinct voice actors active'
-                      : 'ℹ Modulating pitch for Call vs Response (single voice detected)'}
+                      : 'ℹ Modulating pitch for Call vs Response'}
                   </span>
                   <span>1662 Phonetics & Colon Pausing active</span>
                 </div>
@@ -344,11 +398,11 @@ export function AudioPlayer({
               </button>
             </div>
 
-            {/* Voice Settings Toggle Button */}
+            {/* Audio Settings Toggle Button */}
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              title={settingsOpen ? "Hide voice settings" : "Change voices for Minister & People"}
+              title={settingsOpen ? "Hide audio settings" : "Audio options and voice selection"}
               className={`text-[11px] px-2 py-1 rounded-lg transition-all flex items-center gap-1.5 font-medium ${
                 settingsOpen 
                   ? 'bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-500/30'
@@ -356,7 +410,7 @@ export function AudioPlayer({
               }`}
             >
               <SlidersHorizontal size={12} />
-              <span className="hidden sm:inline">Voices</span>
+              <span className="hidden sm:inline">Settings</span>
             </button>
           </div>
         </div>
