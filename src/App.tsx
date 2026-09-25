@@ -1,31 +1,47 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Liturgy } from './components/Liturgy';
+import { AboutModal } from './components/AboutModal';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { getCurrentOfficeType } from './utils/liturgyHelpers';
-import { AppSettings, OfficeType, CompletedData } from './types';
+import { AppSettings, OfficeType, CompletedData, Theme } from './types';
+
+const getInitialTheme = (): Theme => {
+  if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+};
 
 export default function App() {
   const [settings, setSettings] = useLocalStorage<AppSettings>('bcp-settings', {
-    theme: 'light',
-    fontSize: 'text-lg',
-    translation: 'KJV',
     useShortForm: false,
     shortLessonPreference: 'OT'
   });
   
+  const [theme, setTheme] = useLocalStorage<Theme>('bcp-theme', getInitialTheme());
   const [currentOffice, setCurrentOffice] = useState<OfficeType>(getCurrentOfficeType());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [completedData, setCompletedData] = useLocalStorage<CompletedData>('bcp-completed', {});
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [audioState, setAudioState] = useState<{ isPlaying: boolean; isOpen: boolean; toggle: () => void }>({
+    isPlaying: false,
+    isOpen: false,
+    toggle: () => {}
+  });
 
-  // Apply Theme
+  // Apply theme class to document element
   useEffect(() => {
-    if (settings.theme === 'dark') {
+    if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [settings.theme]);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const updateSettings = (newSettings: Partial<AppSettings>) => {
     setSettings(prev => ({ ...prev, ...newSettings }));
@@ -46,7 +62,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen ${settings.fontSize} leading-loose`}>
+    <div className="min-h-screen text-base leading-normal">
       <Header 
         office={currentOffice}
         setOffice={setCurrentOffice}
@@ -55,16 +71,28 @@ export default function App() {
         selectedDate={selectedDate}
         onSelectDate={setSelectedDate}
         completedData={completedData}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onToggleAudio={audioState.toggle}
+        isAudioPlaying={audioState.isPlaying}
+        isAudioOpen={audioState.isOpen}
       />
       
       <Liturgy 
         office={currentOffice} 
-        translation={settings.translation} 
+        translation="ESV" 
         selectedDate={selectedDate}
         completedData={completedData}
         onToggleCompleted={toggleCompleted}
         settings={settings}
         updateSettings={updateSettings}
+        onOpenAbout={() => setAboutOpen(true)}
+        onAudioStateChange={setAudioState}
+      />
+
+      <AboutModal 
+        isOpen={aboutOpen} 
+        onClose={() => setAboutOpen(false)} 
       />
     </div>
   );

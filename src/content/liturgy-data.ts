@@ -7,15 +7,15 @@ export const openingSentences = [
 ];
 
 export const exhortation = {
-  short: "Dearly beloved brethren, the Scripture moveth us in sundry places to acknowledge and confess our manifold sins and wickedness; wherefore I pray and beseech you, as many as are here present, to accompany me with a pure heart, and humble voice, unto the throne of the heavenly grace.",
-  full: "Dearly beloved brethren, the Scripture moveth us in sundry places to acknowledge and confess our manifold sins and wickedness; and that we should not dissemble nor cloak them before the face of Almighty God our heavenly Father; but confess them with an humble, lowly, penitent, and obedient heart; to the end that we may obtain forgiveness of the same, by his infinite goodness and mercy. And although we ought at all times humbly to acknowledge our sins before God; yet ought we most chiefly so to do, when we assemble and meet together to render thanks for the great benefits that we have received at his hands, to set forth his most worthy praise, to hear his most holy Word, and to ask those things which are requisite and necessary, as well for the body as the soul. Wherefore I pray and beseech you, as many as are here present, to accompany me with a pure heart, and humble voice, unto the throne of the heavenly grace."
+  short: "Dearly beloved brethren, the Scripture moveth us in sundry places to acknowledge and confess our manifold sins and wickedness; and that we should not dissemble nor cloke them before the face of Almighty God our heavenly Father; but confess them with an humble, lowly, penitent, and obedient heart; to the end that we may obtain forgiveness of the same, by his infinite goodness and mercy. And although we ought at all times humbly to acknowledge our sins before God; yet ought we most chiefly so to do, when we assemble and meet together to render thanks for the great benefits that we have received at his hands, to set forth his most worthy praise, to hear his most holy Word, and to ask those things which are requisite and necessary, as well for the body as the soul. Wherefore I pray and beseech you, as many as are here present, to accompany me with a pure heart and humble voice unto the throne of the heavenly grace, saying after me:",
+  full: "Dearly beloved brethren, the Scripture moveth us in sundry places to acknowledge and confess our manifold sins and wickedness; and that we should not dissemble nor cloke them before the face of Almighty God our heavenly Father; but confess them with an humble, lowly, penitent, and obedient heart; to the end that we may obtain forgiveness of the same, by his infinite goodness and mercy. And although we ought at all times humbly to acknowledge our sins before God; yet ought we most chiefly so to do, when we assemble and meet together to render thanks for the great benefits that we have received at his hands, to set forth his most worthy praise, to hear his most holy Word, and to ask those things which are requisite and necessary, as well for the body as the soul. Wherefore I pray and beseech you, as many as are here present, to accompany me with a pure heart and humble voice unto the throne of the heavenly grace, saying after me:"
 };
 
-export const confession = "Almighty and most merciful Father; We have erred, and strayed from thy ways like lost sheep. We have followed too much the devices and desires of our own hearts. We have offended against thy holy laws. We have left undone those things which we ought to have done; And we have done those things which we ought not to have done; And there is no health in us. But thou, O Lord, have mercy upon us, miserable offenders. Spare thou them, O God, which confess their faults. Restore thou them that are penitent; According to thy promises declared unto mankind in Christ Jesu our Lord. And grant, O most merciful Father, for his sake; That we may hereafter live a godly, righteous, and sober life, To the glory of thy holy Name. Amen.";
+export const confession = "Almighty and most merciful Father, We have erred, and strayed from thy ways like lost sheep, We have followed too much the devices and desires of our own hearts, We have offended against thy holy laws, We have left undone those things which we ought to have done, And we have done those things which we ought not to have done, And there is no health in us: But thou, O Lord, have mercy upon us miserable offenders; Spare thou them, O God, which confess their faults, Restore thou them that are penitent, According to thy promises declared unto mankind in Christ Jesu our Lord: And grant, O most merciful Father, for his sake, That we may hereafter live a godly, righteous, and sober life, To the glory of thy holy Name. Amen.";
 
-export const priestlyAbsolution = "Almighty God, the Father of our Lord Jesus Christ, who desireth not the death of a sinner, but rather that he may turn from his wickedness, and live; and hath given power, and commandment, to his Ministers, to declare and pronounce to his people, being penitent, the Absolution and Remission of their sins: He pardoneth and absolveth all them that truly repent, and unfeignedly believe his holy Gospel. Wherefore let us beseech him to grant us true repentance, and his Holy Spirit, that those things may please him, which we do at this present; and that the rest of our life hereafter may be pure, and holy; so that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen.";
+export const priestlyAbsolution = "Almighty God, the Father of our Lord Jesus Christ, who desireth not the death of a sinner, but rather that he may turn from his wickedness, and live; and hath given power, and commandment, to his Ministers, to declare and pronounce to his people, being penitent, the Absolution and Remission of their sins: He pardoneth and absolveth all them that truly repent, and unfeignedly believe his holy Gospel. Wherefore let us beseech him to grant us true repentance, and his Holy Spirit, that those things may please him, which we do at this present; and that the rest of our life hereafter may be pure, and holy; so that at the last we may come to his eternal joy; through Jesus Christ our Lord.";
 
-export const absolutionSubstitute = "Grant, we beseech thee, merciful Lord, to thy faithful people pardon and peace, that they may be cleansed from all their sins, and serve thee with a quiet mind; through Jesus Christ our Lord. Amen.";
+export const absolutionSubstitute = "Grant, we beseech thee, merciful Lord, to thy faithful people pardon and peace, that they may be cleansed from all their sins, and serve thee with a quiet mind; through Jesus Christ our Lord.";
 
 export const lordsPrayer = "Our Father, which art in heaven, Hallowed be thy Name. Thy kingdom come. Thy will be done, in earth as it is in heaven. Give us this day our daily bread. And forgive us our trespasses, As we forgive them that trespass against us. And lead us not into temptation; But deliver us from evil: For thine is the kingdom, The power, and the glory, For ever and ever. Amen.";
 
@@ -70,6 +70,54 @@ export const benediciteVerses = [
 ];
 
 export const benediciteRefrain = "praise him, and magnify him for ever.";
+
+export const venite = [
+  "O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.",
+  "Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.",
+  "For the Lord is a great God : and a great King above all gods.",
+  "In his hand are all the corners of the earth : and the strength of the hills is his also.",
+  "The sea is his, and he made it : and his hands prepared the dry land.",
+  "O come, let us worship, and fall down : and kneel before the Lord our Maker.",
+  "For he is the Lord our God : and we are the people of his pasture, and the sheep of his hand.",
+  "To day if ye will hear his voice, harden not your hearts : as in the provocation, and as in the day of temptation in the wilderness;",
+  "When your fathers tempted me : proved me, and saw my works.",
+  "Forty years long was I grieved with this generation, and said : It is a people that do err in their hearts, for they have not known my ways;",
+  "Unto whom I sware in my wrath : that they should not enter into my rest."
+];
+
+export const magnificat = [
+  "My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour.",
+  "For he hath regarded : the lowliness of his hand-maiden.",
+  "For behold, from henceforth : all generations shall call me blessed.",
+  "For he that is mighty hath magnified me : and holy is his Name.",
+  "And his mercy is on them that fear him : throughout all generations.",
+  "He hath shewed strength with his arm : he hath scattered the proud in the imagination of their hearts.",
+  "He hath put down the mighty from their seat : and hath exalted the humble and meek.",
+  "He hath filled the hungry with good things : and the rich he hath sent empty away.",
+  "He remembering his mercy hath holpen his servant Israel : as he promised to our forefathers, Abraham and his seed, for ever."
+];
+
+export const benedictus = [
+  "Blessed be the Lord God of Israel : for he hath visited, and redeemed his people;",
+  "And hath raised up a mighty salvation for us : in the house of his servant David;",
+  "As he spake by the mouth of his holy Prophets : which have been since the world began;",
+  "That we should be saved from our enemies : and from the hands of all that hate us;",
+  "To perform the mercy promised to our forefathers : and to remember his holy Covenant;",
+  "To perform the oath which he sware to our forefather Abraham : that he would give us;",
+  "That we being delivered out of the hands of our enemies : might serve him without fear;",
+  "In holiness and righteousness before him : all the days of our life.",
+  "And thou, Child, shalt be called the Prophet of the Highest : for thou shalt go before the face of the Lord to prepare his ways;",
+  "To give knowledge of salvation unto his people : for the remission of their sins,",
+  "Through the tender mercy of our God : whereby the day-spring from on high hath visited us;",
+  "To give light to them that sit in darkness, and in the shadow of death : and to guide our feet into the way of peace."
+];
+
+export const nuncDimittis = [
+  "Lord, now lettest thou thy servant depart in peace : according to thy word.",
+  "For mine eyes have seen : thy salvation,",
+  "Which thou hast prepared : before the face of all people;",
+  "To be a light to lighten the Gentiles : and to be the glory of thy people Israel."
+];
 
 export const teDeum = [
   "We praise thee, O God : we acknowledge thee to be the Lord.",

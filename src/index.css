@@ -27,6 +27,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-serif);
+  line-height: 1.45;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

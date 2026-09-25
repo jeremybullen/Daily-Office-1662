@@ -1,24 +1,18 @@
 import { P } from './GlossaryText';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { openingSentences, exhortation, confession, absolutionSubstitute, priestlyAbsolution, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers, generalThanksgiving } from '../content/liturgy-data';
-import { isAshWednesdayOrGoodFriday } from '../utils/liturgyHelpers';
+import { openingSentences, exhortation, confession, absolutionSubstitute, priestlyAbsolution, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers } from '../content/liturgy-data';
+import { isAshWednesdayOrGoodFriday, isAthanasianCreedDay } from '../utils/liturgyHelpers';
 import { getReadingsForDate } from '../utils/lectionary';
 import { Translation, CompletedData, OfficeType, AppSettings } from '../types';
 import { BibleReading } from './BibleReading';
 import { Section } from './Section';
 import { SheetMusic } from './SheetMusic';
 import { hymns } from '../content/hymn-data';
-import { Check, Music } from 'lucide-react';
-
-interface LiturgyProps {
-    office: OfficeType;
-    translation: Translation;
-    selectedDate: Date;
-    completedData: CompletedData;
-    onToggleCompleted: () => void;
-}
-
+import { Check, Music, Info, Volume2 } from 'lucide-react';
+import { buildLiturgySpeechSections } from '../utils/liturgySpeechBuilder';
+import { useLiturgicalSpeech } from '../hooks/useLiturgicalSpeech';
+import { AudioPlayer } from './AudioPlayer';
 
 interface LiturgyProps {
     office: OfficeType;
@@ -28,6 +22,8 @@ interface LiturgyProps {
     onToggleCompleted: () => void;
     settings: AppSettings;
     updateSettings: (newSettings: Partial<AppSettings>) => void;
+    onOpenAbout?: () => void;
+    onAudioStateChange?: (state: { isPlaying: boolean; isOpen: boolean; toggle: () => void }) => void;
 }
 
 
@@ -47,17 +43,19 @@ function parsePsalms(str: string) {
     return ['Psalm ' + str];
 }
 
-export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings }: LiturgyProps) {
+export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings, onOpenAbout, onAudioStateChange }: LiturgyProps) {
 
     const [sentenceIdx, setSentenceIdx] = useState(0);
     const [shortPsalmIndex, setShortPsalmIndex] = useState(0);
     const [useBenedicite, setUseBenedicite] = useState(false);
     const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(false);
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
-    const [useAthanasianCreed, setUseAthanasianCreed] = useState(false);
-    const [usePriestlyAbsolution, setUsePriestlyAbsolution] = useState(false);
+    const [usePriestlyAbsolution, setUsePriestlyAbsolution] = useState(true);
     const [useAmericanStatePrayers, setUseAmericanStatePrayers] = useState(true);
     const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
+    const [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false);
+    
+    const isAthanasian = office === 'morning' && isAthanasianCreedDay(selectedDate);
     
     const toggleHymn = (id: string, e?: any) => {
         if (e && e.stopPropagation) e.stopPropagation(); // prevent parent onClick
@@ -75,6 +73,78 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
 
     const readings = useMemo(() => getReadingsForDate(selectedDate, office), [office, selectedDate]);
     
+    const [useFirstAlt, setUseFirstAlt] = useState(false);
+    const [useSecondAlt, setUseSecondAlt] = useState(false);
+
+    const speechSections = useMemo(() => {
+        return buildLiturgySpeechSections({
+            office,
+            settings,
+            readings,
+            sentenceIdx,
+            usePriestlyAbsolution,
+            useBenedicite,
+            useAlternativeEveningCanticle1,
+            useAlternativeCanticle2,
+            isAthanasian,
+            useAmericanStatePrayers,
+            isAshWedOrGoodFri
+        });
+    }, [
+        office,
+        settings,
+        readings,
+        sentenceIdx,
+        usePriestlyAbsolution,
+        useBenedicite,
+        useAlternativeEveningCanticle1,
+        useAlternativeCanticle2,
+        isAthanasian,
+        useAmericanStatePrayers,
+        isAshWedOrGoodFri
+    ]);
+
+    const speech = useLiturgicalSpeech({ sections: speechSections });
+
+    // Sync audio state to parent / header
+    useEffect(() => {
+        if (onAudioStateChange) {
+            onAudioStateChange({
+                isPlaying: speech.isPlaying && !speech.isPaused,
+                isOpen: isAudioPlayerOpen,
+                toggle: () => {
+                    if (!isAudioPlayerOpen) {
+                        setIsAudioPlayerOpen(true);
+                        speech.play();
+                    } else if (speech.isPlaying && !speech.isPaused) {
+                        speech.pause();
+                    } else {
+                        speech.play();
+                    }
+                }
+            });
+        }
+    }, [speech.isPlaying, speech.isPaused, isAudioPlayerOpen, onAudioStateChange, speech.play, speech.pause]);
+
+    // Stop speech when office or date changes
+    useEffect(() => {
+        speech.stop();
+        setIsAudioPlayerOpen(false);
+    }, [office, selectedDate]);
+
+    const getHighlightClass = (sectionId: string, baseClass: string = '') => {
+        const isCurrent = speech.isPlaying && speech.currentSectionId === sectionId;
+        return `${baseClass} transition-all duration-300 ${isCurrent ? 'bg-amber-500/[0.04] p-3 -mx-3 rounded-2xl ring-1 ring-amber-500/20' : ''}`;
+    };
+
+    useEffect(() => {
+        setUseFirstAlt(false);
+        setUseSecondAlt(false);
+    }, [office, selectedDate]);
+
+    const activeFirstLesson = useFirstAlt && readings.firstLessonAlt ? readings.firstLessonAlt : readings.firstLesson;
+    const activeSecondLesson = useSecondAlt && readings.secondLessonAlt ? readings.secondLessonAlt : readings.secondLesson;
+
     const allPsalms = useMemo(() => parsePsalms(readings.psalms), [readings.psalms]);
     const displayedPsalm = settings.useShortForm ? allPsalms[shortPsalmIndex % allPsalms.length] : readings.psalms;
     
@@ -82,7 +152,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         if (settings.useShortForm) setShortPsalmIndex(prev => prev + 1);
     };
     
-    const displayedLesson = settings.shortLessonPreference === 'OT' ? readings.firstLesson : readings.secondLesson;
+    const displayedLesson = settings.shortLessonPreference === 'OT' ? activeFirstLesson : activeSecondLesson;
 
     const handleNextSentence = () => setSentenceIdx(i => (i + 1) % openingSentences.length);
 
@@ -101,16 +171,21 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         <main className="w-full max-w-[900px] mx-auto px-6 pt-24 sm:pt-32 pb-32">
              <div className="mb-16 md:mb-24 text-center">
                 <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-4">The Order for {office === 'morning' ? 'Morning' : 'Evening'} Prayer</h1>
-                {(readings.feastName || isSunday) && (
-                    <div className="flex flex-col items-center justify-center space-y-1.5">
-                        <P className="font-semibold opacity-60 text-sm tracking-widest uppercase">{readings.feastName || readings.liturgicalWeek}</P>
-                    </div>
-                )}
+                <div className="flex flex-col items-center justify-center space-y-1">
+                    <p className="font-semibold opacity-70 text-sm sm:text-base tracking-widest uppercase font-serif">
+                        {readings.dayTitle || readings.liturgicalWeek}
+                    </p>
+                    {readings.commemoration && readings.commemoration !== readings.dayTitle && (
+                        <p className="rubric font-serif italic text-sm sm:text-base">
+                            {readings.commemoration}
+                        </p>
+                    )}
+                </div>
              </div>
 
              
              {/* Sentences */}
-             <Section title="The Opening Sentence" metadata={openingSentences[sentenceIdx].citation} onTitleClick={handleNextSentence}>
+             <Section id="tts-opening-sentence" className={getHighlightClass('tts-opening-sentence')} title="The Opening Sentence" metadata={openingSentences[sentenceIdx].citation} onTitleClick={handleNextSentence}>
                 <div className="select-none">
                     <AnimatePresence mode="wait">
                         <motion.p
@@ -128,42 +203,57 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
 
              {/* Exhortation */}
              {!settings.useShortForm && (
-                 <Section title="The Exhortation">
-                     <P>{isSunday ? exhortation.full : exhortation.short}</P>
+                 <Section id="tts-exhortation" className={getHighlightClass('tts-exhortation')} title="The Exhortation">
+                     <P>{exhortation.full}</P>
                  </Section>
              )}
 
              {/* Confession */}
              <Section 
+                 id="tts-confession"
+                 className={getHighlightClass('tts-confession')}
                  title="A General Confession"
-                 rubric="To be said of the whole Congregation after the Minister, all kneeling."
+                 rubric="of the whole Congregation after the Minister, all kneeling."
              >
                  <P>{confession}</P>
              </Section>
 
-             {/* Absolution (Replaced) */}
+             {/* Absolution */}
              <Section 
+                 id="tts-absolution"
+                 className={getHighlightClass('tts-absolution', '!mb-6 md:!mb-8')}
                  title={usePriestlyAbsolution ? "The Absolution" : "The Collect for Pardon"}
-                 rubric={usePriestlyAbsolution ? "To be pronounced by the Priest alone, standing; the people still kneeling." : "Substituted for the Absolution for private devotion."}
+                 rubric={usePriestlyAbsolution ? "or Remission of sins to be pronounced by the Priest alone, standing: the people still kneeling." : "If no priest be present the person saying the Service shall read the Collect for the Twenty-First Sunday after Trinity, that person and the people still kneeling."}
                  onTitleClick={() => setUsePriestlyAbsolution(!usePriestlyAbsolution)}
              >
                  <div className="select-none">
                     <AnimatePresence mode="wait">
-                        <motion.p
+                        <motion.div
                             key={usePriestlyAbsolution ? 'priestly' : 'substitute'}
                             initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -5 }}
                             transition={{ duration: 0.3 }}
                         >
-                            {usePriestlyAbsolution ? priestlyAbsolution : absolutionSubstitute}
-                        </motion.p>
+                            <P>{usePriestlyAbsolution ? priestlyAbsolution : absolutionSubstitute}</P>
+                        </motion.div>
                     </AnimatePresence>
                  </div>
              </Section>
 
+             {/* Amen Rubric and Response */}
+             <Section 
+                 id="tts-absolution-amen"
+                 className={getHighlightClass('tts-absolution-amen', '!mb-12 md:!mb-16')}
+                 rubric="The people shall answer here, and at the end of all other prayers,"
+             >
+                 <P className="font-bold">Amen.</P>
+             </Section>
+
              {/* Lord's Prayer */}
              <Section 
+                 id="tts-lords-prayer-1"
+                 className={getHighlightClass('tts-lords-prayer-1')}
                  title="The Lord's Prayer"
                  rubric="Then the Minister shall kneel, and say the Lord's Prayer with an audible voice; the people also kneeling, and repeating it with him, both here, and wheresoever else it is used in Divine Service."
                  leftAction={
@@ -184,9 +274,20 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Versicles */}
-             <Section title="The Versicles">
+             <Section id="tts-versicles" className={getHighlightClass('tts-versicles', 'mb-6 md:mb-8')} title="The Versicles">
                  <div className="space-y-4">
-                     {initialVersicles.map((v, i) => (
+                     {initialVersicles.slice(0, 2).map((v, i) => (
+                         <div key={i}>
+                            <P className="text-opacity-90">{v.v}</P>
+                            <P className="font-bold">{v.r}</P>
+                         </div>
+                     ))}
+                 </div>
+             </Section>
+
+             <Section id="tts-versicles-gloria" className={getHighlightClass('tts-versicles-gloria')} rubric="Here, all standing up">
+                 <div className="space-y-4">
+                     {initialVersicles.slice(2).map((v, i) => (
                          <div key={i}>
                             <P className="text-opacity-90">{v.v}</P>
                             <P className="font-bold">{v.r}</P>
@@ -198,6 +299,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Venite (Morning only, unless Ash Wed/Good Fri) */}
              {office === 'morning' && !isAshWedOrGoodFri && !settings.useShortForm && (
                  <Section 
+                     id="tts-venite"
+                     className={getHighlightClass('tts-venite')}
                      title="Venite, exultemus Domino" 
                      metadata="Psalm 95."
                      leftAction={
@@ -210,7 +313,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      {hymnMode['venite'] ? (
                          <SheetMusic imageUrl={hymns.venite.imageUrl} extraVerses={hymns.venite.extraVerses} />
                      ) : (
-                         <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                         <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                             <P>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</P>
                             <P>Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.</P>
                             <P>For the Lord is a great God : and a great King above all gods.</P>
@@ -232,6 +335,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Psalms */}
              {settings.useShortForm ? (
                  <BibleReading 
+                     id="tts-psalms"
                      title="The Psalm" 
                      metadata={displayedPsalm}
                      passage={displayedPsalm} 
@@ -240,6 +344,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  />
              ) : (
                  <BibleReading 
+                     id="tts-psalms"
                      title="The Psalms of the Day" 
                      metadata={readings.psalms}
                      passage={readings.psalms} 
@@ -249,23 +354,28 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* First Lesson (or Single Lesson) */}
              {settings.useShortForm ? (
                  <BibleReading 
-                         title="The Lesson" 
-                         metadata={displayedLesson}
-                         passage={displayedLesson} 
-                         translation={translation} 
-                         onTitleClick={() => updateSettings({ shortLessonPreference: settings.shortLessonPreference === 'OT' ? 'NT' : 'OT' })}
-                     />
+                     id="tts-first-lesson"
+                     title="The Lesson" 
+                     metadata={displayedLesson}
+                     passage={displayedLesson} 
+                     translation={translation} 
+                     onTitleClick={() => updateSettings({ shortLessonPreference: settings.shortLessonPreference === 'OT' ? 'NT' : 'OT' })}
+                 />
              ) : (
                  <BibleReading 
+                     id="tts-first-lesson"
                      title="The First Lesson" 
-                     metadata={readings.firstLesson}
-                     passage={readings.firstLesson} 
+                     metadata={readings.firstLessonAlt ? `${activeFirstLesson} (or: ${useFirstAlt ? readings.firstLesson : readings.firstLessonAlt})` : activeFirstLesson}
+                     passage={activeFirstLesson} 
                      translation={translation} 
+                     onTitleClick={readings.firstLessonAlt ? () => setUseFirstAlt(prev => !prev) : undefined}
                  />
              )}
              
              {/* Canticle 1 */}
-                     <Section 
+             <Section 
+                 id="tts-canticle-1"
+                 className={getHighlightClass('tts-canticle-1')}
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
                  metadata={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
                  onTitleClick={office === 'morning' ? () => setUseBenedicite(!useBenedicite) : () => setUseAlternativeEveningCanticle1(!useAlternativeEveningCanticle1)}
@@ -282,7 +392,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <div className="select-none">
                         {!useBenedicite ? (
                             <div className="animate-in fade-in duration-500">
-                                <div className="space-y-1 leading-relaxed">
+                                <div className="space-y-1 leading-normal">
                                     {teDeum.map((verse, i) => <P key={i}>{verse}</P>)}
                                 </div>
                             </div>
@@ -291,14 +401,14 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 {benediciteGroups.map((group, i) => (
                                     <div key={i} className="mb-4 sm:mb-5">
                                         <div className="space-y-0.5 sm:space-y-1 mb-1.5">
-                                            {group.map((v, j) => <P key={j} className="leading-relaxed">{v}</P>)}
+                                            {group.map((v, j) => <P key={j} className="leading-normal">{v}</P>)}
                                         </div>
-                                        <P className="font-bold opacity-90 leading-relaxed">{benediciteRefrain}</P>
+                                        <P className="font-bold opacity-90 leading-normal">{benediciteRefrain}</P>
                                     </div>
                                 ))}
                                 <div className="mt-5">
-                                    <P className="leading-relaxed">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                    <P className="leading-relaxed font-bold mt-0.5">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                    <P className="leading-normal">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+                                    <P className="leading-normal font-bold mt-0.5">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                                 </div>
                             </div>
                         )}
@@ -306,7 +416,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  ) : (
                      <div className="select-none">
                          {!useAlternativeEveningCanticle1 ? (
-                             <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                             <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                 <P>My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour.</P>
                                 <P>For he hath regarded : the lowliness of his hand-maiden.</P>
                                 <P>For behold, from henceforth : all generations shall call me blessed.</P>
@@ -320,7 +430,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          ) : (
-                             <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                             <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  {cantateDomino.map((verse, i) => <P key={i}>{verse}</P>)}
                                  <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
@@ -334,9 +444,10 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <>
                      <BibleReading 
                          title="The Second Lesson" 
-                         metadata={readings.secondLesson}
-                         passage={readings.secondLesson} 
+                         metadata={readings.secondLessonAlt ? `${activeSecondLesson} (or: ${useSecondAlt ? readings.secondLesson : readings.secondLessonAlt})` : activeSecondLesson}
+                         passage={activeSecondLesson} 
                          translation={translation} 
+                         onTitleClick={readings.secondLessonAlt ? () => setUseSecondAlt(prev => !prev) : undefined}
                      />
                      <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
@@ -355,7 +466,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <div className="select-none">
                      {office === 'morning' ? (
                          !useAlternativeCanticle2 ? (
-                             <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                             <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  <P>Blessed be the Lord God of Israel : for he hath visited, and redeemed his people;</P>
                                  <P>And hath raised up a mighty salvation for us : in the house of his servant David;</P>
                                  <P>As he spake by the mouth of his holy Prophets : which have been since the world began;</P>
@@ -372,7 +483,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          ) : (
-                             <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                             <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  {jubilateDeo.map((verse, i) => <P key={i}>{verse}</P>)}
                                  <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
@@ -380,7 +491,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          )
                      ) : (
                          !useAlternativeCanticle2 ? (
-                             <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                             <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  <P>Lord, now lettest thou thy servant depart in peace : according to thy word.</P>
                                  <P>For mine eyes have seen : thy salvation,</P>
                                  <P>Which thou hast prepared : before the face of all people;</P>
@@ -389,7 +500,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
                          ) : (
-                             <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                             <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  {deusMisereatur.map((verse, i) => <P key={i}>{verse}</P>)}
                                  <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
@@ -403,17 +514,17 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              )}
              {/* Creed */}
              <Section 
-                 title={useAthanasianCreed ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
-                 metadata={useAthanasianCreed ? "Quicunque vult." : ""}
-                 onTitleClick={() => setUseAthanasianCreed(!useAthanasianCreed)}
+                 title={isAthanasian ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
+                 metadata={isAthanasian ? "Quicunque vult." : ""}
+                 rubric={isAthanasian ? "sung or said at Morning Prayer, instead of the Apostles' Creed, by the Minister and people standing." : "by the Minister and the people, standing."}
              >
                  <div className="select-none">
-                     {!useAthanasianCreed ? (
+                     {!isAthanasian ? (
                          <div className="animate-in fade-in duration-500">
                              <P>{apostlesCreed}</P>
                          </div>
                      ) : (
-                         <div className="animate-in fade-in duration-500 space-y-1 leading-relaxed">
+                         <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                              {athanasianCreed.map((verse, i) => <P key={i}>{verse}</P>)}
                          </div>
                      )}
@@ -531,10 +642,6 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <Section title="A Prayer for the Clergy and People">
                          <P>{statePrayers.clergyAndPeople}</P>
                      </Section>
-                     
-                     <Section title="A General Thanksgiving" rubric="To be said by the Minister alone.">
-                         <P>{generalThanksgiving}</P>
-                     </Section>
                  </>
              )}
 
@@ -548,7 +655,13 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <P>{theGrace}</P>
              </Section>
              
-             <div className="py-8 flex justify-center">
+             <div className="text-center my-10 md:my-14">
+                 <p className="font-serif italic text-base md:text-lg opacity-85">
+                     Here endeth the Order of {office === 'morning' ? 'Morning' : 'Evening'} Prayer throughout the Year.
+                 </p>
+             </div>
+             
+             <div className="py-8 flex flex-col items-center gap-3">
                  <button
                      onClick={onToggleCompleted}
                      className={`
@@ -562,8 +675,39 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <Check size={18} className={`transition-transform duration-300 ${isCompleted ? 'scale-100 opacity-100' : 'scale-75 opacity-50'}`} />
                      {isCompleted ? 'Office Completed' : 'Mark as Completed'}
                  </button>
+
+                 {onOpenAbout && (
+                     <button
+                         type="button"
+                         onClick={onOpenAbout}
+                         className="text-xs opacity-65 hover:opacity-100 transition-opacity flex items-center gap-1.5 py-1.5 px-3 rounded-full hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer"
+                     >
+                         <Info size={13} />
+                         <span>About</span>
+                     </button>
+                 )}
              </div>
              
+             {/* Audio Floating Controller */}
+             <AudioPlayer
+                 isOpen={isAudioPlayerOpen}
+                 isPlaying={speech.isPlaying}
+                 isPaused={speech.isPaused}
+                 currentSectionTitle={speech.currentSectionTitle}
+                 currentRole={speech.currentRole}
+                 currentSectionIndex={speech.currentSectionIndex}
+                 totalSections={speech.totalSections}
+                 rate={speech.rate}
+                 hasDistinctVoices={speech.voices.isDistinct}
+                 onPlay={speech.play}
+                 onPause={speech.pause}
+                 onStop={speech.stop}
+                 onNext={speech.nextSection}
+                 onPrev={speech.prevSection}
+                 onChangeRate={speech.changeRate}
+                 onClose={() => setIsAudioPlayerOpen(false)}
+             />
+
              <div className="h-16"></div>
         </main>
     );

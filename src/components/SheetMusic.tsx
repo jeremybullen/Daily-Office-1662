@@ -37,7 +37,7 @@ export function SheetMusic({ imageUrl, extraVerses }: SheetMusicProps) {
                     {extraVerses.map((verse, i) => (
                         <div key={i} className="space-y-1">
                             {verse.map((line, j) => (
-                                <P key={j} className="leading-relaxed opacity-90">{line}</P>
+                                <P key={j} className="leading-normal opacity-90">{line}</P>
                             ))}
                         </div>
                     ))}

@@ -1,0 +1,6539 @@
+{
+  "advent": {
+    "advent1": {
+      "sunday": {
+        "dayName": "Advent Sunday",
+        "morning": {
+          "first": "Isaiah 1:1-20",
+          "firstAlt": "",
+          "second": "John 3:1-21",
+          "secondAlt": "John 1 Thessalonians 4:13-5:11"
+        },
+        "evening": {
+          "first": "Isaiah 2",
+          "firstAlt": "Isaiah 1:18-31",
+          "second": "Matthew 24:1-28",
+          "secondAlt": "Revelation 14:13-15:4"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Isaiah 3:1-15",
+          "firstAlt": "",
+          "second": "Mark 1:1-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 4:2-6",
+          "firstAlt": "",
+          "second": "James 1",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Isaiah 5:1-17",
+          "firstAlt": "",
+          "second": "Mark 1:21-45",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 5:18-30",
+          "firstAlt": "",
+          "second": "James 2:1-13",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Isaiah 6",
+          "firstAlt": "",
+          "second": "Isaiah 8:16-9:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Mark 2:1-22",
+          "firstAlt": "",
+          "second": "James 2:14-26",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Isaiah 9:8-10:4",
+          "firstAlt": "",
+          "second": "Mark 2:23-3:12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 10:5-23",
+          "firstAlt": "",
+          "second": "James 3",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Isaiah 10:24-11:9",
+          "firstAlt": "",
+          "second": "Mark 3:13-35",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 11:10-12-end",
+          "firstAlt": "",
+          "second": "James 4",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Isaiah 13:1-14:2",
+          "firstAlt": "",
+          "second": "Mark 4:1-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 14:3-27",
+          "firstAlt": "",
+          "second": "James 5",
+          "secondAlt": ""
+        }
+      }
+    },
+    "advent2": {
+      "sunday": {
+        "dayName": "Second Sunday in Advent",
+        "morning": {
+          "first": "Isaiah 5",
+          "firstAlt": "",
+          "second": "John 5:19-40",
+          "secondAlt": "John 2 Peter 3:1-14"
+        },
+        "evening": {
+          "first": "Isaiah 10:33-11:9",
+          "firstAlt": "Isaiah 11:10-12-end",
+          "second": "Matthew 24:29-51",
+          "secondAlt": "Revelation 20:1-21:8"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Isaiah 17",
+          "firstAlt": "",
+          "second": "Mark 4:21-41",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 18",
+          "firstAlt": "",
+          "second": "1 Peter 1:1-21",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Isaiah 19:1-17",
+          "firstAlt": "",
+          "second": "Mark 5:1-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 19:18-25",
+          "firstAlt": "",
+          "second": "1 Peter 1:22-2:10",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Isaiah 21:1-12",
+          "firstAlt": "",
+          "second": "Mark 5:21-43",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 22:1-14",
+          "firstAlt": "",
+          "second": "1 Peter 2:11-3:7",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Isaiah 24",
+          "firstAlt": "",
+          "second": "Mark 6:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Peter 3:8-4:6",
+          "firstAlt": "",
+          "second": "Isaiah 28:1-13",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Isaiah 28:14-29",
+          "firstAlt": "",
+          "second": "Mark 6:14-29",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 29:1-14",
+          "firstAlt": "",
+          "second": "1 Peter 4:7-19",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Isaiah 29:15-24",
+          "firstAlt": "",
+          "second": "Mark 6:30-56",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 30:1-18",
+          "firstAlt": "",
+          "second": "1 Peter 5",
+          "secondAlt": ""
+        }
+      }
+    },
+    "advent3": {
+      "sunday": {
+        "dayName": "Third Sunday in Advent",
+        "morning": {
+          "first": "Isaiah 25:1-9",
+          "firstAlt": "",
+          "second": "Luke 3:1-17",
+          "secondAlt": "Luke 1 Timothy 1:12-2:7"
+        },
+        "evening": {
+          "first": "Isaiah 26",
+          "firstAlt": "Isaiah 11:10-12-end",
+          "second": "Matthew 25:1-30",
+          "secondAlt": "Revelation 14:13-15:4"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Isaiah 30:19-33",
+          "firstAlt": "",
+          "second": "Mark 7:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 31",
+          "firstAlt": "",
+          "second": "1 John 1:1-2:6",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Isaiah 38:1-20",
+          "firstAlt": "",
+          "second": "Mark 7:24-8:10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 40:1-11",
+          "firstAlt": "",
+          "second": "1 John 2:7-25",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Isaiah 40:12-31",
+          "firstAlt": "",
+          "second": "Mark 8:11-9:1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 41",
+          "firstAlt": "",
+          "second": "1 John 3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Isaiah 42:1-17",
+          "firstAlt": "",
+          "second": "Mark 9:2-32",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 42:18-43:13",
+          "firstAlt": "",
+          "second": "1 John 4",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Isaiah 43:14-44:5",
+          "firstAlt": "",
+          "second": "Mark 9:33-50",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 44:6-23",
+          "firstAlt": "",
+          "second": "1 John 5",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Isaiah 44:24-45:13",
+          "firstAlt": "",
+          "second": "Mark 10:1-31",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 45:15-25",
+          "firstAlt": "",
+          "second": "2 John",
+          "secondAlt": ""
+        }
+      }
+    },
+    "advent4": {
+      "sunday": {
+        "dayName": "Fourth Sunday in Advent",
+        "morning": {
+          "first": "Isaiah 32:1-18",
+          "firstAlt": "",
+          "second": "Luke 1:26-45",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 33:2-22",
+          "firstAlt": "Isaiah 35",
+          "second": "Matthew 25:31-end",
+          "secondAlt": "Revelation 22:6-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Isaiah 46",
+          "firstAlt": "",
+          "second": "Mark 10:32-52",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 47",
+          "firstAlt": "",
+          "second": "3 John",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Isaiah 48",
+          "firstAlt": "",
+          "second": "Mark 11:1-26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 50:4-10",
+          "firstAlt": "",
+          "second": "Jude",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Isaiah 51:1-16",
+          "firstAlt": "",
+          "second": "Mark 11:27-12:12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 51:17-52:12",
+          "firstAlt": "",
+          "second": "Jude 2Peter 1",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Isaiah 52:13-53-end",
+          "firstAlt": "",
+          "second": "Mark 12:13-34",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 54",
+          "firstAlt": "",
+          "second": "Jude 2Peter 2",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Isaiah 56:1-8",
+          "firstAlt": "",
+          "second": "Mark 12:35-13:13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 57:15-21",
+          "firstAlt": "",
+          "second": "Jude 2Peter 3",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "#160; Saturday",
+        "morning": {
+          "first": "Isaiah 59",
+          "firstAlt": "",
+          "second": "Mark 13:14-37",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "",
+          "firstAlt": "",
+          "second": "",
+          "secondAlt": ""
+        }
+      }
+    }
+  },
+  "xmas": {
+    "fixed": {
+      "12-24": {
+        "dayName": "Christmas Eve",
+        "morning": {
+          "first": "",
+          "firstAlt": "",
+          "second": "",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zechariah 2:10-end",
+          "firstAlt": "",
+          "second": "Titus 2:11-end",
+          "secondAlt": "Titus 3:1-7"
+        }
+      },
+      "12-25": {
+        "dayName": "Christmas Day",
+        "morning": {
+          "first": "Isaiah 9:2-7",
+          "firstAlt": "",
+          "second": "Luke 2:1-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 7:10-14",
+          "firstAlt": "",
+          "second": "1 John 4:7-end",
+          "secondAlt": ""
+        }
+      },
+      "12-26": {
+        "dayName": "St. Stephen",
+        "morning": {
+          "first": "Genesis 4:1-10",
+          "firstAlt": "",
+          "second": "Acts 6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 24:15-22",
+          "firstAlt": "",
+          "second": "Acts 7:54-end",
+          "secondAlt": "Acts 8:1-4"
+        }
+      },
+      "12-27": {
+        "dayName": "St. John Evangelist",
+        "morning": {
+          "first": "Exodus 33:9-19",
+          "firstAlt": "",
+          "second": "John 13:21-35",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 6:1-8",
+          "firstAlt": "",
+          "second": "1 John 5:1-12",
+          "secondAlt": ""
+        }
+      },
+      "12-28": {
+        "dayName": "Innocents' Day",
+        "morning": {
+          "first": "Jeremiah 31:1-17",
+          "firstAlt": "",
+          "second": "Matthew 18:1-10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 49:14-25",
+          "firstAlt": "",
+          "second": "Mark 10:13-16",
+          "secondAlt": ""
+        }
+      },
+      "12-29": {
+        "dayName": "December 29",
+        "morning": {
+          "first": "Isaiah 55",
+          "firstAlt": "",
+          "second": "Luke 12:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 60:1-12",
+          "firstAlt": "",
+          "second": "Colossians 2:6-17",
+          "secondAlt": ""
+        }
+      },
+      "12-30": {
+        "dayName": "December 30",
+        "morning": {
+          "first": "Isaiah 60:13-end",
+          "firstAlt": "",
+          "second": "Luke 12:22-34",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 61",
+          "firstAlt": "",
+          "second": "Colossians 3:1-17",
+          "secondAlt": ""
+        }
+      },
+      "12-31": {
+        "dayName": "December 31",
+        "morning": {
+          "first": "Isaiah 62",
+          "firstAlt": "",
+          "second": "Luke 12:35-48",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 10:12-11:1",
+          "firstAlt": "",
+          "second": "Luke 21:25-36",
+          "secondAlt": ""
+        }
+      },
+      "01-01": {
+        "dayName": "Circumcision",
+        "morning": {
+          "first": "Genesis 17:1-13",
+          "firstAlt": "",
+          "second": "Romans 2:17-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 30",
+          "firstAlt": "",
+          "second": "Romans 13",
+          "secondAlt": ""
+        }
+      },
+      "01-02": {
+        "dayName": "January 2",
+        "morning": {
+          "first": "Isaiah 63:1-6",
+          "firstAlt": "",
+          "second": "Matthew 1:18-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 63:7-end",
+          "firstAlt": "",
+          "second": "1 Thessalonians 1",
+          "secondAlt": ""
+        }
+      },
+      "01-03": {
+        "dayName": "January 3",
+        "morning": {
+          "first": "Isaiah 64",
+          "firstAlt": "",
+          "second": "Matthew 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 65:1-16",
+          "firstAlt": "",
+          "second": "1 Thessalonians 2:1-16",
+          "secondAlt": ""
+        }
+      },
+      "01-04": {
+        "dayName": "January 4",
+        "morning": {
+          "first": "Isaiah 65:17-end",
+          "firstAlt": "",
+          "second": "Matthew 3:1",
+          "secondAlt": "Matthew 4:1-11"
+        },
+        "evening": {
+          "first": "Isaiah 66:1-9",
+          "firstAlt": "",
+          "second": "1 Thessalonians 2:17-end",
+          "secondAlt": "1 Thessalonians 1 Thessalonians 3"
+        }
+      },
+      "01-05": {
+        "dayName": "January 5",
+        "morning": {
+          "first": "Isaiah 66:10-end",
+          "firstAlt": "",
+          "second": "Matthew 4:12",
+          "secondAlt": "Matthew 5:1-16"
+        },
+        "evening": {
+          "first": "Isaiah 49:1-13",
+          "firstAlt": "",
+          "second": "Romans 15:8-21",
+          "secondAlt": ""
+        }
+      }
+    },
+    "sundayAfterChristmas": {
+      "dayName": "Sunday after Christmas Day *",
+      "morning": {
+        "first": "Isaiah 40:1-11",
+        "firstAlt": "",
+        "second": "Luke 2:22-40",
+        "secondAlt": "Colossians 1:1-20"
+      },
+      "evening": {
+        "first": "Isaiah 40:12-end",
+        "firstAlt": "Isaiah 41:1-20",
+        "second": "John 10:1-16",
+        "secondAlt": "Philippians 2:1-11"
+      }
+    },
+    "secondSundayAfterChristmas": {
+      "dayName": "Second Sunday after Christmas *",
+      "morning": {
+        "first": "Isaiah 42:1-16",
+        "firstAlt": "",
+        "second": "Matthew 6:19-end",
+        "secondAlt": "Ephesians 1"
+      },
+      "evening": {
+        "first": "Isaiah 43:1-13",
+        "firstAlt": "Isaiah 43:14-44:5",
+        "second": "Matthew 7:13-27",
+        "secondAlt": "Matthew 1 John 3"
+      }
+    }
+  },
+  "epiphany": {
+    "fixedEpiphany": {
+      "dayName": "Epiphany",
+      "morning": {
+        "first": "Isaiah 60",
+        "firstAlt": "",
+        "second": "Luke 3:15-22",
+        "secondAlt": ""
+      },
+      "evening": {
+        "first": "Isaiah 61",
+        "firstAlt": "",
+        "second": "John 2:1-11",
+        "secondAlt": ""
+      }
+    },
+    "weekOfEpiphany": {
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Hosea 2:14-end",
+          "firstAlt": "",
+          "second": "Matthew 5:17-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Hosea 4:1-11",
+          "firstAlt": "",
+          "second": "1 Thessalonians 4:1-12",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Hosea 5:8-6:6",
+          "firstAlt": "",
+          "second": "Matthew 6:1-18",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Hosea 8",
+          "firstAlt": "",
+          "second": "1 Thessalonians 4:13-5:11",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Hosea 9",
+          "firstAlt": "",
+          "second": "Matthew 6:19-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Hosea 10",
+          "firstAlt": "",
+          "second": "1 Thessalonians 5:12-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Hosea 11",
+          "firstAlt": "",
+          "second": "Matthew 7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Hosea 12",
+          "firstAlt": "",
+          "second": "2 Thessalonians 1",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Hosea 13:1-14",
+          "firstAlt": "",
+          "second": "Matthew 8:1-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Hosea 14",
+          "firstAlt": "",
+          "second": "2 Thessalonians 2",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Joel 1",
+          "firstAlt": "",
+          "second": "Matthew 8:18-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joel 2:1-14",
+          "firstAlt": "",
+          "second": "2 Thessalonians 3",
+          "secondAlt": ""
+        }
+      }
+    },
+    "epiphany1": {
+      "sunday": {
+        "dayName": "First Sunday after Epiphany",
+        "morning": {
+          "first": "Isaiah 44:6-end",
+          "firstAlt": "",
+          "second": "John 1:19-34",
+          "secondAlt": "Ephesians 2"
+        },
+        "evening": {
+          "first": "Isaiah 45",
+          "firstAlt": "Isaiah 48",
+          "second": "John 4:1-42",
+          "secondAlt": "Colossians 1:21-2:1-7"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Joel 2:15-end",
+          "firstAlt": "",
+          "second": "Matthew 9:1-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joel 3",
+          "firstAlt": "",
+          "second": "Galatians 1",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Amos 1",
+          "firstAlt": "",
+          "second": "Matthew 9:18-34",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Amos 2",
+          "firstAlt": "",
+          "second": "Galatians 2",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Amos 3",
+          "firstAlt": "",
+          "second": "Matthew 9:35-10:23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Amos 4",
+          "firstAlt": "",
+          "second": "Galatians 3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Amos 5",
+          "firstAlt": "",
+          "second": "Matthew 10:24-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Amos 6",
+          "firstAlt": "",
+          "second": "Galatians 4-5:1",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Amos 7",
+          "firstAlt": "",
+          "second": "Matthew 11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Amos 8",
+          "firstAlt": "",
+          "second": "Galatians 5:2-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Amos 9",
+          "firstAlt": "",
+          "second": "Matthew 12:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Obadiah",
+          "firstAlt": "",
+          "second": "Galatians 6",
+          "secondAlt": ""
+        }
+      }
+    },
+    "epiphany2": {
+      "sunday": {
+        "dayName": "Second Sunday after Epiphany",
+        "morning": {
+          "first": "Isaiah 49:1-13",
+          "firstAlt": "",
+          "second": "Luke 4:16-30",
+          "secondAlt": "James 1"
+        },
+        "evening": {
+          "first": "Isaiah 49:14-end",
+          "firstAlt": "Isaiah 50:4-10",
+          "second": "John 12:20-end",
+          "secondAlt": "John 1 Thessalonians 1-2:12"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Jonah 1-2",
+          "firstAlt": "",
+          "second": "Matthew 12:22-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jonah 3-4",
+          "firstAlt": "",
+          "second": "1 Corinthians 1:1-25",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Micah 1",
+          "firstAlt": "",
+          "second": "Matthew 13:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Micah 2",
+          "firstAlt": "",
+          "second": "1 Corinthians 1:26 & 2",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Micah 3",
+          "firstAlt": "",
+          "second": "Matthew 13:24-43",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Micah 4-5:1",
+          "firstAlt": "",
+          "second": "1 Corinthians 3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Micah 5:2-end",
+          "firstAlt": "",
+          "second": "Matthew 13:44-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Micah 6",
+          "firstAlt": "",
+          "second": "1 Corinthians 4:1-17",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Micah 7",
+          "firstAlt": "",
+          "second": "Matthew 14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Nahum 1",
+          "firstAlt": "",
+          "second": "1 Corinthians 4:18-5:13",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Nahum 2",
+          "firstAlt": "",
+          "second": "Matthew 15:1-28",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Nahum 3",
+          "firstAlt": "",
+          "second": "1 Corinthians 6",
+          "secondAlt": ""
+        }
+      }
+    },
+    "epiphany3": {
+      "sunday": {
+        "dayName": "Third Sunday after Epiphany",
+        "morning": {
+          "first": "Hosea 11:1-12:6",
+          "firstAlt": "",
+          "second": "John 2",
+          "secondAlt": "James 2"
+        },
+        "evening": {
+          "first": "Hosea 14",
+          "firstAlt": "Joel 2:15-end",
+          "second": "John 6:22-40",
+          "secondAlt": "Galatians 1"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Habakkuk 1",
+          "firstAlt": "",
+          "second": "1 Corinthians 7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Habakkuk 2",
+          "firstAlt": "",
+          "second": "1 Corinthians 8",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Habakkuk 3:2-end",
+          "firstAlt": "",
+          "second": "1 Corinthians 9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zephaniah 1",
+          "firstAlt": "",
+          "second": "1 Corinthians 10:1-11:1",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Zephaniah 2",
+          "firstAlt": "",
+          "second": "1 Corinthians 11:2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zephaniah 3",
+          "firstAlt": "",
+          "second": "1 Corinthians 12:1-27",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Zechariah 11",
+          "firstAlt": "",
+          "second": "1 Corinthians 12:27-13:13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zechariah 13",
+          "firstAlt": "",
+          "second": "1 Corinthians 14:1-19",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Malachi 1",
+          "firstAlt": "",
+          "second": "1 Corinthians 14:20-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Malachi 2:1-16",
+          "firstAlt": "",
+          "second": "1 Corinthians 15:1-34",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Malachi 2:17-3:12",
+          "firstAlt": "",
+          "second": "1 Corinthians 15:35-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Malachi 3:13-4",
+          "firstAlt": "",
+          "second": "1 Corinthians 16",
+          "secondAlt": ""
+        }
+      }
+    },
+    "epiphany4": {
+      "sunday": {
+        "dayName": "Fourth Sunday after Epiphany",
+        "morning": {
+          "first": "Amos 3",
+          "firstAlt": "",
+          "second": "John 3:22-end",
+          "secondAlt": "James 3"
+        },
+        "evening": {
+          "first": "Amos 4:4-end",
+          "firstAlt": "Amos 5:1-24",
+          "second": "John 6:41-end",
+          "secondAlt": "John 1 Corinthians 1:1-25"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Jeremiah 1",
+          "firstAlt": "",
+          "second": "2 Corinthians 1:1-2:11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 2:1-13",
+          "firstAlt": "",
+          "second": "2 Corinthians 2:12-3-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Jeremiah 4:1-18",
+          "firstAlt": "",
+          "second": "2 Corinthians 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 5:1-19",
+          "firstAlt": "",
+          "second": "2 Corinthians 5:",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Jeremiah 5:20-end",
+          "firstAlt": "",
+          "second": "2 Corinthians 5:20-7:1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 6:1-21",
+          "firstAlt": "",
+          "second": "2 Corinthians 7:2-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Jeremiah 7:1-28",
+          "firstAlt": "",
+          "second": "2 Corinthians 8",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 8:",
+          "firstAlt": "",
+          "second": "2 Corinthians 9:",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Jeremiah 9:1-24",
+          "firstAlt": "",
+          "second": "2 Corinthians 10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 10:",
+          "firstAlt": "",
+          "second": "2 Corinthians 11:",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Jeremiah 14",
+          "firstAlt": "",
+          "second": "2 Corinthians 12:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 15:",
+          "firstAlt": "",
+          "second": "2 Corinthians 12:14-13",
+          "secondAlt": ""
+        }
+      }
+    },
+    "epiphany5": {
+      "sunday": {
+        "dayName": "Fifth Sunday after Epiphany",
+        "morning": {
+          "first": "Amos 7",
+          "firstAlt": "",
+          "second": "John 4:43-end",
+          "secondAlt": "James 4"
+        },
+        "evening": {
+          "first": "Amos 8",
+          "firstAlt": "Amos 9",
+          "second": "John 7:14-36",
+          "secondAlt": "John 1 Corinthians 1:26-2-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Jeremiah 17:1-18",
+          "firstAlt": "",
+          "second": "Acts 15:1-29",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 17:19-end",
+          "firstAlt": "",
+          "second": "Acts 15:30-16:5",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Jeremiah 18:1-17",
+          "firstAlt": "",
+          "second": "Acts 16:6-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 20:",
+          "firstAlt": "",
+          "second": "Acts 17:1-15",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Jeremiah 23:9-32",
+          "firstAlt": "",
+          "second": "Acts 17:16-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 30:1-22",
+          "firstAlt": "",
+          "second": "Acts 18:1-23",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Jeremiah 31:1-20",
+          "firstAlt": "",
+          "second": "Acts 18:24-19:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 31:23-end",
+          "firstAlt": "",
+          "second": "Acts 19:8-20",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Jeremiah 33:1-13",
+          "firstAlt": "",
+          "second": "Acts 19:21-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 33:14-end",
+          "firstAlt": "",
+          "second": "Acts 20:1-16",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ezekiel 1",
+          "firstAlt": "",
+          "second": "Acts 20:17-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 11:1-13",
+          "firstAlt": "",
+          "second": "Acts 21:1-16",
+          "secondAlt": ""
+        }
+      }
+    },
+    "epiphany6": {
+      "sunday": {
+        "dayName": "Sixth Sunday after Epiphany",
+        "morning": {
+          "first": "Micah 2",
+          "firstAlt": "",
+          "second": "John 5:24-end",
+          "secondAlt": "James 5"
+        },
+        "evening": {
+          "first": "Micah 3",
+          "firstAlt": "Micah 5:2-end",
+          "second": "John 7:37-8:11",
+          "secondAlt": "John 1 Corinthians 3"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Ezekiel 12:17-end",
+          "firstAlt": "",
+          "second": "Acts 21:17-36",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 15",
+          "firstAlt": "",
+          "second": "Acts 21:37-22:22",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Ezekiel 17",
+          "firstAlt": "",
+          "second": "Acts 22:23-23:11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 20:27-44",
+          "firstAlt": "",
+          "second": "Acts 23:12-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Ezekiel 24:15-end",
+          "firstAlt": "",
+          "second": "Acts 24:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 27",
+          "firstAlt": "",
+          "second": "Acts 24:24-25:12",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Ezekiel 31",
+          "firstAlt": "",
+          "second": "Acts 25:13-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 33:1-20",
+          "firstAlt": "",
+          "second": "Acts 26",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Ezekiel 36:22-end",
+          "firstAlt": "",
+          "second": "Acts:27:1-26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 37:15-end",
+          "firstAlt": "",
+          "second": "Acts 27:27-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ezekiel 43:1-9",
+          "firstAlt": "",
+          "second": "Acts 28:1-15",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 47:1-12",
+          "firstAlt": "",
+          "second": "Acts 28:16-end",
+          "secondAlt": ""
+        }
+      }
+    }
+  },
+  "lent": {
+    "septuagesima": {
+      "sunday": {
+        "dayName": "Septuagesima",
+        "morning": {
+          "first": "Genesis 1:1-2:3",
+          "firstAlt": "",
+          "second": "John 1:1-18",
+          "secondAlt": "Revelation 21:1-14"
+        },
+        "evening": {
+          "first": "Genesis 2:4-end",
+          "firstAlt": "Jeremiah 10:1-16",
+          "second": "Mark 10:1-16",
+          "secondAlt": "Revelation 21:15-22:5"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Genesis 3",
+          "firstAlt": "",
+          "second": "Matthew 15:29-16:12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 4:1-16",
+          "firstAlt": "",
+          "second": "Romans 1",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Genesis 6:5-end",
+          "firstAlt": "",
+          "second": "Matthew 16:13-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 7",
+          "firstAlt": "",
+          "second": "Romans 2",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Genesis 8:1-14",
+          "firstAlt": "",
+          "second": "Matthew 17:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 8:15-9:17",
+          "firstAlt": "",
+          "second": "Romans 3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Genesis 11:1-9",
+          "firstAlt": "",
+          "second": "Matthew 17:24-18:14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 11:27-12:10",
+          "firstAlt": "",
+          "second": "Romans 4",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Genesis 13",
+          "firstAlt": "",
+          "second": "Matthew 18:15-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 14",
+          "firstAlt": "",
+          "second": "Romans 5",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Genesis 15",
+          "firstAlt": "",
+          "second": "Matthew 19:1-15",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 16",
+          "firstAlt": "",
+          "second": "Romans 6",
+          "secondAlt": ""
+        }
+      }
+    },
+    "sexagesima": {
+      "sunday": {
+        "dayName": "Sexagesima",
+        "morning": {
+          "first": "Genesis 3",
+          "firstAlt": "",
+          "second": "Mark 9:33-end",
+          "secondAlt": "Mark 1 Corinthians 6"
+        },
+        "evening": {
+          "first": "Genesis 6:5-end",
+          "firstAlt": "Genesis 8:15-9:17 or Sirach 15:11",
+          "second": "Luke 17:20-end",
+          "secondAlt": "Luke 1 Corinthians 10:1-24"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Genesis 17:1-22",
+          "firstAlt": "",
+          "second": "Matthew 19:16-20:16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 18",
+          "firstAlt": "",
+          "second": "Romans 7",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Genesis 19:1-3 & 19:12-29",
+          "firstAlt": "",
+          "second": "Matthew 20:17-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 21",
+          "firstAlt": "",
+          "second": "Romans 8:1-17",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Genesis 22:1-19",
+          "firstAlt": "",
+          "second": "Matthew 21:1-22",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 23",
+          "firstAlt": "",
+          "second": "Romans 8:18-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Genesis 24:1-28",
+          "firstAlt": "",
+          "second": "Matthew 21:23-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 24:29-end",
+          "firstAlt": "",
+          "second": "Romans 9",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Genesis 25:1-11 & 25:19-end",
+          "firstAlt": "",
+          "second": "Matthew 22:1-33",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 26:1-5 & 26:12-end",
+          "firstAlt": "",
+          "second": "Romans 10",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Genesis 27:1-40",
+          "firstAlt": "",
+          "second": "Matthew 22:34-23:14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 27:41-28-end",
+          "firstAlt": "",
+          "second": "Romans 11",
+          "secondAlt": ""
+        }
+      }
+    },
+    "quinquagesima": {
+      "sunday": {
+        "dayName": "Quinquagesima",
+        "morning": {
+          "first": "Genesis 12:1-8",
+          "firstAlt": "Sirach 1:1-13",
+          "second": "Matthew 5:1-16",
+          "secondAlt": "Matthew 1 Corinthians 12:4-end"
+        },
+        "evening": {
+          "first": "Genesis 13",
+          "firstAlt": "Genesis 15:1-18 or Sirach 1:14",
+          "second": "Luke 10:25-37",
+          "secondAlt": "Luke 2 Corinthians 1:1-22"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Genesis 29:1-20",
+          "firstAlt": "",
+          "second": "Matthew 23:13-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 31:1-19 & 31:14-21",
+          "firstAlt": "",
+          "second": "Romans 12",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Genesis 31:22-32:2",
+          "firstAlt": "",
+          "second": "Matthew 24:1-28",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 32:3-30",
+          "firstAlt": "",
+          "second": "Romans 13",
+          "secondAlt": ""
+        }
+      }
+    },
+    "ashWednesday": {
+      "wednesday": {
+        "dayName": "Ash Wednesday",
+        "morning": {
+          "first": "Isaiah 58",
+          "firstAlt": "",
+          "second": "Mark 2:13-22",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jonah 3",
+          "firstAlt": "Prayer of Manasses",
+          "second": "Hebrews 3:12-4:13",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Genesis 33",
+          "firstAlt": "",
+          "second": "Matthew 24:29-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 35:1-20",
+          "firstAlt": "",
+          "second": "Romans 14",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Genesis 37",
+          "firstAlt": "",
+          "second": "Matthew 25:1-30",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 40",
+          "firstAlt": "",
+          "second": "Romans 15",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Genesis 41:1-40",
+          "firstAlt": "",
+          "second": "Matthew 25:31-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 41:41-end",
+          "firstAlt": "",
+          "second": "Romans 16",
+          "secondAlt": ""
+        }
+      }
+    },
+    "lent1": {
+      "sunday": {
+        "dayName": "First Sunday in Lent",
+        "morning": {
+          "first": "Genesis 18",
+          "firstAlt": "Sirach 2",
+          "second": "Matthew 3",
+          "secondAlt": "Hebrews 6"
+        },
+        "evening": {
+          "first": "Genesis 21:1-21",
+          "firstAlt": "Genesis 22:1-19 or Baruch 3:1-14",
+          "second": "Mark 14:1-26",
+          "secondAlt": "Mark 2 Corinthians 4"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Genesis 42",
+          "firstAlt": "",
+          "second": "Matthew 24:1-30",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 43",
+          "firstAlt": "",
+          "second": "Philippians1",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Genesis 44",
+          "firstAlt": "",
+          "second": "Matthew 26:31-56",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 45:1-15",
+          "firstAlt": "",
+          "second": "Philippians2",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Ember Day",
+        "morning": {
+          "first": "Genesis 45:16-46:7",
+          "firstAlt": "",
+          "second": "Matthew 26:57-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 46:26-47:12",
+          "firstAlt": "",
+          "second": "Philippians3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Genesis 47:13-end",
+          "firstAlt": "",
+          "second": "Matthew 27:1-26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 48",
+          "firstAlt": "",
+          "second": "Philippians4",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Ember Day",
+        "morning": {
+          "first": "Genesis 49:1-32",
+          "firstAlt": "",
+          "second": "Matthew 27:27-56",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Genesis 49:33-50-end",
+          "firstAlt": "",
+          "second": "Colossians1:1-20",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Ember Day",
+        "morning": {
+          "first": "Exodus 1:1-14 & 1:22-2:10",
+          "firstAlt": "",
+          "second": "Matthew 27:57-28-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 2:11-22",
+          "firstAlt": "",
+          "second": "Colossians1:21-2:7",
+          "secondAlt": ""
+        }
+      }
+    },
+    "lent2": {
+      "sunday": {
+        "dayName": "Second Sunday in Lent",
+        "morning": {
+          "first": "Genesis 27:1-40",
+          "firstAlt": "Sirach 4:11-28",
+          "second": "Matthew 9:1-17",
+          "secondAlt": "Hebrews 9:11-end"
+        },
+        "evening": {
+          "first": "Genesis 28:10-end",
+          "firstAlt": "Genesis 32:3-30 or Sirach 5:1-14",
+          "second": "Mark 14:27-52",
+          "secondAlt": "Mark 2 Corinthians 5"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Exodus 2:23-3-end",
+          "firstAlt": "",
+          "second": "John 1:1-28",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 4:1-23",
+          "firstAlt": "",
+          "second": "Colossians 2:8-3:11",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Exodus 4:27-6:1",
+          "firstAlt": "",
+          "second": "John 1:29-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 6:2-13 & 7:1-7",
+          "firstAlt": "",
+          "second": "Colossians 3:12-4:1",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Exodus 7:8-end",
+          "firstAlt": "",
+          "second": "John 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 8:1-19",
+          "firstAlt": "",
+          "second": "Colossians 4:2-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Exodus 8:20-9:12",
+          "firstAlt": "",
+          "second": "John 3:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 9:13-end",
+          "firstAlt": "",
+          "second": "Philemon",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Exodus 10:1-20",
+          "firstAlt": "",
+          "second": "John 3:22-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 10:21-11-end",
+          "firstAlt": "",
+          "second": "Ephesians 1",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Exodus 12:1-20",
+          "firstAlt": "",
+          "second": "John 4:1-26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 12:21-36",
+          "firstAlt": "",
+          "second": "Ephesians 2",
+          "secondAlt": ""
+        }
+      }
+    },
+    "lent3": {
+      "sunday": {
+        "dayName": "Third Sunday in Lent",
+        "morning": {
+          "first": "Genesis 37",
+          "firstAlt": "Sirach 10:12-24",
+          "second": "Matthew 18:1-14",
+          "secondAlt": "Hebrews 10:19-end"
+        },
+        "evening": {
+          "first": "Genesis 39",
+          "firstAlt": "Genesis 42 or Sirach 17:1-26",
+          "second": "Mark 14:53-end",
+          "secondAlt": "Mark 2 Corinthians 5:20-7:1"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Exodus 12:37-end",
+          "firstAlt": "",
+          "second": "John 4:27-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 13:1-16",
+          "firstAlt": "",
+          "second": "Ephesians 3",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Exodus 13:17-14:14",
+          "firstAlt": "",
+          "second": "John 5:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 14:15-end",
+          "firstAlt": "",
+          "second": "Ephesians 4:1-16",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Exodus 15:1-26",
+          "firstAlt": "",
+          "second": "John 5:24-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 15:27-16:35",
+          "firstAlt": "",
+          "second": "Ephesians 4:17-30",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Exodus 17",
+          "firstAlt": "",
+          "second": "John 6:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 18",
+          "firstAlt": "",
+          "second": "Ephesians 4:31-5:21",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Exodus 19",
+          "firstAlt": "",
+          "second": "John 6:22-40",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 20:1-21",
+          "firstAlt": "",
+          "second": "Ephesians 5:22-6:9",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Exodus 22:20-23:17",
+          "firstAlt": "",
+          "second": "John 6:41-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 23:18-end",
+          "firstAlt": "",
+          "second": "Ephesians 9:10-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "lent4": {
+      "sunday": {
+        "dayName": "Fourth Sunday in Lent",
+        "morning": {
+          "first": "Genesis 43",
+          "firstAlt": "Sirach 27:30 or 28:9",
+          "second": "Luke 15",
+          "secondAlt": "Hebrews 12"
+        },
+        "evening": {
+          "first": "Genesis 44:1-45:8",
+          "firstAlt": "Genesis 45:16-46:7 or Sirach 34:13",
+          "second": "Mark 15:1-21",
+          "secondAlt": "Mark 2 Corinthians 9"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Exodus 24",
+          "firstAlt": "",
+          "second": "John 7:1-24",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 25:1-22",
+          "firstAlt": "",
+          "second": "1 Timothy 1:1-17",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Exodus 28:1-4 & 28:29-41",
+          "firstAlt": "",
+          "second": "John 7:25-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 29:38-30:16",
+          "firstAlt": "",
+          "second": "1 Timothy 1:18-2-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Exodus 32",
+          "firstAlt": "",
+          "second": "John 8:1-30",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 33",
+          "firstAlt": "",
+          "second": "1 Timothy 3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Exodus 34",
+          "firstAlt": "",
+          "second": "John 8:31-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 35:20-36:7",
+          "firstAlt": "",
+          "second": "1 Timothy 4",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Exodus 40:17-end",
+          "firstAlt": "",
+          "second": "John 9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Leviticus 6:8-end",
+          "firstAlt": "",
+          "second": "1 Timothy 5",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Leviticus 19:1-18 & 19:30-end",
+          "firstAlt": "",
+          "second": "John 10:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Leviticus 25:1-24",
+          "firstAlt": "",
+          "second": "1 Timothy 6",
+          "secondAlt": ""
+        }
+      }
+    },
+    "lent5": {
+      "sunday": {
+        "dayName": "Fifth Sunday in Lent",
+        "morning": {
+          "first": "Exodus 2:23-3-end",
+          "firstAlt": "",
+          "second": "Matthew 20:17-28",
+          "secondAlt": "Hebrews 13:1-21"
+        },
+        "evening": {
+          "first": "Exodus 4:1-23",
+          "firstAlt": "Exodus 4:27-6:1",
+          "second": "Mark 15:22-end",
+          "secondAlt": "Mark 2 Corinthians 11:16-12:10"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Numbers 6",
+          "firstAlt": "",
+          "second": "John 10:22-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Numbers 9:15-end & 10:29-end",
+          "firstAlt": "",
+          "second": "Titus 1:1-2:8",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Numbers 11:10-33",
+          "firstAlt": "",
+          "second": "John 11:1-44",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Numbers 12",
+          "firstAlt": "",
+          "second": "Titus 2:9-3-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Numbers 13:1-3 & 13:17-end",
+          "firstAlt": "",
+          "second": "John 11:45-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Numbers 14:1-25",
+          "firstAlt": "",
+          "second": "2 Timothy 1",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Numbers 16:1-35",
+          "firstAlt": "",
+          "second": "John 12:1-19",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Numbers 16:36-17-end",
+          "firstAlt": "",
+          "second": "2 Timothy 2",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Numbers 20",
+          "firstAlt": "",
+          "second": "John 12:20-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Numbers 22:1-35",
+          "firstAlt": "",
+          "second": "2 Timothy 3",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Numbers 22:36-23:26",
+          "firstAlt": "",
+          "second": "John 13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Numbers 23:27-24-end",
+          "firstAlt": "",
+          "second": "2 Timothy 4",
+          "secondAlt": ""
+        }
+      }
+    }
+  },
+  "easter": {
+    "holyWeek": {
+      "sunday": {
+        "dayName": "Palm Sunday",
+        "morning": {
+          "first": "Isaiah 52:13-53-end",
+          "firstAlt": "",
+          "second": "Matthew 26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 10:21-11",
+          "firstAlt": "Isaiah 59:12-end",
+          "second": "Luke 19:29-end",
+          "secondAlt": "John 12:1-19"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Lamentations 1:1-12",
+          "firstAlt": "",
+          "second": "John 14:1-14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Lamentations 3:1-42",
+          "firstAlt": "",
+          "second": "John 14:15-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Isaiah 42:1-9",
+          "firstAlt": "",
+          "second": "John 15:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Wisdom 2:1 & 12",
+          "firstAlt": "",
+          "second": "John 15:17-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Numbers 21:4-9",
+          "firstAlt": "",
+          "second": "John 16:1-15",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Leviticus 16:2-24",
+          "firstAlt": "",
+          "second": "John 16:16-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Exodus 24:1-11",
+          "firstAlt": "",
+          "second": "John 17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 16:2-15",
+          "firstAlt": "",
+          "second": "John 13:1-35",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Good Friday",
+        "morning": {
+          "first": "Genesis 22:1-18",
+          "firstAlt": "",
+          "second": "John 18",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 52:13-53-end",
+          "firstAlt": "",
+          "second": "John 19:31-end",
+          "secondAlt": "John 1 Peter 2:11-end"
+        }
+      },
+      "saturday": {
+        "dayName": "Easter Eve",
+        "morning": {
+          "first": "Zechariah 9:9-12",
+          "firstAlt": "",
+          "second": "Luke 23:50-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 19:21-27",
+          "firstAlt": "",
+          "second": "John 2:13-22",
+          "secondAlt": ""
+        }
+      }
+    },
+    "easterWeek": {
+      "sunday": {
+        "dayName": "Easter Day",
+        "morning": {
+          "first": "Exodus 12:1-14",
+          "firstAlt": "",
+          "second": "Revelation 1:4-18",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 51:1-16",
+          "firstAlt": "Exodus 14",
+          "second": "John 20:1-23",
+          "secondAlt": "Romans 6:1-13"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Exodus 15:1-18",
+          "firstAlt": "",
+          "second": "Luke 24:1-12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 12",
+          "firstAlt": "",
+          "second": "1 Peter 1:1-12",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Isaiah 25:1-9",
+          "firstAlt": "",
+          "second": "Matthew 28:1-10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 26:1-19",
+          "firstAlt": "",
+          "second": "1 Peter 1:13-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Isaiah 61:",
+          "firstAlt": "",
+          "second": "John 21:1-14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Canticles 2:8-end",
+          "firstAlt": "",
+          "second": "Revelation 7:9-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Kings 17:8-end",
+          "firstAlt": "",
+          "second": "Mark 5:21-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 12",
+          "firstAlt": "",
+          "second": "1 Thessalonians 4:13-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "2 Kings 4:8-37",
+          "firstAlt": "",
+          "second": "Luke 7:11-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zephaniah 3:14-end",
+          "firstAlt": "",
+          "second": "Acts 17:16-31",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Jeremiah 31:1-14",
+          "firstAlt": "",
+          "second": "John 11:17-44",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Micah 7:7-end",
+          "firstAlt": "",
+          "second": "Acts 26:1-23",
+          "secondAlt": ""
+        }
+      }
+    },
+    "easter1": {
+      "sunday": {
+        "dayName": "First Sunday after Easter",
+        "morning": {
+          "first": "Isaiah 52:1-12",
+          "firstAlt": "",
+          "second": "Luke 24:13-35",
+          "secondAlt": "Luke 1 Corinthians 15:1-28"
+        },
+        "evening": {
+          "first": "Isaiah 54",
+          "firstAlt": "Ezekiel 37:1-14",
+          "second": "John 20:24-end",
+          "secondAlt": "Revelation 5"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Deuteronomy 1:3-18",
+          "firstAlt": "",
+          "second": "Acts 1:11-14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 1:19-end",
+          "firstAlt": "",
+          "second": "Acts 1:15-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Deuteronomy 2:1-25",
+          "firstAlt": "",
+          "second": "Acts 2:2-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 2:26-3:5",
+          "firstAlt": "",
+          "second": "Acts 2:22-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Deuteronomy 3:18-end",
+          "firstAlt": "",
+          "second": "Acts 3:1-4:4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 4:1-24",
+          "firstAlt": "",
+          "second": "Acts 4:5-31",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Deuteronomy 4:25-40",
+          "firstAlt": "",
+          "second": "Acts 4:32-5:11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 5:1-21",
+          "firstAlt": "",
+          "second": "Acts 5:12-6:7",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Deuteronomy 5:22-end",
+          "firstAlt": "",
+          "second": "Acts 6:8-7:16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 6",
+          "firstAlt": "",
+          "second": "Acts 7:17-34",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Deuteronomy 7:1-11",
+          "firstAlt": "",
+          "second": "Acts 7:35-8:4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 7:12-end",
+          "firstAlt": "",
+          "second": "Acts 8:4-25",
+          "secondAlt": ""
+        }
+      }
+    },
+    "easter2": {
+      "sunday": {
+        "dayName": "Second Sunday after Easter",
+        "morning": {
+          "first": "Exodus 16:2-15",
+          "firstAlt": "Isaiah 55",
+          "second": "John 5:19-29",
+          "secondAlt": "John 1 Corinthians 15:35-end"
+        },
+        "evening": {
+          "first": "Exodus 32",
+          "firstAlt": "Exodus 33:7-end or Isaiah 56:1-8",
+          "second": "John 21",
+          "secondAlt": "Philippians 3:7-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Deuteronomy 8",
+          "firstAlt": "",
+          "second": "Acts 8:26-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 9:1-10",
+          "firstAlt": "",
+          "second": "Acts 9:1-31",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Deuteronomy 9:11-end",
+          "firstAlt": "",
+          "second": "Acts 9:32-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 10",
+          "firstAlt": "",
+          "second": "Acts 10:1-23",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Deuteronomy 11:1-12",
+          "firstAlt": "",
+          "second": "Acts 10:24-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 11:13-end",
+          "firstAlt": "",
+          "second": "Acts 11:1-18",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Deuteronomy 12:1-14",
+          "firstAlt": "",
+          "second": "Acts 11:19-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 15:1-18",
+          "firstAlt": "",
+          "second": "Acts 12:1-214",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Deuteronomy 16:1-20",
+          "firstAlt": "",
+          "second": "Acts 12:25-13:12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 17:8-end",
+          "firstAlt": "",
+          "second": "Acts 13:13-43",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Deuteronomy 18:9-end",
+          "firstAlt": "",
+          "second": "Acts 13:44-14:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 19",
+          "firstAlt": "",
+          "second": "Acts 14:8-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "easter3": {
+      "sunday": {
+        "dayName": "Third Sunday after Easter",
+        "morning": {
+          "first": "Numbers 22:1-35",
+          "firstAlt": "Isaiah 57:15-end",
+          "second": "Mark 5:21-end",
+          "secondAlt": "Acts 2:22-end"
+        },
+        "evening": {
+          "first": "Numbers 22:36-23:26",
+          "firstAlt": "Numbers 23:27-24 or Isaiah 59",
+          "second": "John 11:1-44",
+          "secondAlt": "Revelation 2:1-17"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Deuteronomy 21:22-22:8",
+          "firstAlt": "",
+          "second": "Acts 15:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 24:5-end",
+          "firstAlt": "",
+          "second": "Acts 15:22-35",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Deuteronomy 26",
+          "firstAlt": "",
+          "second": "Acts 15:36-16:5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 28:58-end",
+          "firstAlt": "",
+          "second": "Acts 16:6-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Deuteronomy 29:10-end",
+          "firstAlt": "",
+          "second": "Acts 17:1-15",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 30",
+          "firstAlt": "",
+          "second": "Acts 17:16-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Deuteronomy 31:1-13",
+          "firstAlt": "",
+          "second": "Acts 18:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 31:14-29",
+          "firstAlt": "",
+          "second": "Acts 18:24-19:7",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Deuteronomy 31:30-32:14",
+          "firstAlt": "",
+          "second": "Acts 19:8-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 32:15-47",
+          "firstAlt": "",
+          "second": "Acts 19:21-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Deuteronomy 33",
+          "firstAlt": "",
+          "second": "Acts 20:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 32:48-end & Deuteronomy 34",
+          "firstAlt": "",
+          "second": "Acts 20:17-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "easter4": {
+      "sunday": {
+        "dayName": "Fourth Sunday after Easter",
+        "morning": {
+          "first": "Deuteronomy 4:1-24",
+          "firstAlt": "Isaiah 60",
+          "second": "Luke 16:19-end",
+          "secondAlt": "Acts 3"
+        },
+        "evening": {
+          "first": "Deuteronomy 4:25-40",
+          "firstAlt": "Deuteronomy 5 or Isaiah 61",
+          "second": "Luke 7:1-35",
+          "secondAlt": "Revelation 2:18-3:6"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Joshua 1",
+          "firstAlt": "",
+          "second": "Acts 21:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joshua 2",
+          "firstAlt": "",
+          "second": "Acts 21:17-36",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Joshua 3",
+          "firstAlt": "",
+          "second": "Acts 21:37-22:22",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joshua 4:1-5:1",
+          "firstAlt": "",
+          "second": "Acts 22:23-23:11",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Joshua 5:13-6:20",
+          "firstAlt": "",
+          "second": "Acts 23:12-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joshua 7",
+          "firstAlt": "",
+          "second": "Acts 24:1-23",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Joshua 9:3-end",
+          "firstAlt": "",
+          "second": "Acts 24:24-25:12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joshua 10:1-15",
+          "firstAlt": "",
+          "second": "Acts 25:13-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Joshua 21:43-22:8",
+          "firstAlt": "",
+          "second": "Acts 26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joshua 22:9-end",
+          "firstAlt": "",
+          "second": "Acts 27",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Joshua 23",
+          "firstAlt": "",
+          "second": "Acts 28:1-15",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Joshua 24:1-28",
+          "firstAlt": "",
+          "second": "Acts 28:16-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "rogation": {
+      "sunday": {
+        "dayName": "Fifth Sunday after Easter",
+        "morning": {
+          "first": "Deuteronomy 6",
+          "firstAlt": "Isaiah 62",
+          "second": "Luke 20:27-21:4",
+          "secondAlt": "Acts 4:1-33"
+        },
+        "evening": {
+          "first": "Deuteronomy 8",
+          "firstAlt": "Deuteronomy 10:12-11:1 or Isaiah 63:7-end",
+          "second": "John 6:47-69",
+          "secondAlt": "Revelation 3:7-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Deuteronomy 7:6-13",
+          "firstAlt": "",
+          "second": "Matthew 6:5-18",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 11:8-21",
+          "firstAlt": "",
+          "second": "Matthew 6:19-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Deuteronomy 28:1-14",
+          "firstAlt": "",
+          "second": "Luke 5:1-11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 8:22-43",
+          "firstAlt": "",
+          "second": "James 5:1-18",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Joel 2:21-27",
+          "firstAlt": "",
+          "second": "John 6:22-40",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Song of Three Children 29-37",
+          "firstAlt": "",
+          "second": "Luke 24:36-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "ascension": {
+      "thursday": {
+        "dayName": "Ascension Day",
+        "morning": {
+          "first": "2 Kings 2:1-15",
+          "firstAlt": "",
+          "second": "Ephesians 4:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 7:9-10 & 13-14",
+          "firstAlt": "",
+          "second": "Hebrews 1",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Judges 2:6-end",
+          "firstAlt": "",
+          "second": "Hebrews 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Judges 4",
+          "firstAlt": "",
+          "second": "Hebrews 3",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Judges 5",
+          "firstAlt": "",
+          "second": "Hebrews 4:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Judges 6:1-24",
+          "firstAlt": "",
+          "second": "Hebrews 4:14-5:10",
+          "secondAlt": ""
+        }
+      }
+    },
+    "sundayAfterAscension": {
+      "sunday": {
+        "dayName": "Sunday after Ascension",
+        "morning": {
+          "first": "Deuteronomy 26",
+          "firstAlt": "Isaiah 64",
+          "second": "John 14:1-14",
+          "secondAlt": "Ephesians 1:3-end"
+        },
+        "evening": {
+          "first": "Deuteronomy 30",
+          "firstAlt": "Deuteronomy 34 or Isaiah 65:17-end",
+          "second": "John 16:5-end",
+          "secondAlt": "Acts 1:1-14"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Judges 6:25-end",
+          "firstAlt": "",
+          "second": "Hebrews 5:11-6-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Judges 7",
+          "firstAlt": "",
+          "second": "Hebrews 7",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Judges 8:32-9:24",
+          "firstAlt": "",
+          "second": "Hebrews 8",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Judges 10:17-11:28",
+          "firstAlt": "",
+          "second": "Hebrews 9:1-14",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Judges 11:29-12:7",
+          "firstAlt": "",
+          "second": "Hebrews 9:15-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Judges 13",
+          "firstAlt": "",
+          "second": "Hebrews 10:1-18",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Judges 14",
+          "firstAlt": "",
+          "second": "Hebrews 10:19-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Judges 16:4-end",
+          "firstAlt": "",
+          "second": "Hebrews 11",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Ruth 1",
+          "firstAlt": "",
+          "second": "Hebrews 12:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ruth 2",
+          "firstAlt": "",
+          "second": "Hebrews 12:14-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ruth 4:1-17",
+          "firstAlt": "",
+          "second": "Hebrews 13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Deuteronomy 16:9-12",
+          "firstAlt": "",
+          "second": "Luke 11:1-13",
+          "secondAlt": ""
+        }
+      }
+    },
+    "whitsunWeek": {
+      "sunday": {
+        "dayName": "Whitsunday",
+        "morning": {
+          "first": "Joel 2:28-end",
+          "firstAlt": "",
+          "second": "Romans 8:1-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 11:1-9",
+          "firstAlt": "Ezekiel 36:22-36",
+          "second": "Romans 8:18-end",
+          "secondAlt": "Galatians 5:13-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Ezekiel 11:14-20",
+          "firstAlt": "",
+          "second": "Acts 2:12-36",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Wisdom 1:1-7",
+          "firstAlt": "",
+          "second": "Acts 2:37-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Ezekiel 37:1-14",
+          "firstAlt": "",
+          "second": "1 Corinthians 12:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Wisdom 7:15",
+          "firstAlt": "Wisdom 8:1",
+          "second": "1 Corinthians 12:27-13-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Ember Day",
+        "morning": {
+          "first": "1 Kings 19:1-18",
+          "firstAlt": "",
+          "second": "1 Corinthians 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Wisdom 9",
+          "firstAlt": "",
+          "second": "1 Corinthians 3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "2 Samuel 23:1-5",
+          "firstAlt": "",
+          "second": "Ephesians 6:10-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Exodus 35:30-36:1",
+          "firstAlt": "",
+          "second": "Acts 18:24-19:7",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Ember Day",
+        "morning": {
+          "first": "Numbers 11:16-17 & 24-29",
+          "firstAlt": "",
+          "second": "2 Corinthians 5:14-6:10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 31:31-34",
+          "firstAlt": "",
+          "second": "2 Corinthians 3",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Ember Day",
+        "morning": {
+          "first": "Numbers 27:15-end",
+          "firstAlt": "",
+          "second": "Matthew 9:35-10:20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 61",
+          "firstAlt": "",
+          "second": "Acts 20:17-35",
+          "secondAlt": ""
+        }
+      }
+    }
+  },
+  "trinity": {
+    "trinitySunday": {
+      "sunday": {
+        "dayName": "Trinity Sunday",
+        "morning": {
+          "first": "Isaiah 6:1-8",
+          "firstAlt": "",
+          "second": "Mark 1:1-11",
+          "secondAlt": "Mark 1 Peter 1:1-12"
+        },
+        "evening": {
+          "first": "Exodus 34:1-10",
+          "firstAlt": "Numbers 6:22-end or Isaiah 40:12-end",
+          "second": "Matthew 28:16-end",
+          "secondAlt": "Ephesians 3"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "1 Samuel 1",
+          "firstAlt": "",
+          "second": "James 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 2:1-21",
+          "firstAlt": "",
+          "second": "Luke 1:1-23",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "1 Samuel 2:22-end",
+          "firstAlt": "",
+          "second": "James 2:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 3",
+          "firstAlt": "",
+          "second": "Luke 1:24-56",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Samuel 4",
+          "firstAlt": "",
+          "second": "James 2:14-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 7",
+          "firstAlt": "",
+          "second": "Luke 1:57-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Samuel 8",
+          "firstAlt": "",
+          "second": "James 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 9:1-25",
+          "firstAlt": "",
+          "second": "Matthew 1:18-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Samuel 9:26-10:16",
+          "firstAlt": "",
+          "second": "James 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 10:17-end",
+          "firstAlt": "",
+          "second": "Luke 2:1-39",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Samuel 11",
+          "firstAlt": "",
+          "second": "James 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 12",
+          "firstAlt": "",
+          "second": "Matthew 2",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity1": {
+      "sunday": {
+        "dayName": "First Sunday after Trinity",
+        "morning": {
+          "first": "Joshua 1",
+          "firstAlt": "Job 1",
+          "second": "Mark 2:1-22",
+          "secondAlt": "Romans 1"
+        },
+        "evening": {
+          "first": "Joshua 5:13-20",
+          "firstAlt": "Joshua 24 or Job 2",
+          "second": "Matthew 1:18-end",
+          "secondAlt": "Acts 8:26"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "1 Samuel 13",
+          "firstAlt": "",
+          "second": "1 Peter 1:1-21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 14:1-23",
+          "firstAlt": "",
+          "second": "Luke 2:40-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "1 Samuel 14:24-48",
+          "firstAlt": "",
+          "second": "1 Peter 1:22-2:10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 15",
+          "firstAlt": "",
+          "second": "Luke 3:1-22",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Samuel 16",
+          "firstAlt": "",
+          "second": "1 Peter 2:11-3:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 17:1-30",
+          "firstAlt": "",
+          "second": "Luke 4:1-30",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Samuel 17:31-54",
+          "firstAlt": "",
+          "second": "1 Peter 3:8-4:6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 17:55-18:16",
+          "firstAlt": "",
+          "second": "Luke 5:1-11",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Samuel 19",
+          "firstAlt": "",
+          "second": "1 Peter 4:7-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 20:1-17",
+          "firstAlt": "",
+          "second": "Mark 1:21-39",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Samuel 20:18-end",
+          "firstAlt": "",
+          "second": "1 Peter 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 21:1-22:5",
+          "firstAlt": "",
+          "second": "Mark 1:40-2:12",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity2": {
+      "sunday": {
+        "dayName": "Second Sunday after Trinity",
+        "morning": {
+          "first": "Judges 4",
+          "firstAlt": "Judges 5 or Job 3",
+          "second": "Mark 2:23-3:19",
+          "secondAlt": "Romans 5"
+        },
+        "evening": {
+          "first": "Judges 6:33-7:23",
+          "firstAlt": "Ruth 1 or Job 5:6-end",
+          "second": "Matthew 2",
+          "secondAlt": "Acts 9:1-31"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "1 Samuel 22:6-end",
+          "firstAlt": "",
+          "second": "Mark 2Peter 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 23",
+          "firstAlt": "",
+          "second": "Luke 5:27-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "1 Samuel 24",
+          "firstAlt": "",
+          "second": "Mark 2Peter 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 25:2-42",
+          "firstAlt": "",
+          "second": "Luke 6:1-19",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Samuel 26",
+          "firstAlt": "",
+          "second": "Mark 2Peter 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Samuel 28:3-end",
+          "firstAlt": "",
+          "second": "Matthew 5:1-16",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Samuel 31",
+          "firstAlt": "",
+          "second": "Jude",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 1",
+          "firstAlt": "",
+          "second": "Matthew 5:17-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "2 Samuel 2:1-3:1",
+          "firstAlt": "",
+          "second": "1 John 1:1-2:6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 3:17-end",
+          "firstAlt": "",
+          "second": "Matthew 6:1-23",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "2 Samuel 5:1-12 & 17-end",
+          "firstAlt": "",
+          "second": "1 John 2:7-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 6",
+          "firstAlt": "",
+          "second": "Matthew 7",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity3": {
+      "sunday": {
+        "dayName": "Third Sunday after Trinity",
+        "morning": {
+          "first": "1 Samuel 1",
+          "firstAlt": "Job 19",
+          "second": "Mark 4:1-29",
+          "secondAlt": "Romans 6"
+        },
+        "evening": {
+          "first": "1 Samuel 2:1-21",
+          "firstAlt": "1 Samuel 1 Samuel 3 or Job 28",
+          "second": "Matthew 4:23-5:16",
+          "secondAlt": "Acts 10"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "2 Samuel 7",
+          "firstAlt": "",
+          "second": "1 John 3:1-12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 9",
+          "firstAlt": "",
+          "second": "Luke 7:1-17",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "2 Samuel 11",
+          "firstAlt": "",
+          "second": "1 John 3:13-4:6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 12:1-23",
+          "firstAlt": "",
+          "second": "Matthew 11:2-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "2 Samuel 13:38-14:24",
+          "firstAlt": "",
+          "second": "1 John 4:7-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 14:25-15:12",
+          "firstAlt": "",
+          "second": "Luke 7:36-8:3",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "2 Samuel 15:13-end",
+          "firstAlt": "",
+          "second": "1 John 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 16:1-19",
+          "firstAlt": "",
+          "second": "Matthew 12:22-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "2 Samuel 17:1-23",
+          "firstAlt": "",
+          "second": "2 John",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 17:24-18:18",
+          "firstAlt": "",
+          "second": "Matthew 13:1-23",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "2 Samuel 18:19-end",
+          "firstAlt": "",
+          "second": "3 John",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 19:1-23",
+          "firstAlt": "",
+          "second": "Matthew 13:24-43",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity4": {
+      "sunday": {
+        "dayName": "Fourth Sunday after Trinity",
+        "morning": {
+          "first": "1 Samuel 12",
+          "firstAlt": "Job 29",
+          "second": "Mark 6:1-32",
+          "secondAlt": "Romans 12"
+        },
+        "evening": {
+          "first": "1 Samuel 15:1-31",
+          "firstAlt": "1 Samuel 1 Samuel 16 or Job 38",
+          "second": "Matthew 5:17-end",
+          "secondAlt": "Acts 13:1-26"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "2 Samuel 19:24-end",
+          "firstAlt": "",
+          "second": "1 Thessalonians 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Samuel 23:1-17",
+          "firstAlt": "",
+          "second": "Matthew 13:44-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "2 Samuel 24",
+          "firstAlt": "",
+          "second": "1 Thessalonians 2:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 1:5-31",
+          "firstAlt": "",
+          "second": "Mark 4:35-5:20",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Kings 1:32-end",
+          "firstAlt": "",
+          "second": "1 Thessalonians 2:17-3-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Chronicles 22:2-end",
+          "firstAlt": "",
+          "second": "Mark 5:21-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Chronicles 28:1-10",
+          "firstAlt": "",
+          "second": "1 Thessalonians 4:1-12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Chronicles 28:20-29:9",
+          "firstAlt": "",
+          "second": "Matthew 9:27-10:23",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Chronicles 29:10-end",
+          "firstAlt": "",
+          "second": "1 Thessalonians 4:13-5:11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 3",
+          "firstAlt": "",
+          "second": "Matthew 10:24-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Kings 4:21-end",
+          "firstAlt": "",
+          "second": "1 Thessalonians 5:12-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 5",
+          "firstAlt": "",
+          "second": "Mark 6:7-44",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity5": {
+      "sunday": {
+        "dayName": "Fifth Sunday after Trinity",
+        "morning": {
+          "first": "1 Samuel 17:1-54",
+          "firstAlt": "Wisdom 1",
+          "second": "Mark 6:53-7:23",
+          "secondAlt": "Romans 13"
+        },
+        "evening": {
+          "first": "1 Samuel 20:1-17",
+          "firstAlt": "1 Samuel 1 Samuel 26 or Wisdom 2",
+          "second": "Matthew 6",
+          "secondAlt": "Acts 14"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "1 Kings 6:1-14",
+          "firstAlt": "",
+          "second": "2 Thessalonians 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 8:1-21",
+          "firstAlt": "",
+          "second": "Matthew 14:22-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "1 Kings 8:22-53",
+          "firstAlt": "",
+          "second": "2 Thessalonians 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 8:54-9:9",
+          "firstAlt": "",
+          "second": "Mark 8:1-26",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Kings 10",
+          "firstAlt": "",
+          "second": "2 Thessalonians 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 11:1-13",
+          "firstAlt": "",
+          "second": "Matthew 16:13-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Kings 11:26-end",
+          "firstAlt": "",
+          "second": "Galatians 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 12:1-24",
+          "firstAlt": "",
+          "second": "Matthew 17",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Kings 12:25-13:10",
+          "firstAlt": "",
+          "second": "Galatians 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 13:11-end",
+          "firstAlt": "",
+          "second": "Mark 9:33-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Kings 14:1-20",
+          "firstAlt": "",
+          "second": "Galatians 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 12",
+          "firstAlt": "",
+          "second": "Matthew 18:12-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity6": {
+      "sunday": {
+        "dayName": "Sixth Sunday after Trinity",
+        "morning": {
+          "first": "2 Samuel 1",
+          "firstAlt": "Wisdom 3:1-9",
+          "second": "Mark 7:24-8:10",
+          "secondAlt": "Romans 14:1-15:7"
+        },
+        "evening": {
+          "first": "2 Samuel 7",
+          "firstAlt": "2 Samuel 2 Samuel 12:1-23 or Wisdom 4:7-14",
+          "second": "Matthew 7",
+          "secondAlt": "Acts 15:1-31"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "2 Chronicles 13",
+          "firstAlt": "",
+          "second": "Galatians 4:1-5:1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 14",
+          "firstAlt": "",
+          "second": "Luke 9:51-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "2 Chronicles 15",
+          "firstAlt": "",
+          "second": "Galatians 5:2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 16",
+          "firstAlt": "",
+          "second": "Luke 10:1-22",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Kings 16:15-end",
+          "firstAlt": "",
+          "second": "Galatians 6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 17",
+          "firstAlt": "",
+          "second": "Luke 10:23-11:13",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Kings 18:1-16",
+          "firstAlt": "",
+          "second": "1 Corinthians 1:1-25",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 18:17-end",
+          "firstAlt": "",
+          "second": "Luke 12:1-34",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Kings 19",
+          "firstAlt": "",
+          "second": "1 Corinthians 1:26-2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Kings 21",
+          "firstAlt": "",
+          "second": "Luke 12:35-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Kings 22:1-40",
+          "firstAlt": "",
+          "second": "1 Corinthians 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 20:1-30",
+          "firstAlt": "",
+          "second": "Luke 13",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity7": {
+      "sunday": {
+        "dayName": "Seventh Sunday after Trinity",
+        "morning": {
+          "first": "2 Samuel 18",
+          "firstAlt": "Wisdom 5:1-16",
+          "second": "Mark 1:2-32",
+          "secondAlt": "Philippians 1"
+        },
+        "evening": {
+          "first": "1 Kings 3",
+          "firstAlt": "1 Kings 1 Kings 8:22-61 or Wisdom 6:1-11",
+          "second": "Matthew 9:35-10:23",
+          "secondAlt": "Acts 16:6-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "2 Kings 1",
+          "firstAlt": "",
+          "second": "1 Corinthians 4:1-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 2:1-22",
+          "firstAlt": "",
+          "second": "Luke 14:1-33",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "2 Kings 4:1-37",
+          "firstAlt": "",
+          "second": "1 Corinthians 4:18-5-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 5",
+          "firstAlt": "",
+          "second": "Luke 15",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "2 Kings 6:1-23",
+          "firstAlt": "",
+          "second": "1 Corinthians 6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 6:24-7:2",
+          "firstAlt": "",
+          "second": "Luke 16",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "2 Kings 7:3-end",
+          "firstAlt": "",
+          "second": "1 Corinthians 7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 8:1-15",
+          "firstAlt": "",
+          "second": "Luke 17",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "2 Kings 9",
+          "firstAlt": "",
+          "second": "1 Corinthians 8",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 11:1-20",
+          "firstAlt": "",
+          "second": "Luke 18:1-14",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "2 Kings 11:21-12-end",
+          "firstAlt": "",
+          "second": "1 Corinthians 9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 13",
+          "firstAlt": "",
+          "second": "Matthew 20:1-16",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity8": {
+      "sunday": {
+        "dayName": "Eighth Sunday after Trinity",
+        "morning": {
+          "first": "1 Kings 10:1-13",
+          "firstAlt": "Wisdom 6:12",
+          "second": "Mark 10:1-31",
+          "secondAlt": "Philippians 2"
+        },
+        "evening": {
+          "first": "1 Kings 12",
+          "firstAlt": "1 Kings 1 Kings 13:1-32 or Wisdom 7:15 or 8:1",
+          "second": "Matthew 10:24-end",
+          "secondAlt": "Acts 17:16-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "2 Kings 14",
+          "firstAlt": "",
+          "second": "1 Corinthians 10:1-11:1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 26",
+          "firstAlt": "",
+          "second": "Mark 10:32-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "2 Kings 15:17-end",
+          "firstAlt": "",
+          "second": "1 Corinthians 11:2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 16",
+          "firstAlt": "",
+          "second": "Luke 19:1-28",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Isaiah 7:1-17",
+          "firstAlt": "",
+          "second": "1 Corinthians 12:1-27",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Isaiah 8:1-18",
+          "firstAlt": "",
+          "second": "Luke 19:29-44",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "2 Kings 17:1-23",
+          "firstAlt": "",
+          "second": "1 Corinthians 12:27-13-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 17:24-end",
+          "firstAlt": "",
+          "second": "Mark 11:11-12:12",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "2 Kings 18:1-8",
+          "firstAlt": "",
+          "second": "1 Corinthians 14:1-19",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 30",
+          "firstAlt": "",
+          "second": "Matthew 22:1-22",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "2 Kings 18:13-end",
+          "firstAlt": "",
+          "second": "1 Corinthians 14:20-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 19",
+          "firstAlt": "",
+          "second": "Matthew 22:23-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity9": {
+      "sunday": {
+        "dayName": "Ninth Sunday after Trinity",
+        "morning": {
+          "first": "1 Kings 17",
+          "firstAlt": "Wisdom 11:21 or 12:2",
+          "second": "Luke 1:1-25",
+          "secondAlt": "Philippians 3"
+        },
+        "evening": {
+          "first": "1 Kings 18",
+          "firstAlt": "1 Kings 1 Kings 19 or Wisdom 12:12-21",
+          "second": "Matthew 11",
+          "secondAlt": "Acts 20:17-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "2 Kings 20",
+          "firstAlt": "",
+          "second": "1 Corinthians 15:1-34",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Chronicles 33",
+          "firstAlt": "",
+          "second": "Matthew 23",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "2 Kings 22",
+          "firstAlt": "",
+          "second": "1 Corinthians 15:35-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 23:1-20",
+          "firstAlt": "",
+          "second": "Mark 12:41-13:13",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "2 Kings 23:21-35",
+          "firstAlt": "",
+          "second": "1 Corinthians 16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 23:36-24:17",
+          "firstAlt": "",
+          "second": "Mark 13:14-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "2 Kings 24:18-25:7",
+          "firstAlt": "",
+          "second": "2 Corinthians 1:1-22",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Kings 25:8-end",
+          "firstAlt": "",
+          "second": "Matthew 25:1-30",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Jeremiah 19",
+          "firstAlt": "",
+          "second": "2 Corinthians 1:23-2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 21:1-10",
+          "firstAlt": "",
+          "second": "Matthew 25:31-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Jeremiah 22:20-23:8",
+          "firstAlt": "",
+          "second": "2 Corinthians 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 24",
+          "firstAlt": "",
+          "second": "Mark 14:1-26",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity10": {
+      "sunday": {
+        "dayName": "Tenth Sunday after Trinity",
+        "morning": {
+          "first": "1 Kings 21",
+          "firstAlt": "Sirach 3:17-29",
+          "second": "Luke 1:26-56",
+          "secondAlt": "Philippians 4"
+        },
+        "evening": {
+          "first": "1 Kings 22:1-40",
+          "firstAlt": "1 Kings 2 Kings 4:8-37 or Sirach 11:7-28",
+          "second": "Matthew 13:24-52",
+          "secondAlt": "Acts 27"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Jeremiah 25:1-14",
+          "firstAlt": "",
+          "second": "2 Corinthians 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 27:2-end",
+          "firstAlt": "",
+          "second": "Mark 14:27-52",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Jeremiah 28",
+          "firstAlt": "",
+          "second": "2 Corinthians 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 29:1-20",
+          "firstAlt": "",
+          "second": "Mark 14:53-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Jeremiah 32:1-25",
+          "firstAlt": "",
+          "second": "2 Corinthians 5:20-7:1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 32:26-end",
+          "firstAlt": "",
+          "second": "Mark 15:1-41",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Jeremiah 33",
+          "firstAlt": "",
+          "second": "2 Corinthians 7:2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 34:8-end",
+          "firstAlt": "",
+          "second": "Luke 23:33-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Jeremiah 37",
+          "firstAlt": "",
+          "second": "2 Corinthians 8",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 38:1-13",
+          "firstAlt": "",
+          "second": "Mark 15:42-16-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Jeremiah 38:14-end",
+          "firstAlt": "",
+          "second": "2 Corinthians 9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 39",
+          "firstAlt": "",
+          "second": "Luke 24:13-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity11": {
+      "sunday": {
+        "dayName": "Eleventh Sunday after Trinity",
+        "morning": {
+          "first": "2 Kings 5",
+          "firstAlt": "Sirach 18:1-14",
+          "second": "Luke 1:57-end",
+          "secondAlt": "Colossians 3:12-4:6"
+        },
+        "evening": {
+          "first": "2 Kings 6:8-23",
+          "firstAlt": "2 Kings 2 Kings 17:1-23 or Sirach 38:24",
+          "second": "Matthew 16:13-end",
+          "secondAlt": "Acts 28"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Jeremiah 40",
+          "firstAlt": "",
+          "second": "2 Corinthians 10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 41",
+          "firstAlt": "",
+          "second": "John 1:1-28",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Jeremiah 42",
+          "firstAlt": "",
+          "second": "2 Corinthians 11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 43",
+          "firstAlt": "",
+          "second": "John 1:29-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Jeremiah 44:1-14",
+          "firstAlt": "",
+          "second": "2 Corinthians 12:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Jeremiah 44:15-3",
+          "firstAlt": "",
+          "second": "John 2",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Ezekiel 2",
+          "firstAlt": "",
+          "second": "2 Corinthians 12:14-13-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 3:4-end",
+          "firstAlt": "",
+          "second": "John 3:1-21",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Ezekiel 8",
+          "firstAlt": "",
+          "second": "Romans 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 9",
+          "firstAlt": "",
+          "second": "John 3:22-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ezekiel 11:14-end",
+          "firstAlt": "",
+          "second": "Romans 2:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezekiel 33:21-end",
+          "firstAlt": "",
+          "second": "John 4:1-26",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity12": {
+      "sunday": {
+        "dayName": "Twelfth Sunday after Trinity",
+        "morning": {
+          "first": "2 Kings 18:13-end",
+          "firstAlt": "Micah 6",
+          "second": "Luke 4:1-15",
+          "secondAlt": "Philemon"
+        },
+        "evening": {
+          "first": "2 Kings 19",
+          "firstAlt": "Isaiah 38:1-20 or Micah 7",
+          "second": "Matthew 18:15-end",
+          "secondAlt": "Ephesians 1"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Ezra 1",
+          "firstAlt": "",
+          "second": "Romans 2:17-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezra 3",
+          "firstAlt": "",
+          "second": "John 4:27-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Ezra 4",
+          "firstAlt": "",
+          "second": "Romans 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 1:1-2:9",
+          "firstAlt": "",
+          "second": "John 5:1-23",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Zechariah 1:1-17",
+          "firstAlt": "",
+          "second": "Romans 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zechariah 1:18-2-end",
+          "firstAlt": "",
+          "second": "John 5:24-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Zechariah 3",
+          "firstAlt": "",
+          "second": "Romans 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zechariah 4",
+          "firstAlt": "",
+          "second": "John 6:1-21",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Zechariah 6:9-end",
+          "firstAlt": "",
+          "second": "Romans 6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 2:10-end",
+          "firstAlt": "",
+          "second": "John 6:22-40",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ezra 5",
+          "firstAlt": "",
+          "second": "Romans 7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezra 6",
+          "firstAlt": "",
+          "second": "John 6:41-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity13": {
+      "sunday": {
+        "dayName": "Thirteenth Sunday after Trinity",
+        "morning": {
+          "first": "2 Kings 22",
+          "firstAlt": "Habakkuk 2:1-14",
+          "second": "Luke 4:31-5:11",
+          "secondAlt": "Luke 1 Timothy 6"
+        },
+        "evening": {
+          "first": "2 Kings 23:1-30",
+          "firstAlt": "2 Kings 2 Chronicles 36:1-21 or Habakkuk 3:2-end",
+          "second": "Matthew 20:1-28",
+          "secondAlt": "Ephesians 2"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Zechariah 7",
+          "firstAlt": "",
+          "second": "Romans 8:1-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Zechariah 8",
+          "firstAlt": "",
+          "second": "John 7:1-24",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Ezra 7",
+          "firstAlt": "",
+          "second": "Romans 8:18-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezra 8:15-end",
+          "firstAlt": "",
+          "second": "John 7:25-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Ezra 9",
+          "firstAlt": "",
+          "second": "Romans 9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ezra 10:1-19",
+          "firstAlt": "",
+          "second": "John 8:1-30",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Nehemiah 1",
+          "firstAlt": "",
+          "second": "Romans 10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Nehemiah 2",
+          "firstAlt": "",
+          "second": "John 8:31-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Nehemiah 4",
+          "firstAlt": "",
+          "second": "Romans 11:1-24",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Nehemiah 5",
+          "firstAlt": "",
+          "second": "John 9",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Nehemiah 6:1-7:4",
+          "firstAlt": "",
+          "second": "Romans 11:25-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Nehemiah 8",
+          "firstAlt": "",
+          "second": "John 10:1-21",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity14": {
+      "sunday": {
+        "dayName": "Fourteenth Sunday after Trinity",
+        "morning": {
+          "first": "Ezra 1:1-8 & 3",
+          "firstAlt": "Zephaniah 1",
+          "second": "Luke 7:36-end",
+          "secondAlt": "Luke 1 Corinthians 13"
+        },
+        "evening": {
+          "first": "Nehemiah 1:1-2:8",
+          "firstAlt": "Daniel  1 or Zephaniah 3",
+          "second": "Matthew 21:23-end",
+          "secondAlt": "Ephesians 4:1-24"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Nehemiah 9:1-23",
+          "firstAlt": "",
+          "second": "Romans 12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Nehemiah 9:24-end",
+          "firstAlt": "",
+          "second": "John 10:22-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Nehemiah 13",
+          "firstAlt": "",
+          "second": "Romans 13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 2:1-24",
+          "firstAlt": "",
+          "second": "John 11:1-44",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Daniel 2:25-end",
+          "firstAlt": "",
+          "second": "Romans 14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 4:1-18",
+          "firstAlt": "",
+          "second": "John 11:45-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Daniel 4:19-end",
+          "firstAlt": "",
+          "second": "Romans 15:1-13",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 7:9-end",
+          "firstAlt": "",
+          "second": "John 12:1-19",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Daniel 9:1-19",
+          "firstAlt": "",
+          "second": "Romans 15:14-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 9:20-end",
+          "firstAlt": "",
+          "second": "John 12:20-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Daniel 10",
+          "firstAlt": "",
+          "second": "Romans 16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Daniel 12",
+          "firstAlt": "",
+          "second": "John 13",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity15": {
+      "sunday": {
+        "dayName": "Fifteenth Sunday after Trinity",
+        "morning": {
+          "first": "Daniel 3",
+          "firstAlt": "",
+          "second": "Luke 9:57-10:24",
+          "secondAlt": "Luke 2 Timothy 1"
+        },
+        "evening": {
+          "first": "Daniel 5",
+          "firstAlt": "Daniel  6",
+          "second": "Matthew 28",
+          "secondAlt": "Ephesians 4:25-5:21"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Esther 1",
+          "firstAlt": "",
+          "second": "Philippians 1:1-11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Esther 2:5-11 & 15-end",
+          "firstAlt": "",
+          "second": "John 14:1-14",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Esther 3",
+          "firstAlt": "",
+          "second": "Philippians 1:12-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Esther 4",
+          "firstAlt": "",
+          "second": "John 14:15-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Esther 5",
+          "firstAlt": "",
+          "second": "Philippians 2:1-11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Esther 6 & 7",
+          "firstAlt": "",
+          "second": "John 15",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Maccabees 1:1-19",
+          "firstAlt": "",
+          "second": "Philippians 2:12-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 1:20-40",
+          "firstAlt": "",
+          "second": "John 16:1-15",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Maccabees 1:41",
+          "firstAlt": "",
+          "second": "Philippians 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 2:1-28",
+          "firstAlt": "",
+          "second": "John 16:16-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Maccabees 2:29-48",
+          "firstAlt": "",
+          "second": "Philippians 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 2:49",
+          "firstAlt": "",
+          "second": "John 17",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity16": {
+      "sunday": {
+        "dayName": "Sixteenth Sunday after Trinity",
+        "morning": {
+          "first": "Jeremiah 5:1-19",
+          "firstAlt": "",
+          "second": "Luke 11:1-28",
+          "secondAlt": "Titus 2:1-3:7"
+        },
+        "evening": {
+          "first": "Jeremiah 5:20-end",
+          "firstAlt": "Jeremiah 7:1-15",
+          "second": "John 8:12-30",
+          "secondAlt": "Ephesians 5:22-6:9"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "1 Maccabees 3:1-26",
+          "firstAlt": "",
+          "second": "Colossians 1:1-20",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 3:27-41",
+          "firstAlt": "",
+          "second": "John 18:1-27",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "1 Maccabees 3:42",
+          "firstAlt": "",
+          "second": "Colossians 1:21-2:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 4:1-25",
+          "firstAlt": "",
+          "second": "John 18:28-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "1 Maccabees 4:26-35",
+          "firstAlt": "",
+          "second": "Colossians 2:8-19",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 4:36",
+          "firstAlt": "",
+          "second": "John 19:1-30",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "1 Maccabees 6:1-17",
+          "firstAlt": "",
+          "second": "Colossians 2:20-3:11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 6:18-47",
+          "firstAlt": "",
+          "second": "John 19:31-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "1 Maccabees 7:1-20",
+          "firstAlt": "",
+          "second": "Colossians 3:12-4:1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 7:21",
+          "firstAlt": "",
+          "second": "John 20",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "1 Maccabees 9:1-22",
+          "firstAlt": "",
+          "second": "Colossians 4:2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "1 Maccabees 13:41",
+          "firstAlt": "1 Maccabees 14:4",
+          "second": "John 21",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity17": {
+      "sunday": {
+        "dayName": "Seventeenth Sunday after Trinity",
+        "morning": {
+          "first": "Jeremiah 17",
+          "firstAlt": "",
+          "second": "Luke 11:29-end",
+          "secondAlt": "Luke 1 Peter 1:1-21"
+        },
+        "evening": {
+          "first": "Jeremiah 18:1-17",
+          "firstAlt": "Jeremiah 22:1-19",
+          "second": "John 8:31-end",
+          "secondAlt": "Ephesians 6:10-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Job 1",
+          "firstAlt": "",
+          "second": "Philemon",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 2",
+          "firstAlt": "",
+          "second": "Luke 1:1-23",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Job 3",
+          "firstAlt": "",
+          "second": "Ephesians 1:1-14",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 4",
+          "firstAlt": "",
+          "second": "Luke 1:24-56",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Job 5",
+          "firstAlt": "",
+          "second": "Ephesians 1:15-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 6",
+          "firstAlt": "",
+          "second": "Luke 1:57-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Job 7",
+          "firstAlt": "",
+          "second": "Ephesians 2:1-10",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 8",
+          "firstAlt": "",
+          "second": "Luke 2:1-21",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Job 9",
+          "firstAlt": "",
+          "second": "Ephesians 2:11-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 10",
+          "firstAlt": "",
+          "second": "Luke 2:22-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Job 11",
+          "firstAlt": "",
+          "second": "Ephesians 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 12",
+          "firstAlt": "",
+          "second": "Luke 3:1-22",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity18": {
+      "sunday": {
+        "dayName": "Eighteenth Sunday after Trinity",
+        "morning": {
+          "first": "Jeremiah 26",
+          "firstAlt": "",
+          "second": "Luke 12:1-34",
+          "secondAlt": "Luke 1 Peter 1:22-2:10"
+        },
+        "evening": {
+          "first": "Jeremiah 30:1-3 & 10-22",
+          "firstAlt": "Jeremiah 31:1-20",
+          "second": "John 13",
+          "secondAlt": "John 1 John 1:1-2:11"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Job 13",
+          "firstAlt": "",
+          "second": "Ephesians 4:1-16",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 14",
+          "firstAlt": "",
+          "second": "Luke 4:1-30",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Job 15:1-16",
+          "firstAlt": "",
+          "second": "Ephesians 4:17-30",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 16:1-17:2",
+          "firstAlt": "",
+          "second": "Luke 4:31-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Job 17:3-end",
+          "firstAlt": "",
+          "second": "Ephesians 4:31-5:21",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 18",
+          "firstAlt": "",
+          "second": "Luke 5:1-16",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Job 19",
+          "firstAlt": "",
+          "second": "Ephesians 5:22-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 21",
+          "firstAlt": "",
+          "second": "Luke 5:17-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Job 22",
+          "firstAlt": "",
+          "second": "Ephesians 6:1-9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 23",
+          "firstAlt": "",
+          "second": "Luke 6:1-19",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Job 24",
+          "firstAlt": "",
+          "second": "Ephesians 6:10-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 25:1-26-end",
+          "firstAlt": "",
+          "second": "Luke 6:20-38",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity19": {
+      "sunday": {
+        "dayName": "Nineteenth Sunday after Trinity",
+        "morning": {
+          "first": "Jeremiah 31:23-37",
+          "firstAlt": "",
+          "second": "Luke 12:35-end",
+          "secondAlt": "Luke 1 Peter 2:11-3:7"
+        },
+        "evening": {
+          "first": "Jeremiah 35",
+          "firstAlt": "Jeremiah 36",
+          "second": "John 14",
+          "secondAlt": "John 1 John 2:12-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Job 27",
+          "firstAlt": "",
+          "second": "1 Timothy 1:1-17",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 28",
+          "firstAlt": "",
+          "second": "Luke 6:39-7:10",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Job 29:1-30:1",
+          "firstAlt": "",
+          "second": "1 Timothy 1:18-2-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 31:13-end",
+          "firstAlt": "",
+          "second": "Luke 7:11-35",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Job 32",
+          "firstAlt": "",
+          "second": "1 Timothy 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 33",
+          "firstAlt": "",
+          "second": "Luke 7:36-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Job 38:1-21",
+          "firstAlt": "",
+          "second": "1 Timothy 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 38:22-end",
+          "firstAlt": "",
+          "second": "Luke 8:1-21",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Job 39",
+          "firstAlt": "",
+          "second": "1 Timothy 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 40",
+          "firstAlt": "",
+          "second": "Luke 8:22-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Job 41",
+          "firstAlt": "",
+          "second": "1 Timothy 6",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Job 42",
+          "firstAlt": "",
+          "second": "Luke 9:1-17",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity20": {
+      "sunday": {
+        "dayName": "Twentieth Sunday after Trinity",
+        "morning": {
+          "first": "Ezekiel 2",
+          "firstAlt": "",
+          "second": "Luke 13",
+          "secondAlt": "Luke 1 Peter 3:8-4:6"
+        },
+        "evening": {
+          "first": "Ezekiel 3:4-21",
+          "firstAlt": "Ezekiel 13:1-16",
+          "second": "John 15",
+          "secondAlt": "John 1 John 3"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Proverbs 1:1-19",
+          "firstAlt": "",
+          "second": "Titus 1:1-2:8",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 1:20-end",
+          "firstAlt": "",
+          "second": "Luke 9:18-50",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Proverbs 2",
+          "firstAlt": "",
+          "second": "Titus 2:9-3-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 3:1-26",
+          "firstAlt": "",
+          "second": "Luke 9:51-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Proverbs 3:27-4:19",
+          "firstAlt": "",
+          "second": "2 Timothy 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 4:20-5:14",
+          "firstAlt": "",
+          "second": "Luke 10:1-24",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Proverbs 6:1-19",
+          "firstAlt": "",
+          "second": "2 Timothy 2",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 8",
+          "firstAlt": "",
+          "second": "Luke 10:25-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Proverbs 9",
+          "firstAlt": "",
+          "second": "2 Timothy 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 10:1-22",
+          "firstAlt": "",
+          "second": "Luke 11:1-28",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Proverbs 11:1-25",
+          "firstAlt": "",
+          "second": "2 Timothy 4",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 12:10-end",
+          "firstAlt": "",
+          "second": "Luke 11:29-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity21": {
+      "sunday": {
+        "dayName": "Twenty-First Sunday after Trinity",
+        "morning": {
+          "first": "Ezekiel 14",
+          "firstAlt": "",
+          "second": "Luke 14:1-24",
+          "secondAlt": "Luke 1 Peter 4:7-5:11"
+        },
+        "evening": {
+          "first": "Ezekiel 18:1-4 & 19",
+          "firstAlt": "Ezekiel 33:1-20",
+          "second": "John 16",
+          "secondAlt": "John 1 John 4"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Proverbs 14:9-27",
+          "firstAlt": "",
+          "second": "Luke 12:1-34",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 15:18-end",
+          "firstAlt": "",
+          "second": "Luke 12:35-53",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Proverbs 16:31-17:17",
+          "firstAlt": "",
+          "second": "Luke 12:54-13:9",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 18:10-end",
+          "firstAlt": "",
+          "second": "Luke 13:10-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Proverbs 20:1-22",
+          "firstAlt": "",
+          "second": "Luke 14:1-24",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 22:1-16",
+          "firstAlt": "",
+          "second": "Luke 14:25-15:10",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Proverbs 24:23-end",
+          "firstAlt": "",
+          "second": "Luke 15:11-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 25",
+          "firstAlt": "",
+          "second": "Luke 16",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Proverbs 26:12-end",
+          "firstAlt": "",
+          "second": "Luke 17:1-19",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 27:1-22",
+          "firstAlt": "",
+          "second": "Luke 17:20-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Proverbs 30:1-16",
+          "firstAlt": "",
+          "second": "Luke 18:1-30",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Proverbs 31:10-end",
+          "firstAlt": "",
+          "second": "Luke 18:31-19:10",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity22": {
+      "sunday": {
+        "dayName": "Twenty-Second Sunday after Trinity",
+        "morning": {
+          "first": "Ezekiel 34:1-16",
+          "firstAlt": "",
+          "second": "Luke 14:25-15:10",
+          "secondAlt": "Luke 2Peter 1"
+        },
+        "evening": {
+          "first": "Ezekiel 34:17-end",
+          "firstAlt": "Ezekiel 37:15-end",
+          "second": "John 17",
+          "secondAlt": "John 1 John 5"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Ecclesiastes 1",
+          "firstAlt": "",
+          "second": "Luke 19:11-28",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ecclesiastes 2:1-23",
+          "firstAlt": "",
+          "second": "Luke 19:29-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Ecclesiastes 3:1-15",
+          "firstAlt": "",
+          "second": "Luke 20:1-26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ecclesiastes 3:16-4:6",
+          "firstAlt": "",
+          "second": "Luke 20:27-21:4",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Ecclesiastes 4:7-end",
+          "firstAlt": "",
+          "second": "Luke 21:5-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ecclesiastes 5",
+          "firstAlt": "",
+          "second": "Luke 22:1-38",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Ecclesiastes 6",
+          "firstAlt": "",
+          "second": "Luke 22:39-53",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ecclesiastes 7:1-14",
+          "firstAlt": "",
+          "second": "Luke 22:54-end",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Ecclesiastes 7:15-end",
+          "firstAlt": "",
+          "second": "Luke 23:1-25",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ecclesiastes 8",
+          "firstAlt": "",
+          "second": "Luke 23:26-49",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ecclesiastes 9",
+          "firstAlt": "",
+          "second": "Luke 23:50-24:12",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Ecclesiastes 10:5-18",
+          "firstAlt": "",
+          "second": "Luke 24:13-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity23": {
+      "sunday": {
+        "dayName": "* Twenty-Third Sunday after Trinity",
+        "morning": {
+          "first": "Proverbs 1:20-end",
+          "firstAlt": "",
+          "second": "Luke 16",
+          "secondAlt": "Luke 1 Corinthians 1:1-25"
+        },
+        "evening": {
+          "first": "Proverbs 2",
+          "firstAlt": "Proverbs 3:1-26",
+          "second": "John 9",
+          "secondAlt": "John 1 Corinthians 13"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Sirach 1:1-10",
+          "firstAlt": "",
+          "second": "Acts 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 1:11",
+          "firstAlt": "",
+          "second": "Acts 2:1-21",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Sirach 2",
+          "firstAlt": "",
+          "second": "Acts 2:22-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 3:17-29",
+          "firstAlt": "",
+          "second": "Acts 3:1-4:4",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Sirach 4:11-28",
+          "firstAlt": "",
+          "second": "Acts 4:5-31",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 4:29",
+          "firstAlt": "- or 6:1",
+          "second": "Acts 4:32-5:11",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Sirach 6:14-31",
+          "firstAlt": "",
+          "second": "Acts 5:12-6:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 7:27",
+          "firstAlt": "",
+          "second": "Acts 6:8-7:16",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Sirach 10:6-8, 12-24",
+          "firstAlt": "",
+          "second": "Acts 7:17-34",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 11:7-28",
+          "firstAlt": "",
+          "second": "Acts 7:35-8:4",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Sirach 14:20",
+          "firstAlt": "Sirach 15:10",
+          "second": "Acts 8:4-25",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 15:11",
+          "firstAlt": "",
+          "second": "Acts 8:26-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity24": {
+      "sunday": {
+        "dayName": "Twenty-Fourth Sunday after Trinity",
+        "morning": {
+          "first": "Proverbs 8:1-21",
+          "firstAlt": "",
+          "second": "Luke 17:1-19",
+          "secondAlt": "Luke 1 Corinthians 1:26-2-end"
+        },
+        "evening": {
+          "first": "Proverbs 8:1 & 22-end",
+          "firstAlt": "Proverbs 9",
+          "second": "John 10",
+          "secondAlt": "James 3"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Sirach 16:17",
+          "firstAlt": "",
+          "second": "Acts 9:1-31",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 17:1-24",
+          "firstAlt": "",
+          "second": "Acts 9:32-end",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Sirach 18:1-14",
+          "firstAlt": "",
+          "second": "Acts 10:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 19:13",
+          "firstAlt": "",
+          "second": "Acts 10:24-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Sirach 21:1-17",
+          "firstAlt": "",
+          "second": "Acts 11:1-18",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 22:6-22",
+          "firstAlt": "",
+          "second": "Acts 11:19-end",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Sirach 22:27",
+          "firstAlt": "Sirach 23:15",
+          "second": "Acts 12:1-24",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 24:1-22",
+          "firstAlt": "",
+          "second": "Acts 12:25-13:12",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Sirach 24:23",
+          "firstAlt": "",
+          "second": "Acts 13:13-43",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 27:30",
+          "firstAlt": "Sirach 28:9",
+          "second": "Acts 13:44-14:7",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Sirach 31:1-11",
+          "firstAlt": "",
+          "second": "Acts 14:8-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 34:9",
+          "firstAlt": "",
+          "second": "Acts 15:1-21",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity25": {
+      "sunday": {
+        "dayName": "Twenty-Fifth Sunday after Trinity",
+        "morning": {
+          "first": "Proverbs 13",
+          "firstAlt": "",
+          "second": "Luke 22:1-38",
+          "secondAlt": "Luke 1 Corinthians 3"
+        },
+        "evening": {
+          "first": "Proverbs 14:31-15:17",
+          "firstAlt": "Proverbs 16:1-19",
+          "second": "Luke 22:39-end",
+          "secondAlt": "James 4"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Sirach 35",
+          "firstAlt": "",
+          "second": "Acts 15:22-35",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 37:7-15",
+          "firstAlt": "",
+          "second": "Acts 15:36-16:5",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Sirach 38:1-14",
+          "firstAlt": "",
+          "second": "Acts 16:6-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 38:24",
+          "firstAlt": "",
+          "second": "Acts 17:1-15",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Sirach 39:1-11",
+          "firstAlt": "",
+          "second": "Acts 17:16-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 39:13",
+          "firstAlt": "",
+          "second": "Acts 18:1-23",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Sirach 42:15",
+          "firstAlt": "",
+          "second": "Acts 18:24-19:7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 43:1-12",
+          "firstAlt": "",
+          "second": "Acts 19:8-20",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Sirach 43:13",
+          "firstAlt": "",
+          "second": "Acts 19:21-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 50:1-24",
+          "firstAlt": "",
+          "second": "Acts 20:1-16",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Sirach 51:1-12",
+          "firstAlt": "",
+          "second": "Acts 20:17-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Sirach 51:13",
+          "firstAlt": "",
+          "second": "Acts 21:1-16",
+          "secondAlt": ""
+        }
+      }
+    },
+    "trinity26": {
+      "sunday": {
+        "dayName": "Twenty-Sixth Sunday after Trinity",
+        "morning": {
+          "first": "Proverbs 23:15-end",
+          "firstAlt": "",
+          "second": "Luke 23:1-25",
+          "secondAlt": "Jude"
+        },
+        "evening": {
+          "first": "Proverbs 24:23-end",
+          "firstAlt": "Proverbs 31:10-end",
+          "second": "Luke 23:24-end",
+          "secondAlt": "James 5"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Tobit 4:5-19",
+          "firstAlt": "",
+          "second": "Acts 21:17-36",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Tobit 13",
+          "firstAlt": "",
+          "second": "Acts 21:37-22:22",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Baruch 1:15",
+          "firstAlt": "Baruch 2:10",
+          "second": "Acts 22:23-23:11",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Baruch 2:11",
+          "firstAlt": "",
+          "second": "Acts 23:12-end",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Baruch 3:1-8",
+          "firstAlt": "",
+          "second": "Acts 24:1-23",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Baruch 3:9",
+          "firstAlt": "",
+          "second": "Acts 24:24-25:12",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Baruch 4:21-30",
+          "firstAlt": "",
+          "second": "Acts 25:13-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Baruch 4:36",
+          "firstAlt": "Baruch 5",
+          "second": "Acts 26",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "2 Maccabees 4:7-17",
+          "firstAlt": "",
+          "second": "Acts 27:1-26",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Maccabees 6:12",
+          "firstAlt": "",
+          "second": "Acts 27:27-end",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "2 Maccabees 7:1-19",
+          "firstAlt": "",
+          "second": "Acts 28:1-15",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "2 Maccabees 7:20-41",
+          "firstAlt": "",
+          "second": "Acts 28:16-end",
+          "secondAlt": ""
+        }
+      }
+    },
+    "sundayNextBeforeAdvent": {
+      "sunday": {
+        "dayName": "Sunday Next Before Advent",
+        "morning": {
+          "first": "Ecclesiastes 11 & 12",
+          "firstAlt": "",
+          "second": "John 19:13-end",
+          "secondAlt": "Hebrews 11:1-16"
+        },
+        "evening": {
+          "first": "Haggai 2:1-9",
+          "firstAlt": "Malachi 3 & 4",
+          "second": "John 20",
+          "secondAlt": "Hebrews 11:17-12:2 or Luke 15:11-end"
+        }
+      },
+      "monday": {
+        "dayName": "Monday",
+        "morning": {
+          "first": "Wisdom1",
+          "firstAlt": "",
+          "second": "Revelation 1",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Wisdom2",
+          "firstAlt": "",
+          "second": "Revelation 2",
+          "secondAlt": ""
+        }
+      },
+      "tuesday": {
+        "dayName": "Tuesday",
+        "morning": {
+          "first": "Ecclesiastes 3:1-9",
+          "firstAlt": "",
+          "second": "Revelation 3",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 4:7",
+          "firstAlt": "",
+          "second": "Revelation 4",
+          "secondAlt": ""
+        }
+      },
+      "wednesday": {
+        "dayName": "Wednesday",
+        "morning": {
+          "first": "Ecclesiastes 5:1-16",
+          "firstAlt": "",
+          "second": "Revelation 5",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 6:1-21",
+          "firstAlt": "",
+          "second": "Revelation 6",
+          "secondAlt": ""
+        }
+      },
+      "thursday": {
+        "dayName": "Thursday",
+        "morning": {
+          "first": "Ecclesiastes 7:15",
+          "firstAlt": "Ecclesiastes 8:4",
+          "second": "Revelation 7",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 8:5-18",
+          "firstAlt": "",
+          "second": "Revelation 10:1-11:14",
+          "secondAlt": ""
+        }
+      },
+      "friday": {
+        "dayName": "Friday",
+        "morning": {
+          "first": "Ecclesiastes 8:21",
+          "firstAlt": "Ecclesiastes 9",
+          "second": "Revelation 11:15-12-end",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 10:15",
+          "firstAlt": "Haggai 11:10",
+          "second": "Revelation 14:1-13",
+          "secondAlt": ""
+        }
+      },
+      "saturday": {
+        "dayName": "Saturday",
+        "morning": {
+          "first": "Ecclesiastes 11:21",
+          "firstAlt": "Ecclesiastes 12:2",
+          "second": "Revelation 18",
+          "secondAlt": ""
+        },
+        "evening": {
+          "first": "Haggai 12:12-21",
+          "firstAlt": "",
+          "second": "Revelation 19:1-16",
+          "secondAlt": ""
+        }
+      }
+    }
+  },
+  "holyDays": {
+    "11-30": {
+      "title": "St. Andrew",
+      "firstEve": {
+        "first": "Sirach 14:20",
+        "second": "John 1:35-42"
+      },
+      "mattins": {
+        "first": "Zechariah 8:20-end",
+        "second": "John 12:20-32"
+      },
+      "secondEve": {
+        "first": "Ezekiel 47:1-12",
+        "second": "1 Corinthians 1:18-end"
+      }
+    },
+    "12-21": {
+      "title": "St. Thomas",
+      "firstEve": {
+        "first": "2 Samuel 15:17-21",
+        "second": "John 11:1-16"
+      },
+      "mattins": {
+        "first": "Job 42:1-6",
+        "second": "John 14:1-7"
+      },
+      "secondEve": {
+        "first": "Isaiah 35",
+        "second": "1 Peter 1:3-9"
+      }
+    },
+    "01-25": {
+      "title": "Conversion of St. Paul",
+      "firstEve": {
+        "first": "Jeremiah 1:4-10",
+        "second": "Acts 26:1-23"
+      },
+      "mattins": {
+        "first": "Isaiah 49:1-13",
+        "second": "Galatians 1:11-end"
+      },
+      "secondEve": {
+        "first": "Isaiah 45:18-end",
+        "second": "Philippians 3:1-14"
+      }
+    },
+    "02-02": {
+      "title": "Purification of the Virgin Mary",
+      "firstEve": {
+        "first": "Exodus 13:11-16",
+        "second": "Galatians 4:1-7"
+      },
+      "mattins": {
+        "first": "1 Samuel 1:21-end",
+        "second": "Hebrews 10:1-10"
+      },
+      "secondEve": {
+        "first": "Haggai 2:1-9",
+        "second": "Romans 12:1-5"
+      }
+    },
+    "02-24": {
+      "title": "St. Matthias",
+      "firstEve": {
+        "first": "Isaiah 22:15-22",
+        "second": "John 15:1-16"
+      },
+      "mattins": {
+        "first": "1 Samuel 2:27-35",
+        "second": "Matthew 7:15-27"
+      },
+      "secondEve": {
+        "first": "1 Samuel 16:1-13",
+        "second": "Acts 20:17-35"
+      }
+    },
+    "03-25": {
+      "title": "Annunciation of our Lady",
+      "firstEve": {
+        "first": "Genesis 3:1-15",
+        "second": "Romans 5:12-21"
+      },
+      "mattins": {
+        "first": "Isaiah 52:7-12",
+        "second": "Hebrews 2:5-end"
+      },
+      "secondEve": {
+        "first": "1 Samuel 2:1-11",
+        "second": "Matthew 1:18-23"
+      }
+    },
+    "04-25": {
+      "title": "St. Mark",
+      "firstEve": {
+        "first": "Ezekiel 1",
+        "second": "Acts 12:25-13:13"
+      },
+      "mattins": {
+        "first": "Sirach 51:13",
+        "second": "Acts 15:35-end"
+      },
+      "secondEve": {
+        "first": "Isaiah 62:6-end",
+        "second": "2 Timothy 4:1-11"
+      }
+    },
+    "05-01": {
+      "title": "St. Philip and St. James",
+      "firstEve": {
+        "first": "Proverbs 4:10-18",
+        "second": "John 1:43-end"
+      },
+      "mattins": {
+        "first": "Job 23:1-12",
+        "second": "John 6:1-24"
+      },
+      "secondEve": {
+        "first": "Isaiah 30:15-21",
+        "second": "John 17:1-8"
+      }
+    },
+    "06-11": {
+      "title": "St. Barnabas",
+      "firstEve": {
+        "first": "Job 29:11-16",
+        "second": "Acts 4:32-end"
+      },
+      "mattins": {
+        "first": "Jeremiah 9:23-24",
+        "second": "Acts 9:26-31"
+      },
+      "secondEve": {
+        "first": "Isaiah 42:5-12",
+        "second": "Acts 14:8-end"
+      }
+    },
+    "06-24": {
+      "title": "St. John Baptist",
+      "firstEve": {
+        "first": "Malachi 3:1-6",
+        "second": "Luke 1:5-23"
+      },
+      "mattins": {
+        "first": "Sirach 48:1-10",
+        "second": "Luke 3:1-20"
+      },
+      "secondEve": {
+        "first": "Malachi 4",
+        "second": "Matthew 11:2-19"
+      }
+    },
+    "06-29": {
+      "title": "St. Peter",
+      "firstEve": {
+        "first": "Ezekiel 2:1-7",
+        "second": "Acts 3"
+      },
+      "mattins": {
+        "first": "Ezekiel 3:4-11",
+        "second": "Acts 11:1-18"
+      },
+      "secondEve": {
+        "first": "Ezekiel 34:11-16",
+        "second": "John 21:15-22"
+      }
+    },
+    "07-22": {
+      "title": "St. Mary Magdalen",
+      "firstEve": {
+        "first": "Proverbs 31:10-end",
+        "second": "Luke 8:1-3"
+      },
+      "mattins": {
+        "first": "Isaiah 52:7-10",
+        "second": "John 20:1-10"
+      },
+      "secondEve": {
+        "first": "Zephaniah 3:14-end",
+        "second": "Mark 15:40-16:7"
+      }
+    },
+    "07-25": {
+      "title": "St. James",
+      "firstEve": {
+        "first": "2 Kings 1:1-15",
+        "second": "Luke 9:46-56"
+      },
+      "mattins": {
+        "first": "Jeremiah 45",
+        "second": "Mark 1:14-20"
+      },
+      "secondEve": {
+        "first": "Jeremiah 26:1-15",
+        "second": "Mark 5:21-end"
+      }
+    },
+    "08-06": {
+      "title": "Transfiguration",
+      "firstEve": {
+        "first": "Exodus 24:12-end",
+        "second": "Luke 9:28-45"
+      },
+      "mattins": {
+        "first": "Exodus 34:29-end",
+        "second": "2 Corinthians 3"
+      },
+      "secondEve": {
+        "first": "1 Kings 19:1-16",
+        "second": "2 Peter 1:12-end"
+      }
+    },
+    "08-24": {
+      "title": "St. Bartholomew",
+      "firstEve": {
+        "first": "Genesis 28:10-17",
+        "second": "John 1:43-end"
+      },
+      "mattins": {
+        "first": "Sirach 39:1-10",
+        "second": "Matthew 10:1-15"
+      },
+      "secondEve": {
+        "first": "Deuteronomy 18:15-19",
+        "second": "Matthew 10:16-22"
+      }
+    },
+    "09-21": {
+      "title": "St. Matthew",
+      "firstEve": {
+        "first": "1 Kings 19:15-end",
+        "second": "Matthew 6:19-end"
+      },
+      "mattins": {
+        "first": "Proverbs 3:1-18",
+        "second": "Matthew 19:16-end"
+      },
+      "secondEve": {
+        "first": "1 Chronicles 29:9-17",
+        "second": "1 Timothy 6:6-19"
+      }
+    },
+    "09-29": {
+      "title": "St. Michael",
+      "firstEve": {
+        "first": "Ezekiel 10:8-end",
+        "second": "Revelation 5"
+      },
+      "mattins": {
+        "first": "2 Kings 6:8-17",
+        "second": "Acts 12:1-11"
+      },
+      "secondEve": {
+        "first": "Daniel 10:4-end",
+        "second": "Matthew 13:24-30 & 36-43"
+      }
+    },
+    "10-18": {
+      "title": "St. Luke",
+      "firstEve": {
+        "first": "Isaiah 55",
+        "second": "Luke 1:1-4"
+      },
+      "mattins": {
+        "first": "Isaiah 61:1-6",
+        "second": "Acts 16:6-18"
+      },
+      "secondEve": {
+        "first": "Sirach 38:1-14",
+        "second": "Colossians 4:7-end"
+      }
+    },
+    "10-28": {
+      "title": "St. Simon and St. Jude",
+      "firstEve": {
+        "first": "Isaiah 28:9-16",
+        "second": "Ephesians 2:11-end"
+      },
+      "mattins": {
+        "first": "Sirach 2",
+        "second": "Luke 6:12-23"
+      },
+      "secondEve": {
+        "first": "1 Maccabees 2:42-66",
+        "second": "Jude 17-end"
+      }
+    },
+    "11-01": {
+      "title": "All Saints",
+      "firstEve": {
+        "first": "Wisdom 3:1-9",
+        "second": "Hebrews 11:32-12:2"
+      },
+      "mattins": {
+        "first": "Wisdom 5:1-16",
+        "second": "Revelation 19:6-10"
+      },
+      "secondEve": {
+        "first": "Sirach 44:1-15",
+        "second": "Revelation 7:9-end"
+      }
+    }
+  }
+}

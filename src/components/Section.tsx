@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 interface SectionProps {
+  id?: string;
   title?: ReactNode;
   rubric?: ReactNode;
   metadata?: ReactNode;
@@ -10,9 +11,9 @@ interface SectionProps {
   onTitleClick?: () => void;
 }
 
-export function Section({ title, rubric, metadata, leftAction, children, className = '', onTitleClick }: SectionProps) {
+export function Section({ id, title, rubric, metadata, leftAction, children, className = '', onTitleClick }: SectionProps) {
   return (
-    <div className={`flex flex-col md:flex-row gap-2 md:gap-12 mb-12 md:mb-16 ${className}`}>
+    <div id={id} className={`flex flex-col md:flex-row gap-2 md:gap-12 mb-12 md:mb-16 scroll-mt-24 ${className}`}>
       <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
         {title && (
           <h3 
@@ -29,7 +30,7 @@ export function Section({ title, rubric, metadata, leftAction, children, classNa
         )}
         {rubric && (
           <div className="rubric text-sm space-y-2 opacity-90">
-            {typeof rubric === 'string' && !rubric.trim().endsWith('.') ? rubric.trim() + '.' : rubric}
+            {typeof rubric === 'string' && !/[.:;,!?]$/.test(rubric.trim()) ? rubric.trim() + '.' : rubric}
           </div>
         )}
         {leftAction && (

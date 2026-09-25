@@ -1,4 +1,6 @@
 import { collects } from '../data/collects';
+import { get1922LessonEntry } from './lectionaryData';
+
 // 1662 Psalm assignments by Day of the Month
 const psalmsByDay = [
     { m: "1-5", e: "6-8" },         // 1
@@ -33,35 +35,7 @@ const psalmsByDay = [
     { m: "144-146", e: "147-150" }  // 30
 ];
 
-const otBooks = [
-    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", 
-    "Joshua", "Judges", "1 Samuel", "2 Samuel", "1 Kings", 
-    "2 Kings", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Job"
-];
-
-const ntMorningBooks = ["Matthew", "Mark", "Luke", "John", "Acts"];
-const ntEveningBooks = [
-    "Romans", "1 Corinthians", "2 Corinthians", "Galatians", 
-    "Ephesians", "Philippians", "Colossians", "1 Thessalonians", 
-    "1 Timothy", "Hebrews", "James", "1 Peter", "1 John"
-];
-
-function getDayOfYear(date: Date): number {
-    const start = new Date(date.getFullYear(), 0, 0);
-    const diff = (date.getTime() - start.getTime()) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
-    return Math.floor(diff / (1000 * 60 * 60 * 24));
-}
-
-function getPseudoRandomReading(dayOfYear: number, books: string[], salt: number = 0): string {
-    // Generate a deterministic but varied book and chapter based on day of year
-    const index = (dayOfYear + salt) % books.length;
-    const book = books[index];
-    // Modulate chapter so it doesn't get ridiculously high (1-15 generally safe for these books)
-    const chapter = (Math.floor((dayOfYear + salt) / books.length) % 15) + 1;
-    return `${book} ${chapter}`;
-}
-
-function getEaster(year: number): Date {
+export function getEaster(year: number): Date {
     const a = year % 19;
     const b = Math.floor(year / 100);
     const c = year % 100;
@@ -79,45 +53,29 @@ function getEaster(year: number): Date {
     return new Date(year, month, day);
 }
 
-
 export function getLiturgicalWeek(date: Date): { week: string, feast?: string } {
     const year = date.getFullYear();
     const easter = getEaster(year);
-    const christmas = new Date(year, 11, 25);
-    let advent = new Date(year, 10, 27); // Earliest Advent is Nov 27. 
-    // Find the Sunday closest to Nov 30 (St Andrew's Day)
-    const nov30 = new Date(year, 10, 30);
-    const dayOfWeekNov30 = nov30.getDay();
-    advent = new Date(year, 10, 30 - dayOfWeekNov30); 
-    if (dayOfWeekNov30 >= 4) { // Wed-Sat, closest Sunday is after
-       advent = new Date(year, 10, 30 + (7 - dayOfWeekNov30));
-    }
-    // Actually, Advent Sunday is always the Sunday nearest to Nov 30.
-    // If Nov 30 is Mon/Tue/Wed, Advent is Nov 29/28/27.
-    // If Nov 30 is Thu/Fri/Sat, Advent is Dec 3/2/1.
-    // This can be calculated as:
-    advent = new Date(year, 10, 26 + (nov30.getDay() === 0 ? 4 : (4 - nov30.getDay() > 0 ? 4 - nov30.getDay() : 11 - nov30.getDay() ))); 
-    // Wait, simpler: Find Sunday ON OR AFTER Nov 27.
-    for(let d=27; d<=33; d++) {
-        let test = new Date(year, 10, d > 30 ? 30 : d);
-        if (d>30) test = new Date(year, 11, d-30);
+
+    // Find Advent Sunday (Sunday closest to Nov 30, between Nov 27 and Dec 3)
+    let advent = new Date(year, 10, 27);
+    for (let d = 27; d <= 33; d++) {
+        let test = d > 30 ? new Date(year, 11, d - 30) : new Date(year, 10, d);
         if (test.getDay() === 0) { advent = test; break; }
     }
-    
-    // Now determine the PRECEDING Sunday to find the "week" collect.
+
     const getSundayBefore = (d: Date) => {
         const res = new Date(d);
         res.setDate(res.getDate() - res.getDay());
         return res;
     };
-    
+
     const msPerDay = 24 * 60 * 60 * 1000;
     const daysSinceEaster = Math.floor((date.getTime() - easter.getTime()) / msPerDay);
     const sundayDaysSinceEaster = daysSinceEaster - date.getDay();
-    
-    let weekName = "Trinity-Sunday";
-    let feastName = undefined;
 
+    let weekName = "Trinity-Sunday";
+    let feastName: string | undefined = undefined;
 
     // Check fixed feasts
     if (date.getMonth() === 0 && date.getDate() === 1) feastName = "The Circumcision of Christ";
@@ -131,7 +89,9 @@ export function getLiturgicalWeek(date: Date): { week: string, feast?: string } 
     if (date.getMonth() === 5 && date.getDate() === 11) feastName = "Saint Barnabas the Apostle";
     if (date.getMonth() === 5 && date.getDate() === 24) feastName = "Saint John Baptist's Day";
     if (date.getMonth() === 5 && date.getDate() === 29) feastName = "Saint Peter's Day";
+    if (date.getMonth() === 6 && date.getDate() === 22) feastName = "Saint Mary Magdalen";
     if (date.getMonth() === 6 && date.getDate() === 25) feastName = "Saint James the Apostle";
+    if (date.getMonth() === 7 && date.getDate() === 6) feastName = "The Transfiguration";
     if (date.getMonth() === 7 && date.getDate() === 24) feastName = "Saint Bartholomew the Apostle";
     if (date.getMonth() === 8 && date.getDate() === 21) feastName = "Saint Matthew the Apostle";
     if (date.getMonth() === 8 && date.getDate() === 29) feastName = "Saint Michael and All Angels";
@@ -145,7 +105,6 @@ export function getLiturgicalWeek(date: Date): { week: string, feast?: string } 
     if (date.getMonth() === 11 && date.getDate() === 27) feastName = "Saint John the Evangelist's Day";
     if (date.getMonth() === 11 && date.getDate() === 28) feastName = "The Innocents' Day";
 
-
     // Check movable feasts
     if (daysSinceEaster === -46) feastName = "Ash Wednesday";
     if (daysSinceEaster === -2) feastName = "Good Friday";
@@ -157,14 +116,16 @@ export function getLiturgicalWeek(date: Date): { week: string, feast?: string } 
     if (daysSinceEaster === 49) feastName = "Whitsun-Day";
     if (daysSinceEaster === 50) feastName = "Monday in Whitsun-Week";
     if (daysSinceEaster === 51) feastName = "Tuesday in Whitsun-Week";
-    
-    // Determine the Week name based on the preceding Sunday.
+
+    // Preceding Sunday determines week name
     const precedingSunday = getSundayBefore(date);
-    
+
     if (precedingSunday >= advent && precedingSunday < new Date(year, 11, 25)) {
-        const weeksSinceAdvent = Math.floor((precedingSunday.getTime() - advent.getTime()) / (7*msPerDay));
-        weekName = `The ${weeksSinceAdvent + 1}${weeksSinceAdvent === 0 ? 'st' : weeksSinceAdvent === 1 ? 'nd' : weeksSinceAdvent === 2 ? 'rd' : 'th'} Sunday in Advent`;
-    } else if (precedingSunday.getMonth() === 11 && precedingSunday.getDate() >= 25 || precedingSunday.getMonth() === 0 && precedingSunday.getDate() < 6) {
+        const weeksSinceAdvent = Math.floor((precedingSunday.getTime() - advent.getTime()) / (7 * msPerDay));
+        const num = weeksSinceAdvent + 1;
+        const sfx = num === 1 ? 'st' : num === 2 ? 'nd' : num === 3 ? 'rd' : 'th';
+        weekName = `The ${num}${sfx} Sunday in Advent`;
+    } else if ((precedingSunday.getMonth() === 11 && precedingSunday.getDate() >= 25) || (precedingSunday.getMonth() === 0 && precedingSunday.getDate() < 6)) {
         weekName = "The Sunday after Christmas-Day";
         if (precedingSunday.getMonth() === 11 && precedingSunday.getDate() === 25) {
             weekName = "Christmas-Day";
@@ -175,8 +136,9 @@ export function getLiturgicalWeek(date: Date): { week: string, feast?: string } 
         if (epSun.getDay() !== 0) {
             epSun.setDate(epSun.getDate() + (7 - epSun.getDay()));
         }
-        const weeksSinceEpiphany = Math.floor((precedingSunday.getTime() - epSun.getTime()) / (7*msPerDay)) + 1;
-        weekName = `The ${weeksSinceEpiphany}${weeksSinceEpiphany === 1 ? 'st' : weeksSinceEpiphany === 2 ? 'nd' : weeksSinceEpiphany === 3 ? 'rd' : 'th'} Sunday after the Epiphany`;
+        const weeksSinceEpiphany = Math.floor((precedingSunday.getTime() - epSun.getTime()) / (7 * msPerDay)) + 1;
+        const sfx = weeksSinceEpiphany === 1 ? 'st' : weeksSinceEpiphany === 2 ? 'nd' : weeksSinceEpiphany === 3 ? 'rd' : 'th';
+        weekName = `The ${weeksSinceEpiphany}${sfx} Sunday after the Epiphany`;
     } else if (sundayDaysSinceEaster >= -63 && sundayDaysSinceEaster < -46) {
         if (sundayDaysSinceEaster === -63) weekName = "Septuagesima";
         else if (sundayDaysSinceEaster === -56) weekName = "Sexagesima";
@@ -184,20 +146,36 @@ export function getLiturgicalWeek(date: Date): { week: string, feast?: string } 
     } else if (sundayDaysSinceEaster >= -46 && sundayDaysSinceEaster < 0) {
         const weeksInLent = Math.floor((sundayDaysSinceEaster + 42) / 7) + 1;
         if (weeksInLent === 6) weekName = "Sunday next before Easter";
-        else weekName = `The ${weeksInLent}${weeksInLent === 1 ? 'st' : weeksInLent === 2 ? 'nd' : weeksInLent === 3 ? 'rd' : 'th'} Sunday in Lent`;
+        else {
+            const sfx = weeksInLent === 1 ? 'st' : weeksInLent === 2 ? 'nd' : weeksInLent === 3 ? 'rd' : 'th';
+            weekName = `The ${weeksInLent}${sfx} Sunday in Lent`;
+        }
     } else if (sundayDaysSinceEaster >= 0 && sundayDaysSinceEaster < 49) {
         const weeksSinceEaster = Math.floor(sundayDaysSinceEaster / 7);
         if (weeksSinceEaster === 0) weekName = "Easter-Day";
-        else weekName = `The ${weeksSinceEaster}${weeksSinceEaster === 1 ? 'st' : weeksSinceEaster === 2 ? 'nd' : weeksSinceEaster === 3 ? 'rd' : 'th'} Sunday after Easter`;
+        else {
+            const sfx = weeksSinceEaster === 1 ? 'st' : weeksSinceEaster === 2 ? 'nd' : weeksSinceEaster === 3 ? 'rd' : 'th';
+            weekName = `The ${weeksSinceEaster}${sfx} Sunday after Easter`;
+        }
     } else if (sundayDaysSinceEaster >= 49 && sundayDaysSinceEaster < 56) {
         weekName = "Whitsun-Day";
     } else if (sundayDaysSinceEaster >= 56 && precedingSunday < advent) {
         const weeksSinceTrinity = Math.floor((sundayDaysSinceEaster - 56) / 7) + 1;
         if (weeksSinceTrinity === 1) weekName = "Trinity-Sunday";
-        else weekName = `The ${weeksSinceTrinity - 1}${weeksSinceTrinity - 1 === 1 ? 'st' : weeksSinceTrinity - 1 === 2 ? 'nd' : weeksSinceTrinity - 1 === 3 ? 'rd' : 'th'} Sunday after Trinity`;
+        else {
+            const num = weeksSinceTrinity - 1;
+            const sfx = num === 1 ? 'st' : num === 2 ? 'nd' : num === 3 ? 'rd' : 'th';
+            // Check if this is Sunday next before Advent
+            const sunNextAdv = new Date(advent);
+            sunNextAdv.setDate(sunNextAdv.getDate() - 7);
+            if (precedingSunday.getTime() >= sunNextAdv.getTime()) {
+                weekName = "The Sunday next before Advent";
+            } else {
+                weekName = `The ${num}${sfx} Sunday after Trinity`;
+            }
+        }
     }
-    
-    // Some exceptions: if during week of Ascension Day, but not yet Sunday
+
     if (sundayDaysSinceEaster === 35 && daysSinceEaster >= 39) {
         weekName = "Ascension-Day";
     }
@@ -208,43 +186,76 @@ export function getLiturgicalWeek(date: Date): { week: string, feast?: string } 
     return { week: weekName, feast: feastName };
 }
 
+function findCollect(feast?: string, week?: string): string {
+    const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const collectsMap = collects as Record<string, string>;
 
-import { getAccurateDailyLesson } from './lectionaryData';
+    if (feast) {
+        if (collectsMap[feast]) return collectsMap[feast];
+        const normFeast = normalize(feast);
+        for (const [k, v] of Object.entries(collectsMap)) {
+            if (normalize(k) === normFeast || normalize(k).includes(normFeast) || normFeast.includes(normalize(k))) {
+                return v;
+            }
+        }
+    }
+
+    if (week) {
+        if (collectsMap[week]) return collectsMap[week];
+        const normWeek = normalize(week);
+        for (const [k, v] of Object.entries(collectsMap)) {
+            if (normalize(k) === normWeek) return v;
+        }
+        for (const [k, v] of Object.entries(collectsMap)) {
+            if (normalize(k).includes(normWeek) || normWeek.includes(normalize(k))) {
+                return v;
+            }
+        }
+    }
+
+    return collectsMap["The 1st Sunday in Advent"] || "";
+}
 
 export interface DailyReadings {
     psalms: string;
     firstLesson: string;
+    firstLessonAlt?: string;
     secondLesson: string;
+    secondLessonAlt?: string;
     collect: string;
     liturgicalWeek: string;
     feastName?: string;
+    dayTitle?: string;
+    commemoration?: string;
 }
 
 export function getReadingsForDate(date: Date, office: 'morning' | 'evening'): DailyReadings {
     let day = date.getDate();
     // 1662 rules: if 31st, read day 30 again
     if (day === 31) day = 30;
-    
-    const dayOfYear = getDayOfYear(date);
-    const psalmDay = day === 31 ? 30 : day;    const psalms = office === 'morning' ? psalmsByDay[psalmDay - 1].m : psalmsByDay[psalmDay - 1].e;
-    
-    const firstLesson = getAccurateDailyLesson(date, office, 'first');
-    const secondLesson = getAccurateDailyLesson(date, office, 'second');
-    
+
+    const psalmDay = day === 31 ? 30 : day;
+    const psalms = office === 'morning' ? psalmsByDay[psalmDay - 1].m : psalmsByDay[psalmDay - 1].e;
+
+    // Retrieve from 1922 Revised Tables of Lessons
+    const entry = get1922LessonEntry(date);
+    const officeLessons = entry[office] || { first: '', firstAlt: '', second: '', secondAlt: '' };
+
     const lit = getLiturgicalWeek(date);
-    
-    // Fetch collect. If feast is set, use it first, otherwise use week collect.
-    let collectText = lit.feast && collects[lit.feast] ? collects[lit.feast] : collects[lit.week] || "Collect for " + lit.week + " not found.";
-    
-    // On Sundays, usually the Feast collect is said with the Sunday collect, but for now we'll just prioritize Feast if there is one on a Sunday.
-    // Wait, let's keep it simple: just use collectText.
-    
+    const commemoration = entry.commemoration || (entry.source === 'holyDay' ? lit.feast : undefined);
+    const feast = commemoration || lit.feast;
+    const collectText = findCollect(feast, lit.week);
+
     return {
         psalms: `${psalms.includes("-") || psalms.includes(",") ? "Psalms" : "Psalm"} ${psalms}`,
-        firstLesson,
-        secondLesson,
+        firstLesson: officeLessons.first,
+        firstLessonAlt: officeLessons.firstAlt || undefined,
+        secondLesson: officeLessons.second,
+        secondLessonAlt: officeLessons.secondAlt || undefined,
         collect: collectText,
         liturgicalWeek: lit.week,
-        feastName: lit.feast
+        feastName: feast,
+        dayTitle: entry.dayTitle,
+        commemoration: commemoration && commemoration !== entry.dayTitle ? commemoration : undefined
     };
 }
