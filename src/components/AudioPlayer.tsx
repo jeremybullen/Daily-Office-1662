@@ -1,4 +1,5 @@
-import { Play, Pause, SkipBack, SkipForward, X, Volume2, Users, User } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Play, Pause, SkipBack, SkipForward, X, Volume2, Users, User, SlidersHorizontal, RotateCcw, VolumeX } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface AudioPlayerProps {
@@ -11,6 +12,13 @@ interface AudioPlayerProps {
   totalSections: number;
   rate: number;
   hasDistinctVoices: boolean;
+  availableVoices: SpeechSynthesisVoice[];
+  ministerVoiceUri: string;
+  peopleVoiceUri: string;
+  onSelectMinisterVoice: (uri: string) => void;
+  onSelectPeopleVoice: (uri: string) => void;
+  onResetVoices: () => void;
+  onPreviewVoice: (role: 'call' | 'response', uri?: string) => void;
   onPlay: () => void;
   onPause: () => void;
   onStop: () => void;
@@ -30,6 +38,13 @@ export function AudioPlayer({
   totalSections,
   rate,
   hasDistinctVoices,
+  availableVoices,
+  ministerVoiceUri,
+  peopleVoiceUri,
+  onSelectMinisterVoice,
+  onSelectPeopleVoice,
+  onResetVoices,
+  onPreviewVoice,
   onPlay,
   onPause,
   onStop,
@@ -38,6 +53,29 @@ export function AudioPlayer({
   onChangeRate,
   onClose
 }: AudioPlayerProps) {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  // Group voices for easy browsing: English first, then others
+  const { englishVoices, otherVoices } = useMemo(() => {
+    const english: SpeechSynthesisVoice[] = [];
+    const others: SpeechSynthesisVoice[] = [];
+    for (const v of availableVoices) {
+      if (v.lang.toLowerCase().startsWith('en')) {
+        english.push(v);
+      } else {
+        others.push(v);
+      }
+    }
+    // Sort British voices first within English, then alphabetical
+    english.sort((a, b) => {
+      const aGb = a.lang.toLowerCase().includes('gb') || a.name.toLowerCase().includes('uk') ? -1 : 1;
+      const bGb = b.lang.toLowerCase().includes('gb') || b.name.toLowerCase().includes('uk') ? -1 : 1;
+      if (aGb !== bGb) return aGb - bGb;
+      return a.name.localeCompare(b.name);
+    });
+    return { englishVoices: english, otherVoices: others };
+  }, [availableVoices]);
+
   if (!isOpen) return null;
 
   const cycleSpeed = () => {
@@ -56,11 +94,11 @@ export function AudioPlayer({
         transition={{ duration: 0.22, ease: 'easeOut' }}
         className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-lg bg-[var(--bg-color)]/95 backdrop-blur-md border border-black/15 dark:border-white/15 shadow-2xl rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 select-none"
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2.5">
           {/* Top metadata row */}
           <div className="flex items-center justify-between gap-2 border-b border-black/5 dark:border-white/5 pb-2">
             <div className="flex items-center gap-2 min-w-0">
-              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" />
+              <span className={`w-2 h-2 rounded-full shrink-0 ${isPlaying && !isPaused ? 'bg-amber-500 animate-pulse' : 'bg-black/30 dark:bg-white/30'}`} />
               <span className="font-serif font-semibold text-sm truncate opacity-90">
                 {currentSectionTitle || 'Daily Office Audio'}
               </span>
@@ -70,7 +108,7 @@ export function AudioPlayer({
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              {/* Voice indicator */}
+              {/* Call vs Response voice indicator */}
               {currentRole && (
                 <div className={`flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full font-medium tracking-wide transition-colors ${
                   currentRole === 'response'
@@ -105,6 +143,130 @@ export function AudioPlayer({
               </button>
             </div>
           </div>
+
+          {/* Voice Settings Accordion Panel */}
+          <AnimatePresence>
+            {settingsOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden border-b border-black/10 dark:border-white/10 pb-3 mb-1 text-xs"
+              >
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-black/5 dark:border-white/5">
+                  <div className="flex items-center gap-1.5 font-medium opacity-80">
+                    <SlidersHorizontal size={13} />
+                    <span>Voice Selection</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={onResetVoices}
+                    title="Reset to recommended auto-detected voices"
+                    className="flex items-center gap-1 text-[11px] opacity-60 hover:opacity-100 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer"
+                  >
+                    <RotateCcw size={11} />
+                    <span>Reset to Auto</span>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {/* Minister Voice */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] font-semibold flex items-center gap-1 opacity-75">
+                      <User size={11} className="text-amber-600 dark:text-amber-400" />
+                      <span>Minister (Call)</span>
+                    </label>
+                    <div className="flex items-center gap-1">
+                      <select
+                        value={ministerVoiceUri}
+                        onChange={(e) => onSelectMinisterVoice(e.target.value)}
+                        className="w-full text-xs py-1 px-2 rounded-lg bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/15 focus:outline-hidden focus:ring-1 focus:ring-amber-500 truncate"
+                      >
+                        {englishVoices.length > 0 && (
+                          <optgroup label="English Voices">
+                            {englishVoices.map((v) => (
+                              <option key={v.voiceURI} value={v.voiceURI}>
+                                {v.name} ({v.lang})
+                              </option>
+                            ))}
+                          </optgroup>
+                        )}
+                        {otherVoices.length > 0 && (
+                          <optgroup label="Other Installed Voices">
+                            {otherVoices.map((v) => (
+                              <option key={v.voiceURI} value={v.voiceURI}>
+                                {v.name} ({v.lang})
+                              </option>
+                            ))}
+                          </optgroup>
+                        )}
+                      </select>
+                      <button
+                        type="button"
+                        onClick={() => onPreviewVoice('call', ministerVoiceUri)}
+                        title="Preview Minister voice"
+                        className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-70 hover:opacity-100"
+                      >
+                        <Volume2 size={12} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* People Voice */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] font-semibold flex items-center gap-1 opacity-75">
+                      <Users size={11} className="text-sky-600 dark:text-sky-400" />
+                      <span>People (Response)</span>
+                    </label>
+                    <div className="flex items-center gap-1">
+                      <select
+                        value={peopleVoiceUri}
+                        onChange={(e) => onSelectPeopleVoice(e.target.value)}
+                        className="w-full text-xs py-1 px-2 rounded-lg bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/15 focus:outline-hidden focus:ring-1 focus:ring-amber-500 truncate"
+                      >
+                        {englishVoices.length > 0 && (
+                          <optgroup label="English Voices">
+                            {englishVoices.map((v) => (
+                              <option key={v.voiceURI} value={v.voiceURI}>
+                                {v.name} ({v.lang})
+                              </option>
+                            ))}
+                          </optgroup>
+                        )}
+                        {otherVoices.length > 0 && (
+                          <optgroup label="Other Installed Voices">
+                            {otherVoices.map((v) => (
+                              <option key={v.voiceURI} value={v.voiceURI}>
+                                {v.name} ({v.lang})
+                              </option>
+                            ))}
+                          </optgroup>
+                        )}
+                      </select>
+                      <button
+                        type="button"
+                        onClick={() => onPreviewVoice('response', peopleVoiceUri)}
+                        title="Preview People voice"
+                        className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-70 hover:opacity-100"
+                      >
+                        <Volume2 size={12} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[10px] opacity-60 pt-2 flex items-center justify-between">
+                  <span>
+                    {hasDistinctVoices
+                      ? '✓ Two distinct voice actors active'
+                      : 'ℹ Modulating pitch for Call vs Response (single voice detected)'}
+                  </span>
+                  <span>1662 Phonetics & Colon Pausing active</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Bottom control row */}
           <div className="flex items-center justify-between pt-0.5">
@@ -150,14 +312,20 @@ export function AudioPlayer({
               </button>
             </div>
 
-            {/* Dual Voice Status Badge */}
-            <div 
-              title={hasDistinctVoices ? "Using two distinct OS voices for Call and Response" : "Using distinct pitches for Call and Response"} 
-              className="text-[11px] opacity-60 font-serif flex items-center gap-1"
+            {/* Voice Settings Toggle Button */}
+            <button
+              type="button"
+              onClick={() => setSettingsOpen(!settingsOpen)}
+              title={settingsOpen ? "Hide voice settings" : "Change voices for Minister & People"}
+              className={`text-[11px] px-2 py-1 rounded-lg transition-all flex items-center gap-1.5 font-medium ${
+                settingsOpen 
+                  ? 'bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-500/30'
+                  : 'bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100'
+              }`}
             >
-              <Volume2 size={12} />
-              <span className="hidden sm:inline">2 Voices</span>
-            </div>
+              <SlidersHorizontal size={12} />
+              <span className="hidden sm:inline">Voices</span>
+            </button>
           </div>
         </div>
       </motion.div>

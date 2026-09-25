@@ -699,6 +699,13 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  totalSections={speech.totalSections}
                  rate={speech.rate}
                  hasDistinctVoices={speech.voices.isDistinct}
+                 availableVoices={speech.availableVoices}
+                 ministerVoiceUri={speech.ministerVoiceUri}
+                 peopleVoiceUri={speech.peopleVoiceUri}
+                 onSelectMinisterVoice={speech.setMinisterVoice}
+                 onSelectPeopleVoice={speech.setPeopleVoice}
+                 onResetVoices={speech.resetDefaultVoices}
+                 onPreviewVoice={speech.previewVoice}
                  onPlay={speech.play}
                  onPause={speech.pause}
                  onStop={speech.stop}

@@ -13,6 +13,13 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [currentRole, setCurrentRole] = useState<'call' | 'response' | null>(null);
   const [rate, setRate] = useState<number>(0.95);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [ministerVoiceUri, setMinisterVoiceUri] = useState<string>(() => {
+    return (typeof window !== 'undefined' ? localStorage.getItem('bcp-tts-minister-voice') : null) || '';
+  });
+  const [peopleVoiceUri, setPeopleVoiceUri] = useState<string>(() => {
+    return (typeof window !== 'undefined' ? localStorage.getItem('bcp-tts-people-voice') : null) || '';
+  });
   const [voicePair, setVoicePair] = useState<VoicePair>({
     minister: null,
     people: null,
@@ -44,8 +51,14 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     let isMounted = true;
     getVoices().then((voices) => {
       if (isMounted && voices.length > 0) {
-        const pair = pickLiturgicalVoices(voices);
+        setAvailableVoices(voices);
+        const savedMinister = typeof window !== 'undefined' ? localStorage.getItem('bcp-tts-minister-voice') : null;
+        const savedPeople = typeof window !== 'undefined' ? localStorage.getItem('bcp-tts-people-voice') : null;
+        const pair = pickLiturgicalVoices(voices, savedMinister, savedPeople);
         setVoicePair(pair);
+        stateRef.current.voicePair = pair;
+        if (pair.minister) setMinisterVoiceUri(pair.minister.voiceURI);
+        if (pair.people) setPeopleVoiceUri(pair.people.voiceURI);
       }
     });
 
@@ -335,6 +348,72 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     }
   }, [cancelSpeech, speakCurrent]);
 
+  const setMinisterVoice = useCallback((uri: string) => {
+    if (typeof window !== 'undefined') {
+      if (uri) localStorage.setItem('bcp-tts-minister-voice', uri);
+      else localStorage.removeItem('bcp-tts-minister-voice');
+    }
+    setMinisterVoiceUri(uri);
+    const chosen = availableVoices.find(v => v.voiceURI === uri || v.name === uri) || null;
+    setVoicePair(prev => {
+      const minister = chosen || prev.minister;
+      const next: VoicePair = {
+        minister,
+        people: prev.people,
+        isDistinct: minister !== prev.people && minister !== null && prev.people !== null
+      };
+      stateRef.current.voicePair = next;
+      return next;
+    });
+  }, [availableVoices]);
+
+  const setPeopleVoice = useCallback((uri: string) => {
+    if (typeof window !== 'undefined') {
+      if (uri) localStorage.setItem('bcp-tts-people-voice', uri);
+      else localStorage.removeItem('bcp-tts-people-voice');
+    }
+    setPeopleVoiceUri(uri);
+    const chosen = availableVoices.find(v => v.voiceURI === uri || v.name === uri) || null;
+    setVoicePair(prev => {
+      const people = chosen || prev.people;
+      const next: VoicePair = {
+        minister: prev.minister,
+        people,
+        isDistinct: prev.minister !== people && prev.minister !== null && people !== null
+      };
+      stateRef.current.voicePair = next;
+      return next;
+    });
+  }, [availableVoices]);
+
+  const resetDefaultVoices = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('bcp-tts-minister-voice');
+      localStorage.removeItem('bcp-tts-people-voice');
+    }
+    const pair = pickLiturgicalVoices(availableVoices);
+    setVoicePair(pair);
+    stateRef.current.voicePair = pair;
+    setMinisterVoiceUri(pair.minister?.voiceURI || '');
+    setPeopleVoiceUri(pair.people?.voiceURI || '');
+  }, [availableVoices]);
+
+  const previewVoice = useCallback((role: 'call' | 'response', uri?: string) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const text = role === 'call' ? 'The Lord be with you.' : 'And with thy spirit.';
+    const utterance = new SpeechSynthesisUtterance(text);
+    const targetVoice = uri 
+      ? availableVoices.find(v => v.voiceURI === uri || v.name === uri) 
+      : (role === 'call' ? voicePair.minister : voicePair.people);
+    if (targetVoice) {
+      utterance.voice = targetVoice;
+    }
+    utterance.rate = stateRef.current.rate;
+    utterance.pitch = role === 'call' ? (voicePair.isDistinct ? 0.98 : 0.88) : (voicePair.isDistinct ? 1.04 : 1.18);
+    window.speechSynthesis.speak(utterance);
+  }, [availableVoices, voicePair]);
+
   const currentSection = sections[currentSectionIndex] || null;
 
   return {
@@ -346,6 +425,13 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     currentRole,
     rate,
     voices: voicePair,
+    availableVoices,
+    ministerVoiceUri,
+    peopleVoiceUri,
+    setMinisterVoice,
+    setPeopleVoice,
+    resetDefaultVoices,
+    previewVoice,
     play,
     pause,
     stop,

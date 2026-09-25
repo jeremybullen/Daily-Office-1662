@@ -46,14 +46,57 @@ export function cleanTextForSpeech(text: string): string {
     .trim();
 }
 
+/**
+ * Phonetic adaptations for 1662 Book of Common Prayer text.
+ * Modern browser speech synthesizers mispronounce archaic Jacobean English words.
+ * This runs only on the text fed to the synthesizer; the on-screen text remains authentic.
+ */
+export function applyLiturgicalPhonetics(text: string): string {
+  if (!text) return '';
+  return text
+    // Archaic 'shew' variations -> show
+    .replace(/\bSheweth\b/g, 'Showeth')
+    .replace(/\bsheweth\b/g, 'showeth')
+    .replace(/\bShewed\b/g, 'Showed')
+    .replace(/\bshewed\b/g, 'showed')
+    .replace(/\bShewing\b/g, 'Showing')
+    .replace(/\bshewing\b/g, 'showing')
+    .replace(/\bShews\b/g, 'Shows')
+    .replace(/\bshews\b/g, 'shows')
+    .replace(/\bShew\b/g, 'Show')
+    .replace(/\bshew\b/g, 'show')
+    // cloke -> cloak
+    .replace(/\bCloke\b/g, 'Cloak')
+    .replace(/\bcloke\b/g, 'cloak')
+    .replace(/\bcloked\b/g, 'cloaked')
+    .replace(/\bclokes\b/g, 'cloaks')
+    // Jesu -> Jesus (ensures clear, dignified pronunciation across all engines)
+    .replace(/\bChrist Jesu\b/g, 'Christ Jesus')
+    .replace(/\bJesu Christ\b/g, 'Jesus Christ')
+    .replace(/\bJesu\b/g, 'Jesus')
+    // Sabaoth (Hebrew צבאות 'hosts' in Te Deum) -> Sab-ah-oath
+    .replace(/\bSabaoth\b/gi, 'Sab-ah-oath')
+    // Amen -> Ah-men (liturgical choral pronunciation rather than casual ay-men)
+    .replace(/\bAmen\b/g, 'Ah-men')
+    .replace(/\bAMEN\b/g, 'Ah-men')
+    // vouchsafe -> vowch-safe
+    .replace(/\bvouchsafe\b/gi, 'vowch-safe')
+    .replace(/\bvouchsafed\b/gi, 'vowch-safed')
+    // unfeignedly -> un-fay-ned-ly
+    .replace(/\bunfeignedly\b/gi, 'un-fay-ned-ly')
+    .replace(/\bunfeigned\b/gi, 'un-faynd');
+}
+
 export function splitSentences(text: string): string[] {
   const cleaned = cleanTextForSpeech(text);
   if (!cleaned) return [];
+  const phonetic = applyLiturgicalPhonetics(cleaned);
 
-  // Split on sentence boundaries (., !, ?) while keeping the text natural
-  const regex = /[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g;
-  const matches = cleaned.match(regex);
-  if (!matches) return [cleaned];
+  // Split on sentence boundaries (. ! ?) and liturgical half-verse pause marks (: ;)
+  // We avoid splitting colons between digits (like chapter:verse)
+  const regex = /[^.!?:]+[.!?]+(?:\s|$)|[^.!?:]+[:;]+(?:\s|$)|[^.!?:]+$/g;
+  const matches = phonetic.match(regex);
+  if (!matches) return [phonetic];
   return matches.map(s => s.trim()).filter(s => s.length > 0);
 }
 
@@ -83,9 +126,24 @@ export async function getVoices(): Promise<SpeechSynthesisVoice[]> {
   });
 }
 
-export function pickLiturgicalVoices(voices: SpeechSynthesisVoice[]): VoicePair {
+export function pickLiturgicalVoices(
+  voices: SpeechSynthesisVoice[],
+  customMinisterUri?: string | null,
+  customPeopleUri?: string | null
+): VoicePair {
   if (voices.length === 0) {
     return { minister: null, people: null, isDistinct: false };
+  }
+
+  // 1. Check if user has explicitly selected custom voices
+  let minister: SpeechSynthesisVoice | null = null;
+  let people: SpeechSynthesisVoice | null = null;
+
+  if (customMinisterUri) {
+    minister = voices.find(v => v.voiceURI === customMinisterUri || v.name === customMinisterUri) || null;
+  }
+  if (customPeopleUri) {
+    people = voices.find(v => v.voiceURI === customPeopleUri || v.name === customPeopleUri) || null;
   }
 
   const english = voices.filter(v => v.lang.toLowerCase().startsWith('en'));
@@ -102,40 +160,41 @@ export function pickLiturgicalVoices(voices: SpeechSynthesisVoice[]): VoicePair 
   const maleNames = ['daniel', 'george', 'oliver', 'arthur', 'david', 'mark', 'james', 'guy', 'ryan', 'thomas', 'brian', 'aaron', 'richard', 'charles', 'male'];
   const femaleNames = ['serena', 'stephanie', 'martha', 'victoria', 'karen', 'samantha', 'moira', 'fiona', 'zira', 'hazel', 'susan', 'catherine', 'libby', 'sonia', 'jenny', 'aria', 'female'];
 
-  let minister: SpeechSynthesisVoice | null = null;
-  let people: SpeechSynthesisVoice | null = null;
-
-  // 1. Try to find a male voice for the Minister (ideally British)
-  const poolToSearch = british.length > 0 ? british : candidatePool;
-  minister = poolToSearch.find(v => maleNames.some(m => v.name.toLowerCase().includes(m))) || null;
-  if (!minister && british.length > 0) {
-    minister = candidatePool.find(v => maleNames.some(m => v.name.toLowerCase().includes(m))) || null;
-  }
+  // If minister not explicitly selected, auto-detect
   if (!minister) {
-    minister = poolToSearch[0] || candidatePool[0];
+    const poolToSearch = british.length > 0 ? british : candidatePool;
+    minister = poolToSearch.find(v => maleNames.some(m => v.name.toLowerCase().includes(m))) || null;
+    if (!minister && british.length > 0) {
+      minister = candidatePool.find(v => maleNames.some(m => v.name.toLowerCase().includes(m))) || null;
+    }
+    if (!minister) {
+      minister = poolToSearch[0] || candidatePool[0];
+    }
   }
 
-  // 2. Try to find a distinct voice for the People / Responses
-  const remaining = candidatePool.filter(v => v !== minister);
-  const remainingBritish = british.filter(v => v !== minister);
-
-  people = (remainingBritish.length > 0 ? remainingBritish : remaining).find(v => 
-    femaleNames.some(f => v.name.toLowerCase().includes(f))
-  ) || null;
-
-  if (!people && remaining.length > 0) {
-    people = remaining.find(v => femaleNames.some(f => v.name.toLowerCase().includes(f))) || null;
-  }
-  if (!people && remaining.length > 0) {
-    people = remaining[0];
-  }
+  // If people not explicitly selected, auto-detect distinct voice
   if (!people) {
-    people = minister;
+    const remaining = candidatePool.filter(v => v !== minister);
+    const remainingBritish = british.filter(v => v !== minister);
+
+    people = (remainingBritish.length > 0 ? remainingBritish : remaining).find(v => 
+      femaleNames.some(f => v.name.toLowerCase().includes(f))
+    ) || null;
+
+    if (!people && remaining.length > 0) {
+      people = remaining.find(v => femaleNames.some(f => v.name.toLowerCase().includes(f))) || null;
+    }
+    if (!people && remaining.length > 0) {
+      people = remaining[0];
+    }
+    if (!people) {
+      people = minister;
+    }
   }
 
   return {
     minister,
     people,
-    isDistinct: minister !== people
+    isDistinct: minister !== people && minister !== null && people !== null
   };
 }
