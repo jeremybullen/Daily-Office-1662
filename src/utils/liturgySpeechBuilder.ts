@@ -26,7 +26,7 @@ import {
 } from '../content/liturgy-data';
 import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
-import { LITURGICAL_AUDIO_FILES } from './liturgicalAudioManifest';
+import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES } from './liturgicalAudioManifest';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -185,6 +185,7 @@ export function buildLiturgySpeechSections({
         id: 'tts-canticle-1',
         title: 'Te Deum Laudamus',
         audioSrc: LITURGICAL_AUDIO_FILES['tts-te-deum'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-te-deum'],
         parts: teDeum.map(verse => ({ text: verse, role: 'call' as const }))
       });
     } else {
@@ -200,6 +201,7 @@ export function buildLiturgySpeechSections({
         id: 'tts-canticle-1',
         title: 'Benedicite, omnia opera',
         audioSrc: LITURGICAL_AUDIO_FILES['tts-benedicite'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'],
         parts: benParts
       });
     }
@@ -210,6 +212,7 @@ export function buildLiturgySpeechSections({
         id: 'tts-canticle-1',
         title: 'Magnificat',
         audioSrc: LITURGICAL_AUDIO_FILES['tts-magnificat'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-magnificat'],
         parts: [
           ...magnificat.map(verse => ({ text: verse, role: 'call' as const })),
           { text: gloriaPatriCall, role: 'call' },
@@ -221,6 +224,7 @@ export function buildLiturgySpeechSections({
         id: 'tts-canticle-1',
         title: 'Cantate Domino',
         audioSrc: LITURGICAL_AUDIO_FILES['tts-cantate'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-cantate'],
         parts: [
           ...cantateDomino.map(verse => ({ text: verse, role: 'call' as const })),
           { text: gloriaPatriCall, role: 'call' },
@@ -255,6 +259,7 @@ export function buildLiturgySpeechSections({
           id: 'tts-canticle-2',
           title: 'Benedictus',
           audioSrc: LITURGICAL_AUDIO_FILES['tts-benedictus'],
+          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'],
           parts: [
             ...benedictus.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -266,6 +271,7 @@ export function buildLiturgySpeechSections({
           id: 'tts-canticle-2',
           title: 'Jubilate Deo',
           audioSrc: LITURGICAL_AUDIO_FILES['tts-jubilate'],
+          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'],
           parts: [
             ...jubilateDeo.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -279,6 +285,7 @@ export function buildLiturgySpeechSections({
           id: 'tts-canticle-2',
           title: 'Nunc Dimittis',
           audioSrc: LITURGICAL_AUDIO_FILES['tts-nunc-dimittis'],
+          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-nunc-dimittis'],
           parts: [
             ...nuncDimittis.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },
@@ -290,6 +297,7 @@ export function buildLiturgySpeechSections({
           id: 'tts-canticle-2',
           title: 'Deus Misereatur',
           audioSrc: LITURGICAL_AUDIO_FILES['tts-deus-misereatur'],
+          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-deus-misereatur'],
           parts: [
             ...deusMisereatur.map(verse => ({ text: verse, role: 'call' as const })),
             { text: gloriaPatriCall, role: 'call' },

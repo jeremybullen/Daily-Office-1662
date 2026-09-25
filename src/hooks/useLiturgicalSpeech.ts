@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { LiturgySpeechSection, VoicePair, getVoices, pickLiturgicalVoices, splitSentences } from '../utils/speechEngine';
+import { LITURGICAL_AUDIO_CANDIDATES } from '../utils/liturgicalAudioManifest';
 
 export type PlaybackMode = 'hybrid' | 'tts-only';
 export type CurrentMediaType = 'recording' | 'tts' | null;
@@ -338,46 +339,66 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
       }
     }
 
-    // Check if we should attempt pre-recorded audio:
-    // Only in 'hybrid' mode, when audioSrc is present, and when NOT marked isDynamic (changing lessons/psalms)
-    const shouldTryRecording = mode === 'hybrid' && Boolean(section.audioSrc) && !section.isDynamic;
+    // Gather all candidate audio URLs for this section
+    const candidateUrls: string[] = [];
+    if (section.audioSrc) candidateUrls.push(section.audioSrc);
+    if (section.audioCandidates) candidateUrls.push(...section.audioCandidates);
+    if (section.id && LITURGICAL_AUDIO_CANDIDATES[section.id]) {
+      candidateUrls.push(...LITURGICAL_AUDIO_CANDIDATES[section.id]);
+    }
 
-    if (shouldTryRecording && section.audioSrc) {
-      cancelSpeech();
-      stopAudio();
+    // Deduplicate candidates
+    const uniqueCandidates = Array.from(new Set(candidateUrls));
+    const shouldTryRecording = mode === 'hybrid' && uniqueCandidates.length > 0 && !section.isDynamic;
 
-      const audio = new Audio(section.audioSrc);
-      audioElementRef.current = audio;
-      audio.playbackRate = Math.max(0.5, Math.min(2.0, currentRate || 1.0));
+    if (shouldTryRecording) {
+      const tryPlayCandidate = (candIdx: number) => {
+        if (candIdx >= uniqueCandidates.length) {
+          // All candidate audio files failed or not found, fall back smoothly to TTS
+          stopAudio();
+          speakCurrentWithTTS();
+          return;
+        }
 
-      setCurrentMediaType('recording');
-      stateRef.current.currentMediaType = 'recording';
-      setCurrentRole(null);
+        const candidatePath = uniqueCandidates[candIdx];
+        // Safely encode URI (e.g. spaces -> %20) so browser can load names like "Lords Prayer.mp3"
+        const encodedPath = encodeURI(candidatePath);
 
-      audio.onended = () => {
-        if (!stateRef.current.isPlaying || stateRef.current.isPaused) return;
-        const nextIdx = sectionIdx + 1;
-        stateRef.current.sectionIdx = nextIdx;
-        stateRef.current.partIdx = 0;
-        stateRef.current.sentenceIdx = 0;
-        setCurrentSectionIndex(nextIdx);
-        setCurrentPartIndex(0);
-        setCurrentSentenceIndex(0);
-        playSection(nextIdx);
+        cancelSpeech();
+        stopAudio();
+
+        const audio = new Audio(encodedPath);
+        audioElementRef.current = audio;
+        audio.playbackRate = Math.max(0.5, Math.min(2.0, currentRate || 1.0));
+
+        setCurrentMediaType('recording');
+        stateRef.current.currentMediaType = 'recording';
+        setCurrentRole(null);
+
+        audio.onended = () => {
+          if (!stateRef.current.isPlaying || stateRef.current.isPaused) return;
+          const nextIdx = sectionIdx + 1;
+          stateRef.current.sectionIdx = nextIdx;
+          stateRef.current.partIdx = 0;
+          stateRef.current.sentenceIdx = 0;
+          setCurrentSectionIndex(nextIdx);
+          setCurrentPartIndex(0);
+          setCurrentSentenceIndex(0);
+          playSection(nextIdx);
+        };
+
+        audio.onerror = () => {
+          // Try next candidate audio file
+          tryPlayCandidate(candIdx + 1);
+        };
+
+        audio.play().catch(() => {
+          // If playback error on this candidate, try next
+          tryPlayCandidate(candIdx + 1);
+        });
       };
 
-      // Fallback: if audio file not found (404) or cannot be loaded, transparently fallback to TTS!
-      audio.onerror = () => {
-        console.info(`[Hybrid Audio] Recording not found at ${section.audioSrc}; falling back smoothly to Speech Synthesis.`);
-        stopAudio();
-        speakCurrentWithTTS();
-      };
-
-      audio.play().catch(() => {
-        // Autoplay rejection or network failure: fall back smoothly to TTS
-        stopAudio();
-        speakCurrentWithTTS();
-      });
+      tryPlayCandidate(0);
     } else {
       // Dynamic section (Psalms, Lessons, Collect of Day) or 'tts-only' mode
       stopAudio();

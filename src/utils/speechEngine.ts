@@ -11,6 +11,7 @@ export interface LiturgySpeechSection {
   parts: SpeechPart[];
   getParts?: () => SpeechPart[];
   audioSrc?: string; // Optional path/URL to pre-recorded audio file
+  audioCandidates?: string[]; // Optional fallback audio file candidates
   isDynamic?: boolean; // True for daily changing texts (Psalms, Lessons, Collect of Day) that require TTS
 }
 
