@@ -14,7 +14,7 @@ const bookMap: Record<string, number> = {
 
 async function startServer() {
   const app = express();
-  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+  const PORT = 3000;
 
   // Middleware to parse JSON
   app.use(express.json());
@@ -92,7 +92,7 @@ async function startServer() {
   app.get("/api/esv-audio", async (req, res) => {
     try {
       const { passage } = req.query;
-      const apiKey = process.env.ESV_API_KEY || "3f7fb8cff413998b5e94b2dafc98b1ecf689f928";
+      const apiKey = process.env.ESV_API_KEY || "3f7fb8c898296bcae9d9988bf04855d467d844e9";
 
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
@@ -123,7 +123,7 @@ async function startServer() {
       // Replace 'Psalms' with 'Psalm', fix colon spacing, replace '&' with ';', normalize whitespace
       const cleanPassage = passage
         .replace(/Psalms\b/gi, 'Psalm')
-        .replace(/:\s+/g, ':')
+        .replace(/:/g, ':')
         .replace(/\s*&\s*/g, '; ')
         .replace(/\s+/g, ' ')
         .trim();
@@ -136,37 +136,42 @@ async function startServer() {
         fetchHeaders.Range = req.headers.range;
       }
 
+      // Query ESV API with manual redirect to retrieve direct CDN audio location
       const response = await fetch(esvUrl, {
         headers: fetchHeaders,
-        redirect: 'follow'
+        redirect: 'manual'
       });
 
-      if (!response.ok) {
-        return res.status(response.status).json({ 
-          error: `ESV Audio API error (${response.status})` 
-        });
+      const audioLocation = response.headers.get("location");
+      if (audioLocation) {
+        res.setHeader("Cache-Control", "public, max-age=86400");
+        return res.redirect(302, audioLocation);
       }
 
-      res.status(response.status);
+      // If direct response or stream returned
+      if (response.ok) {
+        res.status(response.status);
+        const contentType = response.headers.get("content-type") || "audio/mpeg";
+        const contentLength = response.headers.get("content-length");
+        const contentRange = response.headers.get("content-range");
+        const acceptRanges = response.headers.get("accept-ranges") || "bytes";
 
-      const contentType = response.headers.get("content-type") || "audio/mpeg";
-      const contentLength = response.headers.get("content-length");
-      const contentRange = response.headers.get("content-range");
-      const acceptRanges = response.headers.get("accept-ranges") || "bytes";
+        res.setHeader("Content-Type", contentType);
+        if (contentLength) res.setHeader("Content-Length", contentLength);
+        if (contentRange) res.setHeader("Content-Range", contentRange);
+        res.setHeader("Accept-Ranges", acceptRanges);
+        res.setHeader("Cache-Control", "public, max-age=86400");
 
-      res.setHeader("Content-Type", contentType);
-      if (contentLength) res.setHeader("Content-Length", contentLength);
-      if (contentRange) res.setHeader("Content-Range", contentRange);
-      res.setHeader("Accept-Ranges", acceptRanges);
-      res.setHeader("Cache-Control", "public, max-age=3600");
-
-      if (typeof (response.body as any)?.pipe === "function") {
-        (response.body as any).pipe(res);
-      } else if (response.body) {
-        Readable.fromWeb(response.body as any).pipe(res);
-      } else {
-        res.status(500).json({ error: "No audio stream returned from ESV." });
+        if (typeof (response.body as any)?.pipe === "function") {
+          return (response.body as any).pipe(res);
+        } else if (response.body) {
+          return Readable.fromWeb(response.body as any).pipe(res);
+        }
       }
+
+      return res.status(response.status).json({ 
+        error: `ESV Audio API error (${response.status})` 
+      });
     } catch (err: any) {
       console.error("ESV Audio Proxy error:", err);
       if (!res.headersSent) {
