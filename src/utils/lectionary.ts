@@ -1,5 +1,5 @@
 import { collects } from '../data/collects';
-import { get1922LessonEntry } from './lectionaryData';
+import { get1662LessonEntry } from './lectionaryData';
 
 // 1662 Psalm assignments by Day of the Month
 const psalmsByDay = [
@@ -237,8 +237,8 @@ export function getReadingsForDate(date: Date, office: 'morning' | 'evening'): D
     const psalmDay = day === 31 ? 30 : day;
     const psalms = office === 'morning' ? psalmsByDay[psalmDay - 1].m : psalmsByDay[psalmDay - 1].e;
 
-    // Retrieve from 1922 Revised Tables of Lessons
-    const entry = get1922LessonEntry(date);
+    // Retrieve from 1662 Tables of Lessons
+    const entry = get1662LessonEntry(date);
     const officeLessons = entry[office] || { first: '', firstAlt: '', second: '', secondAlt: '' };
 
     const lit = getLiturgicalWeek(date);

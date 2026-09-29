@@ -1,0 +1,2588 @@
+{
+  "calendar": {
+    "1": {
+      "1": {
+        "title": "Circumcision of our Lord",
+        "m1": "Genesis 17",
+        "m2": "Romans 2",
+        "e1": "Deuteronomy 10:12",
+        "e2": "Colossians 2",
+        "holyDay": true
+      },
+      "2": {
+        "m1": "Genesis 1",
+        "m2": "Matthew 1",
+        "e1": "Genesis 2",
+        "e2": "Romans 1"
+      },
+      "3": {
+        "m1": "Genesis 3",
+        "m2": "Matthew 2",
+        "e1": "Genesis 4",
+        "e2": "Romans 2"
+      },
+      "4": {
+        "m1": "Genesis 5",
+        "m2": "Matthew 3",
+        "e1": "Genesis 6",
+        "e2": "Romans 3"
+      },
+      "5": {
+        "m1": "Genesis 7",
+        "m2": "Matthew 4",
+        "e1": "Genesis 8",
+        "e2": "Romans 4"
+      },
+      "6": {
+        "title": "Epiphany of our Lord",
+        "m1": "Isaiah 60",
+        "m2": "Luke 3:1-22",
+        "e1": "Isaiah 49",
+        "e2": "John 2:1-11",
+        "holyDay": true
+      },
+      "7": {
+        "m1": "Genesis 9",
+        "m2": "Matthew 5",
+        "e1": "Genesis 12",
+        "e2": "Romans 5"
+      },
+      "8": {
+        "title": "Lucian, Priest and Martyr",
+        "m1": "Genesis 13",
+        "m2": "Matthew 6",
+        "e1": "Genesis 14",
+        "e2": "Romans 6"
+      },
+      "9": {
+        "m1": "Genesis 15",
+        "m2": "Matthew 7",
+        "e1": "Genesis 16",
+        "e2": "Romans 7"
+      },
+      "10": {
+        "m1": "Genesis 17",
+        "m2": "Matthew 8",
+        "e1": "Genesis 18",
+        "e2": "Romans 8"
+      },
+      "11": {
+        "m1": "Genesis 19",
+        "m2": "Matthew 9",
+        "e1": "Genesis 20",
+        "e2": "Romans 9"
+      },
+      "12": {
+        "m1": "Genesis 21",
+        "m2": "Matthew 10",
+        "e1": "Genesis 22",
+        "e2": "Romans 10"
+      },
+      "13": {
+        "title": "Hilary, Bishop and Confessor",
+        "m1": "Genesis 23",
+        "m2": "Matthew 11",
+        "e1": "Genesis 24",
+        "e2": "Romans 11"
+      },
+      "14": {
+        "m1": "Genesis 25",
+        "m2": "Matthew 12",
+        "e1": "Genesis 26",
+        "e2": "Romans 12"
+      },
+      "15": {
+        "m1": "Genesis 27",
+        "m2": "Matthew 13",
+        "e1": "Genesis 28",
+        "e2": "Romans 13"
+      },
+      "16": {
+        "m1": "Genesis 29",
+        "m2": "Matthew 14",
+        "e1": "Genesis 30",
+        "e2": "Romans 14"
+      },
+      "17": {
+        "m1": "Genesis 31",
+        "m2": "Matthew 15",
+        "e1": "Genesis 32",
+        "e2": "Romans 15"
+      },
+      "18": {
+        "title": "Prisca, Roman Virgin and Martyr",
+        "m1": "Genesis 33",
+        "m2": "Matthew 16",
+        "e1": "Genesis 34",
+        "e2": "Romans 16"
+      },
+      "19": {
+        "m1": "Genesis 35",
+        "m2": "Matthew 17",
+        "e1": "Genesis 37",
+        "e2": "1 Corinthians 1"
+      },
+      "20": {
+        "title": "Fabian, Bishop of Rome and Martyr",
+        "m1": "Genesis 38",
+        "m2": "Matthew 18",
+        "e1": "Genesis 39",
+        "e2": "1 Corinthians 2"
+      },
+      "21": {
+        "title": "Agnes, Roman Virgin and Martyr",
+        "m1": "Genesis 40",
+        "m2": "Matthew 19",
+        "e1": "Genesis 41",
+        "e2": "1 Corinthians 3"
+      },
+      "22": {
+        "title": "Vincent, Spanish Deacon and Martyr",
+        "m1": "Genesis 42",
+        "m2": "Matthew 20",
+        "e1": "Genesis 43",
+        "e2": "1 Corinthians 4"
+      },
+      "23": {
+        "m1": "Genesis 44",
+        "m2": "Matthew 21",
+        "e1": "Genesis 45",
+        "e2": "1 Corinthians 5"
+      },
+      "24": {
+        "m1": "Genesis 46",
+        "m2": "Matthew 22",
+        "e1": "Genesis 47",
+        "e2": "1 Corinthians 6"
+      },
+      "25": {
+        "title": "Conversion of St. Paul",
+        "m1": "Wisdom 5",
+        "m2": "Acts 22:1-21",
+        "e1": "Wisdom 6",
+        "e2": "Acts 26",
+        "holyDay": true
+      },
+      "26": {
+        "m1": "Genesis 48",
+        "m2": "Matthew 23",
+        "e1": "Genesis 49",
+        "e2": "1 Corinthians 7"
+      },
+      "27": {
+        "m1": "Genesis 50",
+        "m2": "Matthew 24",
+        "e1": "Exodus 1",
+        "e2": "1 Corinthians 8"
+      },
+      "28": {
+        "m1": "Exodus 2",
+        "m2": "Matthew 25",
+        "e1": "Exodus 3",
+        "e2": "1 Corinthians 9"
+      },
+      "29": {
+        "m1": "Exodus 4",
+        "m2": "Matthew 26",
+        "e1": "Exodus 5",
+        "e2": "1 Corinthians 10"
+      },
+      "30": {
+        "m1": "Exodus 6:1-13",
+        "m2": "Matthew 27",
+        "e1": "Exodus 7",
+        "e2": "1 Corinthians 11"
+      },
+      "31": {
+        "m1": "Exodus 8",
+        "m2": "Matthew 28",
+        "e1": "Exodus 9",
+        "e2": "1 Corinthians 12"
+      }
+    },
+    "2": {
+      "1": {
+        "title": "Fast",
+        "m1": "Exodus 10",
+        "m2": "Mark 1",
+        "e1": "Exodus 11",
+        "e2": "1 Corinthians 13"
+      },
+      "2": {
+        "title": "Purification of Mary the Blessed Virgin",
+        "m1": "Wisdom 9",
+        "m2": "Mark 2",
+        "e1": "Wisdom 12",
+        "e2": "1 Corinthians 14",
+        "holyDay": true
+      },
+      "3": {
+        "title": "Blasius, Armenian Bishop and Martyr",
+        "m1": "Exodus 12",
+        "m2": "Mark 3",
+        "e1": "Exodus 13",
+        "e2": "1 Corinthians 15"
+      },
+      "4": {
+        "m1": "Exodus 14",
+        "m2": "Mark 4",
+        "e1": "Exodus 15",
+        "e2": "1 Corinthians 16"
+      },
+      "5": {
+        "title": "Agatha, Sicilian Virgin and Martyr",
+        "m1": "Exodus 16",
+        "m2": "Mark 5",
+        "e1": "Exodus 17",
+        "e2": "2 Corinthians 1"
+      },
+      "6": {
+        "m1": "Exodus 18",
+        "m2": "Mark 6",
+        "e1": "Exodus 19",
+        "e2": "2 Corinthians 2"
+      },
+      "7": {
+        "m1": "Exodus 20",
+        "m2": "Mark 7",
+        "e1": "Exodus 21",
+        "e2": "2 Corinthians 3"
+      },
+      "8": {
+        "m1": "Exodus 22",
+        "m2": "Mark 8",
+        "e1": "Exodus 23",
+        "e2": "2 Corinthians 4"
+      },
+      "9": {
+        "m1": "Exodus 24",
+        "m2": "Mark 9",
+        "e1": "Exodus 32",
+        "e2": "2 Corinthians 5"
+      },
+      "10": {
+        "m1": "Exodus 33",
+        "m2": "Mark 10",
+        "e1": "Exodus 34",
+        "e2": "2 Corinthians 6"
+      },
+      "11": {
+        "m1": "Leviticus 18",
+        "m2": "Mark 11",
+        "e1": "Leviticus 19",
+        "e2": "2 Corinthians 7"
+      },
+      "12": {
+        "m1": "Leviticus 20",
+        "m2": "Mark 12",
+        "e1": "Leviticus 26",
+        "e2": "2 Corinthians 8"
+      },
+      "13": {
+        "m1": "Numbers 11",
+        "m2": "Mark 13",
+        "e1": "Numbers 12",
+        "e2": "2 Corinthians 9"
+      },
+      "14": {
+        "title": "Valentine, Bishop and Martyr",
+        "m1": "Numbers 13",
+        "m2": "Mark 14",
+        "e1": "Numbers 14",
+        "e2": "2 Corinthians 10"
+      },
+      "15": {
+        "m1": "Numbers 16",
+        "m2": "Mark 15",
+        "e1": "Numbers 17",
+        "e2": "2 Corinthians 11"
+      },
+      "16": {
+        "m1": "Numbers 20",
+        "m2": "Mark 16",
+        "e1": "Numbers 21",
+        "e2": "2 Corinthians 12"
+      },
+      "17": {
+        "m1": "Numbers 22",
+        "m2": "Luke 1:1-38",
+        "e1": "Numbers 23",
+        "e2": "2 Corinthians 13"
+      },
+      "18": {
+        "m1": "Numbers 24",
+        "m2": "Luke 1:39-80",
+        "e1": "Numbers 25",
+        "e2": "Galatians 1"
+      },
+      "19": {
+        "m1": "Numbers 27",
+        "m2": "Luke 2",
+        "e1": "Numbers 30",
+        "e2": "Galatians 2"
+      },
+      "20": {
+        "m1": "Numbers 31",
+        "m2": "Luke 3",
+        "e1": "Numbers 32",
+        "e2": "Galatians 3"
+      },
+      "21": {
+        "m1": "Numbers 35",
+        "m2": "Luke 4",
+        "e1": "Numbers 36",
+        "e2": "Galatians 4"
+      },
+      "22": {
+        "m1": "Deuteronomy 1",
+        "m2": "Luke 5",
+        "e1": "Deuteronomy 2",
+        "e2": "Galatians 5"
+      },
+      "23": {
+        "title": "Fast",
+        "m1": "Deuteronomy 3",
+        "m2": "Luke 6",
+        "e1": "Deuteronomy 4",
+        "e2": "Galatians 6"
+      },
+      "24": {
+        "title": "St. Matthias, Apostle and Martyr",
+        "m1": "Wisdom 19",
+        "m2": "Luke 7",
+        "e1": "Ecclesiasticus 1",
+        "e2": "Ephesians 1",
+        "holyDay": true
+      },
+      "25": {
+        "m1": "Deuteronomy 5",
+        "m2": "Luke 8",
+        "e1": "Deuteronomy 6",
+        "e2": "Ephesians 2"
+      },
+      "26": {
+        "m1": "Deuteronomy 7",
+        "m2": "Luke 9",
+        "e1": "Deuteronomy 8",
+        "e2": "Ephesians 3"
+      },
+      "27": {
+        "m1": "Deuteronomy 9",
+        "m2": "Luke 10",
+        "e1": "Deuteronomy 10",
+        "e2": "Ephesians 4"
+      },
+      "28": {
+        "m1": "Deuteronomy 11",
+        "m2": "Luke 11",
+        "e1": "Deuteronomy 12",
+        "e2": "Ephesians 5"
+      },
+      "29": {
+        "m1": "Deuteronomy 13",
+        "m2": "Matthew 7",
+        "e1": "Deuteronomy 14",
+        "e2": "Romans 12"
+      }
+    },
+    "3": {
+      "1": {
+        "title": "David, Archbishop of Menevia",
+        "m1": "Deuteronomy 15",
+        "m2": "Luke 12",
+        "e1": "Deuteronomy 16",
+        "e2": "Ephesians 6"
+      },
+      "2": {
+        "title": "Cedde, or Chad, Bishop of Lichfield",
+        "m1": "Deuteronomy 17",
+        "m2": "Luke 13",
+        "e1": "Deuteronomy 18",
+        "e2": "Philippians 1"
+      },
+      "3": {
+        "m1": "Deuteronomy 19",
+        "m2": "Luke 14",
+        "e1": "Deuteronomy 20",
+        "e2": "Philippians 2"
+      },
+      "4": {
+        "m1": "Deuteronomy 21",
+        "m2": "Luke 15",
+        "e1": "Deuteronomy 22",
+        "e2": "Philippians 3"
+      },
+      "5": {
+        "m1": "Deuteronomy 24",
+        "m2": "Luke 16",
+        "e1": "Deuteronomy 25",
+        "e2": "Philippians 4"
+      },
+      "6": {
+        "m1": "Deuteronomy 26",
+        "m2": "Luke 17",
+        "e1": "Deuteronomy 27",
+        "e2": "Colossians 1"
+      },
+      "7": {
+        "title": "Perpetua of Mauritania, Martyr",
+        "m1": "Deuteronomy 28",
+        "m2": "Luke 18",
+        "e1": "Deuteronomy 29",
+        "e2": "Colossians 2"
+      },
+      "8": {
+        "m1": "Deuteronomy 30",
+        "m2": "Luke 19",
+        "e1": "Deuteronomy 31",
+        "e2": "Colossians 3"
+      },
+      "9": {
+        "m1": "Deuteronomy 32",
+        "m2": "Luke 20",
+        "e1": "Deuteronomy 33",
+        "e2": "Colossians 4"
+      },
+      "10": {
+        "m1": "Deuteronomy 34",
+        "m2": "Luke 21",
+        "e1": "Joshua 1",
+        "e2": "1 Thessalonians 1"
+      },
+      "11": {
+        "m1": "Joshua 2",
+        "m2": "Luke 22",
+        "e1": "Joshua 3",
+        "e2": "1 Thessalonians 2"
+      },
+      "12": {
+        "title": "Gregory Magnus, Bishop of Rome and Confessor",
+        "m1": "Joshua 4",
+        "m2": "Luke 23",
+        "e1": "Joshua 5",
+        "e2": "1 Thessalonians 3"
+      },
+      "13": {
+        "m1": "Joshua 6",
+        "m2": "Luke 24",
+        "e1": "Joshua 7",
+        "e2": "1 Thessalonians 4"
+      },
+      "14": {
+        "m1": "Joshua 8",
+        "m2": "John 1",
+        "e1": "Joshua 9",
+        "e2": "1 Thessalonians 5"
+      },
+      "15": {
+        "m1": "Joshua 10",
+        "m2": "John 2",
+        "e1": "Joshua 23",
+        "e2": "2 Thessalonians 1"
+      },
+      "16": {
+        "m1": "Joshua 24",
+        "m2": "John 3",
+        "e1": "Judges 1",
+        "e2": "2 Thessalonians 2"
+      },
+      "17": {
+        "m1": "Judges 2",
+        "m2": "John 4",
+        "e1": "Judges 3",
+        "e2": "2 Thessalonians 3"
+      },
+      "18": {
+        "title": "Edward, King of the West Saxons",
+        "m1": "Judges 4",
+        "m2": "John 5",
+        "e1": "Judges 5",
+        "e2": "1 Timothy 1"
+      },
+      "19": {
+        "m1": "Judges 6",
+        "m2": "John 6",
+        "e1": "Judges 7",
+        "e2": "1 Timothy 2-3"
+      },
+      "20": {
+        "m1": "Judges 8",
+        "m2": "John 7",
+        "e1": "Judges 9",
+        "e2": "1 Timothy 4"
+      },
+      "21": {
+        "title": "Benedict, Abbot",
+        "m1": "Judges 10",
+        "m2": "John 8",
+        "e1": "Judges 11",
+        "e2": "1 Timothy 5"
+      },
+      "22": {
+        "m1": "Judges 12",
+        "m2": "John 9",
+        "e1": "Judges 13",
+        "e2": "1 Timothy 6"
+      },
+      "23": {
+        "m1": "Judges 14",
+        "m2": "John 10",
+        "e1": "Judges 15",
+        "e2": "2 Timothy 1"
+      },
+      "24": {
+        "title": "Fast",
+        "m1": "Judges 16",
+        "m2": "John 11",
+        "e1": "Judges 17",
+        "e2": "2 Timothy 2"
+      },
+      "25": {
+        "title": "Annunciation of Mary",
+        "m1": "Ecclesiasticus 2",
+        "m2": "John 12",
+        "e1": "Ecclesiasticus 3",
+        "e2": "2 Timothy 3",
+        "holyDay": true
+      },
+      "26": {
+        "m1": "Judges 18",
+        "m2": "John 13",
+        "e1": "Judges 19",
+        "e2": "2 Timothy 4"
+      },
+      "27": {
+        "m1": "Judges 20",
+        "m2": "John 14",
+        "e1": "Judges 21",
+        "e2": "Titus 1"
+      },
+      "28": {
+        "m1": "Ruth 1",
+        "m2": "John 15",
+        "e1": "Ruth 2",
+        "e2": "Titus 2-3"
+      },
+      "29": {
+        "m1": "Ruth 3",
+        "m2": "John 16",
+        "e1": "Ruth 4",
+        "e2": "Philemon"
+      },
+      "30": {
+        "m1": "1 Samuel 1",
+        "m2": "John 17",
+        "e1": "1 Samuel 2",
+        "e2": "Hebrews 1"
+      },
+      "31": {
+        "m1": "1 Samuel 3",
+        "m2": "John 18",
+        "e1": "1 Samuel 4",
+        "e2": "Hebrews 2"
+      }
+    },
+    "4": {
+      "1": {
+        "m1": "1 Samuel 5",
+        "m2": "John 19",
+        "e1": "1 Samuel 6",
+        "e2": "Hebrews 3"
+      },
+      "2": {
+        "m1": "1 Samuel 7",
+        "m2": "John 20",
+        "e1": "1 Samuel 8",
+        "e2": "Hebrews 4"
+      },
+      "3": {
+        "title": "Richard, Bishop of Chichester",
+        "m1": "1 Samuel 9",
+        "m2": "John 21",
+        "e1": "1 Samuel 10",
+        "e2": "Hebrews 5"
+      },
+      "4": {
+        "title": "Ambrose, Bishop of Milan",
+        "m1": "1 Samuel 11",
+        "m2": "Acts 1",
+        "e1": "1 Samuel 12",
+        "e2": "Hebrews 6"
+      },
+      "5": {
+        "m1": "1 Samuel 13",
+        "m2": "Acts 2",
+        "e1": "1 Samuel 14",
+        "e2": "Hebrews 7"
+      },
+      "6": {
+        "m1": "1 Samuel 15",
+        "m2": "Acts 3",
+        "e1": "1 Samuel 16",
+        "e2": "Hebrews 8"
+      },
+      "7": {
+        "m1": "1 Samuel 17",
+        "m2": "Acts 4",
+        "e1": "1 Samuel 18",
+        "e2": "Hebrews 9"
+      },
+      "8": {
+        "m1": "1 Samuel 19",
+        "m2": "Acts 5",
+        "e1": "1 Samuel 20",
+        "e2": "Hebrews 10"
+      },
+      "9": {
+        "m1": "1 Samuel 21",
+        "m2": "Acts 6",
+        "e1": "1 Samuel 22",
+        "e2": "Hebrews 11"
+      },
+      "10": {
+        "m1": "1 Samuel 23",
+        "m2": "Acts 7",
+        "e1": "1 Samuel 24",
+        "e2": "Hebrews 12"
+      },
+      "11": {
+        "m1": "1 Samuel 25",
+        "m2": "Acts 8",
+        "e1": "1 Samuel 26",
+        "e2": "Hebrews 13"
+      },
+      "12": {
+        "m1": "1 Samuel 27",
+        "m2": "Acts 9",
+        "e1": "1 Samuel 28",
+        "e2": "James 1"
+      },
+      "13": {
+        "m1": "1 Samuel 29",
+        "m2": "Acts 10",
+        "e1": "1 Samuel 30",
+        "e2": "James 2"
+      },
+      "14": {
+        "m1": "1 Samuel 31",
+        "m2": "Acts 11",
+        "e1": "2 Samuel 1",
+        "e2": "James 3"
+      },
+      "15": {
+        "m1": "2 Samuel 2",
+        "m2": "Acts 12",
+        "e1": "2 Samuel 3",
+        "e2": "James 4"
+      },
+      "16": {
+        "m1": "2 Samuel 4",
+        "m2": "Acts 13",
+        "e1": "2 Samuel 5",
+        "e2": "James 5"
+      },
+      "17": {
+        "m1": "2 Samuel 6",
+        "m2": "Acts 14",
+        "e1": "2 Samuel 7",
+        "e2": "1 Peter 1"
+      },
+      "18": {
+        "m1": "2 Samuel 8",
+        "m2": "Acts 15",
+        "e1": "2 Samuel 9",
+        "e2": "1 Peter 2"
+      },
+      "19": {
+        "title": "Alphege, Archbishop of Canterbury",
+        "m1": "2 Samuel 10",
+        "m2": "Acts 16",
+        "e1": "2 Samuel 11",
+        "e2": "1 Peter 3"
+      },
+      "20": {
+        "m1": "2 Samuel 12",
+        "m2": "Acts 17",
+        "e1": "2 Samuel 13",
+        "e2": "1 Peter 4"
+      },
+      "21": {
+        "m1": "2 Samuel 14",
+        "m2": "Acts 18",
+        "e1": "2 Samuel 15",
+        "e2": "1 Peter 5"
+      },
+      "22": {
+        "m1": "2 Samuel 16",
+        "m2": "Acts 19",
+        "e1": "2 Samuel 17",
+        "e2": "2 Peter 1"
+      },
+      "23": {
+        "title": "St. George, Martyr",
+        "m1": "2 Samuel 18",
+        "m2": "Acts 20",
+        "e1": "2 Samuel 19",
+        "e2": "2 Peter 2"
+      },
+      "24": {
+        "m1": "2 Samuel 20",
+        "m2": "Acts 21",
+        "e1": "2 Samuel 21",
+        "e2": "2 Peter 3"
+      },
+      "25": {
+        "title": "St. Mark, Evangelist and Martyr",
+        "m1": "Ecclesiasticus 4",
+        "m2": "Acts 22",
+        "e1": "Ecclesiasticus 5",
+        "e2": "1 John 1",
+        "holyDay": true
+      },
+      "26": {
+        "m1": "2 Samuel 22",
+        "m2": "Acts 23",
+        "e1": "2 Samuel 23",
+        "e2": "1 John 2"
+      },
+      "27": {
+        "m1": "2 Samuel 24",
+        "m2": "Acts 24",
+        "e1": "1 Kings 1",
+        "e2": "1 John 3"
+      },
+      "28": {
+        "m1": "1 Kings 2",
+        "m2": "Acts 25",
+        "e1": "1 Kings 3",
+        "e2": "1 John 4"
+      },
+      "29": {
+        "m1": "1 Kings 4",
+        "m2": "Acts 26",
+        "e1": "1 Kings 5",
+        "e2": "1 John 5"
+      },
+      "30": {
+        "m1": "1 Kings 6",
+        "m2": "Acts 27",
+        "e1": "1 Kings 7",
+        "e2": "2 & 3 John"
+      }
+    },
+    "5": {
+      "1": {
+        "title": "St. Philip & St. James, Apostles and Martyrs",
+        "m1": "Ecclesiasticus 7",
+        "m2": "John 1:43-51",
+        "e1": "Ecclesiasticus 9",
+        "e2": "Jude",
+        "holyDay": true
+      },
+      "2": {
+        "m1": "1 Kings 8",
+        "m2": "Acts 28",
+        "e1": "1 Kings 9",
+        "e2": "Romans 1"
+      },
+      "3": {
+        "title": "Invention of the Cross",
+        "m1": "1 Kings 10",
+        "m2": "Matthew 1",
+        "e1": "1 Kings 11",
+        "e2": "Romans 2"
+      },
+      "4": {
+        "m1": "1 Kings 12",
+        "m2": "Matthew 2",
+        "e1": "1 Kings 13",
+        "e2": "Romans 3"
+      },
+      "5": {
+        "m1": "1 Kings 14",
+        "m2": "Matthew 3",
+        "e1": "1 Kings 15",
+        "e2": "Romans 4"
+      },
+      "6": {
+        "title": "St. John the Evangelist ante portam Latinam",
+        "m1": "1 Kings 16",
+        "m2": "Matthew 4",
+        "e1": "1 Kings 17",
+        "e2": "Romans 5"
+      },
+      "7": {
+        "m1": "1 Kings 18",
+        "m2": "Matthew 5",
+        "e1": "1 Kings 19",
+        "e2": "Romans 6"
+      },
+      "8": {
+        "m1": "1 Kings 20",
+        "m2": "Matthew 6",
+        "e1": "1 Kings 21",
+        "e2": "Romans 7"
+      },
+      "9": {
+        "m1": "1 Kings 22",
+        "m2": "Matthew 7",
+        "e1": "2 Kings 1",
+        "e2": "Romans 8"
+      },
+      "10": {
+        "m1": "2 Kings 2",
+        "m2": "Matthew 8",
+        "e1": "2 Kings 3",
+        "e2": "Romans 9"
+      },
+      "11": {
+        "m1": "2 Kings 4",
+        "m2": "Matthew 9",
+        "e1": "2 Kings 5",
+        "e2": "Romans 10"
+      },
+      "12": {
+        "m1": "2 Kings 6",
+        "m2": "Matthew 10",
+        "e1": "2 Kings 7",
+        "e2": "Romans 11"
+      },
+      "13": {
+        "m1": "2 Kings 8",
+        "m2": "Matthew 11",
+        "e1": "2 Kings 9",
+        "e2": "Romans 12"
+      },
+      "14": {
+        "m1": "2 Kings 10",
+        "m2": "Matthew 12",
+        "e1": "2 Kings 11",
+        "e2": "Romans 13"
+      },
+      "15": {
+        "m1": "2 Kings 12",
+        "m2": "Matthew 13",
+        "e1": "2 Kings 13",
+        "e2": "Romans 14"
+      },
+      "16": {
+        "m1": "2 Kings 14",
+        "m2": "Matthew 14",
+        "e1": "2 Kings 15",
+        "e2": "Romans 15"
+      },
+      "17": {
+        "m1": "2 Kings 16",
+        "m2": "Matthew 15",
+        "e1": "2 Kings 17",
+        "e2": "Romans 16"
+      },
+      "18": {
+        "m1": "2 Kings 18",
+        "m2": "Matthew 16",
+        "e1": "2 Kings 19",
+        "e2": "1 Corinthians 1"
+      },
+      "19": {
+        "title": "Dunstan, Archbishop of Canterbury",
+        "m1": "2 Kings 20",
+        "m2": "Matthew 17",
+        "e1": "2 Kings 21",
+        "e2": "1 Corinthians 2"
+      },
+      "20": {
+        "m1": "2 Kings 22",
+        "m2": "Matthew 18",
+        "e1": "2 Kings 23",
+        "e2": "1 Corinthians 3"
+      },
+      "21": {
+        "m1": "2 Kings 24",
+        "m2": "Matthew 19",
+        "e1": "2 Kings 25",
+        "e2": "1 Corinthians 4"
+      },
+      "22": {
+        "m1": "Ezra 1",
+        "m2": "Matthew 20",
+        "e1": "Ezra 3",
+        "e2": "1 Corinthians 5"
+      },
+      "23": {
+        "m1": "Ezra 4",
+        "m2": "Matthew 21",
+        "e1": "Ezra 5",
+        "e2": "1 Corinthians 6"
+      },
+      "24": {
+        "m1": "Ezra 6",
+        "m2": "Matthew 22",
+        "e1": "Ezra 7",
+        "e2": "1 Corinthians 7"
+      },
+      "25": {
+        "m1": "Ezra 9",
+        "m2": "Matthew 23",
+        "e1": "Nehemiah 1",
+        "e2": "1 Corinthians 8"
+      },
+      "26": {
+        "title": "Augustine, Archbishop of Canterbury",
+        "m1": "Nehemiah 2",
+        "m2": "Matthew 24",
+        "e1": "Nehemiah 4",
+        "e2": "1 Corinthians 9"
+      },
+      "27": {
+        "title": "Venerable Bede, Priest",
+        "m1": "Nehemiah 5",
+        "m2": "Matthew 25",
+        "e1": "Nehemiah 6",
+        "e2": "1 Corinthians 10"
+      },
+      "28": {
+        "m1": "Nehemiah 8",
+        "m2": "Matthew 26",
+        "e1": "Nehemiah 9",
+        "e2": "1 Corinthians 11"
+      },
+      "29": {
+        "m1": "Nehemiah 10",
+        "m2": "Matthew 27",
+        "e1": "Nehemiah 13",
+        "e2": "1 Corinthians 12"
+      },
+      "30": {
+        "m1": "Esther 1",
+        "m2": "Matthew 28",
+        "e1": "Esther 2",
+        "e2": "1 Corinthians 13"
+      },
+      "31": {
+        "m1": "Esther 3",
+        "m2": "Mark 1",
+        "e1": "Esther 4",
+        "e2": "1 Corinthians 14"
+      }
+    },
+    "6": {
+      "1": {
+        "title": "Nicomede, Roman Priest and Martyr",
+        "m1": "Esther 5",
+        "m2": "Mark 2",
+        "e1": "Esther 6",
+        "e2": "1 Corinthians 15"
+      },
+      "2": {
+        "m1": "Esther 7",
+        "m2": "Mark 3",
+        "e1": "Esther 8",
+        "e2": "1 Corinthians 16"
+      },
+      "3": {
+        "m1": "Esther 9",
+        "m2": "Mark 4",
+        "e1": "Job 1",
+        "e2": "2 Corinthians 1"
+      },
+      "4": {
+        "m1": "Job 2",
+        "m2": "Mark 5",
+        "e1": "Job 3",
+        "e2": "2 Corinthians 2"
+      },
+      "5": {
+        "title": "Boniface, Bishop of Mainz and Martyr",
+        "m1": "Job 4",
+        "m2": "Mark 6",
+        "e1": "Job 5",
+        "e2": "2 Corinthians 3"
+      },
+      "6": {
+        "m1": "Job 6",
+        "m2": "Mark 7",
+        "e1": "Job 7",
+        "e2": "2 Corinthians 4"
+      },
+      "7": {
+        "m1": "Job 8",
+        "m2": "Mark 8",
+        "e1": "Job 9",
+        "e2": "2 Corinthians 5"
+      },
+      "8": {
+        "m1": "Job 10",
+        "m2": "Mark 9",
+        "e1": "Job 11",
+        "e2": "2 Corinthians 6"
+      },
+      "9": {
+        "m1": "Job 12",
+        "m2": "Mark 10",
+        "e1": "Job 13",
+        "e2": "2 Corinthians 7"
+      },
+      "10": {
+        "m1": "Job 14",
+        "m2": "Mark 11",
+        "e1": "Job 15",
+        "e2": "2 Corinthians 8"
+      },
+      "11": {
+        "title": "St. Barnabas, Apostle and Martyr",
+        "m1": "Ecclesiasticus 10",
+        "m2": "Acts 14",
+        "e1": "Ecclesiasticus 12",
+        "e2": "Acts 15:1-35",
+        "holyDay": true
+      },
+      "12": {
+        "m1": "Job 16",
+        "m2": "Mark 12",
+        "e1": "Job 17-18",
+        "e2": "2 Corinthians 9"
+      },
+      "13": {
+        "m1": "Job 19",
+        "m2": "Mark 13",
+        "e1": "Job 20",
+        "e2": "2 Corinthians 10"
+      },
+      "14": {
+        "m1": "Job 21",
+        "m2": "Mark 14",
+        "e1": "Job 22",
+        "e2": "2 Corinthians 11"
+      },
+      "15": {
+        "m1": "Job 23",
+        "m2": "Mark 15",
+        "e1": "Job 24-25",
+        "e2": "2 Corinthians 12"
+      },
+      "16": {
+        "m1": "Job 26-27",
+        "m2": "Mark 16",
+        "e1": "Job 28",
+        "e2": "2 Corinthians 13"
+      },
+      "17": {
+        "title": "St. Alban, Martyr",
+        "m1": "Job 29",
+        "m2": "Luke 1",
+        "e1": "Job 30",
+        "e2": "Galatians 1"
+      },
+      "18": {
+        "m1": "Job 31",
+        "m2": "Luke 2",
+        "e1": "Job 32",
+        "e2": "Galatians 2"
+      },
+      "19": {
+        "m1": "Job 33",
+        "m2": "Luke 3",
+        "e1": "Job 34",
+        "e2": "Galatians 3"
+      },
+      "20": {
+        "title": "Translation of Edward, King of the West Saxons",
+        "m1": "Job 35",
+        "m2": "Luke 4",
+        "e1": "Job 36",
+        "e2": "Galatians 4"
+      },
+      "21": {
+        "m1": "Job 37",
+        "m2": "Luke 5",
+        "e1": "Job 38",
+        "e2": "Galatians 5"
+      },
+      "22": {
+        "m1": "Job 39",
+        "m2": "Luke 6",
+        "e1": "Job 40",
+        "e2": "Galatians 6"
+      },
+      "23": {
+        "title": "Fast",
+        "m1": "Job 41",
+        "m2": "Luke 7",
+        "e1": "Job 42",
+        "e2": "Ephesians 1"
+      },
+      "24": {
+        "title": "Nativity of St. John the Baptist",
+        "m1": "Malachi 3",
+        "m2": "Matthew 3",
+        "e1": "Malachi 4",
+        "e2": "Matthew 14:1-12",
+        "holyDay": true
+      },
+      "25": {
+        "m1": "Proverbs 1",
+        "m2": "Luke 8",
+        "e1": "Proverbs 2",
+        "e2": "Ephesians 2"
+      },
+      "26": {
+        "m1": "Proverbs 3",
+        "m2": "Luke 9",
+        "e1": "Proverbs 4",
+        "e2": "Ephesians 3"
+      },
+      "27": {
+        "m1": "Proverbs 5",
+        "m2": "Luke 10",
+        "e1": "Proverbs 6",
+        "e2": "Ephesians 4"
+      },
+      "28": {
+        "title": "Fast",
+        "m1": "Proverbs 7",
+        "m2": "Luke 11",
+        "e1": "Proverbs 8",
+        "e2": "Ephesians 5"
+      },
+      "29": {
+        "title": "St. Peter, Apostle and Martyr",
+        "m1": "Ecclesiasticus 15",
+        "m2": "Acts 3",
+        "e1": "Ecclesiasticus 19",
+        "e2": "Acts 4",
+        "holyDay": true
+      },
+      "30": {
+        "m1": "Proverbs 9",
+        "m2": "Luke 12",
+        "e1": "Proverbs 10",
+        "e2": "Ephesians 6"
+      }
+    },
+    "7": {
+      "1": {
+        "m1": "Proverbs 11",
+        "m2": "Luke 13",
+        "e1": "Proverbs 12",
+        "e2": "Philippians 1"
+      },
+      "2": {
+        "title": "Visitation of the Blessed Virgin Mary",
+        "m1": "Proverbs 13",
+        "m2": "Luke 14",
+        "e1": "Proverbs 14",
+        "e2": "Philippians 2"
+      },
+      "3": {
+        "m1": "Proverbs 15",
+        "m2": "Luke 15",
+        "e1": "Proverbs 16",
+        "e2": "Philippians 3"
+      },
+      "4": {
+        "title": "Translation of St. Martin, Bishop and Confessor",
+        "m1": "Proverbs 17",
+        "m2": "Luke 16",
+        "e1": "Proverbs 18",
+        "e2": "Philippians 4"
+      },
+      "5": {
+        "m1": "Proverbs 19",
+        "m2": "Luke 17",
+        "e1": "Proverbs 20",
+        "e2": "Colossians 1"
+      },
+      "6": {
+        "m1": "Proverbs 21",
+        "m2": "Luke 18",
+        "e1": "Proverbs 22",
+        "e2": "Colossians 2"
+      },
+      "7": {
+        "m1": "Proverbs 23",
+        "m2": "Luke 19",
+        "e1": "Proverbs 24",
+        "e2": "Colossians 3"
+      },
+      "8": {
+        "m1": "Proverbs 25",
+        "m2": "Luke 20",
+        "e1": "Proverbs 26",
+        "e2": "Colossians 4"
+      },
+      "9": {
+        "m1": "Proverbs 27",
+        "m2": "Luke 21",
+        "e1": "Proverbs 28",
+        "e2": "1 Thessalonians 1"
+      },
+      "10": {
+        "m1": "Proverbs 29",
+        "m2": "Luke 22",
+        "e1": "Proverbs 31",
+        "e2": "1 Thessalonians 2"
+      },
+      "11": {
+        "m1": "Ecclesiastes 1",
+        "m2": "Luke 23",
+        "e1": "Ecclesiastes 2",
+        "e2": "1 Thessalonians 3"
+      },
+      "12": {
+        "m1": "Ecclesiastes 3",
+        "m2": "Luke 24",
+        "e1": "Ecclesiastes 4",
+        "e2": "1 Thessalonians 4"
+      },
+      "13": {
+        "m1": "Ecclesiastes 5",
+        "m2": "John 1",
+        "e1": "Ecclesiastes 6",
+        "e2": "1 Thessalonians 5"
+      },
+      "14": {
+        "m1": "Ecclesiastes 7",
+        "m2": "John 2",
+        "e1": "Ecclesiastes 8",
+        "e2": "2 Thessalonians 1"
+      },
+      "15": {
+        "title": "Swithun, Bishop of Winchester, Translation",
+        "m1": "Ecclesiastes 9",
+        "m2": "John 3",
+        "e1": "Ecclesiastes 10",
+        "e2": "2 Thessalonians 2"
+      },
+      "16": {
+        "m1": "Ecclesiastes 11",
+        "m2": "John 4",
+        "e1": "Ecclesiastes 12",
+        "e2": "2 Thessalonians 3"
+      },
+      "17": {
+        "m1": "Jeremiah 1",
+        "m2": "John 5",
+        "e1": "Jeremiah 2",
+        "e2": "1 Timothy 1"
+      },
+      "18": {
+        "m1": "Jeremiah 3",
+        "m2": "John 6",
+        "e1": "Jeremiah 4",
+        "e2": "1 Timothy 2-3"
+      },
+      "19": {
+        "m1": "Jeremiah 5",
+        "m2": "John 7",
+        "e1": "Jeremiah 6",
+        "e2": "1 Timothy 4"
+      },
+      "20": {
+        "title": "Margaret, Virgin and Martyr at Antioch",
+        "m1": "Jeremiah 7",
+        "m2": "John 8",
+        "e1": "Jeremiah 8",
+        "e2": "1 Timothy 5"
+      },
+      "21": {
+        "m1": "Jeremiah 9",
+        "m2": "John 9",
+        "e1": "Jeremiah 10",
+        "e2": "1 Timothy 6"
+      },
+      "22": {
+        "title": "St. Mary Magdalen",
+        "m1": "Jeremiah 11",
+        "m2": "John 10",
+        "e1": "Jeremiah 12",
+        "e2": "2 Timothy 1"
+      },
+      "23": {
+        "m1": "Jeremiah 13",
+        "m2": "John 11",
+        "e1": "Jeremiah 14",
+        "e2": "2 Timothy 2"
+      },
+      "24": {
+        "title": "Fast",
+        "m1": "Jeremiah 15",
+        "m2": "John 12",
+        "e1": "Jeremiah 16",
+        "e2": "2 Timothy 3"
+      },
+      "25": {
+        "title": "St. James, Apostle and Martyr",
+        "m1": "Ecclesiasticus 21",
+        "m2": "John 13",
+        "e1": "Ecclesiasticus 22",
+        "e2": "2 Timothy 4",
+        "holyDay": true
+      },
+      "26": {
+        "title": "St. Anne, Mother of the Blessed Virgin Mary",
+        "m1": "Jeremiah 17",
+        "m2": "John 14",
+        "e1": "Jeremiah 18",
+        "e2": "Titus 1"
+      },
+      "27": {
+        "m1": "Jeremiah 19",
+        "m2": "John 15",
+        "e1": "Jeremiah 20",
+        "e2": "Titus 2-3"
+      },
+      "28": {
+        "m1": "Jeremiah 21",
+        "m2": "John 16",
+        "e1": "Jeremiah 22",
+        "e2": "Philemon"
+      },
+      "29": {
+        "m1": "Jeremiah 23",
+        "m2": "John 17",
+        "e1": "Jeremiah 24",
+        "e2": "Hebrews 1"
+      },
+      "30": {
+        "m1": "Jeremiah 25",
+        "m2": "John 18",
+        "e1": "Jeremiah 26",
+        "e2": "Hebrews 2"
+      },
+      "31": {
+        "m1": "Jeremiah 27",
+        "m2": "John 19",
+        "e1": "Jeremiah 28",
+        "e2": "Hebrews 3"
+      }
+    },
+    "8": {
+      "1": {
+        "title": "Lammas Day",
+        "m1": "Jeremiah 29",
+        "m2": "John 20",
+        "e1": "Jeremiah 30",
+        "e2": "Hebrews 4"
+      },
+      "2": {
+        "m1": "Jeremiah 31",
+        "m2": "John 21",
+        "e1": "Jeremiah 32",
+        "e2": "Hebrews 5"
+      },
+      "3": {
+        "m1": "Jeremiah 33",
+        "m2": "Acts 1",
+        "e1": "Jeremiah 34",
+        "e2": "Hebrews 6"
+      },
+      "4": {
+        "m1": "Jeremiah 35",
+        "m2": "Acts 2",
+        "e1": "Jeremiah 36",
+        "e2": "Hebrews 7"
+      },
+      "5": {
+        "m1": "Jeremiah 37",
+        "m2": "Acts 3",
+        "e1": "Jeremiah 38",
+        "e2": "Hebrews 8"
+      },
+      "6": {
+        "title": "Transfiguration of our Lord",
+        "m1": "Jeremiah 39",
+        "m2": "Acts 4",
+        "e1": "Jeremiah 40",
+        "e2": "Hebrews 9"
+      },
+      "7": {
+        "title": "Name of Jesus",
+        "m1": "Jeremiah 41",
+        "m2": "Acts 5",
+        "e1": "Jeremiah 42",
+        "e2": "Hebrews 10"
+      },
+      "8": {
+        "m1": "Jeremiah 43",
+        "m2": "Acts 6",
+        "e1": "Jeremiah 44",
+        "e2": "Hebrews 11"
+      },
+      "9": {
+        "m1": "Jeremiah 45-46",
+        "m2": "Acts 7",
+        "e1": "Jeremiah 47",
+        "e2": "Hebrews 12"
+      },
+      "10": {
+        "title": "St. Laurence, Archdeacon of Rome and Martyr",
+        "m1": "Jeremiah 48",
+        "m2": "Acts 8",
+        "e1": "Jeremiah 49",
+        "e2": "Hebrews 13"
+      },
+      "11": {
+        "m1": "Jeremiah 50",
+        "m2": "Acts 9",
+        "e1": "Jeremiah 51",
+        "e2": "James 1"
+      },
+      "12": {
+        "m1": "Jeremiah 52",
+        "m2": "Acts 10",
+        "e1": "Lamentations 1",
+        "e2": "James 2"
+      },
+      "13": {
+        "m1": "Lamentations 2",
+        "m2": "Acts 11",
+        "e1": "Lamentations 3",
+        "e2": "James 3"
+      },
+      "14": {
+        "m1": "Lamentations 4",
+        "m2": "Acts 12",
+        "e1": "Lamentations 5",
+        "e2": "James 4"
+      },
+      "15": {
+        "m1": "Ezekiel 2",
+        "m2": "Acts 13",
+        "e1": "Ezekiel 3",
+        "e2": "James 5"
+      },
+      "16": {
+        "m1": "Ezekiel 6",
+        "m2": "Acts 14",
+        "e1": "Ezekiel 7",
+        "e2": "1 Peter 1"
+      },
+      "17": {
+        "m1": "Ezekiel 13",
+        "m2": "Acts 15",
+        "e1": "Ezekiel 14",
+        "e2": "1 Peter 2"
+      },
+      "18": {
+        "m1": "Ezekiel 18",
+        "m2": "Acts 16",
+        "e1": "Ezekiel 33",
+        "e2": "1 Peter 3"
+      },
+      "19": {
+        "m1": "Ezekiel 34",
+        "m2": "Acts 17",
+        "e1": "Daniel 1",
+        "e2": "1 Peter 4"
+      },
+      "20": {
+        "m1": "Daniel 2",
+        "m2": "Acts 18",
+        "e1": "Daniel 3",
+        "e2": "1 Peter 5"
+      },
+      "21": {
+        "m1": "Daniel 4",
+        "m2": "Acts 19",
+        "e1": "Daniel 5",
+        "e2": "2 Peter 1"
+      },
+      "22": {
+        "m1": "Daniel 6",
+        "m2": "Acts 20",
+        "e1": "Daniel 7",
+        "e2": "2 Peter 2"
+      },
+      "23": {
+        "title": "Fast",
+        "m1": "Daniel 8",
+        "m2": "Acts 21",
+        "e1": "Daniel 9",
+        "e2": "2 Peter 3"
+      },
+      "24": {
+        "title": "St. Bartholomew, Apostle and Martyr",
+        "m1": "Ecclesiasticus 24",
+        "m2": "Acts 22",
+        "e1": "Ecclesiasticus 29",
+        "e2": "1 John 1",
+        "holyDay": true
+      },
+      "25": {
+        "m1": "Daniel 10",
+        "m2": "Acts 23",
+        "e1": "Daniel 11",
+        "e2": "1 John 2"
+      },
+      "26": {
+        "m1": "Daniel 12",
+        "m2": "Acts 24",
+        "e1": "Hosea 1",
+        "e2": "1 John 3"
+      },
+      "27": {
+        "m1": "Hosea 2-3",
+        "m2": "Acts 25",
+        "e1": "Hosea 4",
+        "e2": "1 John 4"
+      },
+      "28": {
+        "title": "St. Augustine, Bishop of Hippo, Confessor and Doctor",
+        "m1": "Hosea 5-6",
+        "m2": "Acts 26",
+        "e1": "Hosea 7",
+        "e2": "1 John 5"
+      },
+      "29": {
+        "title": "Beheading of St. John the Baptist",
+        "m1": "Hosea 8",
+        "m2": "Acts 27",
+        "e1": "Hosea 9",
+        "e2": "2 & 3 John"
+      },
+      "30": {
+        "m1": "Hosea 10",
+        "m2": "Acts 28",
+        "e1": "Hosea 11",
+        "e2": "Jude"
+      },
+      "31": {
+        "m1": "Hosea 12",
+        "m2": "Matthew 1",
+        "e1": "Hosea 13",
+        "e2": "Romans 1"
+      }
+    },
+    "9": {
+      "1": {
+        "title": "Giles, Abbot and Confessor",
+        "m1": "Hosea 14",
+        "m2": "Matthew 2",
+        "e1": "Joel 1",
+        "e2": "Romans 2"
+      },
+      "2": {
+        "m1": "Joel 2",
+        "m2": "Matthew 3",
+        "e1": "Joel 3",
+        "e2": "Romans 3"
+      },
+      "3": {
+        "m1": "Amos 1",
+        "m2": "Matthew 4",
+        "e1": "Amos 2",
+        "e2": "Romans 4"
+      },
+      "4": {
+        "m1": "Amos 3",
+        "m2": "Matthew 5",
+        "e1": "Amos 4",
+        "e2": "Romans 5"
+      },
+      "5": {
+        "m1": "Amos 5",
+        "m2": "Matthew 6",
+        "e1": "Amos 6",
+        "e2": "Romans 6"
+      },
+      "6": {
+        "m1": "Amos 7",
+        "m2": "Matthew 7",
+        "e1": "Amos 8",
+        "e2": "Romans 7"
+      },
+      "7": {
+        "title": "Evurtius, Bishop of Orleans",
+        "m1": "Amos 9",
+        "m2": "Matthew 8",
+        "e1": "Obadiah",
+        "e2": "Romans 8"
+      },
+      "8": {
+        "title": "Nativity of the Blessed Virgin Mary",
+        "m1": "Jonah 1",
+        "m2": "Matthew 9",
+        "e1": "Jonah 2-3",
+        "e2": "Romans 9"
+      },
+      "9": {
+        "m1": "Jonah 4",
+        "m2": "Matthew 10",
+        "e1": "Micah 1",
+        "e2": "Romans 10"
+      },
+      "10": {
+        "m1": "Micah 2",
+        "m2": "Matthew 11",
+        "e1": "Micah 3",
+        "e2": "Romans 11"
+      },
+      "11": {
+        "m1": "Micah 4",
+        "m2": "Matthew 12",
+        "e1": "Micah 5",
+        "e2": "Romans 12"
+      },
+      "12": {
+        "m1": "Micah 6",
+        "m2": "Matthew 13",
+        "e1": "Micah 7",
+        "e2": "Romans 13"
+      },
+      "13": {
+        "m1": "Nahum 1",
+        "m2": "Matthew 14",
+        "e1": "Nahum 2",
+        "e2": "Romans 14"
+      },
+      "14": {
+        "title": "Holy Cross Day",
+        "m1": "Nahum 3",
+        "m2": "Matthew 15",
+        "e1": "Habakkuk 1",
+        "e2": "Romans 15"
+      },
+      "15": {
+        "m1": "Habakkuk 2",
+        "m2": "Matthew 16",
+        "e1": "Habakkuk 3",
+        "e2": "Romans 16"
+      },
+      "16": {
+        "m1": "Zephaniah 1",
+        "m2": "Matthew 17",
+        "e1": "Zephaniah 2",
+        "e2": "1 Corinthians 1"
+      },
+      "17": {
+        "title": "Lambert, Bishop and Martyr",
+        "m1": "Zephaniah 3",
+        "m2": "Matthew 18",
+        "e1": "Haggai 1",
+        "e2": "1 Corinthians 2"
+      },
+      "18": {
+        "m1": "Haggai 2",
+        "m2": "Matthew 19",
+        "e1": "Zechariah 1",
+        "e2": "1 Corinthians 3"
+      },
+      "19": {
+        "m1": "Zechariah 2-3",
+        "m2": "Matthew 20",
+        "e1": "Zechariah 4-5",
+        "e2": "1 Corinthians 4"
+      },
+      "20": {
+        "title": "Fast",
+        "m1": "Zechariah 6",
+        "m2": "Matthew 21",
+        "e1": "Zechariah 7",
+        "e2": "1 Corinthians 5"
+      },
+      "21": {
+        "title": "St. Matthew, Apostle, Evangelist and Martyr",
+        "m1": "Ecclesiasticus 35",
+        "m2": "Matthew 22",
+        "e1": "Ecclesiasticus 38",
+        "e2": "1 Corinthians 6",
+        "holyDay": true
+      },
+      "22": {
+        "m1": "Zechariah 8",
+        "m2": "Matthew 23",
+        "e1": "Zechariah 9",
+        "e2": "1 Corinthians 7"
+      },
+      "23": {
+        "m1": "Zechariah 10",
+        "m2": "Matthew 24",
+        "e1": "Zechariah 11",
+        "e2": "1 Corinthians 8"
+      },
+      "24": {
+        "m1": "Zechariah 12",
+        "m2": "Matthew 25",
+        "e1": "Zechariah 13",
+        "e2": "1 Corinthians 9"
+      },
+      "25": {
+        "m1": "Zechariah 14",
+        "m2": "Matthew 26",
+        "e1": "Malachi 1",
+        "e2": "1 Corinthians 10"
+      },
+      "26": {
+        "title": "St. Cyprian, Archbishop of Carthage and Martyr",
+        "m1": "Malachi 2",
+        "m2": "Matthew 27",
+        "e1": "Malachi 3",
+        "e2": "1 Corinthians 11"
+      },
+      "27": {
+        "m1": "Malachi 4",
+        "m2": "Matthew 28",
+        "e1": "Tobit 1",
+        "e2": "1 Corinthians 12"
+      },
+      "28": {
+        "m1": "Tobit 2",
+        "m2": "Mark 1",
+        "e1": "Tobit 3",
+        "e2": "1 Corinthians 13"
+      },
+      "29": {
+        "title": "St. Michael & All Angels",
+        "m1": "Genesis 32",
+        "m2": "Acts 12:1-19",
+        "e1": "Daniel 10:5-21",
+        "e2": "Jude 6-15",
+        "holyDay": true
+      },
+      "30": {
+        "title": "St. Jerome, Priest, Confessor and Doctor",
+        "m1": "Tobit 4",
+        "m2": "Mark 3",
+        "e1": "Tobit 6",
+        "e2": "1 Corinthians 15"
+      }
+    },
+    "10": {
+      "1": {
+        "title": "Remigius, Bishop of Rheims",
+        "m1": "Tobit 7",
+        "m2": "Mark 4",
+        "e1": "Tobit 8",
+        "e2": "1 Corinthians 16"
+      },
+      "2": {
+        "m1": "Tobit 9",
+        "m2": "Mark 5",
+        "e1": "Tobit 10",
+        "e2": "2 Corinthians 1"
+      },
+      "3": {
+        "m1": "Tobit 11",
+        "m2": "Mark 6",
+        "e1": "Tobit 12",
+        "e2": "2 Corinthians 2"
+      },
+      "4": {
+        "m1": "Tobit 13",
+        "m2": "Mark 7",
+        "e1": "Tobit 14",
+        "e2": "2 Corinthians 3"
+      },
+      "5": {
+        "m1": "Judith 1",
+        "m2": "Mark 8",
+        "e1": "Judith 2",
+        "e2": "2 Corinthians 4"
+      },
+      "6": {
+        "title": "Faith, Virgin and Martyr",
+        "m1": "Judith 3",
+        "m2": "Mark 9",
+        "e1": "Judith 4",
+        "e2": "2 Corinthians 5"
+      },
+      "7": {
+        "m1": "Judith 5",
+        "m2": "Mark 10",
+        "e1": "Judith 6",
+        "e2": "2 Corinthians 6"
+      },
+      "8": {
+        "m1": "Judith 7",
+        "m2": "Mark 11",
+        "e1": "Judith 8",
+        "e2": "2 Corinthians 7"
+      },
+      "9": {
+        "title": "St. Denys the Areopagite, Bishop and Martyr",
+        "m1": "Judith 9",
+        "m2": "Mark 12",
+        "e1": "Judith 10",
+        "e2": "2 Corinthians 8"
+      },
+      "10": {
+        "m1": "Judith 11",
+        "m2": "Mark 13",
+        "e1": "Judith 12",
+        "e2": "2 Corinthians 9"
+      },
+      "11": {
+        "m1": "Judith 13",
+        "m2": "Mark 14",
+        "e1": "Judith 14",
+        "e2": "2 Corinthians 10"
+      },
+      "12": {
+        "m1": "Judith 15",
+        "m2": "Mark 15",
+        "e1": "Judith 16",
+        "e2": "2 Corinthians 11"
+      },
+      "13": {
+        "title": "Translation of King Edward the Confessor",
+        "m1": "Wisdom 1",
+        "m2": "Mark 16",
+        "e1": "Wisdom 2",
+        "e2": "2 Corinthians 12"
+      },
+      "14": {
+        "m1": "Wisdom 3",
+        "m2": "Luke 1:1-38",
+        "e1": "Wisdom 4",
+        "e2": "2 Corinthians 13"
+      },
+      "15": {
+        "m1": "Wisdom 5",
+        "m2": "Luke 1:39-80",
+        "e1": "Wisdom 6",
+        "e2": "Galatians 1"
+      },
+      "16": {
+        "m1": "Wisdom 7",
+        "m2": "Luke 2",
+        "e1": "Wisdom 8",
+        "e2": "Galatians 2"
+      },
+      "17": {
+        "title": "Etheldreda, Virgin",
+        "m1": "Wisdom 9",
+        "m2": "Luke 3",
+        "e1": "Wisdom 10",
+        "e2": "Galatians 3"
+      },
+      "18": {
+        "title": "St. Luke, Evangelist",
+        "m1": "Ecclesiasticus 51",
+        "m2": "Luke 4",
+        "e1": "Job 1",
+        "e2": "Galatians 4",
+        "holyDay": true
+      },
+      "19": {
+        "m1": "Wisdom 11",
+        "m2": "Luke 5",
+        "e1": "Wisdom 12",
+        "e2": "Galatians 5"
+      },
+      "20": {
+        "m1": "Wisdom 13",
+        "m2": "Luke 6",
+        "e1": "Wisdom 14",
+        "e2": "Galatians 6"
+      },
+      "21": {
+        "m1": "Wisdom 15",
+        "m2": "Luke 7",
+        "e1": "Wisdom 16",
+        "e2": "Ephesians 1"
+      },
+      "22": {
+        "m1": "Wisdom 17",
+        "m2": "Luke 8",
+        "e1": "Wisdom 18",
+        "e2": "Ephesians 2"
+      },
+      "23": {
+        "m1": "Wisdom 19",
+        "m2": "Luke 9",
+        "e1": "Ecclesiasticus 1",
+        "e2": "Ephesians 3"
+      },
+      "24": {
+        "m1": "Ecclesiasticus 2",
+        "m2": "Luke 10",
+        "e1": "Ecclesiasticus 3",
+        "e2": "Ephesians 4"
+      },
+      "25": {
+        "title": "Crispin, Martyr",
+        "m1": "Ecclesiasticus 4",
+        "m2": "Luke 11",
+        "e1": "Ecclesiasticus 5",
+        "e2": "Ephesians 5"
+      },
+      "26": {
+        "m1": "Ecclesiasticus 6",
+        "m2": "Luke 12",
+        "e1": "Ecclesiasticus 7",
+        "e2": "Ephesians 6"
+      },
+      "27": {
+        "title": "Fast",
+        "m1": "Ecclesiasticus 8",
+        "m2": "Luke 13",
+        "e1": "Ecclesiasticus 9",
+        "e2": "Philippians 1"
+      },
+      "28": {
+        "title": "St. Simon & St. Jude, Apostles and Martyrs",
+        "m1": "Job 24, 25",
+        "m2": "Luke 14",
+        "e1": "Job 42",
+        "e2": "Philippians 2",
+        "holyDay": true
+      },
+      "29": {
+        "m1": "Ecclesiasticus 10",
+        "m2": "Luke 15",
+        "e1": "Ecclesiasticus 11",
+        "e2": "Philippians 3"
+      },
+      "30": {
+        "m1": "Ecclesiasticus 12",
+        "m2": "Luke 16",
+        "e1": "Ecclesiasticus 13",
+        "e2": "Philippians 4"
+      },
+      "31": {
+        "title": "Fast",
+        "m1": "Ecclesiasticus 14",
+        "m2": "Luke 17",
+        "e1": "Ecclesiasticus 15",
+        "e2": "Colossians 1"
+      }
+    },
+    "11": {
+      "1": {
+        "title": "All Saints' Day",
+        "m1": "Wisdom 3:1-9",
+        "m2": "Hebrews 11:33-12:6",
+        "e1": "Wisdom 5:1-16",
+        "e2": "Revelation 19:1-16",
+        "holyDay": true
+      },
+      "2": {
+        "m1": "Ecclesiasticus 16",
+        "m2": "Luke 18",
+        "e1": "Ecclesiasticus 17",
+        "e2": "Colossians 2"
+      },
+      "3": {
+        "m1": "Ecclesiasticus 18",
+        "m2": "Luke 19",
+        "e1": "Ecclesiasticus 19",
+        "e2": "Colossians 3"
+      },
+      "4": {
+        "m1": "Ecclesiasticus 20",
+        "m2": "Luke 20",
+        "e1": "Ecclesiasticus 21",
+        "e2": "Colossians 4"
+      },
+      "5": {
+        "m1": "Ecclesiasticus 22",
+        "m2": "Luke 21",
+        "e1": "Ecclesiasticus 23",
+        "e2": "1 Thessalonians 1"
+      },
+      "6": {
+        "title": "Leonard, Confessor",
+        "m1": "Ecclesiasticus 24",
+        "m2": "Luke 22",
+        "e1": "Ecclesiasticus 25:1-12",
+        "e2": "1 Thessalonians 2"
+      },
+      "7": {
+        "m1": "Ecclesiasticus 27",
+        "m2": "Luke 23",
+        "e1": "Ecclesiasticus 28",
+        "e2": "1 Thessalonians 3"
+      },
+      "8": {
+        "m1": "Ecclesiasticus 29",
+        "m2": "Luke 24",
+        "e1": "Ecclesiasticus 30:1-17",
+        "e2": "1 Thessalonians 4"
+      },
+      "9": {
+        "m1": "Ecclesiasticus 31",
+        "m2": "John 1",
+        "e1": "Ecclesiasticus 32",
+        "e2": "1 Thessalonians 5"
+      },
+      "10": {
+        "m1": "Ecclesiasticus 33",
+        "m2": "John 2",
+        "e1": "Ecclesiasticus 34",
+        "e2": "2 Thessalonians 1"
+      },
+      "11": {
+        "title": "St. Martin, Bishop and Confessor",
+        "m1": "Ecclesiasticus 35",
+        "m2": "John 3",
+        "e1": "Ecclesiasticus 36",
+        "e2": "2 Thessalonians 2"
+      },
+      "12": {
+        "m1": "Ecclesiasticus 37",
+        "m2": "John 4",
+        "e1": "Ecclesiasticus 38",
+        "e2": "2 Thessalonians 3"
+      },
+      "13": {
+        "title": "Britius, Bishop",
+        "m1": "Ecclesiasticus 39",
+        "m2": "John 5",
+        "e1": "Ecclesiasticus 40",
+        "e2": "1 Timothy 1"
+      },
+      "14": {
+        "m1": "Ecclesiasticus 41",
+        "m2": "John 6",
+        "e1": "Ecclesiasticus 42",
+        "e2": "1 Timothy 2-3"
+      },
+      "15": {
+        "title": "Machutus, Bishop",
+        "m1": "Ecclesiasticus 43",
+        "m2": "John 7",
+        "e1": "Ecclesiasticus 44",
+        "e2": "1 Timothy 4"
+      },
+      "16": {
+        "m1": "Ecclesiasticus 45",
+        "m2": "John 8",
+        "e1": "Ecclesiasticus 46:1-19",
+        "e2": "1 Timothy 5"
+      },
+      "17": {
+        "title": "Hugh, Bishop of Lincoln",
+        "m1": "Ecclesiasticus 47",
+        "m2": "John 9",
+        "e1": "Ecclesiasticus 48",
+        "e2": "1 Timothy 6"
+      },
+      "18": {
+        "m1": "Ecclesiasticus 49",
+        "m2": "John 10",
+        "e1": "Ecclesiasticus 50",
+        "e2": "2 Timothy 1"
+      },
+      "19": {
+        "m1": "Ecclesiasticus 51",
+        "m2": "John 11",
+        "e1": "Baruch 1",
+        "e2": "2 Timothy 2"
+      },
+      "20": {
+        "title": "Edmund, King and Martyr",
+        "m1": "Baruch 2",
+        "m2": "John 12",
+        "e1": "Baruch 3",
+        "e2": "2 Timothy 3"
+      },
+      "21": {
+        "m1": "Baruch 4",
+        "m2": "John 13",
+        "e1": "Baruch 5",
+        "e2": "2 Timothy 4"
+      },
+      "22": {
+        "title": "Cecilia, Virgin and Martyr",
+        "m1": "Baruch 6",
+        "m2": "John 14",
+        "e1": "Susanna",
+        "e2": "Titus 1"
+      },
+      "23": {
+        "title": "St. Clement I, Bishop of Rome and Martyr",
+        "m1": "Bel and the Dragon",
+        "m2": "John 15",
+        "e1": "Isaiah 1",
+        "e2": "Titus 2-3"
+      },
+      "24": {
+        "m1": "Isaiah 2",
+        "m2": "John 16",
+        "e1": "Isaiah 3",
+        "e2": "Philemon"
+      },
+      "25": {
+        "title": "Catherine, Virgin and Martyr",
+        "m1": "Isaiah 4",
+        "m2": "John 17",
+        "e1": "Isaiah 5",
+        "e2": "Hebrews 1"
+      },
+      "26": {
+        "m1": "Isaiah 6",
+        "m2": "John 18",
+        "e1": "Isaiah 7",
+        "e2": "Hebrews 2"
+      },
+      "27": {
+        "m1": "Isaiah 8",
+        "m2": "John 19",
+        "e1": "Isaiah 9",
+        "e2": "Hebrews 3"
+      },
+      "28": {
+        "m1": "Isaiah 10",
+        "m2": "John 20",
+        "e1": "Isaiah 11",
+        "e2": "Hebrews 4"
+      },
+      "29": {
+        "title": "Fast",
+        "m1": "Isaiah 12",
+        "m2": "John 21",
+        "e1": "Isaiah 13",
+        "e2": "Hebrews 5"
+      },
+      "30": {
+        "title": "St. Andrew, Apostle and Martyr",
+        "m1": "Proverbs 20",
+        "m2": "Acts 1",
+        "e1": "Proverbs 21",
+        "e2": "Hebrews 6",
+        "holyDay": true
+      }
+    },
+    "12": {
+      "1": {
+        "m1": "Isaiah 14",
+        "m2": "Acts 2",
+        "e1": "Isaiah 15",
+        "e2": "Hebrews 7"
+      },
+      "2": {
+        "m1": "Isaiah 16",
+        "m2": "Acts 3",
+        "e1": "Isaiah 17",
+        "e2": "Hebrews 8"
+      },
+      "3": {
+        "m1": "Isaiah 18",
+        "m2": "Acts 4",
+        "e1": "Isaiah 19",
+        "e2": "Hebrews 9"
+      },
+      "4": {
+        "m1": "Isaiah 20-21",
+        "m2": "Acts 5",
+        "e1": "Isaiah 22",
+        "e2": "Hebrews 10"
+      },
+      "5": {
+        "m1": "Isaiah 23",
+        "m2": "Acts 6",
+        "e1": "Isaiah 24",
+        "e2": "Hebrews 11"
+      },
+      "6": {
+        "title": "Nicholas, Bishop of Myra in Lycia",
+        "m1": "Isaiah 25",
+        "m2": "Acts 7:1-29",
+        "e1": "Isaiah 26",
+        "e2": "Hebrews 12"
+      },
+      "7": {
+        "m1": "Isaiah 27",
+        "m2": "Acts 7:30-60",
+        "e1": "Isaiah 28",
+        "e2": "Hebrews 13"
+      },
+      "8": {
+        "title": "Conception of the Blessed Virgin Mary",
+        "m1": "Isaiah 29",
+        "m2": "Acts 8",
+        "e1": "Isaiah 30",
+        "e2": "James 1"
+      },
+      "9": {
+        "m1": "Isaiah 31",
+        "m2": "Acts 9",
+        "e1": "Isaiah 32",
+        "e2": "James 2"
+      },
+      "10": {
+        "m1": "Isaiah 33",
+        "m2": "Acts 10",
+        "e1": "Isaiah 34",
+        "e2": "James 3"
+      },
+      "11": {
+        "m1": "Isaiah 35",
+        "m2": "Acts 11",
+        "e1": "Isaiah 36",
+        "e2": "James 4"
+      },
+      "12": {
+        "m1": "Isaiah 37",
+        "m2": "Acts 12",
+        "e1": "Isaiah 38",
+        "e2": "James 5"
+      },
+      "13": {
+        "title": "Lucy, Virgin and Martyr",
+        "m1": "Isaiah 39",
+        "m2": "Acts 13",
+        "e1": "Isaiah 40",
+        "e2": "1 Peter 1"
+      },
+      "14": {
+        "m1": "Isaiah 41",
+        "m2": "Acts 14",
+        "e1": "Isaiah 42",
+        "e2": "1 Peter 2"
+      },
+      "15": {
+        "m1": "Isaiah 43",
+        "m2": "Acts 15",
+        "e1": "Isaiah 44",
+        "e2": "1 Peter 3"
+      },
+      "16": {
+        "title": "O Sapientia",
+        "m1": "Isaiah 45",
+        "m2": "Acts 16",
+        "e1": "Isaiah 46",
+        "e2": "1 Peter 4"
+      },
+      "17": {
+        "m1": "Isaiah 47",
+        "m2": "Acts 17",
+        "e1": "Isaiah 48",
+        "e2": "1 Peter 5"
+      },
+      "18": {
+        "m1": "Isaiah 49",
+        "m2": "Acts 18",
+        "e1": "Isaiah 50",
+        "e2": "2 Peter 1"
+      },
+      "19": {
+        "m1": "Isaiah 51",
+        "m2": "Acts 19",
+        "e1": "Isaiah 52",
+        "e2": "2 Peter 2"
+      },
+      "20": {
+        "title": "Fast",
+        "m1": "Isaiah 53",
+        "m2": "Acts 20",
+        "e1": "Isaiah 54",
+        "e2": "2 Peter 3"
+      },
+      "21": {
+        "title": "St. Thomas, Apostle and Martyr",
+        "m1": "Proverbs 23",
+        "m2": "Acts 21",
+        "e1": "Proverbs 24",
+        "e2": "1 John 1",
+        "holyDay": true
+      },
+      "22": {
+        "m1": "Isaiah 55",
+        "m2": "Acts 22",
+        "e1": "Isaiah 56",
+        "e2": "1 John 2"
+      },
+      "23": {
+        "m1": "Isaiah 57",
+        "m2": "Acts 23",
+        "e1": "Isaiah 58",
+        "e2": "1 John 3"
+      },
+      "24": {
+        "title": "Fast",
+        "m1": "Isaiah 59",
+        "m2": "Acts 24",
+        "e1": "Isaiah 60",
+        "e2": "1 John 4"
+      },
+      "25": {
+        "title": "Christmas Day",
+        "m1": "Isaiah 9:1-7",
+        "m2": "Luke 2:1-14",
+        "e1": "Isaiah 7:10-16",
+        "e2": "Titus 3:4-8",
+        "holyDay": true
+      },
+      "26": {
+        "title": "St. Stephen, First Martyr",
+        "m1": "Proverbs 28",
+        "m2": "Acts 6:8-7:29",
+        "e1": "Ecclesiastes 4",
+        "e2": "Acts 7:30-54",
+        "holyDay": true
+      },
+      "27": {
+        "title": "St. John, Apostle and Evangelist",
+        "m1": "Ecclesiastes 5",
+        "m2": "Revelation 1",
+        "e1": "Ecclesiastes 6",
+        "e2": "Revelation 22",
+        "holyDay": true
+      },
+      "28": {
+        "title": "Innocents' Day",
+        "m1": "Jeremiah 31:1-17",
+        "m2": "Acts 25",
+        "e1": "Wisdom 1",
+        "e2": "1 John 5",
+        "holyDay": true
+      },
+      "29": {
+        "m1": "Isaiah 61",
+        "m2": "Acts 26",
+        "e1": "Isaiah 62",
+        "e2": "2 John"
+      },
+      "30": {
+        "m1": "Isaiah 63",
+        "m2": "Acts 27",
+        "e1": "Isaiah 64",
+        "e2": "3 John"
+      },
+      "31": {
+        "title": "Silvester, Bishop of Rome",
+        "m1": "Isaiah 65",
+        "m2": "Acts 28",
+        "e1": "Isaiah 66",
+        "e2": "Jude"
+      }
+    }
+  },
+  "properSundays": {
+    "advent1": {
+      "m1": "Isaiah 1",
+      "e1": "Isaiah 2"
+    },
+    "advent2": {
+      "m1": "Isaiah 5",
+      "e1": "Isaiah 24"
+    },
+    "advent3": {
+      "m1": "Isaiah 25",
+      "e1": "Isaiah 26"
+    },
+    "advent4": {
+      "m1": "Isaiah 30",
+      "e1": "Isaiah 32"
+    },
+    "christmas1": {
+      "m1": "Isaiah 37",
+      "e1": "Isaiah 38"
+    },
+    "epiphany1": {
+      "m1": "Isaiah 44",
+      "e1": "Isaiah 46"
+    },
+    "epiphany2": {
+      "m1": "Isaiah 51",
+      "e1": "Isaiah 53"
+    },
+    "epiphany3": {
+      "m1": "Isaiah 55",
+      "e1": "Isaiah 56"
+    },
+    "epiphany4": {
+      "m1": "Isaiah 57",
+      "e1": "Isaiah 58"
+    },
+    "epiphany5": {
+      "m1": "Isaiah 59",
+      "e1": "Isaiah 64"
+    },
+    "epiphany6": {
+      "m1": "Isaiah 65",
+      "e1": "Isaiah 66"
+    },
+    "septuagesima": {
+      "m1": "Genesis 1",
+      "e1": "Genesis 2"
+    },
+    "sexagesima": {
+      "m1": "Genesis 3",
+      "e1": "Genesis 6"
+    },
+    "quinquagesima": {
+      "m1": "Genesis 9:1-19",
+      "e1": "Genesis 12"
+    },
+    "lent1": {
+      "m1": "Genesis 19:1-29",
+      "e1": "Genesis 22"
+    },
+    "lent2": {
+      "m1": "Genesis 27",
+      "e1": "Genesis 34"
+    },
+    "lent3": {
+      "m1": "Genesis 39",
+      "e1": "Genesis 42"
+    },
+    "lent4": {
+      "m1": "Genesis 43",
+      "e1": "Genesis 45"
+    },
+    "lent5": {
+      "m1": "Exodus 3",
+      "e1": "Exodus 5"
+    },
+    "lent6": {
+      "m1": "Exodus 9",
+      "m2": "Matthew 26",
+      "e1": "Exodus 10",
+      "e2": "Hebrews 5:1-10"
+    },
+    "easter": {
+      "m1": "Exodus 12",
+      "m2": "Romans 6",
+      "e1": "Exodus 14",
+      "e2": "Acts 2:22-47"
+    },
+    "easter1": {
+      "m1": "Numbers 16",
+      "e1": "Numbers 22"
+    },
+    "easter2": {
+      "m1": "Numbers 23-24",
+      "e1": "Numbers 25"
+    },
+    "easter3": {
+      "m1": "Deuteronomy 4",
+      "e1": "Deuteronomy 5"
+    },
+    "easter4": {
+      "m1": "Deuteronomy 6",
+      "e1": "Deuteronomy 7"
+    },
+    "easter5": {
+      "m1": "Deuteronomy 8",
+      "e1": "Deuteronomy 9"
+    },
+    "ascension": {
+      "m1": "Deuteronomy 10",
+      "m2": "Luke 24:44-53",
+      "e1": "2 Kings 2",
+      "e2": "Ephesians 4:1-16"
+    },
+    "sundayAfterAscension": {
+      "m1": "Deuteronomy 12",
+      "e1": "Deuteronomy 13"
+    },
+    "whitsunday": {
+      "m1": "Deuteronomy 16:1-17",
+      "m2": "Acts 10:34-48",
+      "e1": "Isaiah 11",
+      "e2": "Acts 19:1-20"
+    },
+    "trinity": {
+      "m1": "Genesis 1",
+      "m2": "Matthew 3",
+      "e1": "Genesis 18",
+      "e2": "1 John 5"
+    },
+    "trinity1": {
+      "m1": "Joshua 10",
+      "e1": "Joshua 23"
+    },
+    "trinity2": {
+      "m1": "Judges 4",
+      "e1": "Judges 5"
+    },
+    "trinity3": {
+      "m1": "1 Samuel 2",
+      "e1": "1 Samuel 3"
+    },
+    "trinity4": {
+      "m1": "1 Samuel 12",
+      "e1": "1 Samuel 13"
+    },
+    "trinity5": {
+      "m1": "1 Samuel 15",
+      "e1": "1 Samuel 17"
+    },
+    "trinity6": {
+      "m1": "2 Samuel 12",
+      "e1": "2 Samuel 19"
+    },
+    "trinity7": {
+      "m1": "2 Samuel 21",
+      "e1": "2 Samuel 24"
+    },
+    "trinity8": {
+      "m1": "1 Kings 13",
+      "e1": "1 Kings 17"
+    },
+    "trinity9": {
+      "m1": "1 Kings 18",
+      "e1": "1 Kings 19"
+    },
+    "trinity10": {
+      "m1": "1 Kings 21",
+      "e1": "1 Kings 22"
+    },
+    "trinity11": {
+      "m1": "2 Kings 5",
+      "e1": "2 Kings 9"
+    },
+    "trinity12": {
+      "m1": "2 Kings 10",
+      "e1": "2 Kings 18"
+    },
+    "trinity13": {
+      "m1": "2 Kings 19",
+      "e1": "2 Kings 23"
+    },
+    "trinity14": {
+      "m1": "Jeremiah 5",
+      "e1": "Jeremiah 22"
+    },
+    "trinity15": {
+      "m1": "Jeremiah 35",
+      "e1": "Jeremiah 36"
+    },
+    "trinity16": {
+      "m1": "Ezekiel 2",
+      "e1": "Ezekiel 13"
+    },
+    "trinity17": {
+      "m1": "Ezekiel 14",
+      "e1": "Ezekiel 18"
+    },
+    "trinity18": {
+      "m1": "Ezekiel 20",
+      "e1": "Ezekiel 24"
+    },
+    "trinity19": {
+      "m1": "Daniel 3",
+      "e1": "Daniel 6"
+    },
+    "trinity20": {
+      "m1": "Joel 2",
+      "e1": "Micah 6"
+    },
+    "trinity21": {
+      "m1": "Habakkuk 2",
+      "e1": "Proverbs 1"
+    },
+    "trinity22": {
+      "m1": "Proverbs 2",
+      "e1": "Proverbs 3"
+    },
+    "trinity23": {
+      "m1": "Proverbs 11",
+      "e1": "Proverbs 12"
+    },
+    "trinity24": {
+      "m1": "Proverbs 13",
+      "e1": "Proverbs 14"
+    },
+    "trinity25": {
+      "m1": "Proverbs 15",
+      "e1": "Proverbs 16"
+    },
+    "trinity26": {
+      "m1": "Proverbs 17",
+      "e1": "Proverbs 19"
+    }
+  }
+}

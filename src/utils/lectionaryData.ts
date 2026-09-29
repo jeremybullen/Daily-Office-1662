@@ -1,4 +1,5 @@
 import lectionary from '../data/revised1922Lectionary.json';
+import lectionary1662 from '../data/lectionary1662.json';
 
 export interface LessonDetail {
   first: string;
@@ -484,52 +485,98 @@ function getSeasonalEntry(date: Date): { source: string; dayTitle: string; morni
   };
 }
 
-export function get1922LessonEntry(date: Date): DayLessonEntry {
+export function get1662LessonEntry(date: Date): DayLessonEntry {
   const month = date.getMonth() + 1;
   const day = date.getDate();
+  const dayOfWeek = date.getDay(); // 0 = Sunday
   const dateKey = `${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-  // Always compute the seasonal / temporal day title (e.g. "Friday after Trinity 16")
+  // Always compute the seasonal / temporal day title (e.g. "Tuesday after Trinity 17")
   const seasonal = getSeasonalEntry(date);
 
   // Check 1662 commemoration or holiday
   const commemoration = commemorations1662[dateKey];
 
-  // 1. Check Fixed Red-Letter Holy Days (Part X)
-  const holyDay = (lectionary.holyDays as Record<string, any>)[dateKey];
-  if (holyDay) {
+  // Retrieve Calendar entry from 1662 Kalendar
+  const calendarMonth = (lectionary1662.calendar as Record<string, Record<string, any>>)[String(month)] || {};
+  const calEntry = calendarMonth[String(day)] || {
+    m1: "Genesis 1", m2: "Matthew 1", e1: "Genesis 2", e2: "Romans 1"
+  };
+
+  // 1. Check if today is a Fixed Red-Letter Holy Day in 1662
+  if (calEntry.holyDay) {
     return {
       source: 'holyDay',
       dayTitle: seasonal.dayTitle,
-      commemoration: commemoration || holyDay.title,
+      commemoration: commemoration || calEntry.title,
       morning: {
-        first: holyDay.mattins.first,
+        first: calEntry.m1,
         firstAlt: '',
-        second: holyDay.mattins.second,
+        second: calEntry.m2,
         secondAlt: ''
       },
       evening: {
-        first: holyDay.secondEve.first,
+        first: calEntry.e1,
         firstAlt: '',
-        second: holyDay.secondEve.second,
+        second: calEntry.e2,
         secondAlt: ''
       }
     };
   }
 
-  // Regular seasonal day with potential black-letter commemoration
+  // 2. Check if today is Sunday (in 1662, Sundays have Proper 1st Lessons)
+  if (dayOfWeek === 0) {
+    const sundayProper = (lectionary1662.properSundays as Record<string, any>)[seasonal.source];
+    if (sundayProper) {
+      return {
+        source: seasonal.source,
+        dayTitle: seasonal.dayTitle,
+        commemoration: commemoration && commemoration !== seasonal.dayTitle ? commemoration : undefined,
+        morning: {
+          first: sundayProper.m1,
+          firstAlt: calEntry.m1,
+          second: sundayProper.m2 || calEntry.m2,
+          secondAlt: ''
+        },
+        evening: {
+          first: sundayProper.e1,
+          firstAlt: calEntry.e1,
+          second: sundayProper.e2 || calEntry.e2,
+          secondAlt: ''
+        }
+      };
+    }
+  }
+
+  // 3. Regular Daily Office from the 1662 Kalendar
   return {
-    ...seasonal,
-    commemoration: commemoration && commemoration !== seasonal.dayTitle ? commemoration : undefined
+    source: '1662Calendar',
+    dayTitle: seasonal.dayTitle,
+    commemoration: commemoration && commemoration !== seasonal.dayTitle ? commemoration : (calEntry.title || undefined),
+    morning: {
+      first: calEntry.m1,
+      firstAlt: '',
+      second: calEntry.m2,
+      secondAlt: ''
+    },
+    evening: {
+      first: calEntry.e1,
+      firstAlt: '',
+      second: calEntry.e2,
+      secondAlt: ''
+    }
   };
 }
+
+// Backward compatibility alias for any existing callers
+export const get1922LessonEntry = get1662LessonEntry;
 
 export function getAccurateDailyLesson(
   date: Date,
   office: 'morning' | 'evening',
   lesson: 'first' | 'second'
 ): string {
-  const entry = get1922LessonEntry(date);
+  const entry = get1662LessonEntry(date);
   const officeLessons = entry[office];
   if (!officeLessons) return '';
   return officeLessons[lesson] || '';

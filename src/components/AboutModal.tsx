@@ -32,7 +32,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
   const sources = [
     { label: 'BCP', value: '1662', icon: BookOpen },
     { label: 'Bible', value: 'ESV', icon: BookText },
-    { label: 'Lectionary', value: '1922', icon: CalendarDays },
+    { label: 'Lectionary', value: '1662', icon: CalendarDays },
   ];
 
   return (
