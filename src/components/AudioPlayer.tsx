@@ -37,8 +37,8 @@ export function AudioPlayer({
   if (!isOpen) return null;
 
   const cycleSpeed = () => {
-    const speeds = [0.75, 1.0, 1.25, 1.5];
-    let bestIdx = 1;
+    const speeds = [1.0, 1.25, 1.5, 2.0];
+    let bestIdx = 0;
     let minDiff = 999;
     for (let i = 0; i < speeds.length; i++) {
       const diff = Math.abs(speeds[i] - rate);
@@ -92,7 +92,7 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={cycleSpeed}
-              title="Click to cycle speed (0.75x, 1.0x, 1.25x, 1.5x)"
+              title="Click to cycle speed (1x, 1.25x, 1.5x, 2x)"
               className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors cursor-pointer"
             >
               {rate.toFixed(2).replace(/\.?0+$/, '')}x
