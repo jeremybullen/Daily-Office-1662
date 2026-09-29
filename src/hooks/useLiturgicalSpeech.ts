@@ -110,7 +110,9 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
       }
 
       const candidatePath = uniqueCandidates[candIdx];
-      const encodedPath = candidatePath.startsWith('/api/') ? candidatePath : encodeURI(candidatePath);
+      const encodedPath = (candidatePath.startsWith('/api/') || candidatePath.startsWith('http'))
+        ? candidatePath
+        : encodeURI(candidatePath);
 
       const audio = new Audio(encodedPath);
       audio.preload = 'auto';

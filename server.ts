@@ -135,18 +135,24 @@ async function startServer() {
       let audioUrl = esvAudioUrlCache.get(cleanPassage);
       if (!audioUrl) {
         const esvLookupUrl = `https://api.esv.org/v3/passage/audio/?q=${encodeURIComponent(cleanPassage)}`;
-        const esvLookupRes = await fetch(esvLookupUrl, {
-          headers: { Authorization: `Token ${apiKey}` },
-          redirect: 'manual'
-        });
-
-        audioUrl = esvLookupRes.headers.get("location") || undefined;
-        if (audioUrl) {
-          esvAudioUrlCache.set(cleanPassage, audioUrl);
-        } else if (!esvLookupRes.ok) {
-          return res.status(esvLookupRes.status).json({ 
-            error: `ESV Audio API error (${esvLookupRes.status})` 
+        try {
+          const esvLookupRes = await fetch(esvLookupUrl, {
+            headers: { Authorization: `Token ${apiKey}` },
+            redirect: 'manual'
           });
+
+          audioUrl = esvLookupRes.headers.get("location") || undefined;
+          if (audioUrl) {
+            esvAudioUrlCache.set(cleanPassage, audioUrl);
+          }
+        } catch (lookupErr) {
+          console.warn("ESV API lookup failed, falling back to CDN URL:", lookupErr);
+        }
+
+        // If ESV API lookup failed or returned non-302, use the direct Crossway CDN endpoint
+        if (!audioUrl) {
+          audioUrl = `https://audio.esv.org/hw/${encodeURIComponent(cleanPassage)}.mp3`;
+          esvAudioUrlCache.set(cleanPassage, audioUrl);
         }
       }
 

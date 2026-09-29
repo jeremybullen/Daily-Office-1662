@@ -40,6 +40,38 @@ interface BuilderOptions {
   isAshWedOrGoodFri: boolean;
 }
 
+// Helper to generate resilient ESV audio candidates:
+// 1. Same-origin proxy route (server authenticated with developer secret API key)
+// 2. Direct Crossway HearTheWord CDN endpoint (fallback for static or external hosting)
+function buildEsvAudioCandidates(passage?: string): string[] {
+  if (!passage || typeof passage !== 'string') return [];
+  const cleanPassage = passage
+    .replace(/Psalms\b/gi, 'Psalm')
+    .replace(/:/g, ':')
+    .replace(/\s*&\s*/g, '; ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!cleanPassage) return [];
+
+  // Check if book is Apocrypha (not in standard 66-book ESV audio)
+  const bookNameMatch = cleanPassage.match(/^(\d?\s*[a-zA-Z\s]+?)\s+\d+/);
+  const bookName = bookNameMatch ? bookNameMatch[1].trim().toLowerCase() : '';
+  const apocryphaBooks = [
+    '1 esdras', 'tobit', 'judith', 'wisdom', 'wisdom of solomon',
+    'sirach', 'ecclesiasticus', 'baruch', '1 maccabees', '2 maccabees',
+    'prayer of manasseh', 'prayer of manasses', '2 esdras'
+  ];
+  if (apocryphaBooks.includes(bookName)) {
+    return [];
+  }
+
+  const proxyUrl = `/api/esv-audio?passage=${encodeURIComponent(cleanPassage)}`;
+  const directCdnUrl = `https://audio.esv.org/hw/${encodeURIComponent(cleanPassage)}.mp3`;
+
+  return [proxyUrl, directCdnUrl];
+}
+
 export function buildLiturgySpeechSections({
   office,
   settings,
@@ -149,13 +181,13 @@ export function buildLiturgySpeechSections({
   }
 
   // 9. The Psalms of the Day
-  const esvAudioPsalmsUrl = readings.psalms ? `/api/esv-audio?passage=${encodeURIComponent(readings.psalms)}` : undefined;
+  const esvCandidatesPsalms = buildEsvAudioCandidates(readings.psalms);
   sections.push({
     id: 'tts-psalms',
     title: 'The Psalms of the Day',
     isDynamic: true,
-    audioSrc: esvAudioPsalmsUrl,
-    audioCandidates: esvAudioPsalmsUrl ? [esvAudioPsalmsUrl] : [],
+    audioSrc: esvCandidatesPsalms[0],
+    audioCandidates: esvCandidatesPsalms,
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-psalms');
@@ -169,13 +201,13 @@ export function buildLiturgySpeechSections({
   });
 
   // 10. The First Lesson
-  const esvAudioFirstLessonUrl = readings.firstLesson ? `/api/esv-audio?passage=${encodeURIComponent(readings.firstLesson)}` : undefined;
+  const esvCandidatesFirstLesson = buildEsvAudioCandidates(readings.firstLesson);
   sections.push({
     id: 'tts-first-lesson',
     title: 'The First Lesson',
     isDynamic: true,
-    audioSrc: esvAudioFirstLessonUrl,
-    audioCandidates: esvAudioFirstLessonUrl ? [esvAudioFirstLessonUrl] : [],
+    audioSrc: esvCandidatesFirstLesson[0],
+    audioCandidates: esvCandidatesFirstLesson,
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-first-lesson');
@@ -245,13 +277,13 @@ export function buildLiturgySpeechSections({
   }
 
   // 12. Second Lesson
-  const esvAudioSecondLessonUrl = readings.secondLesson ? `/api/esv-audio?passage=${encodeURIComponent(readings.secondLesson)}` : undefined;
+  const esvCandidatesSecondLesson = buildEsvAudioCandidates(readings.secondLesson);
   sections.push({
     id: 'tts-second-lesson',
     title: 'The Second Lesson',
     isDynamic: true,
-    audioSrc: esvAudioSecondLessonUrl,
-    audioCandidates: esvAudioSecondLessonUrl ? [esvAudioSecondLessonUrl] : [],
+    audioSrc: esvCandidatesSecondLesson[0],
+    audioCandidates: esvCandidatesSecondLesson,
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-second-lesson');
