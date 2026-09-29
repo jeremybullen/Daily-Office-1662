@@ -14,10 +14,7 @@ const getInitialTheme = (): Theme => {
 };
 
 export default function App() {
-  const [settings, setSettings] = useLocalStorage<AppSettings>('bcp-settings', {
-    useShortForm: false,
-    shortLessonPreference: 'OT'
-  });
+  const [settings, setSettings] = useLocalStorage<AppSettings>('bcp-settings', {});
   
   const [theme, setTheme] = useLocalStorage<Theme>('bcp-theme', getInitialTheme());
   const [currentOffice, setCurrentOffice] = useState<OfficeType>(getCurrentOfficeType());

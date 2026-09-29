@@ -3,7 +3,6 @@ import {
   openingSentences, 
   exhortation, 
   confession, 
-  priestlyAbsolution, 
   absolutionSubstitute, 
   lordsPrayer, 
   initialVersicles, 
@@ -33,7 +32,6 @@ interface BuilderOptions {
   settings: AppSettings;
   readings: DailyReadings;
   sentenceIdx: number;
-  usePriestlyAbsolution: boolean;
   useBenedicite: boolean;
   useAlternativeEveningCanticle1: boolean;
   useAlternativeCanticle2: boolean;
@@ -47,7 +45,6 @@ export function buildLiturgySpeechSections({
   settings,
   readings,
   sentenceIdx,
-  usePriestlyAbsolution,
   useBenedicite,
   useAlternativeEveningCanticle1,
   useAlternativeCanticle2,
@@ -60,24 +57,27 @@ export function buildLiturgySpeechSections({
   const gloriaPatriCall = "Glory be to the Father, and to the Son : and to the Holy Ghost;";
   const gloriaPatriResponse = "As it was in the beginning, is now, and ever shall be : world without end. Amen.";
 
-  // 1. Opening Sentence
+  // 1. Opening Sentence (User-provided BCP / KJV recordings)
   const sentence = openingSentences[sentenceIdx] || openingSentences[0];
   sections.push({
     id: 'tts-opening-sentence',
     title: 'The Opening Sentence',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-opening-sentence'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-opening-sentence'] || [
+      '/audio/Opening Sentence.mp3',
+      '/audio/Sentence.mp3',
+      '/audio/opening-sentence.mp3'
+    ],
     parts: [{ text: sentence.text, role: 'call' }]
   });
 
-  // 2. Exhortation (Full form only)
-  if (!settings.useShortForm) {
-    sections.push({
-      id: 'tts-exhortation',
-      title: 'The Exhortation',
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-exhortation'],
-      parts: [{ text: exhortation.full, role: 'call' }]
-    });
-  }
+  // 2. Exhortation
+  sections.push({
+    id: 'tts-exhortation',
+    title: 'The Exhortation',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-exhortation'],
+    parts: [{ text: exhortation.full, role: 'call' }]
+  });
 
   // 3. A General Confession
   sections.push({
@@ -87,13 +87,17 @@ export function buildLiturgySpeechSections({
     parts: [{ text: confession, role: 'call' }]
   });
 
-  // 4. The Absolution (or Collect for Pardon)
+  // 4. The Collect for Pardon
   sections.push({
     id: 'tts-absolution',
-    title: usePriestlyAbsolution ? 'The Absolution' : 'The Collect for Pardon',
+    title: 'The Collect for Pardon',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-absolution'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-absolution'] || [
+      '/audio/Collect for Pardon.mp3',
+      '/audio/Collect For Pardon.mp3'
+    ],
     parts: [
-      { text: usePriestlyAbsolution ? priestlyAbsolution : absolutionSubstitute, role: 'call' }
+      { text: absolutionSubstitute, role: 'call' }
     ]
   });
 
@@ -130,8 +134,8 @@ export function buildLiturgySpeechSections({
     ]
   });
 
-  // 8. Venite (Morning only, unless Ash Wed / Good Fri, and unless short form)
-  if (office === 'morning' && !isAshWedOrGoodFri && !settings.useShortForm) {
+  // 8. Venite (Morning only, unless Ash Wed / Good Fri)
+  if (office === 'morning' && !isAshWedOrGoodFri) {
     sections.push({
       id: 'tts-venite',
       title: 'Venite, exultemus Domino',
@@ -144,11 +148,14 @@ export function buildLiturgySpeechSections({
     });
   }
 
-  // 9. The Psalms of the Day (dynamically reads from loaded scripture DOM)
+  // 9. The Psalms of the Day
+  const esvAudioPsalmsUrl = readings.psalms ? `/api/esv-audio?passage=${encodeURIComponent(readings.psalms)}` : undefined;
   sections.push({
     id: 'tts-psalms',
-    title: settings.useShortForm ? 'The Psalm' : 'The Psalms of the Day',
+    title: 'The Psalms of the Day',
     isDynamic: true,
+    audioSrc: esvAudioPsalmsUrl,
+    audioCandidates: esvAudioPsalmsUrl ? [esvAudioPsalmsUrl] : [],
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-psalms');
@@ -162,10 +169,13 @@ export function buildLiturgySpeechSections({
   });
 
   // 10. The First Lesson
+  const esvAudioFirstLessonUrl = readings.firstLesson ? `/api/esv-audio?passage=${encodeURIComponent(readings.firstLesson)}` : undefined;
   sections.push({
     id: 'tts-first-lesson',
-    title: settings.useShortForm ? 'The Lesson' : 'The First Lesson',
+    title: 'The First Lesson',
     isDynamic: true,
+    audioSrc: esvAudioFirstLessonUrl,
+    audioCandidates: esvAudioFirstLessonUrl ? [esvAudioFirstLessonUrl] : [],
     parts: [],
     getParts: () => {
       const container = document.getElementById('tts-first-lesson');
@@ -234,77 +244,78 @@ export function buildLiturgySpeechSections({
     }
   }
 
-  // 12. Second Lesson (Full form only)
-  if (!settings.useShortForm) {
-    sections.push({
-      id: 'tts-second-lesson',
-      title: 'The Second Lesson',
-      isDynamic: true,
-      parts: [],
-      getParts: () => {
-        const container = document.getElementById('tts-second-lesson');
-        const scriptureDiv = container?.querySelector('.scripture-text');
-        if (scriptureDiv) {
-          const text = cleanScriptureHtml(scriptureDiv.innerHTML);
-          if (text) return [{ text, role: 'call' }];
-        }
-        return [];
+  // 12. Second Lesson
+  const esvAudioSecondLessonUrl = readings.secondLesson ? `/api/esv-audio?passage=${encodeURIComponent(readings.secondLesson)}` : undefined;
+  sections.push({
+    id: 'tts-second-lesson',
+    title: 'The Second Lesson',
+    isDynamic: true,
+    audioSrc: esvAudioSecondLessonUrl,
+    audioCandidates: esvAudioSecondLessonUrl ? [esvAudioSecondLessonUrl] : [],
+    parts: [],
+    getParts: () => {
+      const container = document.getElementById('tts-second-lesson');
+      const scriptureDiv = container?.querySelector('.scripture-text');
+      if (scriptureDiv) {
+        const text = cleanScriptureHtml(scriptureDiv.innerHTML);
+        if (text) return [{ text, role: 'call' }];
       }
-    });
+      return [];
+    }
+  });
 
-    // 13. Second Canticle
-    if (office === 'morning') {
-      if (!useAlternativeCanticle2) {
-        sections.push({
-          id: 'tts-canticle-2',
-          title: 'Benedictus',
-          audioSrc: LITURGICAL_AUDIO_FILES['tts-benedictus'],
-          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'],
-          parts: [
-            ...benedictus.map(verse => ({ text: verse, role: 'call' as const })),
-            { text: gloriaPatriCall, role: 'call' },
-            { text: gloriaPatriResponse, role: 'response' }
-          ]
-        });
-      } else {
-        sections.push({
-          id: 'tts-canticle-2',
-          title: 'Jubilate Deo',
-          audioSrc: LITURGICAL_AUDIO_FILES['tts-jubilate'],
-          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'],
-          parts: [
-            ...jubilateDeo.map(verse => ({ text: verse, role: 'call' as const })),
-            { text: gloriaPatriCall, role: 'call' },
-            { text: gloriaPatriResponse, role: 'response' }
-          ]
-        });
-      }
+  // 13. Second Canticle
+  if (office === 'morning') {
+    if (!useAlternativeCanticle2) {
+      sections.push({
+        id: 'tts-canticle-2',
+        title: 'Benedictus',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-benedictus'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'],
+        parts: [
+          ...benedictus.map(verse => ({ text: verse, role: 'call' as const })),
+          { text: gloriaPatriCall, role: 'call' },
+          { text: gloriaPatriResponse, role: 'response' }
+        ]
+      });
     } else {
-      if (!useAlternativeCanticle2) {
-        sections.push({
-          id: 'tts-canticle-2',
-          title: 'Nunc Dimittis',
-          audioSrc: LITURGICAL_AUDIO_FILES['tts-nunc-dimittis'],
-          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-nunc-dimittis'],
-          parts: [
-            ...nuncDimittis.map(verse => ({ text: verse, role: 'call' as const })),
-            { text: gloriaPatriCall, role: 'call' },
-            { text: gloriaPatriResponse, role: 'response' }
-          ]
-        });
-      } else {
-        sections.push({
-          id: 'tts-canticle-2',
-          title: 'Deus Misereatur',
-          audioSrc: LITURGICAL_AUDIO_FILES['tts-deus-misereatur'],
-          audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-deus-misereatur'],
-          parts: [
-            ...deusMisereatur.map(verse => ({ text: verse, role: 'call' as const })),
-            { text: gloriaPatriCall, role: 'call' },
-            { text: gloriaPatriResponse, role: 'response' }
-          ]
-        });
-      }
+      sections.push({
+        id: 'tts-canticle-2',
+        title: 'Jubilate Deo',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-jubilate'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'],
+        parts: [
+          ...jubilateDeo.map(verse => ({ text: verse, role: 'call' as const })),
+          { text: gloriaPatriCall, role: 'call' },
+          { text: gloriaPatriResponse, role: 'response' }
+        ]
+      });
+    }
+  } else {
+    if (!useAlternativeCanticle2) {
+      sections.push({
+        id: 'tts-canticle-2',
+        title: 'Nunc Dimittis',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-nunc-dimittis'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-nunc-dimittis'],
+        parts: [
+          ...nuncDimittis.map(verse => ({ text: verse, role: 'call' as const })),
+          { text: gloriaPatriCall, role: 'call' },
+          { text: gloriaPatriResponse, role: 'response' }
+        ]
+      });
+    } else {
+      sections.push({
+        id: 'tts-canticle-2',
+        title: 'Deus Misereatur',
+        audioSrc: LITURGICAL_AUDIO_FILES['tts-deus-misereatur'],
+        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-deus-misereatur'],
+        parts: [
+          ...deusMisereatur.map(verse => ({ text: verse, role: 'call' as const })),
+          { text: gloriaPatriCall, role: 'call' },
+          { text: gloriaPatriResponse, role: 'response' }
+        ]
+      });
     }
   }
 
@@ -340,15 +351,13 @@ export function buildLiturgySpeechSections({
     ]
   });
 
-  // 16. The Lord's Prayer 2 (Full form only)
-  if (!settings.useShortForm) {
-    sections.push({
-      id: 'tts-lords-prayer-2',
-      title: "The Lord's Prayer",
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-lords-prayer-2'],
-      parts: [{ text: lordsPrayer, role: 'call' }]
-    });
-  }
+  // 16. The Lord's Prayer 2
+  sections.push({
+    id: 'tts-lords-prayer-2',
+    title: "The Lord's Prayer",
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-lords-prayer-2'],
+    parts: [{ text: lordsPrayer, role: 'call' }]
+  });
 
   // 17. The Suffrages
   sections.push({
@@ -395,30 +404,28 @@ export function buildLiturgySpeechSections({
     parts: [{ text: thirdCollect, role: 'call' }]
   });
 
-  // 21. State Prayers (Full form only)
-  if (!settings.useShortForm) {
-    if (useAmericanStatePrayers) {
-      sections.push({
-        id: 'tts-state-prayers',
-        title: 'Prayer for Civil Authority',
-        audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-president'],
-        parts: [
-          { text: statePrayers.president, role: 'call' },
-          { text: statePrayers.clergyAndPeople, role: 'call' }
-        ]
-      });
-    } else {
-      sections.push({
-        id: 'tts-state-prayers',
-        title: 'State Prayers',
-        audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-king'],
-        parts: [
-          { text: statePrayers.kingsMajesty, role: 'call' },
-          { text: statePrayers.royalFamily, role: 'call' },
-          { text: statePrayers.clergyAndPeople, role: 'call' }
-        ]
-      });
-    }
+  // 21. State Prayers
+  if (useAmericanStatePrayers) {
+    sections.push({
+      id: 'tts-state-prayers',
+      title: 'Prayer for Civil Authority',
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-president'],
+      parts: [
+        { text: statePrayers.president, role: 'call' },
+        { text: statePrayers.clergyAndPeople, role: 'call' }
+      ]
+    });
+  } else {
+    sections.push({
+      id: 'tts-state-prayers',
+      title: 'State Prayers',
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-king'],
+      parts: [
+        { text: statePrayers.kingsMajesty, role: 'call' },
+        { text: statePrayers.royalFamily, role: 'call' },
+        { text: statePrayers.clergyAndPeople, role: 'call' }
+      ]
+    });
   }
 
   // 22. Prayer of Saint Chrysostom

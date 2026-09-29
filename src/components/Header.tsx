@@ -43,8 +43,6 @@ export function Header({
   const displayDate = selectedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
   const litWeek = getLiturgicalWeek(selectedDate);
 
-  const cycleForm = () => updateSettings({ useShortForm: !settings.useShortForm });
-
   return (
     <>
       <header 
@@ -110,16 +108,6 @@ export function Header({
                 Evening
               </button>
             </div>
-
-            {/* Short / Full Form Toggle */}
-            <button 
-              type="button"
-              onClick={cycleForm} 
-              title={settings.useShortForm ? "Switch to Full Office" : "Switch to Short Form"}
-              className="px-2.5 sm:px-3 h-7 text-[11px] sm:text-xs font-medium tracking-wide rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors flex items-center justify-center"
-            >
-              {settings.useShortForm ? 'Short' : 'Full'}
-            </button>
 
             {/* Dark / Light Mode Switcher */}
             <button 

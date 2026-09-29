@@ -101,8 +101,18 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
               })}
             </div>
 
+            {/* Copyright & Licensing Attribution */}
+            <div className="mt-4 pt-3 border-t border-black/10 dark:border-white/10 text-[11px] leading-relaxed opacity-65 font-sans space-y-1.5">
+              <p>
+                Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), copyright © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved.
+              </p>
+              <p>
+                The Holy Bible, English Standard Version, is available in audio format and online at <a href="https://www.esv.org" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-100">esv.org</a>.
+              </p>
+            </div>
+
             {/* Close Button */}
-            <div className="mt-6 flex justify-end">
+            <div className="mt-5 flex justify-end">
               <button
                 type="button"
                 onClick={onClose}

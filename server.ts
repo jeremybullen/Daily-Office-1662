@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import { Readable } from "stream";
 import { createServer as createViteServer } from "vite";
 import fetch from "node-fetch"; // we'll just use global fetch in Node 20+
 
@@ -83,6 +84,93 @@ async function startServer() {
     return filtered.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/<[^>]+>/g, '').trim()}`).join(" ");
   }
 
+  // API Route for ESV Passage Audio Proxy
+  app.get("/api/esv-audio", async (req, res) => {
+    try {
+      const { passage } = req.query;
+      const apiKey = process.env.ESV_API_KEY;
+
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Range");
+      res.setHeader("Access-Control-Expose-Headers", "Content-Range, Content-Length, Accept-Ranges");
+
+      if (req.method === "OPTIONS") {
+        return res.status(204).end();
+      }
+
+      if (!apiKey) {
+        return res.status(503).json({ error: "ESV_API_KEY is not configured." });
+      }
+
+      if (!passage || typeof passage !== "string") {
+        return res.status(400).json({ error: "Missing passage query parameter." });
+      }
+
+      // Check if passage contains an Apocryphal book (not available in standard 66-book ESV audio)
+      const bookNameMatch = passage.match(/^(\d?\s*[a-zA-Z\s]+?)\s+\d+/);
+      const bookName = bookNameMatch ? bookNameMatch[1].trim().toLowerCase() : "";
+      const bookId = bookMap[bookName];
+      if (bookId && bookId >= 67) {
+        return res.status(404).json({ error: "Apocryphal books are not available in ESV audio." });
+      }
+
+      // Clean passage query for ESV API:
+      // Replace 'Psalms' with 'Psalm', fix colon spacing, replace '&' with ';', normalize whitespace
+      const cleanPassage = passage
+        .replace(/Psalms\b/gi, 'Psalm')
+        .replace(/:\s+/g, ':')
+        .replace(/\s*&\s*/g, '; ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const esvUrl = `https://api.esv.org/v3/passage/audio/?q=${encodeURIComponent(cleanPassage)}`;
+
+      const fetchHeaders: Record<string, string> = {
+        Authorization: `Token ${apiKey}`
+      };
+      if (req.headers.range) {
+        fetchHeaders.Range = req.headers.range;
+      }
+
+      const response = await fetch(esvUrl, {
+        headers: fetchHeaders,
+        redirect: 'follow'
+      });
+
+      if (!response.ok) {
+        return res.status(response.status).json({ 
+          error: `ESV Audio API error (${response.status})` 
+        });
+      }
+
+      res.status(response.status);
+
+      const contentType = response.headers.get("content-type") || "audio/mpeg";
+      const contentLength = response.headers.get("content-length");
+      const contentRange = response.headers.get("content-range");
+      const acceptRanges = response.headers.get("accept-ranges") || "bytes";
+
+      res.setHeader("Content-Type", contentType);
+      if (contentLength) res.setHeader("Content-Length", contentLength);
+      if (contentRange) res.setHeader("Content-Range", contentRange);
+      res.setHeader("Accept-Ranges", acceptRanges);
+      res.setHeader("Cache-Control", "public, max-age=3600");
+
+      if (typeof (response.body as any)?.pipe === "function") {
+        (response.body as any).pipe(res);
+      } else if (response.body) {
+        Readable.fromWeb(response.body as any).pipe(res);
+      } else {
+        res.status(500).json({ error: "No audio stream returned from ESV." });
+      }
+    } catch (err: any) {
+      console.error("ESV Audio Proxy error:", err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: err.message || "Failed to retrieve ESV audio." });
+      }
+    }
+  });
+
   // API Route for Bible Readings
   app.get("/api/bible", async (req, res) => {
     try {
@@ -150,6 +238,13 @@ async function startServer() {
       console.error("Bible Fetch Error:", error);
       return res.status(500).json({ error: error.message || "Failed to fetch passage." });
     }
+  });
+
+  // Serve local liturgical audio recordings explicitly and return 404 for missing audio
+  const audioDir = path.join(process.cwd(), 'public', 'audio');
+  app.use('/audio', express.static(audioDir));
+  app.all('/audio/*', (req, res) => {
+    res.status(404).send('Audio file not found');
   });
 
   // Vite middleware for development
