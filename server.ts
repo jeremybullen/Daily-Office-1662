@@ -12,6 +12,9 @@ const bookMap: Record<string, number> = {
   "genesis": 1, "exodus": 2, "leviticus": 3, "numbers": 4, "deuteronomy": 5, "joshua": 6, "judges": 7, "ruth": 8, "1 samuel": 9, "2 samuel": 10, "1 kings": 11, "2 kings": 12, "1 chronicles": 13, "2 chronicles": 14, "ezra": 15, "nehemiah": 16, "esther": 17, "job": 18, "psalm": 19, "psalms": 19, "proverbs": 20, "ecclesiastes": 21, "song of solomon": 22, "isaiah": 23, "jeremiah": 24, "lamentations": 25, "ezekiel": 26, "daniel": 27, "hosea": 28, "joel": 29, "amos": 30, "obadiah": 31, "jonah": 32, "micah": 33, "nahum": 34, "habakkuk": 35, "zephaniah": 36, "haggai": 37, "zechariah": 38, "malachi": 39, "matthew": 40, "mark": 41, "luke": 42, "john": 43, "acts": 44, "romans": 45, "1 corinthians": 46, "2 corinthians": 47, "galatians": 48, "ephesians": 49, "philippians": 50, "colossians": 51, "1 thessalonians": 52, "2 thessalonians": 53, "1 timothy": 54, "2 timothy": 55, "titus": 56, "philemon": 57, "hebrews": 58, "james": 59, "1 peter": 60, "2 peter": 61, "1 john": 62, "2 john": 63, "3 john": 64, "jude": 65, "revelation": 66
 };
 
+// In-memory cache for ESV passage -> direct audio CDN URLs
+const esvAudioUrlCache = new Map<string, string>();
+
 async function startServer() {
   const app = express();
   const PORT = 3000;
@@ -127,51 +130,60 @@ async function startServer() {
         .replace(/\s*&\s*/g, '; ')
         .replace(/\s+/g, ' ')
         .trim();
-      const esvUrl = `https://api.esv.org/v3/passage/audio/?q=${encodeURIComponent(cleanPassage)}`;
 
-      const fetchHeaders: Record<string, string> = {
-        Authorization: `Token ${apiKey}`
-      };
-      if (req.headers.range) {
-        fetchHeaders.Range = req.headers.range;
-      }
+      // Retrieve the direct CDN audio URL (from cache if available)
+      let audioUrl = esvAudioUrlCache.get(cleanPassage);
+      if (!audioUrl) {
+        const esvLookupUrl = `https://api.esv.org/v3/passage/audio/?q=${encodeURIComponent(cleanPassage)}`;
+        const esvLookupRes = await fetch(esvLookupUrl, {
+          headers: { Authorization: `Token ${apiKey}` },
+          redirect: 'manual'
+        });
 
-      // Query ESV API with manual redirect to retrieve direct CDN audio location
-      const response = await fetch(esvUrl, {
-        headers: fetchHeaders,
-        redirect: 'manual'
-      });
-
-      const audioLocation = response.headers.get("location");
-      if (audioLocation) {
-        res.setHeader("Cache-Control", "public, max-age=86400");
-        return res.redirect(302, audioLocation);
-      }
-
-      // If direct response or stream returned
-      if (response.ok) {
-        res.status(response.status);
-        const contentType = response.headers.get("content-type") || "audio/mpeg";
-        const contentLength = response.headers.get("content-length");
-        const contentRange = response.headers.get("content-range");
-        const acceptRanges = response.headers.get("accept-ranges") || "bytes";
-
-        res.setHeader("Content-Type", contentType);
-        if (contentLength) res.setHeader("Content-Length", contentLength);
-        if (contentRange) res.setHeader("Content-Range", contentRange);
-        res.setHeader("Accept-Ranges", acceptRanges);
-        res.setHeader("Cache-Control", "public, max-age=86400");
-
-        if (typeof (response.body as any)?.pipe === "function") {
-          return (response.body as any).pipe(res);
-        } else if (response.body) {
-          return Readable.fromWeb(response.body as any).pipe(res);
+        audioUrl = esvLookupRes.headers.get("location") || undefined;
+        if (audioUrl) {
+          esvAudioUrlCache.set(cleanPassage, audioUrl);
+        } else if (!esvLookupRes.ok) {
+          return res.status(esvLookupRes.status).json({ 
+            error: `ESV Audio API error (${esvLookupRes.status})` 
+          });
         }
       }
 
-      return res.status(response.status).json({ 
-        error: `ESV Audio API error (${response.status})` 
+      // Fetch audio from direct CDN URL (or fallback API URL) forwarding client Range headers
+      const audioTarget = audioUrl || `https://api.esv.org/v3/passage/audio/?q=${encodeURIComponent(cleanPassage)}`;
+      const fetchHeaders: Record<string, string> = {};
+      if (req.headers.range) {
+        fetchHeaders["Range"] = req.headers.range;
+      }
+      if (!audioUrl) {
+        fetchHeaders["Authorization"] = `Token ${apiKey}`;
+      }
+
+      const upstreamRes = await fetch(audioTarget, {
+        headers: fetchHeaders
       });
+
+      res.status(upstreamRes.status);
+
+      const contentType = upstreamRes.headers.get("content-type") || "audio/mpeg";
+      const contentLength = upstreamRes.headers.get("content-length");
+      const contentRange = upstreamRes.headers.get("content-range");
+      const acceptRanges = upstreamRes.headers.get("accept-ranges") || "bytes";
+
+      res.setHeader("Content-Type", contentType);
+      if (contentLength) res.setHeader("Content-Length", contentLength);
+      if (contentRange) res.setHeader("Content-Range", contentRange);
+      res.setHeader("Accept-Ranges", acceptRanges);
+      res.setHeader("Cache-Control", "public, max-age=86400");
+
+      if (typeof (upstreamRes.body as any)?.pipe === "function") {
+        return (upstreamRes.body as any).pipe(res);
+      } else if (upstreamRes.body) {
+        return Readable.fromWeb(upstreamRes.body as any).pipe(res);
+      } else {
+        return res.status(500).json({ error: "No audio stream returned from ESV." });
+      }
     } catch (err: any) {
       console.error("ESV Audio Proxy error:", err);
       if (!res.headersSent) {
@@ -258,8 +270,11 @@ async function startServer() {
     res.status(404).send('Audio file not found');
   });
 
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
+  // Vite middleware for development vs static serving in production
+  const distPath = path.join(process.cwd(), 'dist');
+  const isProduction = process.env.NODE_ENV === "production" || fs.existsSync(path.join(distPath, 'index.html'));
+
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -267,7 +282,6 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     // Production serving of static files
-    const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
