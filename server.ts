@@ -198,6 +198,38 @@ async function startServer() {
     }
   });
 
+  // API Route for ESV Bible Text (official Crossway API with developer key)
+  app.get("/api/esv-text", async (req, res) => {
+    try {
+      const { passage } = req.query;
+      if (!passage || typeof passage !== "string") {
+        return res.status(400).json({ error: "Missing passage query parameter." });
+      }
+
+      const apiKey = process.env.ESV_API_KEY || "3f7fb8c898296bcae9d9988bf04855d467d844e9";
+      const cleanPassage = passage.replace(/Psalms\b/gi, 'Psalm').trim();
+      const esvUrl = `https://api.esv.org/v3/passage/html/?q=${encodeURIComponent(cleanPassage)}&include-headings=false&include-footnotes=false&include-short-copyright=false`;
+
+      const upstreamRes = await fetch(esvUrl, {
+        headers: { Authorization: `Token ${apiKey}` }
+      });
+
+      if (!upstreamRes.ok) {
+        return res.status(upstreamRes.status).json({ error: `ESV API responded with ${upstreamRes.status}` });
+      }
+
+      const data = await upstreamRes.json() as any;
+      if (data.passages && data.passages.length > 0) {
+        return res.json({ reference: passage, text: data.passages.join("\n").trim() });
+      }
+
+      return res.status(404).json({ error: "No passage text returned from ESV." });
+    } catch (err: any) {
+      console.error("ESV Text API error:", err);
+      return res.status(500).json({ error: err.message || "Failed to retrieve ESV text." });
+    }
+  });
+
   // API Route for Bible Readings
   app.get("/api/bible", async (req, res) => {
     try {

@@ -15,9 +15,45 @@ const bookMap: Record<string, number> = {
   "prayer of manasseh": 76, "prayer of manasses": 76, "2 esdras": 77
 };
 
+const singleChapterBooks = [
+  'obadiah', 'philemon', '2 john', '3 john', 'jude', 
+  'prayer of manasseh', 'prayer of manasses', 'susanna', 'bel and the dragon'
+];
+
+export function normalizeSingleChapterReference(query: string): string {
+  const trimmed = query.trim();
+  const match = trimmed.match(/^(\d?\s*[a-zA-Z\s]+?)\s+(\d+)(?:-(\d+))?$/);
+  if (match) {
+    const bookName = match[1].trim().toLowerCase();
+    if (singleChapterBooks.includes(bookName)) {
+      const start = match[2];
+      const end = match[3];
+      return end ? `${match[1].trim()} 1:${start}-${end}` : `${match[1].trim()} 1:${start}`;
+    }
+  }
+  return trimmed;
+}
+
+// Helper to fetch text from official Crossway ESV API server proxy
+async function fetchFromEsvApi(query: string): Promise<string> {
+  const clean = query.replace(/-end$/i, '').trim();
+  const url = typeof window !== 'undefined'
+    ? `/api/esv-text?passage=${encodeURIComponent(clean)}`
+    : `http://localhost:3000/api/esv-text?passage=${encodeURIComponent(clean)}`;
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`ESV API returned ${res.status}`);
+  }
+  const data = await res.json() as any;
+  if (!data.text) {
+    throw new Error("No text returned from ESV API");
+  }
+  return data.text;
+}
+
 // Helper to fetch a single query from bible-api.com
 async function fetchFromBibleApi(query: string, trans: string) {
-  let apiQuery = query.replace(/-end$/i, '');
+  let apiQuery = normalizeSingleChapterReference(query.replace(/-end$/i, ''));
   let startVerse: number | null = null;
   
   // If the query specifies a starting verse but no ending verse (e.g., "Ezekiel 3:15" or "1 John 4:7"), 
@@ -49,7 +85,7 @@ async function fetchFromBibleApi(query: string, trans: string) {
 
 // Helper to fetch a single query from bolls.life
 async function fetchFromBollsApi(query: string, trans: string) {
-  let cleanQuery = query.replace(/-end$/i, '');
+  let cleanQuery = normalizeSingleChapterReference(query.replace(/-end$/i, ''));
   
   // Check chapter span: Book 1:20-2:4
   const spanMatch = cleanQuery.match(/^(\d?\s*[a-zA-Z\s]+?)\s+(\d+):(\d+)-(\d+):(\d+)$/);
@@ -156,7 +192,8 @@ export async function fetchPassages(passage: string, translation: string = "ESV"
 
   // Fetch sub-passages
   let passages: { reference: string, text: string }[] = [];
-  for (const sub of finalSubPassages) {
+  for (const rawSub of finalSubPassages) {
+    const sub = normalizeSingleChapterReference(rawSub);
     let text = "";
     
     // Check if book is Apocrypha (bookId >= 67)
@@ -167,22 +204,35 @@ export async function fetchPassages(passage: string, translation: string = "ESV"
 
     const trans = translation.toString().toLowerCase();
 
-    if (isApocrypha || trans === 'esv') {
+    if (trans === 'esv' && !isApocrypha) {
       try {
-        text = await fetchFromBollsApi(sub, isApocrypha ? 'kjv' : trans);
+        // Tier 1: Official Crossway ESV API server proxy (clean HTML, verse numbers, headings)
+        text = await fetchFromEsvApi(sub);
+      } catch (esvErr: any) {
+        console.warn("ESV API fetch failed, falling back to Bolls:", esvErr);
+        try {
+          // Tier 2: Bolls ESV mirror (handles Jude 1:6-15, etc.)
+          text = await fetchFromBollsApi(sub, trans);
+        } catch (bollsErr: any) {
+          console.warn("Bolls ESV failed, falling back to BibleApi:", bollsErr);
+          // Tier 3: BibleApi KJV fallback
+          text = await fetchFromBibleApi(sub, 'kjv');
+        }
+      }
+    } else if (isApocrypha) {
+      try {
+        text = await fetchFromBollsApi(sub, 'kjv');
       } catch (err: any) {
-        // Fallback
         text = await fetchFromBibleApi(sub, 'kjv');
       }
     } else {
       try {
         text = await fetchFromBibleApi(sub, trans);
       } catch (err: any) {
-        // Fallback to Bolls KJV
         text = await fetchFromBollsApi(sub, 'kjv');
       }
     }
-    passages.push({ reference: sub, text });
+    passages.push({ reference: rawSub, text });
   }
 
   return passages;
