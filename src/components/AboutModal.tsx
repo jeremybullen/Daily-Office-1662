@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { X, BookOpen, BookText, CalendarDays } from 'lucide-react';
+import { X, BookOpen, BookText, CalendarDays, ExternalLink } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 
 interface AboutModalProps {
@@ -30,9 +30,24 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
   }, [isOpen]);
 
   const sources = [
-    { label: 'BCP', value: '1662', icon: BookOpen },
-    { label: 'Bible', value: 'ESV', icon: BookText },
-    { label: 'Lectionary', value: '1662', icon: CalendarDays },
+    {
+      label: 'BCP',
+      value: '1662',
+      icon: BookOpen,
+      url: 'https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/order-morning-prayer',
+    },
+    {
+      label: 'Lectionary',
+      value: '1662',
+      icon: CalendarDays,
+      url: 'https://www.ivpress.com/Media/Default/Content-Articles/1662-daily-office-lectionary.pdf',
+    },
+    {
+      label: 'Bible',
+      value: 'ESV',
+      icon: BookText,
+      url: 'https://www.esv.org',
+    },
   ];
 
   return (
@@ -81,33 +96,35 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
               {sources.map((item) => {
                 const IconComponent = item.icon;
                 return (
-                  <div
+                  <a
                     key={item.label}
-                    className="flex items-center justify-between p-3.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 transition-colors"
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between p-3.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 hover:border-black/25 dark:hover:border-white/25 hover:bg-black/[0.06] dark:hover:bg-white/[0.08] transition-all cursor-pointer"
+                    title={`Open ${item.label} (${item.value}) in new tab`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-black/5 dark:bg-white/10 opacity-80 shrink-0">
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-black/5 dark:bg-white/10 opacity-80 group-hover:opacity-100 transition-opacity shrink-0">
                         <IconComponent size={18} />
                       </div>
-                      <span className="font-serif font-semibold text-base sm:text-lg tracking-wide">
+                      <span className="font-serif font-semibold text-base sm:text-lg tracking-wide group-hover:underline">
                         {item.label}
                       </span>
                     </div>
-                    <div className="flex items-center gap-1.5 font-serif font-bold text-base sm:text-lg tracking-wide px-3 py-1 rounded-lg bg-black/5 dark:bg-white/10">
+                    <div className="flex items-center gap-1.5 font-serif font-bold text-base sm:text-lg tracking-wide px-3 py-1 rounded-lg bg-black/5 dark:bg-white/10 group-hover:bg-black/10 dark:group-hover:bg-white/20 transition-colors">
                       <span>{item.value}</span>
+                      <ExternalLink size={13} className="opacity-50 group-hover:opacity-100 transition-opacity ml-0.5" />
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
 
             {/* Copyright & Licensing Attribution */}
-            <div className="mt-4 pt-3 border-t border-black/10 dark:border-white/10 text-[11px] leading-relaxed opacity-65 font-sans space-y-1.5">
+            <div className="mt-4 pt-3 border-t border-black/10 dark:border-white/10 text-[11px] leading-relaxed opacity-65 font-sans">
               <p>
                 Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), copyright © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved.
-              </p>
-              <p>
-                The Holy Bible, English Standard Version, is available in audio format and online at <a href="https://www.esv.org" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-100">esv.org</a>.
               </p>
             </div>
 
