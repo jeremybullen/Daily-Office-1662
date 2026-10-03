@@ -51,7 +51,44 @@ export const hymns: Record<string, Hymn> = {
         title: "All Creatures of Our God and King (Benedicite)",
         imageUrl: '/hymns/benedicte.jpg',
         audioUrl: '/audio/All Creatures of Our God and King.mp3',
-        extraVerses: []
+        extraVerses: [
+            [
+                "2. Thou rushing wind that art so strong,",
+                "Ye clouds that sail in heav'n along,",
+                "O praise him! Alleluia!",
+                "Thou rising morn, in praise rejoice,",
+                "Ye lights of evening, find a voice:",
+                "O praise him! O praise him!",
+                "Alleluia! Alleluia! Alleluia!"
+            ],
+            [
+                "3. Thou flowing water, pure and clear,",
+                "Make music for thy Lord to hear,",
+                "Alleluia! Alleluia!",
+                "Thou fire so masterful and bright,",
+                "That givest man both warmth and light:",
+                "O praise him! O praise him!",
+                "Alleluia! Alleluia! Alleluia!"
+            ],
+            [
+                "4. Dear mother earth, who day by day",
+                "Foldest blessings on our way,",
+                "O praise him! Alleluia!",
+                "The flow'rs and fruits that in thee grow,",
+                "Let them his glory also show:",
+                "O praise him! O praise him!",
+                "Alleluia! Alleluia! Alleluia!"
+            ],
+            [
+                "5. Let all things their Creator bless,",
+                "And worship him in humbleness,",
+                "O praise him! Alleluia!",
+                "Praise, praise the Father, praise the Son,",
+                "And praise the Spirit, Three in One:",
+                "O praise him! O praise him!",
+                "Alleluia! Alleluia! Alleluia!"
+            ]
+        ]
     },
     jubilate: {
         title: "All People That on Earth Do Dwell (Psalm 100)",

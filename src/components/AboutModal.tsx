@@ -124,7 +124,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
             {/* Attributions & Notes */}
             <div className="mt-4 pt-3 border-t border-black/10 dark:border-white/10 text-[11px] leading-relaxed opacity-65 font-sans space-y-1.5">
               <p>
-                1662 BCP localized according to{' '}
+                1662 BCP Americanized according to{' '}
                 <a
                   href="https://danielsparks.com/how-to-use-the-1662-book-of-common-prayer-in-the-united-states/"
                   target="_blank"
