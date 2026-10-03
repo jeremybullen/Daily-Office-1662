@@ -251,11 +251,19 @@ export function buildLiturgySpeechSections({
       }
       benParts.push({ text: gloriaPatriCall, role: 'call' });
       benParts.push({ text: gloriaPatriResponse, role: 'response' });
+      const isBenediciteHymn = !!hymnMode?.canticle1;
+      const benediciteCandidates = isBenediciteHymn
+        ? [
+            '/audio/All Creatures of Our God and King.mp3',
+            ...(LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'] || [])
+          ]
+        : (LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'] || []);
       sections.push({
         id: 'tts-canticle-1',
-        title: 'Benedicite, omnia opera',
-        audioSrc: LITURGICAL_AUDIO_FILES['tts-benedicite'],
-        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'],
+        title: isBenediciteHymn ? 'All Creatures of Our God and King (Benedicite)' : 'Benedicite, omnia opera',
+        isHymn: isBenediciteHymn,
+        audioSrc: benediciteCandidates[0] || LITURGICAL_AUDIO_FILES['tts-benedicite'],
+        audioCandidates: benediciteCandidates,
         parts: benParts
       });
     }
@@ -332,11 +340,19 @@ export function buildLiturgySpeechSections({
         ]
       });
     } else {
+      const isJubilateHymn = !!hymnMode?.canticle2;
+      const jubilateCandidates = isJubilateHymn
+        ? [
+            '/audio/All People That on Earth Do Dwell.mp3',
+            ...(LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'] || [])
+          ]
+        : (LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'] || []);
       sections.push({
         id: 'tts-canticle-2',
-        title: 'Jubilate Deo',
-        audioSrc: LITURGICAL_AUDIO_FILES['tts-jubilate'],
-        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'],
+        title: isJubilateHymn ? 'All People That on Earth Do Dwell (Psalm 100)' : 'Jubilate Deo',
+        isHymn: isJubilateHymn,
+        audioSrc: jubilateCandidates[0] || LITURGICAL_AUDIO_FILES['tts-jubilate'],
+        audioCandidates: jubilateCandidates,
         parts: [
           ...jubilateDeo.map(verse => ({ text: verse, role: 'call' as const })),
           { text: gloriaPatriCall, role: 'call' },

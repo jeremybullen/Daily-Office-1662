@@ -310,6 +310,14 @@ async function startServer() {
     res.status(404).send('Audio file not found');
   });
 
+  // Serve local hymn images explicitly: check public/hymns first, then dist/hymns
+  if (fs.existsSync(path.join(process.cwd(), 'public', 'hymns'))) {
+    app.use('/hymns', express.static(path.join(process.cwd(), 'public', 'hymns')));
+  }
+  if (fs.existsSync(path.join(process.cwd(), 'dist', 'hymns'))) {
+    app.use('/hymns', express.static(path.join(process.cwd(), 'dist', 'hymns')));
+  }
+
   // Vite middleware for development vs static serving in production
   const distPath = path.join(process.cwd(), 'dist');
   const isProduction = process.env.NODE_ENV === "production" || fs.existsSync(path.join(distPath, 'index.html'));

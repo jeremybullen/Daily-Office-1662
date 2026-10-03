@@ -6,11 +6,6 @@ export interface Hymn {
 }
 
 export const hymns: Record<string, Hymn> = {
-    lordsPrayer: {
-        title: "The Lord's Prayer",
-        imageUrl: "/hymns/Lord's%20Prayer.jpg",
-        extraVerses: []
-    },
     venite: {
         title: "Now with joyful exultation (Psalm 95)",
         imageUrl: '/hymns/Psalm%2095.png',
@@ -40,7 +35,7 @@ export const hymns: Record<string, Hymn> = {
                 "Prophets swell the glad refrain,",
                 "And the white-robed martyrs follow;",
                 "And from morn to set of sun,",
-                "Through the Church the song goes on."
+                "Through the church the song goes on."
             ],
             [
                 "4. Holy Father, Holy Son,",
@@ -53,14 +48,41 @@ export const hymns: Record<string, Hymn> = {
         ]
     },
     benedicite: {
-        title: "Benedicite, omnia opera",
+        title: "All Creatures of Our God and King (Benedicite)",
         imageUrl: '/hymns/benedicte.jpg',
+        audioUrl: '/audio/All Creatures of Our God and King.mp3',
         extraVerses: []
     },
     jubilate: {
         title: "All People That on Earth Do Dwell (Psalm 100)",
-        imageUrl: '/hymns/psalm-100.png',
-        extraVerses: []
+        imageUrl: '/hymns/Psalm%20100.JPG',
+        audioUrl: '/audio/All People That on Earth Do Dwell.mp3',
+        extraVerses: [
+            [
+                "2. The Lord, ye know, is God indeed;",
+                "Without our aid he did us make;",
+                "We are his folk, he doth us feed,",
+                "And for his sheep he doth us take."
+            ],
+            [
+                "3. O enter then his gates with praise,",
+                "Approach with joy his courts unto;",
+                "Praise, laud, and bless his name always,",
+                "For it is seemly so to do."
+            ],
+            [
+                "4. For why? the Lord our God is good;",
+                "His mercy is for ever sure;",
+                "His truth at all times firmly stood,",
+                "And shall from age to age endure."
+            ],
+            [
+                "5. To Father, Son, and Holy Ghost,",
+                "The God whom heav'n and earth adore,",
+                "From men and from the angel host",
+                "Be praise and glory evermore."
+            ]
+        ]
     },
     benedictus: {
         title: "Blest Be the God of Israel (Song of Zechariah)",

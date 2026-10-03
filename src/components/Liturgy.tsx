@@ -53,9 +53,9 @@ function parsePsalms(str: string) {
 export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings, onOpenAbout, onAudioStateChange }: LiturgyProps) {
 
     const [sentenceIdx, setSentenceIdx] = useState(() => Math.floor(Math.random() * openingSentences.length));
-    const [useBenedicite, setUseBenedicite] = useState(false);
-    const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(false);
-    const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
+    const [useBenedicite, setUseBenedicite] = useState(() => Math.random() < 0.5);
+    const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(() => Math.random() < 0.5);
+    const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(() => Math.random() < 0.5);
     const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
     const [serviceAudioMode, setServiceAudioMode] = useState<'spoken' | 'music'>('spoken');
     const [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false);
@@ -114,8 +114,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         setHymnMode({
             venite: false,
             canticle1: false,
-            canticle2: false,
-            lordsPrayer: false
+            canticle2: false
         });
         setIsAudioPlayerOpen(true);
         setTimeout(() => {
@@ -128,8 +127,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         setHymnMode({
             venite: true,
             canticle1: true,
-            canticle2: true,
-            lordsPrayer: true
+            canticle2: true
         });
         setIsAudioPlayerOpen(true);
         setTimeout(() => {
@@ -168,7 +166,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         }
     }, [speech.isPlaying, speech.isPaused, isAudioPlayerOpen, serviceAudioMode, onAudioStateChange, speech.play, speech.pause, handlePlaySpoken, handlePlayMusic]);
 
-    // Stop speech and pick a random opening sentence when office or date changes
+    // Stop speech and pick a random opening sentence and canticles when office or date changes
     useEffect(() => {
         speech.stop();
         setIsAudioPlayerOpen(false);
@@ -179,6 +177,10 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             if (next === prev) next = (next + 1) % count;
             return next;
         });
+        // Randomly select between the canticles like the opening sentences
+        setUseBenedicite(Math.random() < 0.5);
+        setUseAlternativeEveningCanticle1(Math.random() < 0.5);
+        setUseAlternativeCanticle2(Math.random() < 0.5);
     }, [office, selectedDate]);
 
     const getHighlightClass = (sectionId: string, baseClass: string = '') => {
@@ -300,21 +302,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  className={getHighlightClass('tts-lords-prayer-1')}
                  title="The Lord's Prayer"
                  rubric="Then the Minister shall kneel, and say the Lord's Prayer with an audible voice; the people also kneeling, and repeating it with him, both here, and wheresoever else it is used in Divine Service."
-                 leftAction={
-                     <button 
-                         onClick={(e) => toggleHymn('lordsPrayer', e)}
-                         className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10"
-                     >
-                         <Music size={12} />
-                         {hymnMode['lordsPrayer'] ? "Prose Text" : "Hymn Version"}
-                     </button>
-                 }
              >
-                 {hymnMode['lordsPrayer'] ? (
-                     <SheetMusic title={hymns.lordsPrayer.title} imageUrl={hymns.lordsPrayer.imageUrl} audioUrl={hymns.lordsPrayer.audioUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
-                 ) : (
-                     <P>{lordsPrayer}</P>
-                 )}
+                 <P>{lordsPrayer}</P>
              </Section>
 
              {/* Versicles & Gloria Patri */}
@@ -418,7 +407,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  id="tts-canticle-1"
                  className={getHighlightClass('tts-canticle-1')}
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
-                 metadata={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
+                 metadata={office === 'morning' ? (useBenedicite ? "Song of the Three Children (or: Te Deum)" : "An Ancient Hymn (or: Benedicite)") : (useAlternativeEveningCanticle1 ? "Psalm 98. (or: Magnificat)" : "Luke 1. (or: Cantate Domino)")}
                  onTitleClick={office === 'morning' ? () => setUseBenedicite(!useBenedicite) : () => setUseAlternativeEveningCanticle1(!useAlternativeEveningCanticle1)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle1', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
@@ -490,7 +479,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              />
              <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
-                 metadata={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
+                 metadata={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100. (or: Benedictus)" : "Luke 1:68. (or: Jubilate Deo)") : (useAlternativeCanticle2 ? "Psalm 67. (or: Nunc Dimittis)" : "Luke 2:29. (or: Deus Misereatur)")}
                  onTitleClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle2', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
@@ -585,25 +574,10 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
              
              {/* Lord's Prayer 2 */}
-             <Section 
-                 title="The Lord's Prayer"
-                 leftAction={
-                     <button 
-                         onClick={(e) => toggleHymn('lordsPrayer', e)}
-                         className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10"
-                     >
-                         <Music size={12} />
-                         {hymnMode['lordsPrayer'] ? "Prose Text" : "Hymn Version"}
-                     </button>
-                 }
-             >
-                 {hymnMode['lordsPrayer'] ? (
-                     <SheetMusic title={hymns.lordsPrayer.title} imageUrl={hymns.lordsPrayer.imageUrl} audioUrl={hymns.lordsPrayer.audioUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
-                 ) : (
-                     <div className="animate-in fade-in duration-500">
-                         <P>{lordsPrayer}</P>
-                     </div>
-                 )}
+             <Section title="The Lord's Prayer">
+                 <div className="animate-in fade-in duration-500">
+                     <P>{lordsPrayer}</P>
+                 </div>
              </Section>
 
              {/* Suffrages */}

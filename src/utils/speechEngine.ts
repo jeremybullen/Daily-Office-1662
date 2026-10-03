@@ -26,6 +26,8 @@ export function isHymnAudio(path?: string): boolean {
     lower.includes('now with joyful exultation') ||
     lower.includes('holy god, we praise') ||
     lower.includes('blest be the god of israel') ||
+    lower.includes('all creatures of our god and king') ||
+    lower.includes('all people that on earth do dwell') ||
     lower.includes('/hymns/')
   );
 }
