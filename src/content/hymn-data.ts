@@ -1,15 +1,20 @@
 export interface Hymn {
+    title?: string;
     imageUrl: string | string[];
+    audioUrl?: string;
     extraVerses?: string[][];
 }
 
 export const hymns: Record<string, Hymn> = {
     lordsPrayer: {
+        title: "The Lord's Prayer",
         imageUrl: "/hymns/Lord's%20Prayer.jpg",
         extraVerses: []
     },
     venite: {
+        title: "Now with joyful exultation (Psalm 95)",
         imageUrl: '/hymns/Psalm%2095.png',
+        audioUrl: '/audio/184. Now with joyful exultation (Psalm 95).mp3',
         extraVerses: [
             ["2. The depths of earth are in his hand,", "Her secret wealth at his command;", "The strength of hills that reach the sky,", "Subjected to his empire lie."],
             ["3. The rolling ocean's vast abyss", "By the same sovereign right is his;", "'Tis moved by his almighty hand,", "That formed and fixed the solid land."],
@@ -17,20 +22,72 @@ export const hymns: Record<string, Hymn> = {
         ]
     },
     teDeum: {
+        title: "Holy God, We Praise Your Name",
         imageUrl: '/hymns/te-deum.png',
-        extraVerses: []
+        audioUrl: '/audio/Holy God, We Praise Your Name.mp3',
+        extraVerses: [
+            [
+                "2. Hark! the glad celestial hymn",
+                "Angel choirs above are raising;",
+                "Cherubim and seraphim,",
+                "In unceasing chorus praising,",
+                "Fill the heav'ns with sweet accord:",
+                "Holy, holy, holy Lord!"
+            ],
+            [
+                "3. Lo! the apostolic train",
+                "Join your sacred name to hallow;",
+                "Prophets swell the glad refrain,",
+                "And the white-robed martyrs follow;",
+                "And from morn to set of sun,",
+                "Through the Church the song goes on."
+            ],
+            [
+                "4. Holy Father, Holy Son,",
+                "Holy Spirit, Three we name you;",
+                "While in essence only One,",
+                "Undivided God we claim you,",
+                "And adoring bend the knee,",
+                "While we sing this mystery."
+            ]
+        ]
     },
     benedicite: {
+        title: "Benedicite, omnia opera",
         imageUrl: '/hymns/benedicte.jpg',
         extraVerses: []
     },
     jubilate: {
+        title: "All People That on Earth Do Dwell (Psalm 100)",
         imageUrl: '/hymns/psalm-100.png',
         extraVerses: []
     },
     benedictus: {
+        title: "Blest Be the God of Israel (Song of Zechariah)",
         imageUrl: '/hymns/Benedictus.jpg',
-        extraVerses: []
+        audioUrl: '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
+        extraVerses: [
+            [
+                "2. With promised mercy will God still",
+                "The covenant recall,",
+                "The oath once sworn to Abraham,",
+                "From foes to save us all,",
+                "That we might worship without fear",
+                "And offer lives of praise,",
+                "In holiness and righteousness,",
+                "To serve God all our days."
+            ],
+            [
+                "3. My child, as prophet of the Lord",
+                "You will prepare the way,",
+                "To tell God's people they are saved",
+                "From sin's dark power today.",
+                "The dawn from on high will break upon",
+                "The shadows of the night,",
+                "To guide our feet in paths of peace",
+                "With everlasting light."
+            ]
+        ]
     },
     magnificat: {
         imageUrl: '/hymns/song-of-mary.png',

@@ -156,6 +156,7 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
 
   // Canticles
   'tts-venite': [
+    '/audio/184. Now with joyful exultation (Psalm 95).mp3',
     '/audio/Venite.mp3',
     '/audio/Psalm 95.mp3',
     '/audio/Venite (Hymn).mp3',
@@ -166,6 +167,7 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/canticles/venite.mp3'
   ],
   'tts-canticle-1': [
+    '/audio/Holy God, We Praise Your Name.mp3',
     '/audio/Te Deum.mp3',
     '/audio/Te Deum Laudamus.mp3',
     '/audio/Magnificat.mp3',
@@ -188,6 +190,7 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/canticles/magnificat.mp3'
   ],
   'tts-canticle-2': [
+    '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
     '/audio/Benedictus.mp3',
     '/audio/Nunc Dimittis.mp3',
     '/audio/Song of Simeon.mp3',
@@ -216,6 +219,7 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/canticles/nunc-dimittis.mp3'
   ],
   'tts-te-deum': [
+    '/audio/Holy God, We Praise Your Name.mp3',
     '/audio/Te Deum.mp3',
     '/audio/Te Deum Laudamus.mp3',
     '/audio/te-deum.mp3',
@@ -227,6 +231,7 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/canticles/benedicite.mp3'
   ],
   'tts-benedictus': [
+    '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
     '/audio/Benedictus.mp3',
     '/audio/benedictus.mp3',
     '/audio/canticles/benedictus.mp3'

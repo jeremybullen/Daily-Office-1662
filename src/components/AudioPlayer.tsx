@@ -1,10 +1,13 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Pause, SkipBack, SkipForward, X } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, X, Music, Mic } from 'lucide-react';
 
 interface AudioPlayerProps {
   isOpen: boolean;
   isPlaying: boolean;
   isPaused: boolean;
+  isCurrentHymn?: boolean;
+  serviceMode?: 'spoken' | 'music';
+  onToggleServiceMode?: () => void;
   currentSectionTitle: string;
   currentSectionIndex: number;
   totalSections: number;
@@ -22,6 +25,9 @@ export function AudioPlayer({
   isOpen,
   isPlaying,
   isPaused,
+  isCurrentHymn = false,
+  serviceMode = 'spoken',
+  onToggleServiceMode,
   currentSectionTitle,
   currentSectionIndex,
   totalSections,
@@ -71,6 +77,12 @@ export function AudioPlayer({
               <span className="text-[11px] opacity-50 shrink-0 font-serif">
                 ({currentSectionIndex + 1}/{totalSections})
               </span>
+              {isCurrentHymn && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-200 font-medium shrink-0 flex items-center gap-1 border border-amber-500/20">
+                  <Music size={10} />
+                  Hymn
+                </span>
+              )}
             </div>
 
             <button
@@ -88,15 +100,24 @@ export function AudioPlayer({
 
           {/* Controls row */}
           <div className="flex items-center justify-between pt-0.5">
-            {/* Speed toggle */}
-            <button
-              type="button"
-              onClick={cycleSpeed}
-              title="Click to cycle speed (1x, 1.25x, 1.5x, 2x)"
-              className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors cursor-pointer"
-            >
-              {rate.toFixed(2).replace(/\.?0+$/, '')}x
-            </button>
+            {/* Speed toggle: locked to 1x during hymns */}
+            {isCurrentHymn ? (
+              <span
+                title="Hymn audio plays at natural tempo (1.0x)"
+                className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-amber-500/15 text-amber-800 dark:text-amber-200 border border-amber-500/30 flex items-center gap-1 cursor-default select-none"
+              >
+                1x
+              </span>
+            ) : (
+              <button
+                type="button"
+                onClick={cycleSpeed}
+                title="Click to cycle speed (1x, 1.25x, 1.5x, 2x)"
+                className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors cursor-pointer"
+              >
+                {rate.toFixed(2).replace(/\.?0+$/, '')}x
+              </button>
+            )}
 
             {/* Playback Controls */}
             <div className="flex items-center gap-2">
@@ -130,7 +151,27 @@ export function AudioPlayer({
               </button>
             </div>
 
-            <div className="w-8" />
+            {/* Mode Indicator & Switcher */}
+            {onToggleServiceMode && (
+              <button
+                type="button"
+                onClick={onToggleServiceMode}
+                title={`Current mode: ${serviceMode === 'music' ? 'Music (Hymns enabled)' : 'Spoken (Prose only)'}. Click to switch.`}
+                className="px-2 py-1 rounded-lg text-[10px] font-medium tracking-wide flex items-center gap-1 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-all opacity-85 hover:opacity-100 cursor-pointer"
+              >
+                {serviceMode === 'music' ? (
+                  <>
+                    <Music size={11} className="text-amber-600 dark:text-amber-400" />
+                    <span>Music</span>
+                  </>
+                ) : (
+                  <>
+                    <Mic size={11} className="opacity-70" />
+                    <span>Spoken</span>
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </motion.div>

@@ -1,5 +1,5 @@
 import { P } from './GlossaryText';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { openingSentences, exhortation, confession, absolutionSubstitute, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers } from '../content/liturgy-data';
 import { isAshWednesdayOrGoodFriday, isAthanasianCreedDay } from '../utils/liturgyHelpers';
@@ -23,7 +23,14 @@ interface LiturgyProps {
     settings: AppSettings;
     updateSettings: (newSettings: Partial<AppSettings>) => void;
     onOpenAbout?: () => void;
-    onAudioStateChange?: (state: { isPlaying: boolean; isOpen: boolean; toggle: () => void }) => void;
+    onAudioStateChange?: (state: { 
+        isPlaying: boolean; 
+        isOpen: boolean; 
+        serviceMode: 'spoken' | 'music';
+        toggle: () => void;
+        playSpoken: () => void;
+        playMusic: () => void;
+    }) => void;
 }
 
 
@@ -50,6 +57,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(false);
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
     const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
+    const [serviceAudioMode, setServiceAudioMode] = useState<'spoken' | 'music'>('spoken');
     const [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false);
     
     const isAthanasian = office === 'morning' && isAthanasianCreedDay(selectedDate);
@@ -83,7 +91,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             useAlternativeEveningCanticle1,
             useAlternativeCanticle2,
             isAthanasian,
-            isAshWedOrGoodFri
+            isAshWedOrGoodFri,
+            hymnMode
         });
     }, [
         office,
@@ -94,10 +103,47 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         useAlternativeEveningCanticle1,
         useAlternativeCanticle2,
         isAthanasian,
-        isAshWedOrGoodFri
+        isAshWedOrGoodFri,
+        hymnMode
     ]);
 
     const speech = useLiturgicalSpeech({ sections: speechSections });
+
+    const handlePlaySpoken = useCallback(() => {
+        setServiceAudioMode('spoken');
+        setHymnMode({
+            venite: false,
+            canticle1: false,
+            canticle2: false,
+            lordsPrayer: false
+        });
+        setIsAudioPlayerOpen(true);
+        setTimeout(() => {
+            speech.play();
+        }, 40);
+    }, [speech]);
+
+    const handlePlayMusic = useCallback(() => {
+        setServiceAudioMode('music');
+        setHymnMode({
+            venite: true,
+            canticle1: true,
+            canticle2: true,
+            lordsPrayer: true
+        });
+        setIsAudioPlayerOpen(true);
+        setTimeout(() => {
+            speech.play();
+        }, 40);
+    }, [speech]);
+
+    const handleToggleServiceMode = useCallback(() => {
+        if (serviceAudioMode === 'music') {
+            handlePlaySpoken();
+        } else {
+            handlePlayMusic();
+        }
+    }, [serviceAudioMode, handlePlaySpoken, handlePlayMusic]);
 
     // Sync audio state to parent / header
     useEffect(() => {
@@ -105,6 +151,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             onAudioStateChange({
                 isPlaying: speech.isPlaying && !speech.isPaused,
                 isOpen: isAudioPlayerOpen,
+                serviceMode: serviceAudioMode,
                 toggle: () => {
                     if (!isAudioPlayerOpen) {
                         setIsAudioPlayerOpen(true);
@@ -114,10 +161,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                     } else {
                         speech.play();
                     }
-                }
+                },
+                playSpoken: handlePlaySpoken,
+                playMusic: handlePlayMusic
             });
         }
-    }, [speech.isPlaying, speech.isPaused, isAudioPlayerOpen, onAudioStateChange, speech.play, speech.pause]);
+    }, [speech.isPlaying, speech.isPaused, isAudioPlayerOpen, serviceAudioMode, onAudioStateChange, speech.play, speech.pause, handlePlaySpoken, handlePlayMusic]);
 
     // Stop speech and pick a random opening sentence when office or date changes
     useEffect(() => {
@@ -262,7 +311,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['lordsPrayer'] ? (
-                     <SheetMusic imageUrl={hymns.lordsPrayer.imageUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
+                     <SheetMusic title={hymns.lordsPrayer.title} imageUrl={hymns.lordsPrayer.imageUrl} audioUrl={hymns.lordsPrayer.audioUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
                  ) : (
                      <P>{lordsPrayer}</P>
                  )}
@@ -324,7 +373,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      }
                  >
                      {hymnMode['venite'] ? (
-                         <SheetMusic imageUrl={hymns.venite.imageUrl} extraVerses={hymns.venite.extraVerses} />
+                         <SheetMusic title={hymns.venite.title} imageUrl={hymns.venite.imageUrl} audioUrl={hymns.venite.audioUrl} extraVerses={hymns.venite.extraVerses} />
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                             <P>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</P>
@@ -379,7 +428,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['canticle1'] ? (
-                     <SheetMusic imageUrl={hymns[activeCanticle1].imageUrl} extraVerses={hymns[activeCanticle1].extraVerses} />
+                     <SheetMusic title={hymns[activeCanticle1]?.title} imageUrl={hymns[activeCanticle1].imageUrl} audioUrl={hymns[activeCanticle1]?.audioUrl} extraVerses={hymns[activeCanticle1].extraVerses} />
                  ) : office === 'morning' ? (
                      <div className="select-none">
                         {!useBenedicite ? (
@@ -451,7 +500,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['canticle2'] ? (
-                     <SheetMusic imageUrl={hymns[activeCanticle2].imageUrl} extraVerses={hymns[activeCanticle2].extraVerses} />
+                     <SheetMusic title={hymns[activeCanticle2]?.title} imageUrl={hymns[activeCanticle2].imageUrl} audioUrl={hymns[activeCanticle2]?.audioUrl} extraVerses={hymns[activeCanticle2].extraVerses} />
                  ) : (
                  <div className="select-none">
                      {office === 'morning' ? (
@@ -549,7 +598,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['lordsPrayer'] ? (
-                     <SheetMusic imageUrl={hymns.lordsPrayer.imageUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
+                     <SheetMusic title={hymns.lordsPrayer.title} imageUrl={hymns.lordsPrayer.imageUrl} audioUrl={hymns.lordsPrayer.audioUrl} extraVerses={hymns.lordsPrayer.extraVerses} />
                  ) : (
                      <div className="animate-in fade-in duration-500">
                          <P>{lordsPrayer}</P>
@@ -647,6 +696,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  isOpen={isAudioPlayerOpen}
                  isPlaying={speech.isPlaying}
                  isPaused={speech.isPaused}
+                 isCurrentHymn={speech.isCurrentHymn}
+                 serviceMode={serviceAudioMode}
+                 onToggleServiceMode={handleToggleServiceMode}
                  currentSectionTitle={speech.currentSectionTitle}
                  currentSectionIndex={speech.currentSectionIndex}
                  totalSections={speech.totalSections}

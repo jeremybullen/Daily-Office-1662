@@ -13,9 +13,22 @@ export interface LiturgySpeechSection {
   parts?: SpeechPart[];
   getParts?: () => SpeechPart[];
   isDynamic?: boolean;
+  isHymn?: boolean;
 }
 
 export type LiturgyAudioSection = LiturgySpeechSection;
+
+export function isHymnAudio(path?: string): boolean {
+  if (!path) return false;
+  const lower = path.toLowerCase();
+  return (
+    lower.includes('hymn') ||
+    lower.includes('now with joyful exultation') ||
+    lower.includes('holy god, we praise') ||
+    lower.includes('blest be the god of israel') ||
+    lower.includes('/hymns/')
+  );
+}
 
 export function cleanScriptureHtml(html: string): string {
   if (!html) return '';

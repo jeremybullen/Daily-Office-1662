@@ -21,10 +21,20 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [completedData, setCompletedData] = useLocalStorage<CompletedData>('bcp-completed', {});
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [audioState, setAudioState] = useState<{ isPlaying: boolean; isOpen: boolean; toggle: () => void }>({
+  const [audioState, setAudioState] = useState<{
+    isPlaying: boolean;
+    isOpen: boolean;
+    serviceMode: 'spoken' | 'music';
+    toggle: () => void;
+    playSpoken: () => void;
+    playMusic: () => void;
+  }>({
     isPlaying: false,
     isOpen: false,
-    toggle: () => {}
+    serviceMode: 'spoken',
+    toggle: () => {},
+    playSpoken: () => {},
+    playMusic: () => {}
   });
 
   // Apply theme class to document element
@@ -71,6 +81,9 @@ export default function App() {
         theme={theme}
         toggleTheme={toggleTheme}
         onToggleAudio={audioState.toggle}
+        onPlaySpoken={audioState.playSpoken}
+        onPlayMusic={audioState.playMusic}
+        audioMode={audioState.serviceMode}
         isAudioPlaying={audioState.isPlaying}
         isAudioOpen={audioState.isOpen}
       />

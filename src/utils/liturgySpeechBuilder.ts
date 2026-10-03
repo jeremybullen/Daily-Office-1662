@@ -37,6 +37,7 @@ interface BuilderOptions {
   useAlternativeCanticle2: boolean;
   isAthanasian: boolean;
   isAshWedOrGoodFri: boolean;
+  hymnMode?: Record<string, boolean>;
 }
 
 // Helper to generate resilient ESV audio candidates:
@@ -80,7 +81,8 @@ export function buildLiturgySpeechSections({
   useAlternativeEveningCanticle1,
   useAlternativeCanticle2,
   isAthanasian,
-  isAshWedOrGoodFri
+  isAshWedOrGoodFri,
+  hymnMode
 }: BuilderOptions): LiturgySpeechSection[] {
   const sections: LiturgySpeechSection[] = [];
 
@@ -159,10 +161,20 @@ export function buildLiturgySpeechSections({
 
   // 8. Venite (Morning only, unless Ash Wed / Good Fri)
   if (office === 'morning' && !isAshWedOrGoodFri) {
+    const isVeniteHymn = !!hymnMode?.venite;
+    const veniteCandidates = isVeniteHymn
+      ? [
+          '/audio/184. Now with joyful exultation (Psalm 95).mp3',
+          ...(LITURGICAL_AUDIO_CANDIDATES['tts-venite'] || [])
+        ]
+      : (LITURGICAL_AUDIO_CANDIDATES['tts-venite'] || ['/audio/Venite.mp3']);
+
     sections.push({
       id: 'tts-venite',
-      title: 'Venite, exultemus Domino',
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-venite'],
+      title: isVeniteHymn ? 'Venite (Hymn: Psalm 95)' : 'Venite, exultemus Domino',
+      isHymn: isVeniteHymn,
+      audioSrc: veniteCandidates[0],
+      audioCandidates: veniteCandidates,
       parts: [
         ...venite.map(verse => ({ text: verse, role: 'call' as const })),
         { text: gloriaPatriCall, role: 'call' },
@@ -214,11 +226,20 @@ export function buildLiturgySpeechSections({
   // 11. First Canticle
   if (office === 'morning') {
     if (!useBenedicite) {
+      const isTeDeumHymn = !!(hymnMode?.teDeum || hymnMode?.canticle1);
+      const teDeumCandidates = isTeDeumHymn
+        ? [
+            '/audio/Holy God, We Praise Your Name.mp3',
+            ...(LITURGICAL_AUDIO_CANDIDATES['tts-te-deum'] || [])
+          ]
+        : (LITURGICAL_AUDIO_CANDIDATES['tts-te-deum'] || ['/audio/Te Deum.mp3']);
+
       sections.push({
         id: 'tts-canticle-1',
-        title: 'Te Deum Laudamus',
-        audioSrc: LITURGICAL_AUDIO_FILES['tts-te-deum'],
-        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-te-deum'],
+        title: isTeDeumHymn ? 'Holy God, We Praise Your Name (Te Deum)' : 'Te Deum Laudamus',
+        isHymn: isTeDeumHymn,
+        audioSrc: teDeumCandidates[0],
+        audioCandidates: teDeumCandidates,
         parts: teDeum.map(verse => ({ text: verse, role: 'call' as const }))
       });
     } else {
@@ -290,11 +311,20 @@ export function buildLiturgySpeechSections({
   // 13. Second Canticle
   if (office === 'morning') {
     if (!useAlternativeCanticle2) {
+      const isBenedictusHymn = !!(hymnMode?.benedictus || hymnMode?.canticle2);
+      const benedictusCandidates = isBenedictusHymn
+        ? [
+            '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
+            ...(LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'] || [])
+          ]
+        : (LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'] || ['/audio/Benedictus.mp3']);
+
       sections.push({
         id: 'tts-canticle-2',
-        title: 'Benedictus',
-        audioSrc: LITURGICAL_AUDIO_FILES['tts-benedictus'],
-        audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'],
+        title: isBenedictusHymn ? 'Blest Be the God of Israel (Benedictus)' : 'Benedictus',
+        isHymn: isBenedictusHymn,
+        audioSrc: benedictusCandidates[0],
+        audioCandidates: benedictusCandidates,
         parts: [
           ...benedictus.map(verse => ({ text: verse, role: 'call' as const })),
           { text: gloriaPatriCall, role: 'call' },

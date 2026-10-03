@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { LiturgySpeechSection } from '../utils/speechEngine';
+import { LiturgySpeechSection, isHymnAudio } from '../utils/speechEngine';
 import { LITURGICAL_AUDIO_CANDIDATES } from '../utils/liturgicalAudioManifest';
 
 interface UseLiturgicalSpeechProps {
@@ -10,6 +10,7 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const [isCurrentHymn, setIsCurrentHymn] = useState(false);
 
   const [rate, setRate] = useState<number>(() => {
     if (typeof window !== 'undefined') {
@@ -27,6 +28,7 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
     isPaused: false,
     sectionIdx: 0,
     rate: 1.0,
+    isCurrentHymn: false,
     sections: [] as LiturgySpeechSection[]
   });
 
@@ -114,10 +116,15 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
         ? candidatePath
         : encodeURI(candidatePath);
 
+      const isHymn = !!section.isHymn || isHymnAudio(candidatePath);
+      stateRef.current.isCurrentHymn = isHymn;
+      setIsCurrentHymn(isHymn);
+
       const audio = new Audio(encodedPath);
       audio.preload = 'auto';
       audioElementRef.current = audio;
-      audio.playbackRate = Math.max(0.5, Math.min(2.0, stateRef.current.rate || 1.0));
+      // Hymn audio should never be sped up (always 1.0x)
+      audio.playbackRate = isHymn ? 1.0 : Math.max(0.5, Math.min(2.0, stateRef.current.rate || 1.0));
 
       audio.onended = () => {
         if (!stateRef.current.isPlaying || stateRef.current.isPaused) return;
@@ -222,7 +229,11 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
       localStorage.setItem('bcp-audio-rate', newRate.toString());
     }
     if (audioElementRef.current) {
-      audioElementRef.current.playbackRate = newRate;
+      if (!stateRef.current.isCurrentHymn) {
+        audioElementRef.current.playbackRate = newRate;
+      } else {
+        audioElementRef.current.playbackRate = 1.0;
+      }
     }
   }, []);
 
@@ -231,6 +242,7 @@ export function useLiturgicalSpeech({ sections }: UseLiturgicalSpeechProps) {
   return {
     isPlaying,
     isPaused,
+    isCurrentHymn,
     currentSectionIndex,
     currentSectionId: currentSection?.id,
     currentSectionTitle: currentSection?.title || '',
