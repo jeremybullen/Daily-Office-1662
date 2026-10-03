@@ -5,9 +5,80 @@
  * `Collect for Pardon.mp3`, `Lords Prayer.mp3`) and structured folder names.
  */
 
+// Mapping of opening sentence indices to audio files
+export const OPENING_SENTENCE_AUDIO: Record<number, string[]> = {
+  0: [
+    '/audio/Ezekiel 18:27.mp3',
+    '/audio/Ezekiel 18.27.mp3',
+    '/audio/Ezekiel 18-27.mp3',
+    '/audio/sentences/ezekiel-18-27.mp3'
+  ],
+  1: [
+    '/audio/Psalm 51:3.mp3',
+    '/audio/Psalm 51.3.mp3',
+    '/audio/Psalm 51-3.mp3',
+    '/audio/sentences/psalm-51-3.mp3'
+  ],
+  2: [
+    '/audio/Psalm 51:9.mp3',
+    '/audio/Psalm 51.9.mp3',
+    '/audio/Psalm 51-9.mp3',
+    '/audio/sentences/psalm-51-9.mp3'
+  ],
+  3: [
+    '/audio/Psalm 51:17.mp3',
+    '/audio/Psalm 51.17.mp3',
+    '/audio/Psalm 51-17.mp3',
+    '/audio/sentences/psalm-51-17.mp3'
+  ],
+  4: [
+    '/audio/Joel 2:13.mp3',
+    '/audio/Joel 2.13.mp3',
+    '/audio/Joel 2-13.mp3',
+    '/audio/sentences/joel-2-13.mp3'
+  ],
+  5: [
+    '/audio/Daniel 9:9-10.mp3',
+    '/audio/Daniel 9.9-10.mp3',
+    '/audio/Daniel 9-9-10.mp3',
+    '/audio/sentences/daniel-9-9-10.mp3'
+  ],
+  6: [
+    '/audio/Jeremiah 10:24; Psalm 6:1.mp3',
+    '/audio/Jeremiah 10.24; Psalm 6.1.mp3',
+    '/audio/Jeremiah 10:24.mp3',
+    '/audio/sentences/jeremiah-10-24.mp3'
+  ],
+  7: [
+    '/audio/Matthew 3:2.mp3',
+    '/audio/St Matthew 3:2.mp3',
+    '/audio/Matthew 3.2.mp3',
+    '/audio/sentences/matthew-3-2.mp3'
+  ],
+  8: [
+    '/audio/Luke 15:18-19.mp3',
+    '/audio/St Luke 15:18-19.mp3',
+    '/audio/Luke 15.18-19.mp3',
+    '/audio/sentences/luke-15-18-19.mp3'
+  ],
+  9: [
+    '/audio/Psalm 143:2.mp3',
+    '/audio/Psalm 143.2.mp3',
+    '/audio/Psalm 143-2.mp3',
+    '/audio/sentences/psalm-143-2.mp3'
+  ],
+  10: [
+    '/audio/1 John 1:8-9.mp3',
+    '/audio/1 St John 1:8-9.mp3',
+    '/audio/1 John 1.8-9.mp3',
+    '/audio/sentences/1-john-1-8-9.mp3'
+  ]
+};
+
 export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
   // Opening Sentence
   'tts-opening-sentence': [
+    '/audio/Ezekiel 18:27.mp3',
     '/audio/Opening Sentence.mp3',
     '/audio/Sentence.mp3',
     '/audio/opening-sentence.mp3',
@@ -55,6 +126,10 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     "/audio/Lord's Prayer.mp3",
     '/audio/The Lords Prayer.mp3',
     "/audio/The Lord's Prayer.mp3",
+    "/audio/Lord's Prayer (Hymn).mp3",
+    '/audio/Lords Prayer (Hymn).mp3',
+    "/audio/hymns/Lord's Prayer.mp3",
+    '/audio/hymns/Lords Prayer.mp3',
     '/audio/lords-prayer.mp3',
     '/audio/general/lords-prayer.mp3'
   ],
@@ -63,6 +138,10 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     "/audio/Lord's Prayer.mp3",
     '/audio/The Lords Prayer.mp3',
     "/audio/The Lord's Prayer.mp3",
+    "/audio/Lord's Prayer (Hymn).mp3",
+    '/audio/Lords Prayer (Hymn).mp3',
+    "/audio/hymns/Lord's Prayer.mp3",
+    '/audio/hymns/Lords Prayer.mp3',
     '/audio/lords-prayer.mp3',
     '/audio/general/lords-prayer.mp3'
   ],
@@ -79,6 +158,10 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
   'tts-venite': [
     '/audio/Venite.mp3',
     '/audio/Psalm 95.mp3',
+    '/audio/Venite (Hymn).mp3',
+    '/audio/Psalm 95 (Hymn).mp3',
+    '/audio/hymns/Venite.mp3',
+    '/audio/hymns/Psalm 95.mp3',
     '/audio/venite.mp3',
     '/audio/canticles/venite.mp3'
   ],
@@ -89,6 +172,16 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/Song of Mary.mp3',
     '/audio/Benedicite.mp3',
     '/audio/Cantate Domino.mp3',
+    '/audio/Te Deum (Hymn).mp3',
+    '/audio/Magnificat (Hymn).mp3',
+    '/audio/Song of Mary (Hymn).mp3',
+    '/audio/Benedicite (Hymn).mp3',
+    '/audio/Cantate Domino (Hymn).mp3',
+    '/audio/hymns/Te Deum.mp3',
+    '/audio/hymns/Magnificat.mp3',
+    '/audio/hymns/Song of Mary.mp3',
+    '/audio/hymns/Benedicite.mp3',
+    '/audio/hymns/Cantate Domino.mp3',
     '/audio/te-deum.mp3',
     '/audio/magnificat.mp3',
     '/audio/canticles/te-deum.mp3',
@@ -101,6 +194,22 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/Jubilate.mp3',
     '/audio/Jubilate Deo.mp3',
     '/audio/Deus Misereatur.mp3',
+    '/audio/Benedictus (Hymn).mp3',
+    '/audio/Nunc Dimittis (Hymn).mp3',
+    '/audio/Song of Simeon (Hymn).mp3',
+    '/audio/Jubilate (Hymn).mp3',
+    '/audio/Jubilate Deo (Hymn).mp3',
+    '/audio/Deus Misereatur (Hymn).mp3',
+    '/audio/Psalm 100.mp3',
+    '/audio/Psalm 67.mp3',
+    '/audio/Psalm 100 (Hymn).mp3',
+    '/audio/Psalm 67 (Hymn).mp3',
+    '/audio/hymns/Benedictus.mp3',
+    '/audio/hymns/Nunc Dimittis.mp3',
+    '/audio/hymns/Jubilate.mp3',
+    '/audio/hymns/Deus Misereatur.mp3',
+    '/audio/hymns/Psalm 100.mp3',
+    '/audio/hymns/Psalm 67.mp3',
     '/audio/benedictus.mp3',
     '/audio/nunc-dimittis.mp3',
     '/audio/canticles/benedictus.mp3',

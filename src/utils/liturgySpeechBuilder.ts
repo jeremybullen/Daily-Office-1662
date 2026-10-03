@@ -25,7 +25,7 @@ import {
 } from '../content/liturgy-data';
 import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
-import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES } from './liturgicalAudioManifest';
+import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES, OPENING_SENTENCE_AUDIO } from './liturgicalAudioManifest';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -89,14 +89,14 @@ export function buildLiturgySpeechSections({
 
   // 1. Opening Sentence (User-provided BCP / KJV recordings)
   const sentence = openingSentences[sentenceIdx] || openingSentences[0];
+  const specificSentenceAudio = OPENING_SENTENCE_AUDIO[sentenceIdx] || [];
   sections.push({
     id: 'tts-opening-sentence',
     title: 'The Opening Sentence',
-    audioSrc: LITURGICAL_AUDIO_FILES['tts-opening-sentence'],
-    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-opening-sentence'] || [
-      '/audio/Opening Sentence.mp3',
-      '/audio/Sentence.mp3',
-      '/audio/opening-sentence.mp3'
+    audioSrc: specificSentenceAudio[0] || LITURGICAL_AUDIO_FILES['tts-opening-sentence'],
+    audioCandidates: [
+      ...specificSentenceAudio,
+      ...(LITURGICAL_AUDIO_CANDIDATES['tts-opening-sentence'] || [])
     ],
     parts: [{ text: sentence.text, role: 'call' }]
   });
@@ -117,7 +117,7 @@ export function buildLiturgySpeechSections({
     parts: [{ text: confession, role: 'call' }]
   });
 
-  // 4. The Collect for Pardon
+  // 4. The Collect for Pardon (including Amen)
   sections.push({
     id: 'tts-absolution',
     title: 'The Collect for Pardon',
@@ -127,16 +127,9 @@ export function buildLiturgySpeechSections({
       '/audio/Collect For Pardon.mp3'
     ],
     parts: [
-      { text: absolutionSubstitute, role: 'call' }
+      { text: absolutionSubstitute, role: 'call' },
+      { text: 'Amen.', role: 'response' }
     ]
-  });
-
-  // 5. Amen Response
-  sections.push({
-    id: 'tts-absolution-amen',
-    title: 'The Response',
-    audioSrc: LITURGICAL_AUDIO_FILES['tts-absolution-amen'],
-    parts: [{ text: 'Amen.', role: 'response' }]
   });
 
   // 6. The Lord's Prayer

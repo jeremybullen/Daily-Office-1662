@@ -45,7 +45,7 @@ function parsePsalms(str: string) {
 
 export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings, onOpenAbout, onAudioStateChange }: LiturgyProps) {
 
-    const [sentenceIdx, setSentenceIdx] = useState(0);
+    const [sentenceIdx, setSentenceIdx] = useState(() => Math.floor(Math.random() * openingSentences.length));
     const [useBenedicite, setUseBenedicite] = useState(false);
     const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(false);
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
@@ -119,10 +119,17 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         }
     }, [speech.isPlaying, speech.isPaused, isAudioPlayerOpen, onAudioStateChange, speech.play, speech.pause]);
 
-    // Stop speech when office or date changes
+    // Stop speech and pick a random opening sentence when office or date changes
     useEffect(() => {
         speech.stop();
         setIsAudioPlayerOpen(false);
+        setSentenceIdx(prev => {
+            const count = openingSentences.length;
+            if (count <= 1) return 0;
+            let next = Math.floor(Math.random() * count);
+            if (next === prev) next = (next + 1) % count;
+            return next;
+        });
     }, [office, selectedDate]);
 
     const getHighlightClass = (sectionId: string, baseClass: string = '') => {
@@ -138,7 +145,15 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const activeFirstLesson = useFirstAlt && readings.firstLessonAlt ? readings.firstLessonAlt : readings.firstLesson;
     const activeSecondLesson = useSecondAlt && readings.secondLessonAlt ? readings.secondLessonAlt : readings.secondLesson;
 
-    const handleNextSentence = () => setSentenceIdx(i => (i + 1) % openingSentences.length);
+    const handleNextSentence = () => {
+        setSentenceIdx(prev => {
+            const count = openingSentences.length;
+            if (count <= 1) return 0;
+            let next = Math.floor(Math.random() * count);
+            if (next === prev) next = (next + 1) % count;
+            return next;
+        });
+    };
 
     
     const activeCanticle1 = office === 'morning' ? (useBenedicite ? 'benedicite' : 'teDeum') : (useAlternativeEveningCanticle1 ? 'cantate' : 'magnificat');
@@ -200,24 +215,35 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <P>{confession}</P>
              </Section>
 
-             {/* Collect for Pardon */}
-             <Section 
-                 id="tts-absolution"
-                 className={getHighlightClass('tts-absolution', '!mb-6 md:!mb-8')}
-                 title="The Collect for Pardon"
-                 rubric="The Minister or person saying the Service shall read the Collect for Pardon, that person and the people still kneeling."
-             >
-                 <P>{absolutionSubstitute}</P>
-             </Section>
+             {/* Collect for Pardon & Amen */}
+             <div id="tts-absolution" className={`mb-12 md:mb-16 scroll-mt-24 ${getHighlightClass('tts-absolution')}`}>
+                 {/* The Collect for Pardon */}
+                 <div className="flex flex-col md:flex-row gap-2 md:gap-12 mb-6 md:mb-8">
+                     <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
+                         <h3 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-80 mb-2">
+                             The Collect for Pardon
+                         </h3>
+                         <div className="rubric text-sm space-y-2 opacity-90">
+                             The Minister or person saying the Service shall read the Collect for Pardon, that person and the people still kneeling.
+                         </div>
+                     </div>
+                     <div className="md:w-3/4 flex-1">
+                         <P>{absolutionSubstitute}</P>
+                     </div>
+                 </div>
 
-             {/* Amen Rubric and Response */}
-             <Section 
-                 id="tts-absolution-amen"
-                 className={getHighlightClass('tts-absolution-amen', '!mb-12 md:!mb-16')}
-                 rubric="The people shall answer here, and at the end of all other prayers,"
-             >
-                 <P className="font-bold">Amen.</P>
-             </Section>
+                 {/* Amen Rubric and Response */}
+                 <div className="flex flex-col md:flex-row gap-2 md:gap-12">
+                     <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
+                         <div className="rubric text-sm space-y-2 opacity-90">
+                             The people shall answer here, and at the end of all other prayers,
+                         </div>
+                     </div>
+                     <div className="md:w-3/4 flex-1">
+                         <P className="font-bold">Amen.</P>
+                     </div>
+                 </div>
+             </div>
 
              {/* Lord's Prayer */}
              <Section 
@@ -243,17 +269,34 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Versicles & Gloria Patri */}
-             <Section id="tts-versicles" className={getHighlightClass('tts-versicles')} title="The Versicles">
-                 <div className="space-y-4">
-                     {initialVersicles.slice(0, 2).map((v, i) => (
-                         <div key={i}>
-                            <P className="text-opacity-90">{v.v}</P>
-                            <P className="font-bold">{v.r}</P>
+             <div id="tts-versicles" className={`mb-12 md:mb-16 scroll-mt-24 ${getHighlightClass('tts-versicles')}`}>
+                 {/* First Part: The Versicles */}
+                 <div className="flex flex-col md:flex-row gap-2 md:gap-12 mb-6 md:mb-8">
+                     <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
+                         <h3 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-80 mb-2">
+                             The Versicles
+                         </h3>
+                     </div>
+                     <div className="md:w-3/4 flex-1">
+                         <div className="space-y-4">
+                             {initialVersicles.slice(0, 2).map((v, i) => (
+                                 <div key={i}>
+                                    <P className="text-opacity-90">{v.v}</P>
+                                    <P className="font-bold">{v.r}</P>
+                                 </div>
+                             ))}
                          </div>
-                     ))}
+                     </div>
+                 </div>
 
-                     <div className="pt-2 border-t border-black/5 dark:border-white/5">
-                         <p className="font-serif italic text-xs md:text-sm opacity-60 mb-3">Here, all standing up.</p>
+                 {/* Second Part: Standing Rubric & Gloria Patri */}
+                 <div className="flex flex-col md:flex-row gap-2 md:gap-12">
+                     <div className="md:w-1/4 md:text-right md:shrink-0 md:pt-1.5 mb-4 md:mb-0">
+                         <div className="rubric text-sm space-y-2 opacity-90">
+                             Here, all standing up.
+                         </div>
+                     </div>
+                     <div className="md:w-3/4 flex-1">
                          <div className="space-y-4">
                              {initialVersicles.slice(2).map((v, i) => (
                                  <div key={i}>
@@ -264,7 +307,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          </div>
                      </div>
                  </div>
-             </Section>
+             </div>
 
              {/* Venite (Morning only, unless Ash Wed/Good Fri) */}
              {office === 'morning' && !isAshWedOrGoodFri && (

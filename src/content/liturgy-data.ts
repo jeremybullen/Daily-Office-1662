@@ -3,7 +3,13 @@ export const openingSentences = [
   { text: "I acknowledge my transgressions, and my sin is ever before me.", citation: "Psalm 51. 3." },
   { text: "Hide thy face from my sins, and blot out all mine iniquities.", citation: "Psalm 51. 9." },
   { text: "The sacrifices of God are a broken spirit: a broken and a contrite heart, O God, thou wilt not despise.", citation: "Psalm 51. 17." },
-  { text: "Rend your heart, and not your garments, and turn unto the Lord your God: for he is gracious and merciful, slow to anger, and of great kindness, and repenteth him of the evil.", citation: "Joel 2. 13." }
+  { text: "Rend your heart, and not your garments, and turn unto the Lord your God: for he is gracious and merciful, slow to anger, and of great kindness, and repenteth him of the evil.", citation: "Joel 2. 13." },
+  { text: "To the Lord our God belong mercies and forgivenesses, though we have rebelled against him; neither have we obeyed the voice of the Lord our God, to walk in his laws which he set before us.", citation: "Daniel 9. 9, 10." },
+  { text: "O Lord, correct me, but with judgment; not in thine anger, lest thou bring me to nothing.", citation: "Jeremiah 10. 24. Psalm 6. 1." },
+  { text: "Repent ye; for the Kingdom of Heaven is at hand.", citation: "St. Matthew 3. 2." },
+  { text: "I will arise, and go to my father, and will say unto him, Father, I have sinned against heaven, and before thee, and am no more worthy to be called thy son.", citation: "St. Luke 15. 18, 19." },
+  { text: "Enter not into judgment with thy servant, O Lord; for in thy sight shall no man living be justified.", citation: "Psalm 143. 2." },
+  { text: "If we say that we have no sin, we deceive ourselves, and the truth is not in us: but if we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.", citation: "1 St. John 1. 8, 9." }
 ];
 
 export const exhortation = {

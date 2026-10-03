@@ -299,11 +299,13 @@ async function startServer() {
     }
   });
 
-  // Serve local liturgical audio recordings explicitly and return 404 for missing audio
-  const audioDir = fs.existsSync(path.join(process.cwd(), 'dist', 'audio'))
-    ? path.join(process.cwd(), 'dist', 'audio')
-    : path.join(process.cwd(), 'public', 'audio');
-  app.use('/audio', express.static(audioDir));
+  // Serve local liturgical audio recordings explicitly: check public/audio first (for newly added files), then dist/audio
+  if (fs.existsSync(path.join(process.cwd(), 'public', 'audio'))) {
+    app.use('/audio', express.static(path.join(process.cwd(), 'public', 'audio')));
+  }
+  if (fs.existsSync(path.join(process.cwd(), 'dist', 'audio'))) {
+    app.use('/audio', express.static(path.join(process.cwd(), 'dist', 'audio')));
+  }
   app.all('/audio/*', (req, res) => {
     res.status(404).send('Audio file not found');
   });
