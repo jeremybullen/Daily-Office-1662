@@ -36,7 +36,6 @@ interface BuilderOptions {
   useAlternativeEveningCanticle1: boolean;
   useAlternativeCanticle2: boolean;
   isAthanasian: boolean;
-  useAmericanStatePrayers: boolean;
   isAshWedOrGoodFri: boolean;
 }
 
@@ -81,7 +80,6 @@ export function buildLiturgySpeechSections({
   useAlternativeEveningCanticle1,
   useAlternativeCanticle2,
   isAthanasian,
-  useAmericanStatePrayers,
   isAshWedOrGoodFri
 }: BuilderOptions): LiturgySpeechSection[] {
   const sections: LiturgySpeechSection[] = [];
@@ -436,29 +434,21 @@ export function buildLiturgySpeechSections({
     parts: [{ text: thirdCollect, role: 'call' }]
   });
 
-  // 21. State Prayers
-  if (useAmericanStatePrayers) {
-    sections.push({
-      id: 'tts-state-prayers',
-      title: 'Prayer for Civil Authority',
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-president'],
-      parts: [
-        { text: statePrayers.president, role: 'call' },
-        { text: statePrayers.clergyAndPeople, role: 'call' }
-      ]
-    });
-  } else {
-    sections.push({
-      id: 'tts-state-prayers',
-      title: 'State Prayers',
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-state-prayers-king'],
-      parts: [
-        { text: statePrayers.kingsMajesty, role: 'call' },
-        { text: statePrayers.royalFamily, role: 'call' },
-        { text: statePrayers.clergyAndPeople, role: 'call' }
-      ]
-    });
-  }
+  // 21. A Prayer for the President and all in Civil Authority
+  sections.push({
+    id: 'tts-prayer-president',
+    title: 'A Prayer for the President',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-prayer-president'] || LITURGICAL_AUDIO_FILES['tts-state-prayers'],
+    parts: [{ text: statePrayers.president, role: 'call' }]
+  });
+
+  // 22. A Prayer for the Clergy and People
+  sections.push({
+    id: 'tts-prayer-clergy',
+    title: 'A Prayer for the Clergy and People',
+    audioSrc: LITURGICAL_AUDIO_FILES['tts-prayer-clergy'],
+    parts: [{ text: statePrayers.clergyAndPeople, role: 'call' }]
+  });
 
   // 22. Prayer of Saint Chrysostom
   sections.push({

@@ -28,6 +28,7 @@ export const initialVersicles = [
 
 export const suffrages = [
   { v: "O Lord, shew thy mercy upon us.", r: "And grant us thy salvation." },
+  { v: "O Lord, save them that rule.", r: "And mercifully hear us when we call upon thee." },
   { v: "Endue thy Ministers with righteousness.", r: "And make thy chosen people joyful." },
   { v: "O Lord, save thy people.", r: "And bless thine inheritance." },
   { v: "Give peace in our time, O Lord.", r: "Because there is none other that fighteth for us, but only thou, O God." },
@@ -234,8 +235,6 @@ export const athanasianCreed = [
 ];
 
 export const statePrayers = {
-    kingsMajesty: "O Lord our heavenly Father, high and mighty, King of kings, Lord of lords, the only Ruler of princes, who dost from thy throne behold all the dwellers upon earth: Most heartily we beseech thee with thy favour to behold our most gracious Sovereign Lord, King CHARLES; and so replenish him with the grace of thy Holy Spirit, that he may alway incline to thy will, and walk in thy way: Endue him plenteously with heavenly gifts; grant him in health and wealth long to live; strengthen him that he may vanquish and overcome all his enemies; and finally after this life he may attain everlasting joy and felicity; through Jesus Christ our Lord. Amen.",
-    royalFamily: "Almighty God, the fountain of all goodness, we humbly beseech thee to bless Camilla the Queen Consort, William Prince of Wales, the Princess of Wales, and all the Royal Family: Endue them with thy Holy Spirit; enrich them with thy heavenly grace; prosper them with all happiness; and bring them to thine everlasting kingdom; through Jesus Christ our Lord. Amen.",
     president: "O Lord, our heavenly Father, the high and mighty Ruler of the universe, who dost from thy throne behold all the dwellers upon earth; Most heartily we beseech thee, with thy favour to behold and bless thy servant THE PRESIDENT OF THE UNITED STATES, and all others in authority; and so replenish them with the grace of thy Holy Spirit, that they may always incline to thy will, and walk in thy way. Endue them plenteously with heavenly gifts; grant them in health and prosperity long to live; and finally, after this life, to attain everlasting joy and felicity; through Jesus Christ our Lord. Amen.",
     clergyAndPeople: "Almighty and everlasting God, who alone workest great marvels: Send down upon our Bishops, and Curates, and all Congregations committed to their charge, the healthful Spirit of thy grace; and that they may truly please thee, pour upon them the continual dew of thy blessing. Grant this, O Lord, for the honour of our Advocate and Mediator, Jesus Christ. Amen."
 };

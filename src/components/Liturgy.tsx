@@ -49,7 +49,6 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const [useBenedicite, setUseBenedicite] = useState(false);
     const [useAlternativeEveningCanticle1, setUseAlternativeEveningCanticle1] = useState(false);
     const [useAlternativeCanticle2, setUseAlternativeCanticle2] = useState(false);
-    const [useAmericanStatePrayers, setUseAmericanStatePrayers] = useState(true);
     const [hymnMode, setHymnMode] = useState<Record<string, boolean>>({});
     const [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false);
     
@@ -84,7 +83,6 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             useAlternativeEveningCanticle1,
             useAlternativeCanticle2,
             isAthanasian,
-            useAmericanStatePrayers,
             isAshWedOrGoodFri
         });
     }, [
@@ -96,7 +94,6 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         useAlternativeEveningCanticle1,
         useAlternativeCanticle2,
         isAthanasian,
-        useAmericanStatePrayers,
         isAshWedOrGoodFri
     ]);
 
@@ -245,8 +242,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  )}
              </Section>
 
-             {/* Versicles */}
-             <Section id="tts-versicles" className={getHighlightClass('tts-versicles', 'mb-6 md:mb-8')} title="The Versicles">
+             {/* Versicles & Gloria Patri */}
+             <Section id="tts-versicles" className={getHighlightClass('tts-versicles')} title="The Versicles">
                  <div className="space-y-4">
                      {initialVersicles.slice(0, 2).map((v, i) => (
                          <div key={i}>
@@ -254,17 +251,18 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                             <P className="font-bold">{v.r}</P>
                          </div>
                      ))}
-                 </div>
-             </Section>
 
-             <Section id="tts-versicles-gloria" className={getHighlightClass('tts-versicles-gloria')} rubric="Here, all standing up">
-                 <div className="space-y-4">
-                     {initialVersicles.slice(2).map((v, i) => (
-                         <div key={i}>
-                            <P className="text-opacity-90">{v.v}</P>
-                            <P className="font-bold">{v.r}</P>
+                     <div className="pt-2 border-t border-black/5 dark:border-white/5">
+                         <p className="font-serif italic text-xs md:text-sm opacity-60 mb-3">Here, all standing up.</p>
+                         <div className="space-y-4">
+                             {initialVersicles.slice(2).map((v, i) => (
+                                 <div key={i}>
+                                    <P className="text-opacity-90">{v.v}</P>
+                                    <P className="font-bold">{v.r}</P>
+                                 </div>
+                             ))}
                          </div>
-                     ))}
+                     </div>
                  </div>
              </Section>
 
@@ -517,7 +515,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Suffrages */}
-             <Section title="The Suffrages">
+             <Section id="tts-suffrages" className={getHighlightClass('tts-suffrages')} title="The Suffrages">
                  <div className="space-y-4">
                      {suffrages.map((v, i) => (
                          <div key={i}>
@@ -529,11 +527,11 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Collects */}
-             <Section title="The Collect of the Day" metadata={readings.feastName || readings.liturgicalWeek}>
+             <Section id="tts-collect-day" className={getHighlightClass('tts-collect-day')} title="The Collect of the Day" metadata={readings.feastName || readings.liturgicalWeek}>
                  <P>{readings.collect}</P>
              </Section>
                  
-             <Section title="The Second Collect" metadata={office === 'morning' ? "For Peace." : "For Peace."}>
+             <Section id="tts-collect-second" className={getHighlightClass('tts-collect-second')} title="The Second Collect" metadata={office === 'morning' ? "For Peace." : "For Peace."}>
                  {office === 'morning' ? (
                      <P>O God, who art the author of peace and lover of concord, in knowledge of whom standeth our eternal life, whose service is perfect freedom: Defend us thy humble servants in all assaults of our enemies; that we, surely trusting in thy defence, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen.</P>
                  ) : (
@@ -541,7 +539,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  )}
              </Section>
 
-             <Section title="The Third Collect" metadata={office === 'morning' ? "For Grace." : "For Aid against all Perils."}>
+             <Section id="tts-collect-third" className={getHighlightClass('tts-collect-third')} title="The Third Collect" metadata={office === 'morning' ? "For Grace." : "For Aid against all Perils."}>
                  {office === 'morning' ? (
                      <P>O Lord, our heavenly Father, Almighty and everlasting God, who hast safely brought us to the beginning of this day: Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings may be ordered by thy governance, to do always that is righteous in thy sight; through Jesus Christ our Lord. Amen.</P>
                  ) : (
@@ -549,49 +547,22 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  )}
              </Section>
 
-             {/* State Prayers & Thanksgiving */}
-             {useAmericanStatePrayers ? (
-                         <Section 
-                            title="A Prayer for the President and all in Civil Authority" 
-                            onTitleClick={() => setUseAmericanStatePrayers(false)}
-                         >
-                             <div className="select-none animate-in fade-in duration-500">
-                                 <P>{statePrayers.president}</P>
-                             </div>
-                         </Section>
-                     ) : (
-                         <>
-                             <Section 
-                                title="A Prayer for the King's Majesty"
-                                onTitleClick={() => setUseAmericanStatePrayers(true)}
-                             >
-                                 <div className="select-none animate-in fade-in duration-500">
-                                     <P>{statePrayers.kingsMajesty}</P>
-                                 </div>
-                             </Section>
-                             
-                             <Section 
-                                title="A Prayer for the Royal Family"
-                                onTitleClick={() => setUseAmericanStatePrayers(true)}
-                             >
-                                 <div className="select-none animate-in fade-in duration-500">
-                                     <P>{statePrayers.royalFamily}</P>
-                                 </div>
-                             </Section>
-                         </>
-                     )}
+             {/* State Prayers */}
+             <Section id="tts-prayer-president" className={getHighlightClass('tts-prayer-president')} title="A Prayer for the President and all in Civil Authority">
+                 <P>{statePrayers.president}</P>
+             </Section>
                      
-                     <Section title="A Prayer for the Clergy and People">
-                         <P>{statePrayers.clergyAndPeople}</P>
-                     </Section>
+             <Section id="tts-prayer-clergy" className={getHighlightClass('tts-prayer-clergy')} title="A Prayer for the Clergy and People">
+                 <P>{statePrayers.clergyAndPeople}</P>
+             </Section>
 
              {/* Prayer of St Chrysostom */}
-             <Section title="A Prayer of Saint Chrysostom">
+             <Section id="tts-st-chrysostom" className={getHighlightClass('tts-st-chrysostom')} title="A Prayer of Saint Chrysostom">
                  <P>{stChrysostom}</P>
              </Section>
 
              {/* The Grace */}
-             <Section title="The Grace" metadata="2 Corinthians 13:14">
+             <Section id="tts-the-grace" className={getHighlightClass('tts-the-grace')} title="The Grace" metadata="2 Corinthians 13:14">
                  <P>{theGrace}</P>
              </Section>
              

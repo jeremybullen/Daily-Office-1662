@@ -172,6 +172,7 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
 
   // Lesser Litany & Suffrages
   'tts-lesser-litany': [
+    '/audio/LesserLitany.mp3',
     '/audio/Lesser Litany.mp3',
     '/audio/The Lesser Litany.mp3',
     '/audio/lesser-litany.mp3',
@@ -212,19 +213,27 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/evening/collect-aid.mp3'
   ],
 
-  // State Prayers
-  'tts-state-prayers': [
-    '/audio/State Prayers.mp3',
-    '/audio/Prayer for the King.mp3',
+  // State Prayers & Civil Authority
+  'tts-prayer-president': [
     '/audio/Prayer for the President.mp3',
-    '/audio/prayer-king.mp3',
     '/audio/prayer-president.mp3',
-    '/audio/state/prayer-president.mp3',
-    '/audio/state/prayer-king.mp3'
+    '/audio/State Prayers.mp3'
+  ],
+  'tts-prayer-clergy': [
+    '/audio/Prayer for Clergy and People.mp3',
+    '/audio/prayer-clergy-and-people.mp3',
+    '/audio/prayer-clergy.mp3'
+  ],
+  'tts-state-prayers': [
+    '/audio/Prayer for the President.mp3',
+    '/audio/State Prayers.mp3',
+    '/audio/Prayer for Clergy and People.mp3',
+    '/audio/prayer-president.mp3'
   ],
 
   // Prayer of St. Chrysostom
   'tts-st-chrysostom': [
+    '/audio/Prayer of Chrysostom.mp3',
     '/audio/Prayer of Saint Chrysostom.mp3',
     '/audio/Prayer of St Chrysostom.mp3',
     '/audio/Saint Chrysostom.mp3',
