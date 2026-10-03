@@ -8,6 +8,8 @@ interface AudioPlayerProps {
   isCurrentHymn?: boolean;
   serviceMode?: 'spoken' | 'music';
   onToggleServiceMode?: () => void;
+  onSelectSpoken?: () => void;
+  onSelectHymns?: () => void;
   currentSectionTitle: string;
   currentSectionIndex: number;
   totalSections: number;
@@ -28,6 +30,8 @@ export function AudioPlayer({
   isCurrentHymn = false,
   serviceMode = 'spoken',
   onToggleServiceMode,
+  onSelectSpoken,
+  onSelectHymns,
   currentSectionTitle,
   currentSectionIndex,
   totalSections,
@@ -151,26 +155,55 @@ export function AudioPlayer({
               </button>
             </div>
 
-            {/* Mode Indicator & Switcher */}
-            {onToggleServiceMode && (
-              <button
-                type="button"
-                onClick={onToggleServiceMode}
-                title={`Current mode: ${serviceMode === 'music' ? 'Music (Hymns enabled)' : 'Spoken (Prose only)'}. Click to switch.`}
-                className="px-2 py-1 rounded-lg text-[10px] font-medium tracking-wide flex items-center gap-1 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-all opacity-85 hover:opacity-100 cursor-pointer"
+            {/* Mode Segmented Control: Spoken vs Hymns */}
+            {(onToggleServiceMode || onSelectSpoken || onSelectHymns) && (
+              <div 
+                role="radiogroup" 
+                aria-label="Service Audio Mode"
+                className="flex items-center p-0.5 rounded-xl bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/5 text-[11px] font-medium tracking-tight shrink-0"
               >
-                {serviceMode === 'music' ? (
-                  <>
-                    <Music size={11} className="text-amber-600 dark:text-amber-400" />
-                    <span>Music</span>
-                  </>
-                ) : (
-                  <>
-                    <Mic size={11} className="opacity-70" />
-                    <span>Spoken</span>
-                  </>
-                )}
-              </button>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={serviceMode === 'spoken'}
+                  onClick={() => {
+                    if (serviceMode !== 'spoken') {
+                      if (onSelectSpoken) onSelectSpoken();
+                      else if (onToggleServiceMode) onToggleServiceMode();
+                    }
+                  }}
+                  title="Spoken prose without hymns"
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                    serviceMode === 'spoken'
+                      ? 'bg-amber-600 dark:bg-amber-500 text-white shadow-xs font-semibold'
+                      : 'opacity-65 hover:opacity-100 hover:text-black dark:hover:text-white'
+                  }`}
+                >
+                  <Mic size={11} />
+                  <span>Spoken</span>
+                </button>
+
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={serviceMode === 'music'}
+                  onClick={() => {
+                    if (serviceMode !== 'music') {
+                      if (onSelectHymns) onSelectHymns();
+                      else if (onToggleServiceMode) onToggleServiceMode();
+                    }
+                  }}
+                  title="Includes sung canticles and hymns"
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                    serviceMode === 'music'
+                      ? 'bg-amber-600 dark:bg-amber-500 text-white shadow-xs font-semibold'
+                      : 'opacity-65 hover:opacity-100 hover:text-black dark:hover:text-white'
+                  }`}
+                >
+                  <Music size={11} />
+                  <span>Hymns</span>
+                </button>
+              </div>
             )}
           </div>
         </div>

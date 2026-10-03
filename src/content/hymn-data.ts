@@ -8,7 +8,7 @@ export interface Hymn {
 export const hymns: Record<string, Hymn> = {
     venite: {
         title: "Now with joyful exultation (Psalm 95)",
-        imageUrl: '/hymns/Psalm%2095.png',
+        imageUrl: '/hymns/Psalm-95.png',
         audioUrl: '/audio/184. Now with joyful exultation (Psalm 95).mp3',
         extraVerses: [
             ["2. The depths of earth are in his hand,", "Her secret wealth at his command;", "The strength of hills that reach the sky,", "Subjected to his empire lie."],

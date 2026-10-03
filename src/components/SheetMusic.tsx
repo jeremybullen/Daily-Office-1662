@@ -21,10 +21,12 @@ export function SheetMusic({ imageUrl, extraVerses }: SheetMusicProps) {
     return (
         <div className="animate-in fade-in duration-500">
             {/* Sheet Music Images Container */}
-            <div className="w-full flex flex-col items-center justify-center gap-4 my-6">
+            <div className="w-full flex flex-col items-center justify-center gap-6 my-6">
                 {images.length > 0 && images[0] ? (
                     images.map((img, i) => (
-                        <img key={i} src={getSafeSrc(img)} alt={`Hymn sheet music page ${i + 1}`} className="w-full max-w-2xl object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:contrast-150 dark:brightness-150" />
+                        <div key={i} className="w-full max-w-2xl p-2.5 sm:p-3.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] shadow-xs ring-1 ring-black/5 dark:ring-white/5 transition-all">
+                            <img src={getSafeSrc(img)} alt={`Hymn sheet music page ${i + 1}`} className="w-full object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:contrast-150 dark:brightness-150 rounded" />
+                        </div>
                     ))
                 ) : (
                     <div className="p-8 text-center opacity-60 italic">

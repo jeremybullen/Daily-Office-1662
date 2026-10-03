@@ -13,6 +13,7 @@ import { Check, Music, Info, Volume2 } from 'lucide-react';
 import { buildLiturgySpeechSections } from '../utils/liturgySpeechBuilder';
 import { useLiturgicalSpeech } from '../hooks/useLiturgicalSpeech';
 import { AudioPlayer } from './AudioPlayer';
+import { DropCapText, VersiclePair } from './LiturgicalTypography';
 
 interface LiturgyProps {
     office: OfficeType;
@@ -245,7 +246,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                             exit={{ opacity: 0, y: -5 }}
                             transition={{ duration: 0.3 }}
                         >
-                            {openingSentences[sentenceIdx].text}
+                            <DropCapText text={openingSentences[sentenceIdx].text} />
                         </motion.p>
                     </AnimatePresence>
                 </div>
@@ -253,7 +254,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
 
              {/* Exhortation */}
              <Section id="tts-exhortation" className={getHighlightClass('tts-exhortation')} title="The Exhortation">
-                 <P>{exhortation.full}</P>
+                 <P className="liturgical-prose"><DropCapText text={exhortation.full} /></P>
              </Section>
 
              {/* Confession */}
@@ -263,7 +264,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  title="A General Confession"
                  rubric="of the whole Congregation after the Minister, all kneeling."
              >
-                 <P>{confession}</P>
+                 <P className="liturgical-prose"><DropCapText text={confession} /></P>
              </Section>
 
              {/* Collect for Pardon & Amen */}
@@ -279,7 +280,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          </div>
                      </div>
                      <div className="md:w-3/4 flex-1">
-                         <P>{absolutionSubstitute}</P>
+                         <P className="liturgical-prose"><DropCapText text={absolutionSubstitute} /></P>
                      </div>
                  </div>
 
@@ -303,7 +304,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  title="The Lord's Prayer"
                  rubric="Then the Minister shall kneel, and say the Lord's Prayer with an audible voice; the people also kneeling, and repeating it with him, both here, and wheresoever else it is used in Divine Service."
              >
-                 <P>{lordsPrayer}</P>
+                 <P className="liturgical-prose"><DropCapText text={lordsPrayer} /></P>
              </Section>
 
              {/* Versicles & Gloria Patri */}
@@ -316,12 +317,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          </h3>
                      </div>
                      <div className="md:w-3/4 flex-1">
-                         <div className="space-y-4">
+                         <div className="space-y-3">
                              {initialVersicles.slice(0, 2).map((v, i) => (
-                                 <div key={i}>
-                                    <P className="text-opacity-90">{v.v}</P>
-                                    <P className="font-bold">{v.r}</P>
-                                 </div>
+                                 <VersiclePair key={i} v={v.v} r={v.r} />
                              ))}
                          </div>
                      </div>
@@ -335,12 +333,9 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          </div>
                      </div>
                      <div className="md:w-3/4 flex-1">
-                         <div className="space-y-4">
+                         <div className="space-y-3">
                              {initialVersicles.slice(2).map((v, i) => (
-                                 <div key={i}>
-                                    <P className="text-opacity-90">{v.v}</P>
-                                    <P className="font-bold">{v.r}</P>
-                                 </div>
+                                 <VersiclePair key={i} v={v.v} r={v.r} />
                              ))}
                          </div>
                      </div>
@@ -365,7 +360,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          <SheetMusic title={hymns.venite.title} imageUrl={hymns.venite.imageUrl} audioUrl={hymns.venite.audioUrl} extraVerses={hymns.venite.extraVerses} />
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                            <P>O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation.</P>
+                            <P><DropCapText text="O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation." /></P>
                             <P>Let us come before his presence with thanksgiving : and shew ourselves glad in him with Psalms.</P>
                             <P>For the Lord is a great God : and a great King above all gods.</P>
                             <P>In his hand are all the corners of the earth : and the strength of the hills is his also.</P>
@@ -423,7 +418,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                         {!useBenedicite ? (
                             <div className="animate-in fade-in duration-500">
                                 <div className="space-y-1 leading-normal">
-                                    {teDeum.map((verse, i) => <P key={i}>{verse}</P>)}
+                                    {teDeum.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
                                 </div>
                             </div>
                         ) : (
@@ -431,7 +426,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 {benediciteGroups.map((group, i) => (
                                     <div key={i} className="mb-4 sm:mb-5">
                                         <div className="space-y-0.5 sm:space-y-1 mb-1.5">
-                                            {group.map((v, j) => <P key={j} className="leading-normal">{v}</P>)}
+                                            {group.map((v, j) => <P key={j} className="leading-normal">{i === 0 && j === 0 ? <DropCapText text={v} /> : v}</P>)}
                                         </div>
                                         <P className="font-bold opacity-90 leading-normal">{benediciteRefrain}</P>
                                     </div>
@@ -447,7 +442,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      <div className="select-none">
                          {!useAlternativeEveningCanticle1 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                                <P>My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour.</P>
+                                <P><DropCapText text="My soul doth magnify the Lord : and my spirit hath rejoiced in God my Saviour." /></P>
                                 <P>For he hath regarded : the lowliness of his hand-maiden.</P>
                                 <P>For behold, from henceforth : all generations shall call me blessed.</P>
                                 <P>For he that is mighty hath magnified me : and holy is his Name.</P>
@@ -461,7 +456,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                                 {cantateDomino.map((verse, i) => <P key={i}>{verse}</P>)}
+                                 {cantateDomino.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
                                  <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
@@ -495,7 +490,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      {office === 'morning' ? (
                          !useAlternativeCanticle2 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                                 <P>Blessed be the Lord God of Israel : for he hath visited, and redeemed his people;</P>
+                                 <P><DropCapText text="Blessed be the Lord God of Israel : for he hath visited, and redeemed his people;" /></P>
                                  <P>And hath raised up a mighty salvation for us : in the house of his servant David;</P>
                                  <P>As he spake by the mouth of his holy Prophets : which have been since the world began;</P>
                                  <P>That we should be saved from our enemies : and from the hands of all that hate us;</P>
@@ -512,7 +507,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                                 {jubilateDeo.map((verse, i) => <P key={i}>{verse}</P>)}
+                                 {jubilateDeo.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
                                  <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
@@ -520,7 +515,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      ) : (
                          !useAlternativeCanticle2 ? (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                                 <P>Lord, now lettest thou thy servant depart in peace : according to thy word.</P>
+                                 <P><DropCapText text="Lord, now lettest thou thy servant depart in peace : according to thy word." /></P>
                                  <P>For mine eyes have seen : thy salvation,</P>
                                  <P>Which thou hast prepared : before the face of all people;</P>
                                  <P>To be a light to lighten the Gentiles : and to be the glory of thy people Israel.</P>
@@ -529,7 +524,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                                 {deusMisereatur.map((verse, i) => <P key={i}>{verse}</P>)}
+                                 {deusMisereatur.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
                                  <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
                                  <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
                              </div>
@@ -538,6 +533,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  </div>
                  )}
              </Section>
+
              {/* Creed */}
              <Section 
                  title={isAthanasian ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
@@ -547,11 +543,11 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <div className="select-none">
                      {!isAthanasian ? (
                          <div className="animate-in fade-in duration-500">
-                             <P>{apostlesCreed}</P>
+                             <P className="liturgical-prose"><DropCapText text={apostlesCreed} /></P>
                          </div>
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
-                             {athanasianCreed.map((verse, i) => <P key={i}>{verse}</P>)}
+                             {athanasianCreed.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
                          </div>
                      )}
                  </div>
@@ -560,15 +556,21 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Lesser Litany */}
              <Section title="The Lesser Litany">
                  <div className="space-y-4">
-                     <div>
-                         <P>The Lord be with you.</P>
-                         <P className="font-bold">And with thy spirit.</P>
-                     </div>
-                     <P>Let us pray.</P>
-                     <div>
-                         <P>Lord, have mercy upon us.</P>
-                         <P className="font-bold">Christ, have mercy upon us.</P>
-                         <P>Lord, have mercy upon us.</P>
+                     <VersiclePair v="The Lord be with you." r="And with thy spirit." />
+                     <P className="rubric">Let us pray.</P>
+                     <div className="space-y-1">
+                         <P className="flex items-baseline gap-2.5">
+                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
+                             <span className="flex-1">Lord, have mercy upon us.</span>
+                         </P>
+                         <P className="font-bold flex items-baseline gap-2.5">
+                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Answer.</span>
+                             <span className="flex-1">Christ, have mercy upon us.</span>
+                         </P>
+                         <P className="flex items-baseline gap-2.5">
+                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
+                             <span className="flex-1">Lord, have mercy upon us.</span>
+                         </P>
                      </div>
                  </div>
              </Section>
@@ -576,63 +578,61 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Lord's Prayer 2 */}
              <Section title="The Lord's Prayer">
                  <div className="animate-in fade-in duration-500">
-                     <P>{lordsPrayer}</P>
+                     <P className="liturgical-prose"><DropCapText text={lordsPrayer} /></P>
                  </div>
              </Section>
 
              {/* Suffrages */}
              <Section id="tts-suffrages" className={getHighlightClass('tts-suffrages')} title="The Suffrages">
-                 <div className="space-y-4">
+                 <div className="space-y-3">
                      {suffrages.map((v, i) => (
-                         <div key={i}>
-                            <P className="text-opacity-90">{v.v}</P>
-                            <P className="font-bold">{v.r}</P>
-                         </div>
+                         <VersiclePair key={i} v={v.v} r={v.r} />
                      ))}
                  </div>
              </Section>
 
              {/* Collects */}
              <Section id="tts-collect-day" className={getHighlightClass('tts-collect-day')} title="The Collect of the Day" metadata={readings.feastName || readings.liturgicalWeek}>
-                 <P>{readings.collect}</P>
+                 <P className="liturgical-prose"><DropCapText text={readings.collect} /></P>
              </Section>
                  
              <Section id="tts-collect-second" className={getHighlightClass('tts-collect-second')} title="The Second Collect" metadata={office === 'morning' ? "For Peace." : "For Peace."}>
                  {office === 'morning' ? (
-                     <P>O God, who art the author of peace and lover of concord, in knowledge of whom standeth our eternal life, whose service is perfect freedom: Defend us thy humble servants in all assaults of our enemies; that we, surely trusting in thy defence, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen.</P>
+                     <P className="liturgical-prose"><DropCapText text="O God, who art the author of peace and lover of concord, in knowledge of whom standeth our eternal life, whose service is perfect freedom: Defend us thy humble servants in all assaults of our enemies; that we, surely trusting in thy defence, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen." /></P>
                  ) : (
-                     <P>O God, from whom all holy desires, all good counsels, and all just works do proceed: Give unto thy servants that peace which the world cannot give; that both our hearts may be set to obey thy commandments, and also that by thee we being defended from the fear of our enemies may pass our time in rest and quietness; through the merits of Jesus Christ our Saviour. Amen.</P>
+                     <P className="liturgical-prose"><DropCapText text="O God, from whom all holy desires, all good counsels, and all just works do proceed: Give unto thy servants that peace which the world cannot give; that both our hearts may be set to obey thy commandments, and also that by thee we being defended from the fear of our enemies may pass our time in rest and quietness; through the merits of Jesus Christ our Saviour. Amen." /></P>
                  )}
              </Section>
 
              <Section id="tts-collect-third" className={getHighlightClass('tts-collect-third')} title="The Third Collect" metadata={office === 'morning' ? "For Grace." : "For Aid against all Perils."}>
                  {office === 'morning' ? (
-                     <P>O Lord, our heavenly Father, Almighty and everlasting God, who hast safely brought us to the beginning of this day: Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings may be ordered by thy governance, to do always that is righteous in thy sight; through Jesus Christ our Lord. Amen.</P>
+                     <P className="liturgical-prose"><DropCapText text="O Lord, our heavenly Father, Almighty and everlasting God, who hast safely brought us to the beginning of this day: Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings may be ordered by thy governance, to do always that is righteous in thy sight; through Jesus Christ our Lord. Amen." /></P>
                  ) : (
-                     <P>Lighten our darkness, we beseech thee, O Lord; and by thy great mercy defend us from all perils and dangers of this night; for the love of thy only Son, our Saviour, Jesus Christ. Amen.</P>
+                     <P className="liturgical-prose"><DropCapText text="Lighten our darkness, we beseech thee, O Lord; and by thy great mercy defend us from all perils and dangers of this night; for the love of thy only Son, our Saviour, Jesus Christ. Amen." /></P>
                  )}
              </Section>
 
              {/* State Prayers */}
              <Section id="tts-prayer-president" className={getHighlightClass('tts-prayer-president')} title="A Prayer for the President and all in Civil Authority">
-                 <P>{statePrayers.president}</P>
+                 <P className="liturgical-prose"><DropCapText text={statePrayers.president} /></P>
              </Section>
                      
              <Section id="tts-prayer-clergy" className={getHighlightClass('tts-prayer-clergy')} title="A Prayer for the Clergy and People">
-                 <P>{statePrayers.clergyAndPeople}</P>
+                 <P className="liturgical-prose"><DropCapText text={statePrayers.clergyAndPeople} /></P>
              </Section>
 
              {/* Prayer of St Chrysostom */}
              <Section id="tts-st-chrysostom" className={getHighlightClass('tts-st-chrysostom')} title="A Prayer of Saint Chrysostom">
-                 <P>{stChrysostom}</P>
+                 <P className="liturgical-prose"><DropCapText text={stChrysostom} /></P>
              </Section>
 
              {/* The Grace */}
              <Section id="tts-the-grace" className={getHighlightClass('tts-the-grace')} title="The Grace" metadata="2 Corinthians 13:14">
-                 <P>{theGrace}</P>
+                 <P className="liturgical-prose"><DropCapText text={theGrace} /></P>
              </Section>
              
-             <div className="text-center my-10 md:my-14">
+             <div className="text-center my-12 md:my-16 select-none">
+                 <div className="liturgical-fleuron text-base mb-3 opacity-75">❦  ✠  ❦</div>
                  <p className="font-serif italic text-base md:text-lg opacity-85">
                      Here endeth the Order of {office === 'morning' ? 'Morning' : 'Evening'} Prayer throughout the Year.
                  </p>
@@ -673,6 +673,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  isCurrentHymn={speech.isCurrentHymn}
                  serviceMode={serviceAudioMode}
                  onToggleServiceMode={handleToggleServiceMode}
+                 onSelectSpoken={handlePlaySpoken}
+                 onSelectHymns={handlePlayMusic}
                  currentSectionTitle={speech.currentSectionTitle}
                  currentSectionIndex={speech.currentSectionIndex}
                  totalSections={speech.totalSections}

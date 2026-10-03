@@ -7,27 +7,28 @@
 
 :root {
   --bg-color: #F9F6EE;
-  --text-color: #1C1C1C;
-  --rubric-color: #8B0000;
-  --inset-bg: #EAE5D9;
-  --header-bg: rgba(249, 246, 238, 0.85);
-  --border-color: #D1CFC7;
+  --text-color: #1C1917;
+  --rubric-color: #991B1B; /* Authentic 1662 rubric vermilion (red-800) */
+  --inset-bg: #EFECE3;
+  --header-bg: rgba(249, 246, 238, 0.88);
+  --border-color: #D6D3C9;
 }
 
 .dark {
-  --bg-color: #0F172A;
-  --text-color: #E2E8F0;
-  --rubric-color: #FCA5A5; /* Softer, readable dark red */
-  --inset-bg: #1E293B;
-  --header-bg: rgba(15, 23, 42, 0.85);
-  --border-color: #334155;
+  --bg-color: #171513; /* Warm devotional candlelight charcoal */
+  --text-color: #EFE9DE; /* Warm candlelit vellum */
+  --rubric-color: #F87171; /* High-contrast warm coral rose */
+  --inset-bg: #23201C;
+  --header-bg: rgba(23, 21, 19, 0.88);
+  --border-color: #38342D;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-serif);
-  line-height: 1.45;
+  line-height: 1.68;
+  letter-spacing: 0.01em;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,6 +37,66 @@ body {
 .rubric {
   color: var(--rubric-color);
   font-style: italic;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+}
+
+.liturgical-drop-cap {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.25rem;
+  line-height: 0.82;
+  padding-top: 0.12rem;
+  padding-right: 0.45rem;
+  padding-bottom: 0.05rem;
+  font-weight: 500;
+  color: var(--rubric-color);
+  user-select: none;
+}
+
+.liturgical-small-caps {
+  font-variant-caps: all-small-caps;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.liturgical-prose {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+.versicle-mark {
+  color: var(--rubric-color);
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-weight: 600;
+  margin-right: 0.4rem;
+  user-select: none;
+  font-size: 0.95em;
+  opacity: 0.92;
+}
+
+.liturgical-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 3.5rem 0;
+}
+.liturgical-rule::before,
+.liturgical-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.22;
+}
+.liturgical-fleuron {
+  color: var(--rubric-color);
+  user-select: none;
 }
 
 .glass-header {
