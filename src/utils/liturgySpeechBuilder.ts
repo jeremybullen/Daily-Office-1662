@@ -5,11 +5,11 @@ import {
   confession, 
   absolutionSubstitute, 
   lordsPrayer, 
+  lordsPrayerNoDoxology, 
   initialVersicles, 
   venite, 
   teDeum, 
-  benediciteVerses, 
-  benediciteRefrain, 
+  benedicite, 
   magnificat, 
   cantateDomino, 
   benedictus, 
@@ -238,11 +238,10 @@ export function buildLiturgySpeechSections({
       });
     } else {
       const benParts: { text: string; role: 'call' | 'response' }[] = [];
-      for (let i = 0; i < benediciteVerses.length; i += 3) {
-        const grp = benediciteVerses.slice(i, i + 3);
-        grp.forEach(v => benParts.push({ text: v, role: 'call' }));
-        benParts.push({ text: benediciteRefrain, role: 'response' });
-      }
+      benedicite.forEach(b => {
+        benParts.push({ text: b.call, role: 'call' });
+        benParts.push({ text: b.response, role: 'response' });
+      });
       benParts.push({ text: gloriaPatriCall, role: 'call' });
       benParts.push({ text: gloriaPatriResponse, role: 'response' });
       const isBenediciteHymn = !!hymnMode?.canticle1;
@@ -410,7 +409,7 @@ export function buildLiturgySpeechSections({
     id: 'tts-lords-prayer-2',
     title: "The Lord's Prayer",
     audioSrc: LITURGICAL_AUDIO_FILES['tts-lords-prayer-2'],
-    parts: [{ text: lordsPrayer, role: 'call' }]
+    parts: [{ text: lordsPrayerNoDoxology, role: 'call' }]
   });
 
   // 17. The Suffrages

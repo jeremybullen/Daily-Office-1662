@@ -64,17 +64,21 @@ export interface VersiclePairProps {
 export function VersiclePair({ 
   v, 
   r, 
-  leaderLabel = "Priest.", 
+  leaderLabel, 
   responseLabel = "Answer." 
 }: VersiclePairProps) {
   return (
     <div className="space-y-1">
       <P className="text-opacity-90 flex items-baseline gap-2.5">
-        <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">{leaderLabel}</span>
+        {leaderLabel ? (
+          <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">{leaderLabel}</span>
+        ) : null}
         <span className="flex-1">{v}</span>
       </P>
       <P className="flex items-baseline gap-2.5">
-        <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">{responseLabel}</span>
+        {responseLabel ? (
+          <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">{responseLabel}</span>
+        ) : null}
         <span className="flex-1">{r}</span>
       </P>
     </div>

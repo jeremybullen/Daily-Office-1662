@@ -1,7 +1,7 @@
 import { P } from './GlossaryText';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { openingSentences, exhortation, confession, absolutionSubstitute, lordsPrayer, initialVersicles, suffrages, benediciteVerses, benediciteRefrain, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers } from '../content/liturgy-data';
+import { openingSentences, exhortation, confession, absolutionSubstitute, lordsPrayer, lordsPrayerNoDoxology, initialVersicles, suffrages, benedicite, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers } from '../content/liturgy-data';
 import { isAshWednesdayOrGoodFriday, isAthanasianCreedDay } from '../utils/liturgyHelpers';
 import { getReadingsForDate } from '../utils/lectionary';
 import { Translation, CompletedData, OfficeType, AppSettings } from '../types';
@@ -211,12 +211,6 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const activeCanticle1 = office === 'morning' ? (useBenedicite ? 'benedicite' : 'teDeum') : (useAlternativeEveningCanticle1 ? 'cantate' : 'magnificat');
     const activeCanticle2 = office === 'morning' ? (useAlternativeCanticle2 ? 'jubilate' : 'benedictus') : (useAlternativeCanticle2 ? 'deusMisereatur' : 'nuncDimittis');
 
-    // Group benedicite into stanzas of 3
-    const benediciteGroups = [];
-    for (let i = 0; i < benediciteVerses.length; i += 3) {
-        benediciteGroups.push(benediciteVerses.slice(i, i + 3));
-    }
-
     return (
         
         <main className="w-full max-w-[900px] mx-auto px-6 pt-24 sm:pt-32 pb-32">
@@ -262,7 +256,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  id="tts-confession"
                  className={getHighlightClass('tts-confession')}
                  title="A General Confession"
-                 rubric="of the whole Congregation after the Minister, all kneeling."
+                 rubric="all kneeling."
              >
                  <P className="liturgical-prose"><DropCapText text={confession} /></P>
              </Section>
@@ -276,7 +270,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                              The Collect for Pardon
                          </h3>
                          <div className="rubric text-sm space-y-2 opacity-90">
-                             The Minister or person saying the Service shall read the Collect for Pardon, that person and the people still kneeling.
+                             still kneeling.
                          </div>
                      </div>
                      <div className="md:w-3/4 flex-1">
@@ -302,7 +296,6 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  id="tts-lords-prayer-1"
                  className={getHighlightClass('tts-lords-prayer-1')}
                  title="The Lord's Prayer"
-                 rubric="Then the Minister shall kneel, and say the Lord's Prayer with an audible voice; the people also kneeling, and repeating it with him, both here, and wheresoever else it is used in Divine Service."
              >
                  <P className="liturgical-prose"><DropCapText text={lordsPrayer} /></P>
              </Section>
@@ -352,7 +345,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      leftAction={
                          <button onClick={(e) => toggleHymn('venite', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                              <Music size={12} />
-                             {hymnMode['venite'] ? "Prose Text" : "Hymn Version"}
+                             {hymnMode['venite'] ? "Prose Text" : "Hymn Paraphrase"}
                          </button>
                      }
                  >
@@ -401,12 +394,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  id="tts-canticle-1"
                  className={getHighlightClass('tts-canticle-1')}
                  title={office === 'morning' ? (useBenedicite ? "Benedicite, omnia opera" : "Te Deum Laudamus") : (useAlternativeEveningCanticle1 ? "Cantate Domino" : "Magnificat")}
-                 metadata={office === 'morning' ? (useBenedicite ? "Song of the Three Children (or: Te Deum)" : "An Ancient Hymn (or: Benedicite)") : (useAlternativeEveningCanticle1 ? "Psalm 98. (or: Magnificat)" : "Luke 1. (or: Cantate Domino)")}
+                 metadata={office === 'morning' ? (useBenedicite ? "Song of the Three Children" : "An Ancient Hymn") : (useAlternativeEveningCanticle1 ? "Psalm 98." : "Luke 1.")}
                  onTitleClick={office === 'morning' ? () => setUseBenedicite(!useBenedicite) : () => setUseAlternativeEveningCanticle1(!useAlternativeEveningCanticle1)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle1', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                          <Music size={12} />
-                         {hymnMode['canticle1'] ? "Prose Text" : "Hymn Version"}
+                         {hymnMode['canticle1'] ? "Prose Text" : "Hymn Paraphrase"}
                      </button>
                  }
              >
@@ -421,16 +414,14 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 </div>
                             </div>
                         ) : (
-                            <div className="animate-in fade-in duration-500">
-                                {benediciteGroups.map((group, i) => (
-                                    <div key={i} className="mb-4 sm:mb-5">
-                                        <div className="space-y-0.5 sm:space-y-1 mb-1.5">
-                                            {group.map((v, j) => <P key={j} className="leading-normal">{i === 0 && j === 0 ? <DropCapText text={v} /> : v}</P>)}
-                                        </div>
-                                        <P className="opacity-90 leading-normal">{benediciteRefrain}</P>
+                            <div className="animate-in fade-in duration-500 space-y-3 sm:space-y-3.5">
+                                {benedicite.map((v, i) => (
+                                    <div key={i} className="space-y-0.5 sm:space-y-1">
+                                        <P className="leading-normal">{i === 0 ? <DropCapText text={v.call} /> : v.call}</P>
+                                        <P className="opacity-90 leading-normal pl-4 sm:pl-6">{v.response}</P>
                                     </div>
                                 ))}
-                                <GloriaPatri className="mt-5" />
+                                <GloriaPatri className="mt-6" />
                             </div>
                         )}
                      </div>
@@ -468,12 +459,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              />
              <Section 
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
-                 metadata={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100. (or: Benedictus)" : "Luke 1:68. (or: Jubilate Deo)") : (useAlternativeCanticle2 ? "Psalm 67. (or: Nunc Dimittis)" : "Luke 2:29. (or: Deus Misereatur)")}
+                 metadata={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
                  onTitleClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}
                  leftAction={
                      <button onClick={(e) => toggleHymn('canticle2', e)} className="text-[11px] font-medium tracking-wide flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 px-2 py-1 rounded-full border border-black/10 dark:border-white/10">
                          <Music size={12} />
-                         {hymnMode['canticle2'] ? "Prose Text" : "Hymn Version"}
+                         {hymnMode['canticle2'] ? "Prose Text" : activeCanticle2 === 'jubilate' ? "Metrical Hymn" : "Hymn Paraphrase"}
                      </button>
                  }
              >
@@ -528,7 +519,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section 
                  title={isAthanasian ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
                  metadata={isAthanasian ? "Quicunque vult." : ""}
-                 rubric={isAthanasian ? "sung or said at Morning Prayer, instead of the Apostles' Creed, by the Minister and people standing." : "by the Minister and the people, standing."}
+                 rubric="standing."
              >
                  <div className="select-none">
                      {!isAthanasian ? (
@@ -548,22 +539,13 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  <div className="space-y-4">
                      <VersiclePair v="The Lord be with you." r="And with thy spirit." />
                      <div className="space-y-1">
-                         <P className="flex items-baseline gap-2.5">
-                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
-                             <span className="flex-1">Let us pray.</span>
-                         </P>
-                         <P className="flex items-baseline gap-2.5">
-                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
-                             <span className="flex-1">Lord, have mercy upon us.</span>
-                         </P>
+                         <P>Let us pray.</P>
+                         <P>Lord, have mercy upon us.</P>
                          <P className="flex items-baseline gap-2.5">
                              <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Answer.</span>
                              <span className="flex-1">Christ, have mercy upon us.</span>
                          </P>
-                         <P className="flex items-baseline gap-2.5">
-                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
-                             <span className="flex-1">Lord, have mercy upon us.</span>
-                         </P>
+                         <P>Lord, have mercy upon us.</P>
                      </div>
                  </div>
              </Section>
@@ -571,7 +553,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              {/* Lord's Prayer 2 */}
              <Section title="The Lord's Prayer">
                  <div className="animate-in fade-in duration-500">
-                     <P className="liturgical-prose"><DropCapText text={lordsPrayer} /></P>
+                     <P className="liturgical-prose"><DropCapText text={lordsPrayerNoDoxology} /></P>
                  </div>
              </Section>
 

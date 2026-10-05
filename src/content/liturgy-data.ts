@@ -24,6 +24,7 @@ export const priestlyAbsolution = "Almighty God, the Father of our Lord Jesus Ch
 export const absolutionSubstitute = "Grant, we beseech thee, merciful Lord, to thy faithful people pardon and peace, that they may be cleansed from all their sins, and serve thee with a quiet mind; through Jesus Christ our Lord.";
 
 export const lordsPrayer = "Our Father, which art in heaven, Hallowed be thy Name. Thy kingdom come. Thy will be done, in earth as it is in heaven. Give us this day our daily bread. And forgive us our trespasses, As we forgive them that trespass against us. And lead us not into temptation; But deliver us from evil: For thine is the kingdom, The power, and the glory, For ever and ever. Amen.";
+export const lordsPrayerNoDoxology = "Our Father, which art in heaven, Hallowed be thy Name. Thy kingdom come. Thy will be done, in earth as it is in heaven. Give us this day our daily bread. And forgive us our trespasses, As we forgive them that trespass against us. And lead us not into temptation; But deliver us from evil. Amen.";
 
 export const initialVersicles = [
   { v: "O Lord, open thou our lips.", r: "And our mouth shall shew forth thy praise." },
@@ -41,41 +42,47 @@ export const suffrages = [
   { v: "O God, make clean our hearts within us.", r: "And take not thy Holy Spirit from us." }
 ];
 
-export const benediciteVerses = [
-  "O all ye Works of the Lord, bless ye the Lord :",
-  "O ye Angels of the Lord, bless ye the Lord :",
-  "O ye Heavens, bless ye the Lord :",
-  "O ye Waters that be above the Firmament, bless ye the Lord :",
-  "O all ye Powers of the Lord, bless ye the Lord :",
-  "O ye Sun and Moon, bless ye the Lord :",
-  "O ye Stars of Heaven, bless ye the Lord :",
-  "O ye Showers and Dew, bless ye the Lord :",
-  "O ye Winds of God, bless ye the Lord :",
-  "O ye Fire and Heat, bless ye the Lord :",
-  "O ye Winter and Summer, bless ye the Lord :",
-  "O ye Dews and Frosts, bless ye the Lord :",
-  "O ye Frost and Cold, bless ye the Lord :",
-  "O ye Ice and Snow, bless ye the Lord :",
-  "O ye Nights and Days, bless ye the Lord :",
-  "O ye Light and Darkness, bless ye the Lord :",
-  "O ye Lightnings and Clouds, bless ye the Lord :",
-  "O let the Earth bless the Lord :",
-  "O ye Mountains and Hills, bless ye the Lord :",
-  "O all ye Green Things upon the Earth, bless ye the Lord :",
-  "O ye Wells, bless ye the Lord :",
-  "O ye Seas and Floods, bless ye the Lord :",
-  "O ye Whales, and all that move in the Waters, bless ye the Lord :",
-  "O all ye Fowls of the Air, bless ye the Lord :",
-  "O all ye Beasts and Cattle, bless ye the Lord :",
-  "O ye Children of Men, bless ye the Lord :",
-  "O let Israel bless the Lord :",
-  "O ye Priests of the Lord, bless ye the Lord :",
-  "O ye Servants of the Lord, bless ye the Lord :",
-  "O ye Spirits and Souls of the Righteous, bless ye the Lord :",
-  "O ye holy and humble Men of heart, bless ye the Lord :",
-  "O Ananias, Azarias, and Misael, bless ye the Lord :"
+export interface BenediciteVerse {
+  call: string;
+  response: string;
+}
+
+export const benedicite: BenediciteVerse[] = [
+  { call: "O all ye Works of the Lord, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Angels of the Lord, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Heavens, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Waters that be above the Firmament, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O all ye Powers of the Lord, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Sun and Moon, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Stars of Heaven, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Showers and Dew, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Winds of God, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Fire and Heat, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Winter and Summer, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Dews and Frosts, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Frost and Cold, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Ice and Snow, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Nights and Days, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Light and Darkness, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Lightnings and Clouds, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O let the Earth bless the Lord :", response: "yea, let it praise him, and magnify him for ever." },
+  { call: "O ye Mountains and Hills, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O all ye Green Things upon the Earth, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Wells, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Seas and Floods, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Whales, and all that move in the Waters, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O all ye Fowls of the Air, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O all ye Beasts and Cattle, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Children of Men, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O let Israel bless the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Priests of the Lord, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Servants of the Lord, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye Spirits and Souls of the Righteous, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O ye holy and humble Men of heart, bless ye the Lord :", response: "praise him, and magnify him for ever." },
+  { call: "O Ananias, Azarias, and Misael, bless ye the Lord :", response: "praise him, and magnify him for ever." }
 ];
 
+export const benediciteVerses = benedicite.map(b => b.call);
 export const benediciteRefrain = "praise him, and magnify him for ever.";
 
 export const venite = [
