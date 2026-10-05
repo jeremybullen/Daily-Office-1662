@@ -25,7 +25,7 @@ import {
 } from '../content/liturgy-data';
 import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
-import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES, OPENING_SENTENCE_AUDIO } from './liturgicalAudioManifest';
+import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES, HYMN_AUDIO_CANDIDATES, OPENING_SENTENCE_AUDIO } from './liturgicalAudioManifest';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -163,10 +163,7 @@ export function buildLiturgySpeechSections({
   if (office === 'morning' && !isAshWedOrGoodFri) {
     const isVeniteHymn = !!hymnMode?.venite;
     const veniteCandidates = isVeniteHymn
-      ? [
-          '/audio/184. Now with joyful exultation (Psalm 95).mp3',
-          ...(LITURGICAL_AUDIO_CANDIDATES['tts-venite'] || [])
-        ]
+      ? (HYMN_AUDIO_CANDIDATES['venite'] || ['/audio/184. Now with joyful exultation (Psalm 95).mp3'])
       : (LITURGICAL_AUDIO_CANDIDATES['tts-venite'] || ['/audio/Venite.mp3']);
 
     sections.push({
@@ -228,10 +225,7 @@ export function buildLiturgySpeechSections({
     if (!useBenedicite) {
       const isTeDeumHymn = !!(hymnMode?.teDeum || hymnMode?.canticle1);
       const teDeumCandidates = isTeDeumHymn
-        ? [
-            '/audio/Holy God, We Praise Your Name.mp3',
-            ...(LITURGICAL_AUDIO_CANDIDATES['tts-te-deum'] || [])
-          ]
+        ? (HYMN_AUDIO_CANDIDATES['te-deum'] || ['/audio/Holy God, We Praise Your Name.mp3'])
         : (LITURGICAL_AUDIO_CANDIDATES['tts-te-deum'] || ['/audio/Te Deum.mp3']);
 
       sections.push({
@@ -253,16 +247,13 @@ export function buildLiturgySpeechSections({
       benParts.push({ text: gloriaPatriResponse, role: 'response' });
       const isBenediciteHymn = !!hymnMode?.canticle1;
       const benediciteCandidates = isBenediciteHymn
-        ? [
-            '/audio/All Creatures of Our God and King.mp3',
-            ...(LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'] || [])
-          ]
-        : (LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'] || []);
+        ? (HYMN_AUDIO_CANDIDATES['benedicite'] || ['/audio/All Creatures of Our God and King.mp3'])
+        : (LITURGICAL_AUDIO_CANDIDATES['tts-benedicite'] || ['/audio/Benedicite.mp3']);
       sections.push({
         id: 'tts-canticle-1',
         title: isBenediciteHymn ? 'All Creatures of Our God and King (Benedicite)' : 'Benedicite, omnia opera',
         isHymn: isBenediciteHymn,
-        audioSrc: benediciteCandidates[0] || LITURGICAL_AUDIO_FILES['tts-benedicite'],
+        audioSrc: benediciteCandidates[0],
         audioCandidates: benediciteCandidates,
         parts: benParts
       });
@@ -321,10 +312,7 @@ export function buildLiturgySpeechSections({
     if (!useAlternativeCanticle2) {
       const isBenedictusHymn = !!(hymnMode?.benedictus || hymnMode?.canticle2);
       const benedictusCandidates = isBenedictusHymn
-        ? [
-            '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
-            ...(LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'] || [])
-          ]
+        ? (HYMN_AUDIO_CANDIDATES['benedictus'] || ['/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3'])
         : (LITURGICAL_AUDIO_CANDIDATES['tts-benedictus'] || ['/audio/Benedictus.mp3']);
 
       sections.push({
@@ -342,16 +330,13 @@ export function buildLiturgySpeechSections({
     } else {
       const isJubilateHymn = !!hymnMode?.canticle2;
       const jubilateCandidates = isJubilateHymn
-        ? [
-            '/audio/All People That on Earth Do Dwell.mp3',
-            ...(LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'] || [])
-          ]
-        : (LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'] || []);
+        ? (HYMN_AUDIO_CANDIDATES['jubilate'] || ['/audio/All People That on Earth Do Dwell.mp3'])
+        : (LITURGICAL_AUDIO_CANDIDATES['tts-jubilate'] || ['/audio/spoken Jubilate Deo.mp3']);
       sections.push({
         id: 'tts-canticle-2',
         title: isJubilateHymn ? 'All People That on Earth Do Dwell (Psalm 100)' : 'Jubilate Deo',
         isHymn: isJubilateHymn,
-        audioSrc: jubilateCandidates[0] || LITURGICAL_AUDIO_FILES['tts-jubilate'],
+        audioSrc: jubilateCandidates[0],
         audioCandidates: jubilateCandidates,
         parts: [
           ...jubilateDeo.map(verse => ({ text: verse, role: 'call' as const })),

@@ -13,7 +13,7 @@ import { Check, Music, Info, Volume2 } from 'lucide-react';
 import { buildLiturgySpeechSections } from '../utils/liturgySpeechBuilder';
 import { useLiturgicalSpeech } from '../hooks/useLiturgicalSpeech';
 import { AudioPlayer } from './AudioPlayer';
-import { DropCapText, VersiclePair } from './LiturgicalTypography';
+import { DropCapText, VersiclePair, GloriaPatri } from './LiturgicalTypography';
 
 interface LiturgyProps {
     office: OfficeType;
@@ -292,7 +292,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                          </div>
                      </div>
                      <div className="md:w-3/4 flex-1">
-                         <P className="font-bold">Amen.</P>
+                         <P>Amen.</P>
                      </div>
                  </div>
              </div>
@@ -357,7 +357,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                      }
                  >
                      {hymnMode['venite'] ? (
-                         <SheetMusic title={hymns.venite.title} imageUrl={hymns.venite.imageUrl} audioUrl={hymns.venite.audioUrl} extraVerses={hymns.venite.extraVerses} />
+                         <SheetMusic title={hymns.venite.title} imageUrl={hymns.venite.imageUrl} audioUrl={hymns.venite.audioUrl} />
                      ) : (
                          <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                             <P><DropCapText text="O come, let us sing unto the Lord : let us heartily rejoice in the strength of our salvation." /></P>
@@ -371,8 +371,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                             <P>When your fathers tempted me : proved me, and saw my works.</P>
                             <P>Forty years long was I grieved with this generation, and said : It is a people that do err in their hearts, for they have not known my ways;</P>
                             <P>Unto whom I sware in my wrath : that they should not enter into my rest.</P>
-                            <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                            <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                            <GloriaPatri />
                          </div>
                      )}
                  </Section>
@@ -412,7 +411,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['canticle1'] ? (
-                     <SheetMusic title={hymns[activeCanticle1]?.title} imageUrl={hymns[activeCanticle1].imageUrl} audioUrl={hymns[activeCanticle1]?.audioUrl} extraVerses={hymns[activeCanticle1].extraVerses} />
+                     <SheetMusic title={hymns[activeCanticle1]?.title} imageUrl={hymns[activeCanticle1].imageUrl} audioUrl={hymns[activeCanticle1]?.audioUrl} />
                  ) : office === 'morning' ? (
                      <div className="select-none">
                         {!useBenedicite ? (
@@ -428,13 +427,10 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                         <div className="space-y-0.5 sm:space-y-1 mb-1.5">
                                             {group.map((v, j) => <P key={j} className="leading-normal">{i === 0 && j === 0 ? <DropCapText text={v} /> : v}</P>)}
                                         </div>
-                                        <P className="font-bold opacity-90 leading-normal">{benediciteRefrain}</P>
+                                        <P className="opacity-90 leading-normal">{benediciteRefrain}</P>
                                     </div>
                                 ))}
-                                <div className="mt-5">
-                                    <P className="leading-normal">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                    <P className="leading-normal font-bold mt-0.5">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
-                                </div>
+                                <GloriaPatri className="mt-5" />
                             </div>
                         )}
                      </div>
@@ -451,14 +447,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                 <P>He hath put down the mighty from their seat : and hath exalted the humble and meek.</P>
                                 <P>He hath filled the hungry with good things : and the rich he hath sent empty away.</P>
                                 <P>He remembering his mercy hath holpen his servant Israel : as he promised to our forefathers, Abraham and his seed, for ever.</P>
-                                <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                <GloriaPatri />
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  {cantateDomino.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
-                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                 <GloriaPatri />
                              </div>
                          )}
                      </div>
@@ -484,7 +478,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  }
              >
                  {hymnMode['canticle2'] ? (
-                     <SheetMusic title={hymns[activeCanticle2]?.title} imageUrl={hymns[activeCanticle2].imageUrl} audioUrl={hymns[activeCanticle2]?.audioUrl} extraVerses={hymns[activeCanticle2].extraVerses} />
+                     <SheetMusic title={hymns[activeCanticle2]?.title} imageUrl={hymns[activeCanticle2].imageUrl} audioUrl={hymns[activeCanticle2]?.audioUrl} />
                  ) : (
                  <div className="select-none">
                      {office === 'morning' ? (
@@ -502,14 +496,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                  <P>To give knowledge of salvation unto his people : for the remission of their sins,</P>
                                  <P>Through the tender mercy of our God : whereby the day-spring from on high hath visited us;</P>
                                  <P>To give light to them that sit in darkness, and in the shadow of death : and to guide our feet into the way of peace.</P>
-                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                 <GloriaPatri />
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  {jubilateDeo.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
-                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                 <GloriaPatri />
                              </div>
                          )
                      ) : (
@@ -519,14 +511,12 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                                  <P>For mine eyes have seen : thy salvation,</P>
                                  <P>Which thou hast prepared : before the face of all people;</P>
                                  <P>To be a light to lighten the Gentiles : and to be the glory of thy people Israel.</P>
-                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                 <GloriaPatri />
                              </div>
                          ) : (
                              <div className="animate-in fade-in duration-500 space-y-1 leading-normal">
                                  {deusMisereatur.map((verse, i) => <P key={i}>{i === 0 ? <DropCapText text={verse} /> : verse}</P>)}
-                                 <P className="mt-4">Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
-                                 <P className="font-bold">As it was in the beginning, is now, and ever shall be : world without end. Amen.</P>
+                                 <GloriaPatri />
                              </div>
                          )
                      )}
@@ -557,13 +547,16 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              <Section title="The Lesser Litany">
                  <div className="space-y-4">
                      <VersiclePair v="The Lord be with you." r="And with thy spirit." />
-                     <P className="rubric">Let us pray.</P>
                      <div className="space-y-1">
+                         <P className="flex items-baseline gap-2.5">
+                             <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
+                             <span className="flex-1">Let us pray.</span>
+                         </P>
                          <P className="flex items-baseline gap-2.5">
                              <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Priest.</span>
                              <span className="flex-1">Lord, have mercy upon us.</span>
                          </P>
-                         <P className="font-bold flex items-baseline gap-2.5">
+                         <P className="flex items-baseline gap-2.5">
                              <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Answer.</span>
                              <span className="flex-1">Christ, have mercy upon us.</span>
                          </P>

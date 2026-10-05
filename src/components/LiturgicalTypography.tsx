@@ -73,9 +73,21 @@ export function VersiclePair({
         <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">{leaderLabel}</span>
         <span className="flex-1">{v}</span>
       </P>
-      <P className="font-bold flex items-baseline gap-2.5">
+      <P className="flex items-baseline gap-2.5">
         <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">{responseLabel}</span>
         <span className="flex-1">{r}</span>
+      </P>
+    </div>
+  );
+}
+
+export function GloriaPatri({ className = "mt-4" }: { className?: string }) {
+  return (
+    <div className={`${className} space-y-1 leading-normal select-none`}>
+      <P>Glory be to the Father, and to the Son : and to the Holy Ghost;</P>
+      <P className="flex items-baseline gap-2.5">
+        <span className="rubric select-none font-serif text-[0.95em] shrink-0 font-normal">Answer.</span>
+        <span className="flex-1">As it was in the beginning, is now, and ever shall be : world without end. Amen.</span>
       </P>
     </div>
   );

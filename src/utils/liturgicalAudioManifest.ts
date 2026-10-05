@@ -154,72 +154,37 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/general/versicles.mp3'
   ],
 
-  // Canticles
+  // Canticles (Spoken defaults)
   'tts-venite': [
-    '/audio/184. Now with joyful exultation (Psalm 95).mp3',
     '/audio/Venite.mp3',
-    '/audio/Psalm 95.mp3',
-    '/audio/Venite (Hymn).mp3',
-    '/audio/Psalm 95 (Hymn).mp3',
-    '/audio/hymns/Venite.mp3',
-    '/audio/hymns/Psalm 95.mp3',
     '/audio/venite.mp3',
     '/audio/canticles/venite.mp3'
   ],
   'tts-canticle-1': [
-    '/audio/Holy God, We Praise Your Name.mp3',
     '/audio/Te Deum.mp3',
     '/audio/Te Deum Laudamus.mp3',
-    '/audio/Magnificat.mp3',
-    '/audio/Song of Mary.mp3',
     '/audio/Benedicite.mp3',
+    '/audio/Magnificat.mp3',
     '/audio/Cantate Domino.mp3',
-    '/audio/Te Deum (Hymn).mp3',
-    '/audio/Magnificat (Hymn).mp3',
-    '/audio/Song of Mary (Hymn).mp3',
-    '/audio/Benedicite (Hymn).mp3',
-    '/audio/Cantate Domino (Hymn).mp3',
-    '/audio/hymns/Te Deum.mp3',
-    '/audio/hymns/Magnificat.mp3',
-    '/audio/hymns/Song of Mary.mp3',
-    '/audio/hymns/Benedicite.mp3',
-    '/audio/hymns/Cantate Domino.mp3',
     '/audio/te-deum.mp3',
     '/audio/magnificat.mp3',
     '/audio/canticles/te-deum.mp3',
     '/audio/canticles/magnificat.mp3'
   ],
   'tts-canticle-2': [
-    '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
     '/audio/Benedictus.mp3',
-    '/audio/Nunc Dimittis.mp3',
-    '/audio/Song of Simeon.mp3',
-    '/audio/Jubilate.mp3',
+    '/audio/spoken Jubilate Deo.mp3',
+    '/audio/spoken%20Jubilate%20Deo.mp3',
     '/audio/Jubilate Deo.mp3',
+    '/audio/Jubilate.mp3',
+    '/audio/Nunc Dimittis.mp3',
     '/audio/Deus Misereatur.mp3',
-    '/audio/Benedictus (Hymn).mp3',
-    '/audio/Nunc Dimittis (Hymn).mp3',
-    '/audio/Song of Simeon (Hymn).mp3',
-    '/audio/Jubilate (Hymn).mp3',
-    '/audio/Jubilate Deo (Hymn).mp3',
-    '/audio/Deus Misereatur (Hymn).mp3',
-    '/audio/Psalm 100.mp3',
-    '/audio/Psalm 67.mp3',
-    '/audio/Psalm 100 (Hymn).mp3',
-    '/audio/Psalm 67 (Hymn).mp3',
-    '/audio/hymns/Benedictus.mp3',
-    '/audio/hymns/Nunc Dimittis.mp3',
-    '/audio/hymns/Jubilate.mp3',
-    '/audio/hymns/Deus Misereatur.mp3',
-    '/audio/hymns/Psalm 100.mp3',
-    '/audio/hymns/Psalm 67.mp3',
     '/audio/benedictus.mp3',
     '/audio/nunc-dimittis.mp3',
     '/audio/canticles/benedictus.mp3',
     '/audio/canticles/nunc-dimittis.mp3'
   ],
   'tts-te-deum': [
-    '/audio/Holy God, We Praise Your Name.mp3',
     '/audio/Te Deum.mp3',
     '/audio/Te Deum Laudamus.mp3',
     '/audio/te-deum.mp3',
@@ -231,15 +196,15 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/canticles/benedicite.mp3'
   ],
   'tts-benedictus': [
-    '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
     '/audio/Benedictus.mp3',
     '/audio/benedictus.mp3',
     '/audio/canticles/benedictus.mp3'
   ],
   'tts-jubilate': [
-    '/audio/Jubilate.mp3',
+    '/audio/spoken Jubilate Deo.mp3',
+    '/audio/spoken%20Jubilate%20Deo.mp3',
     '/audio/Jubilate Deo.mp3',
-    '/audio/Psalm 100.mp3',
+    '/audio/Jubilate.mp3',
     '/audio/jubilate.mp3',
     '/audio/canticles/jubilate.mp3'
   ],
@@ -362,6 +327,46 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/Grace.mp3',
     '/audio/the-grace.mp3',
     '/audio/general/the-grace.mp3'
+  ]
+};
+
+export const HYMN_AUDIO_CANDIDATES: Record<string, string[]> = {
+  'venite': [
+    '/audio/184. Now with joyful exultation (Psalm 95).mp3',
+    '/audio/Psalm-95.mp3',
+    '/audio/Psalm 95.mp3',
+    '/audio/Venite (Hymn).mp3'
+  ],
+  'te-deum': [
+    '/audio/Holy God, We Praise Your Name.mp3',
+    '/audio/Te Deum (Hymn).mp3'
+  ],
+  'benedicite': [
+    '/audio/All Creatures of Our God and King.mp3',
+    '/audio/Benedicite (Hymn).mp3'
+  ],
+  'benedictus': [
+    '/audio/Blest Be the God of Israel; First Methodist Houston, 11 27 22.mp3',
+    '/audio/Benedictus (Hymn).mp3'
+  ],
+  'jubilate': [
+    '/audio/All People That on Earth Do Dwell.mp3',
+    '/audio/Psalm 100.mp3',
+    '/audio/Jubilate (Hymn).mp3'
+  ],
+  'magnificat': [
+    '/audio/Song of Mary.mp3',
+    '/audio/Magnificat (Hymn).mp3'
+  ],
+  'cantate': [
+    '/audio/Cantate Domino (Hymn).mp3'
+  ],
+  'nunc-dimittis': [
+    '/audio/Nunc Dimittis (Hymn).mp3'
+  ],
+  'deus-misereatur': [
+    '/audio/Deus Misereatur (Hymn).mp3',
+    '/audio/Psalm 67.mp3'
   ]
 };
 

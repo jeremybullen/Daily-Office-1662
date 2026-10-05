@@ -1,6 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import { Translation } from '../types';
 import { Section } from './Section';
+import { GloriaPatri } from './LiturgicalTypography';
 import { fetchPassages } from '../lib/bible-api';
 
 interface Passage {
@@ -80,6 +81,9 @@ export function BibleReading({ id, title, rubric, metadata, passage, translation
                             <div className="leading-normal scripture-text">
                                 <span dangerouslySetInnerHTML={{ __html: p.text }} />
                             </div>
+                            {title === "The Psalms of the Day" && (
+                                <GloriaPatri className="mt-6" />
+                            )}
                         </div>
                     ))}
                 </div>
