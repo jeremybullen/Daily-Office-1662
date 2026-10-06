@@ -1,5 +1,5 @@
 import { P } from './GlossaryText';
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef, MutableRefObject } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { openingSentences, exhortation, confession, absolutionSubstitute, lordsPrayer, lordsPrayerNoDoxology, initialVersicles, suffrages, benedicite, teDeum, apostlesCreed, athanasianCreed, jubilateDeo, cantateDomino, deusMisereatur, stChrysostom, theGrace, statePrayers } from '../content/liturgy-data';
 import { isAshWednesdayOrGoodFriday, isAthanasianCreedDay } from '../utils/liturgyHelpers';
@@ -24,14 +24,8 @@ interface LiturgyProps {
     settings: AppSettings;
     updateSettings: (newSettings: Partial<AppSettings>) => void;
     onOpenAbout?: () => void;
-    onAudioStateChange?: (state: { 
-        isPlaying: boolean; 
-        isOpen: boolean; 
-        serviceMode: 'spoken' | 'music';
-        toggle: () => void;
-        playSpoken: () => void;
-        playMusic: () => void;
-    }) => void;
+    onAudioStatusChange?: (isPlaying: boolean, isOpen: boolean) => void;
+    audioControllerRef?: MutableRefObject<{ toggle: () => void }>;
 }
 
 
@@ -51,7 +45,7 @@ function parsePsalms(str: string) {
     return ['Psalm ' + str];
 }
 
-export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings, onOpenAbout, onAudioStateChange }: LiturgyProps) {
+export function Liturgy({ office, translation, selectedDate, completedData, onToggleCompleted, settings, updateSettings, onOpenAbout, onAudioStatusChange, audioControllerRef }: LiturgyProps) {
 
     const [sentenceIdx, setSentenceIdx] = useState(() => Math.floor(Math.random() * openingSentences.length));
     const [useBenedicite, setUseBenedicite] = useState(() => Math.random() < 0.5);
@@ -108,7 +102,11 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         hymnMode
     ]);
 
-    const speech = useLiturgicalSpeech({ sections: speechSections });
+    const speech = useLiturgicalSpeech({ 
+        sections: speechSections,
+        office,
+        dayTitle: readings.dayTitle || readings.liturgicalWeek
+    });
 
     const handlePlaySpoken = useCallback(() => {
         setServiceAudioMode('spoken');
@@ -118,10 +116,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             canticle2: false
         });
         setIsAudioPlayerOpen(true);
-        setTimeout(() => {
-            speech.play();
-        }, 40);
-    }, [speech]);
+        speech.play();
+    }, [speech.play]);
 
     const handlePlayMusic = useCallback(() => {
         setServiceAudioMode('music');
@@ -131,10 +127,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             canticle2: true
         });
         setIsAudioPlayerOpen(true);
-        setTimeout(() => {
-            speech.play();
-        }, 40);
-    }, [speech]);
+        speech.play();
+    }, [speech.play]);
 
     const handleToggleServiceMode = useCallback(() => {
         if (serviceAudioMode === 'music') {
@@ -144,31 +138,51 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         }
     }, [serviceAudioMode, handlePlaySpoken, handlePlayMusic]);
 
-    // Sync audio state to parent / header
+    // Keep stable refs for syncing without causing infinite render loops
+    const speechRef = useRef(speech);
+    speechRef.current = speech;
+    const handlePlaySpokenRef = useRef(handlePlaySpoken);
+    handlePlaySpokenRef.current = handlePlaySpoken;
+    const handlePlayMusicRef = useRef(handlePlayMusic);
+    handlePlayMusicRef.current = handlePlayMusic;
+
+    const isAudioPlaying = speech.isPlaying && !speech.isPaused;
+
+    // Register audio controller ref for Header
     useEffect(() => {
-        if (onAudioStateChange) {
-            onAudioStateChange({
-                isPlaying: speech.isPlaying && !speech.isPaused,
-                isOpen: isAudioPlayerOpen,
-                serviceMode: serviceAudioMode,
+        if (audioControllerRef) {
+            audioControllerRef.current = {
                 toggle: () => {
                     if (!isAudioPlayerOpen) {
                         setIsAudioPlayerOpen(true);
-                        speech.play();
-                    } else if (speech.isPlaying && !speech.isPaused) {
-                        speech.pause();
+                        speechRef.current.play();
+                    } else if (speechRef.current.isPlaying && !speechRef.current.isPaused) {
+                        speechRef.current.pause();
                     } else {
-                        speech.play();
+                        speechRef.current.play();
                     }
-                },
-                playSpoken: handlePlaySpoken,
-                playMusic: handlePlayMusic
-            });
+                }
+            };
         }
-    }, [speech.isPlaying, speech.isPaused, isAudioPlayerOpen, serviceAudioMode, onAudioStateChange, speech.play, speech.pause, handlePlaySpoken, handlePlayMusic]);
+    }, [isAudioPlayerOpen, audioControllerRef]);
 
-    // Stop speech and pick a random opening sentence and canticles when office or date changes
+    // Notify parent only when boolean isAudioPlaying or isAudioPlayerOpen status changes
     useEffect(() => {
+        onAudioStatusChange?.(isAudioPlaying, isAudioPlayerOpen);
+    }, [isAudioPlaying, isAudioPlayerOpen, onAudioStatusChange]);
+
+    // Reset prayers and canticles ONLY when office or dateKey actually changes (never on initial mount)
+    const prevOfficeAndDateRef = useRef({ office, dateKey });
+
+    useEffect(() => {
+        if (
+            prevOfficeAndDateRef.current.office === office &&
+            prevOfficeAndDateRef.current.dateKey === dateKey
+        ) {
+            return;
+        }
+        prevOfficeAndDateRef.current = { office, dateKey };
+
         speech.stop();
         setIsAudioPlayerOpen(false);
         setSentenceIdx(prev => {
@@ -178,21 +192,17 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
             if (next === prev) next = (next + 1) % count;
             return next;
         });
-        // Randomly select between the canticles like the opening sentences
         setUseBenedicite(Math.random() < 0.5);
         setUseAlternativeEveningCanticle1(Math.random() < 0.5);
         setUseAlternativeCanticle2(Math.random() < 0.5);
-    }, [office, selectedDate]);
+        setUseFirstAlt(false);
+        setUseSecondAlt(false);
+    }, [office, dateKey, speech]);
 
     const getHighlightClass = (sectionId: string, baseClass: string = '') => {
         const isCurrent = speech.isPlaying && speech.currentSectionId === sectionId;
         return `${baseClass} transition-all duration-300 ${isCurrent ? 'bg-amber-500/[0.04] p-3 -mx-3 rounded-2xl ring-1 ring-amber-500/20' : ''}`;
     };
-
-    useEffect(() => {
-        setUseFirstAlt(false);
-        setUseSecondAlt(false);
-    }, [office, selectedDate]);
 
     const activeFirstLesson = useFirstAlt && readings.firstLessonAlt ? readings.firstLessonAlt : readings.firstLesson;
     const activeSecondLesson = useSecondAlt && readings.secondLessonAlt ? readings.secondLessonAlt : readings.secondLesson;

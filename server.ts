@@ -5,6 +5,7 @@ import { Readable } from "stream";
 import { createServer as createViteServer } from "vite";
 import fetch from "node-fetch"; // we'll just use global fetch in Node 20+
 import dotenv from "dotenv";
+import { resolveApocryphaAudioUrl, isApocryphaPassage } from "./src/utils/apocryphaAudioResolver";
 
 dotenv.config();
 
@@ -91,6 +92,73 @@ async function startServer() {
     return filtered.map((v: any) => `<sup>${v.verse}</sup> ${v.text.replace(/<[^>]+>/g, '').trim()}`).join(" ");
   }
 
+  // Helper to proxy an audio stream with Range support for mobile scrub/seek
+  async function proxyAudioStream(targetUrl: string, req: express.Request, res: express.Response, customHeaders?: Record<string, string>) {
+    const fetchHeaders: Record<string, string> = {
+      "User-Agent": "1662-Daily-Office-Audio/1.0",
+      ...(customHeaders || {})
+    };
+    if (req.headers.range) {
+      fetchHeaders["Range"] = req.headers.range;
+    }
+
+    const upstreamRes = await fetch(targetUrl, {
+      headers: fetchHeaders
+    });
+
+    res.status(upstreamRes.status);
+
+    const contentType = upstreamRes.headers.get("content-type") || "audio/mpeg";
+    const contentLength = upstreamRes.headers.get("content-length");
+    const contentRange = upstreamRes.headers.get("content-range");
+    const acceptRanges = upstreamRes.headers.get("accept-ranges") || "bytes";
+
+    res.setHeader("Content-Type", contentType);
+    if (contentLength) res.setHeader("Content-Length", contentLength);
+    if (contentRange) res.setHeader("Content-Range", contentRange);
+    res.setHeader("Accept-Ranges", acceptRanges);
+    res.setHeader("Cache-Control", "public, max-age=604800");
+
+    if (typeof (upstreamRes.body as any)?.pipe === "function") {
+      return (upstreamRes.body as any).pipe(res);
+    } else if (upstreamRes.body) {
+      return Readable.fromWeb(upstreamRes.body as any).pipe(res);
+    } else {
+      return res.status(500).json({ error: "No audio stream returned." });
+    }
+  }
+
+  // API Route for Public Domain Human Audio of Apocrypha chapters (Internet Archive LibriVox CDN)
+  app.get("/api/apocrypha-audio", async (req, res) => {
+    try {
+      const { passage } = req.query;
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Range");
+      res.setHeader("Access-Control-Expose-Headers", "Content-Range, Content-Length, Accept-Ranges");
+
+      if (req.method === "OPTIONS") {
+        return res.status(204).end();
+      }
+
+      if (!passage || typeof passage !== "string") {
+        return res.status(400).json({ error: "Missing passage query parameter." });
+      }
+
+      const streamUrl = resolveApocryphaAudioUrl(passage);
+      if (!streamUrl) {
+        return res.status(404).json({ error: `Audio recording not found for ${passage}` });
+      }
+
+      return proxyAudioStream(streamUrl, req, res);
+    } catch (err: any) {
+      console.error("Apocrypha Audio Proxy error:", err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: err.message || "Failed to retrieve Apocrypha audio." });
+      }
+    }
+  });
+
   // API Route for ESV Passage Audio Proxy
   app.get("/api/esv-audio", async (req, res) => {
     try {
@@ -106,20 +174,21 @@ async function startServer() {
         return res.status(204).end();
       }
 
-      if (!apiKey) {
-        return res.status(503).json({ error: "ESV_API_KEY is not configured." });
-      }
-
       if (!passage || typeof passage !== "string") {
         return res.status(400).json({ error: "Missing passage query parameter." });
       }
 
-      // Check if passage contains an Apocryphal book (not available in standard 66-book ESV audio)
-      const bookNameMatch = passage.match(/^(\d?\s*[a-zA-Z\s]+?)\s+\d+/);
-      const bookName = bookNameMatch ? bookNameMatch[1].trim().toLowerCase() : "";
-      const bookId = bookMap[bookName];
-      if (bookId && bookId >= 67) {
+      // Check if passage contains an Apocryphal book
+      if (isApocryphaPassage(passage)) {
+        const apocryphaStream = resolveApocryphaAudioUrl(passage);
+        if (apocryphaStream) {
+          return proxyAudioStream(apocryphaStream, req, res);
+        }
         return res.status(404).json({ error: "Apocryphal books are not available in ESV audio." });
+      }
+
+      if (!apiKey) {
+        return res.status(503).json({ error: "ESV_API_KEY is not configured." });
       }
 
       // Clean passage query for ESV API:
@@ -158,38 +227,7 @@ async function startServer() {
 
       // Fetch audio from direct CDN URL (or fallback API URL) forwarding client Range headers
       const audioTarget = audioUrl || `https://api.esv.org/v3/passage/audio/?q=${encodeURIComponent(cleanPassage)}`;
-      const fetchHeaders: Record<string, string> = {};
-      if (req.headers.range) {
-        fetchHeaders["Range"] = req.headers.range;
-      }
-      if (!audioUrl) {
-        fetchHeaders["Authorization"] = `Token ${apiKey}`;
-      }
-
-      const upstreamRes = await fetch(audioTarget, {
-        headers: fetchHeaders
-      });
-
-      res.status(upstreamRes.status);
-
-      const contentType = upstreamRes.headers.get("content-type") || "audio/mpeg";
-      const contentLength = upstreamRes.headers.get("content-length");
-      const contentRange = upstreamRes.headers.get("content-range");
-      const acceptRanges = upstreamRes.headers.get("accept-ranges") || "bytes";
-
-      res.setHeader("Content-Type", contentType);
-      if (contentLength) res.setHeader("Content-Length", contentLength);
-      if (contentRange) res.setHeader("Content-Range", contentRange);
-      res.setHeader("Accept-Ranges", acceptRanges);
-      res.setHeader("Cache-Control", "public, max-age=86400");
-
-      if (typeof (upstreamRes.body as any)?.pipe === "function") {
-        return (upstreamRes.body as any).pipe(res);
-      } else if (upstreamRes.body) {
-        return Readable.fromWeb(upstreamRes.body as any).pipe(res);
-      } else {
-        return res.status(500).json({ error: "No audio stream returned from ESV." });
-      }
+      return proxyAudioStream(audioTarget, req, res, !audioUrl ? { Authorization: `Token ${apiKey}` } : undefined);
     } catch (err: any) {
       console.error("ESV Audio Proxy error:", err);
       if (!res.headersSent) {
@@ -324,7 +362,10 @@ async function startServer() {
 
   if (!isProduction) {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: false,
+      },
       appType: "spa",
     });
     app.use(vite.middlewares);

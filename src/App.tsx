@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Header } from './components/Header';
 import { Liturgy } from './components/Liturgy';
 import { AboutModal } from './components/AboutModal';
@@ -21,21 +21,15 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [completedData, setCompletedData] = useLocalStorage<CompletedData>('bcp-completed', {});
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [audioState, setAudioState] = useState<{
-    isPlaying: boolean;
-    isOpen: boolean;
-    serviceMode: 'spoken' | 'music';
-    toggle: () => void;
-    playSpoken: () => void;
-    playMusic: () => void;
-  }>({
-    isPlaying: false,
-    isOpen: false,
-    serviceMode: 'spoken',
-    toggle: () => {},
-    playSpoken: () => {},
-    playMusic: () => {}
-  });
+
+  const audioControllerRef = useRef<{ toggle: () => void }>({ toggle: () => {} });
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isAudioOpen, setIsAudioOpen] = useState(false);
+
+  const handleAudioStatusChange = useCallback((playing: boolean, open: boolean) => {
+    setIsAudioPlaying(playing);
+    setIsAudioOpen(open);
+  }, []);
 
   // Apply theme class to document element
   useEffect(() => {
@@ -80,12 +74,9 @@ export default function App() {
         completedData={completedData}
         theme={theme}
         toggleTheme={toggleTheme}
-        onToggleAudio={audioState.toggle}
-        onPlaySpoken={audioState.playSpoken}
-        onPlayMusic={audioState.playMusic}
-        audioMode={audioState.serviceMode}
-        isAudioPlaying={audioState.isPlaying}
-        isAudioOpen={audioState.isOpen}
+        onToggleAudio={() => audioControllerRef.current.toggle()}
+        isAudioPlaying={isAudioPlaying}
+        isAudioOpen={isAudioOpen}
       />
       
       <Liturgy 
@@ -97,7 +88,8 @@ export default function App() {
         settings={settings}
         updateSettings={updateSettings}
         onOpenAbout={() => setAboutOpen(true)}
-        onAudioStateChange={setAudioState}
+        onAudioStatusChange={handleAudioStatusChange}
+        audioControllerRef={audioControllerRef}
       />
 
       <AboutModal 

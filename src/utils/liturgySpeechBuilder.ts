@@ -26,6 +26,7 @@ import {
 import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
 import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES, HYMN_AUDIO_CANDIDATES, OPENING_SENTENCE_AUDIO } from './liturgicalAudioManifest';
+import { isApocryphaPassage, resolveApocryphaAudioUrl } from './apocryphaAudioResolver';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -40,10 +41,10 @@ interface BuilderOptions {
   hymnMode?: Record<string, boolean>;
 }
 
-// Helper to generate resilient ESV audio candidates:
-// 1. Same-origin proxy route (server authenticated with developer secret API key)
-// 2. Direct Crossway HearTheWord CDN endpoint (fallback for static or external hosting)
-function buildEsvAudioCandidates(passage?: string): string[] {
+// Helper to generate resilient Scripture audio candidates:
+// 1. For Apocrypha: Public domain human audio stream from Internet Archive CDN
+// 2. For Canonical 66-books: Official ESV audio stream from Crossway CDN
+function buildScriptureAudioCandidates(passage?: string): string[] {
   if (!passage || typeof passage !== 'string') return [];
   const cleanPassage = passage
     .replace(/Psalms\b/gi, 'Psalm')
@@ -54,18 +55,14 @@ function buildEsvAudioCandidates(passage?: string): string[] {
 
   if (!cleanPassage) return [];
 
-  // Check if book is Apocrypha (not in standard 66-book ESV audio)
-  const bookNameMatch = cleanPassage.match(/^(\d?\s*[a-zA-Z\s]+?)\s+\d+/);
-  const bookName = bookNameMatch ? bookNameMatch[1].trim().toLowerCase() : '';
-  const apocryphaBooks = [
-    '1 esdras', 'tobit', 'judith', 'wisdom', 'wisdom of solomon',
-    'sirach', 'ecclesiasticus', 'baruch', '1 maccabees', '2 maccabees',
-    'prayer of manasseh', 'prayer of manasses', '2 esdras'
-  ];
-  if (apocryphaBooks.includes(bookName)) {
-    return [];
+  // Check if book is Apocrypha
+  if (isApocryphaPassage(cleanPassage)) {
+    const directUrl = resolveApocryphaAudioUrl(cleanPassage);
+    const proxyUrl = `/api/apocrypha-audio?passage=${encodeURIComponent(cleanPassage)}`;
+    return directUrl ? [proxyUrl, directUrl] : (proxyUrl ? [proxyUrl] : []);
   }
 
+  // Canonical 66 books: ESV audio proxy and direct HearTheWord CDN fallback
   const proxyUrl = `/api/esv-audio?passage=${encodeURIComponent(cleanPassage)}`;
   const directCdnUrl = `https://audio.esv.org/hw/${encodeURIComponent(cleanPassage)}.mp3`;
 
@@ -181,7 +178,7 @@ export function buildLiturgySpeechSections({
   }
 
   // 9. The Psalms of the Day
-  const esvCandidatesPsalms = buildEsvAudioCandidates(readings.psalms);
+  const esvCandidatesPsalms = buildScriptureAudioCandidates(readings.psalms);
   sections.push({
     id: 'tts-psalms',
     title: 'The Psalms of the Day',
@@ -201,7 +198,7 @@ export function buildLiturgySpeechSections({
   });
 
   // 10. The First Lesson
-  const esvCandidatesFirstLesson = buildEsvAudioCandidates(readings.firstLesson);
+  const esvCandidatesFirstLesson = buildScriptureAudioCandidates(readings.firstLesson);
   sections.push({
     id: 'tts-first-lesson',
     title: 'The First Lesson',
@@ -287,7 +284,7 @@ export function buildLiturgySpeechSections({
   }
 
   // 12. Second Lesson
-  const esvCandidatesSecondLesson = buildEsvAudioCandidates(readings.secondLesson);
+  const esvCandidatesSecondLesson = buildScriptureAudioCandidates(readings.secondLesson);
   sections.push({
     id: 'tts-second-lesson',
     title: 'The Second Lesson',
