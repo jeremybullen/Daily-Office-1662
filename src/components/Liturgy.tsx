@@ -697,6 +697,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  isPaused={speech.isPaused}
                  isCurrentHymn={speech.isCurrentHymn}
                  isCurrentApocrypha={speech.isCurrentApocrypha}
+                 missingAudioNotice={speech.missingAudioNotice}
                  serviceMode={serviceAudioMode}
                  onToggleServiceMode={handleToggleServiceMode}
                  onSelectSpoken={handlePlaySpoken}

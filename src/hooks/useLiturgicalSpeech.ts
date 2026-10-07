@@ -26,6 +26,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
   })();
 
   const [rate, setRate] = useState<number>(initialRate);
+  const [missingAudioNotice, setMissingAudioNotice] = useState<string | null>(null);
 
   const stateRef = useRef({
     isPlaying: false,
@@ -33,6 +34,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     sectionIdx: 0,
     rate: initialRate,
     isCurrentHymn: false,
+    missingAudioNotice: null as string | null,
     sections: [] as LiturgySpeechSection[],
     office: 'morning' as 'morning' | 'evening',
     dayTitle: ''
@@ -69,6 +71,25 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
         existing.style.opacity = '0';
         existing.style.pointerEvents = 'none';
         document.body.appendChild(existing);
+
+        // Persistent rate enforcement across any track changes or browser internal resets
+        const applyRate = () => {
+          const currentDesired = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
+          if (existing) {
+            existing.defaultPlaybackRate = currentDesired;
+            if (Math.abs(existing.playbackRate - currentDesired) > 0.005) {
+              existing.playbackRate = currentDesired;
+            }
+          }
+        };
+
+        existing.addEventListener('ratechange', applyRate);
+        existing.addEventListener('play', applyRate);
+        existing.addEventListener('playing', applyRate);
+        existing.addEventListener('canplay', applyRate);
+        existing.addEventListener('canplaythrough', applyRate);
+        existing.addEventListener('loadedmetadata', applyRate);
+        existing.addEventListener('loadeddata', applyRate);
       }
       const initialActiveRate = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
       existing.defaultPlaybackRate = initialActiveRate;
@@ -193,8 +214,10 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     if (sectionIdx < 0 || sectionIdx >= currentSections.length) {
       setIsPlaying(false);
       setIsPaused(false);
+      setMissingAudioNotice(null);
       stateRef.current.isPlaying = false;
       stateRef.current.isPaused = false;
+      stateRef.current.missingAudioNotice = null;
       stopAudio();
       suspendKeepAlive();
       return;
@@ -216,8 +239,11 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       stopAudio();
       setIsPlaying(false);
       setIsPaused(true);
+      const notice = "Apocrypha audio is not available. Paused to read.";
+      setMissingAudioNotice(notice);
       stateRef.current.isPlaying = false;
       stateRef.current.isPaused = true;
+      stateRef.current.missingAudioNotice = notice;
       if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
         try {
           navigator.mediaSession.playbackState = 'paused';
@@ -236,14 +262,53 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     }
 
     const uniqueCandidates = Array.from(new Set(candidateUrls));
+
+    // If section has no audio available at all: pause to read!
+    if (uniqueCandidates.length === 0) {
+      stopAudio();
+      setIsPlaying(false);
+      setIsPaused(true);
+      const notice = "Audio is not available. Paused to read.";
+      setMissingAudioNotice(notice);
+      stateRef.current.isPlaying = false;
+      stateRef.current.isPaused = true;
+      stateRef.current.missingAudioNotice = notice;
+      if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.playbackState = 'paused';
+        } catch (e) {}
+      }
+      return;
+    }
+
+    // Has audio candidates: clear any missing audio notice
+    setMissingAudioNotice(null);
+    stateRef.current.missingAudioNotice = null;
+    setIsPlaying(true);
+    setIsPaused(false);
+    stateRef.current.isPlaying = true;
+    stateRef.current.isPaused = false;
+
     const audio = getOrCreateAudioElement();
 
     const tryPlayCandidate = (candIdx: number) => {
       if (!stateRef.current.isPlaying || stateRef.current.isPaused) return;
 
       if (candIdx >= uniqueCandidates.length) {
-        // Advance immediately to next section
-        playSection(sectionIdx + 1);
+        // All candidates failed to load: pause to read!
+        stopAudio();
+        setIsPlaying(false);
+        setIsPaused(true);
+        const notice = "Audio is not available. Paused to read.";
+        setMissingAudioNotice(notice);
+        stateRef.current.isPlaying = false;
+        stateRef.current.isPaused = true;
+        stateRef.current.missingAudioNotice = notice;
+        if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
+          try {
+            navigator.mediaSession.playbackState = 'paused';
+          } catch (e) {}
+        }
         return;
       }
 
@@ -271,10 +336,12 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       // Always re-apply user's speed whenever metadata loads or playback starts
       const enforceRate = () => {
         const activeRate = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
-        audio.defaultPlaybackRate = activeRate;
-        if (Math.abs(audio.playbackRate - activeRate) > 0.01) {
-          audio.playbackRate = activeRate;
-        }
+        try {
+          audio.defaultPlaybackRate = activeRate;
+          if (Math.abs(audio.playbackRate - activeRate) > 0.005) {
+            audio.playbackRate = activeRate;
+          }
+        } catch (e) {}
       };
 
       audio.onloadedmetadata = enforceRate;
@@ -321,7 +388,11 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
 
       const playPromise = audio.play();
       if (playPromise !== undefined) {
-        playPromise.then(enforceRate).catch(failAndNext);
+        playPromise.then(() => {
+          enforceRate();
+          setTimeout(enforceRate, 50);
+          setTimeout(enforceRate, 200);
+        }).catch(failAndNext);
       }
     };
 
@@ -333,13 +404,18 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     requestWakeLock();
 
     const currentSec = stateRef.current.sections[stateRef.current.sectionIdx];
-    if (currentSec?.isApocrypha) {
-      // User clicked play while on Apocrypha reading; advance to next section
-      setIsPaused(false);
-      setIsPlaying(true);
-      stateRef.current.isPaused = false;
-      stateRef.current.isPlaying = true;
-      playSection(stateRef.current.sectionIdx + 1);
+    if (stateRef.current.missingAudioNotice || currentSec?.isApocrypha) {
+      // User clicked play while on an item with no audio (paused to read); advance to next section
+      const nextIdx = stateRef.current.sectionIdx + 1;
+      if (nextIdx < stateRef.current.sections.length) {
+        setMissingAudioNotice(null);
+        stateRef.current.missingAudioNotice = null;
+        setIsPaused(false);
+        setIsPlaying(true);
+        stateRef.current.isPaused = false;
+        stateRef.current.isPlaying = true;
+        playSection(nextIdx);
+      }
       return;
     }
 
@@ -348,6 +424,8 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       setIsPlaying(true);
       stateRef.current.isPaused = false;
       stateRef.current.isPlaying = true;
+      setMissingAudioNotice(null);
+      stateRef.current.missingAudioNotice = null;
 
       if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
         try {
@@ -363,7 +441,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
         const p = audio.play();
         if (p !== undefined) {
           p.then(() => {
-            if (Math.abs(audio.playbackRate - activeRate) > 0.01) {
+            if (Math.abs(audio.playbackRate - activeRate) > 0.005) {
               audio.playbackRate = activeRate;
             }
           }).catch(() => {
@@ -378,6 +456,8 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       setIsPaused(false);
       stateRef.current.isPlaying = true;
       stateRef.current.isPaused = false;
+      setMissingAudioNotice(null);
+      stateRef.current.missingAudioNotice = null;
       playSection(stateRef.current.sectionIdx);
     }
   }, [ensureKeepAlive, requestWakeLock, getOrCreateAudioElement, playSection]);
@@ -403,8 +483,10 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
   const stop = useCallback(() => {
     setIsPlaying(false);
     setIsPaused(false);
+    setMissingAudioNotice(null);
     stateRef.current.isPlaying = false;
     stateRef.current.isPaused = false;
+    stateRef.current.missingAudioNotice = null;
     stateRef.current.sectionIdx = 0;
     setCurrentSectionIndex(0);
     stopAudio();
@@ -415,7 +497,13 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     const currentSections = stateRef.current.sections;
     const nextIdx = stateRef.current.sectionIdx + 1;
     if (nextIdx < currentSections.length) {
-      if (stateRef.current.isPlaying && !stateRef.current.isPaused) {
+      if ((stateRef.current.isPlaying && !stateRef.current.isPaused) || stateRef.current.missingAudioNotice) {
+        setMissingAudioNotice(null);
+        stateRef.current.missingAudioNotice = null;
+        setIsPaused(false);
+        setIsPlaying(true);
+        stateRef.current.isPaused = false;
+        stateRef.current.isPlaying = true;
         playSection(nextIdx);
       } else {
         stateRef.current.sectionIdx = nextIdx;
@@ -429,7 +517,13 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     const currentSections = stateRef.current.sections;
     const prevIdx = stateRef.current.sectionIdx - 1;
     if (prevIdx >= 0) {
-      if (stateRef.current.isPlaying && !stateRef.current.isPaused) {
+      if ((stateRef.current.isPlaying && !stateRef.current.isPaused) || stateRef.current.missingAudioNotice) {
+        setMissingAudioNotice(null);
+        stateRef.current.missingAudioNotice = null;
+        setIsPaused(false);
+        setIsPlaying(true);
+        stateRef.current.isPaused = false;
+        stateRef.current.isPlaying = true;
         playSection(prevIdx);
       } else {
         stateRef.current.sectionIdx = prevIdx;
@@ -504,6 +598,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     isPaused,
     isCurrentHymn,
     isCurrentApocrypha: !!currentSection?.isApocrypha,
+    missingAudioNotice,
     currentSectionIndex,
     currentSectionId: currentSection?.id,
     currentSectionTitle: currentSection?.title || '',

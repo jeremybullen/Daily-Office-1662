@@ -177,11 +177,13 @@ export function buildLiturgySpeechSections({
   // 9. The Psalms of the Day (each psalm is a separate item with singular title e.g. "Psalm 35")
   const individualPsalms = parseIndividualPsalms(readings.psalms);
   individualPsalms.forEach(ps => {
-    const esvCandidatesPsalms = buildScriptureAudioCandidates(ps.passage);
+    const isPsApocrypha = isApocryphaPassage(ps.passage);
+    const esvCandidatesPsalms = isPsApocrypha ? [] : buildScriptureAudioCandidates(ps.passage);
     sections.push({
       id: ps.id,
       title: ps.title,
       passage: ps.passage,
+      isApocrypha: isPsApocrypha,
       isDynamic: true,
       audioSrc: esvCandidatesPsalms[0],
       audioCandidates: esvCandidatesPsalms,
