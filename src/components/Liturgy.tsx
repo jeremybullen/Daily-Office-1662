@@ -14,6 +14,7 @@ import { buildLiturgySpeechSections } from '../utils/liturgySpeechBuilder';
 import { useLiturgicalSpeech } from '../hooks/useLiturgicalSpeech';
 import { AudioPlayer } from './AudioPlayer';
 import { DropCapText, VersiclePair, GloriaPatri } from './LiturgicalTypography';
+import { parseIndividualPsalms } from '../utils/psalmsParser';
 
 interface LiturgyProps {
     office: OfficeType;
@@ -72,15 +73,23 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     const isCompleted = completedData[dateKey]?.[office] ?? false;
 
     const readings = useMemo(() => getReadingsForDate(selectedDate, office), [office, selectedDate]);
+    const individualPsalms = useMemo(() => parseIndividualPsalms(readings.psalms), [readings.psalms]);
     
     const [useFirstAlt, setUseFirstAlt] = useState(false);
     const [useSecondAlt, setUseSecondAlt] = useState(false);
+
+    const activeFirstLesson = useFirstAlt && readings.firstLessonAlt ? readings.firstLessonAlt : readings.firstLesson;
+    const activeSecondLesson = useSecondAlt && readings.secondLessonAlt ? readings.secondLessonAlt : readings.secondLesson;
 
     const speechSections = useMemo(() => {
         return buildLiturgySpeechSections({
             office,
             settings,
-            readings,
+            readings: {
+                ...readings,
+                firstLesson: activeFirstLesson,
+                secondLesson: activeSecondLesson
+            },
             sentenceIdx,
             useBenedicite,
             useAlternativeEveningCanticle1,
@@ -93,6 +102,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
         office,
         settings,
         readings,
+        activeFirstLesson,
+        activeSecondLesson,
         sentenceIdx,
         useBenedicite,
         useAlternativeEveningCanticle1,
@@ -200,12 +211,13 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     }, [office, dateKey, speech]);
 
     const getHighlightClass = (sectionId: string, baseClass: string = '') => {
-        const isCurrent = speech.isPlaying && speech.currentSectionId === sectionId;
-        return `${baseClass} transition-all duration-300 ${isCurrent ? 'bg-amber-500/[0.04] p-3 -mx-3 rounded-2xl ring-1 ring-amber-500/20' : ''}`;
+        const isCurrent = isAudioPlayerOpen && speech.currentSectionId === sectionId;
+        return `${baseClass} transition-all duration-300 ${
+            isCurrent 
+                ? 'bg-amber-500/10 dark:bg-amber-400/10 p-4 -mx-4 rounded-2xl ring-1.5 ring-amber-500/40 dark:ring-amber-400/40 shadow-xs' 
+                : ''
+        }`;
     };
-
-    const activeFirstLesson = useFirstAlt && readings.firstLessonAlt ? readings.firstLessonAlt : readings.firstLesson;
-    const activeSecondLesson = useSecondAlt && readings.secondLessonAlt ? readings.secondLessonAlt : readings.secondLesson;
 
     const handleNextSentence = () => {
         setSentenceIdx(prev => {
@@ -380,18 +392,44 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  </Section>
              )}
 
-             {/* Psalms */}
-             <BibleReading 
-                 id="tts-psalms"
-                 title="The Psalms of the Day" 
-                 metadata={readings.psalms}
-                 passage={readings.psalms} 
-                 translation={translation} 
-             />
+             {/* Psalms of the Day */}
+             {individualPsalms.length > 1 ? (
+                 <div className="mb-12 md:mb-16">
+                     <div className="mb-6 md:mb-8 text-center md:text-left">
+                         <h2 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-60 font-serif">
+                             The Psalms of the Day
+                         </h2>
+                     </div>
+                     <div className="space-y-6 md:space-y-10">
+                         {individualPsalms.map((ps) => (
+                             <BibleReading 
+                                 key={ps.id}
+                                 id={ps.id}
+                                 className={getHighlightClass(ps.id)}
+                                 title={ps.title} 
+                                 passage={ps.passage} 
+                                 translation={translation} 
+                             />
+                         ))}
+                     </div>
+                 </div>
+             ) : (
+                 individualPsalms.map((ps) => (
+                     <BibleReading 
+                         key={ps.id}
+                         id={ps.id}
+                         className={getHighlightClass(ps.id)}
+                         title={ps.title} 
+                         passage={ps.passage} 
+                         translation={translation} 
+                     />
+                 ))
+             )}
 
              {/* First Lesson */}
              <BibleReading 
                  id="tts-first-lesson"
+                 className={getHighlightClass('tts-first-lesson')}
                  title="The First Lesson" 
                  metadata={readings.firstLessonAlt ? `${activeFirstLesson} (or: ${useFirstAlt ? readings.firstLesson : readings.firstLessonAlt})` : activeFirstLesson}
                  passage={activeFirstLesson} 
@@ -461,6 +499,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
              {/* Second Lesson and Canticle 2 */}
              <BibleReading 
+                 id="tts-second-lesson"
+                 className={getHighlightClass('tts-second-lesson')}
                  title="The Second Lesson" 
                  metadata={readings.secondLessonAlt ? `${activeSecondLesson} (or: ${useSecondAlt ? readings.secondLesson : readings.secondLessonAlt})` : activeSecondLesson}
                  passage={activeSecondLesson} 
@@ -656,6 +696,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  isPlaying={speech.isPlaying}
                  isPaused={speech.isPaused}
                  isCurrentHymn={speech.isCurrentHymn}
+                 isCurrentApocrypha={speech.isCurrentApocrypha}
                  serviceMode={serviceAudioMode}
                  onToggleServiceMode={handleToggleServiceMode}
                  onSelectSpoken={handlePlaySpoken}

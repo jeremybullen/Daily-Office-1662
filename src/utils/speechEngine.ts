@@ -14,6 +14,8 @@ export interface LiturgySpeechSection {
   getParts?: () => SpeechPart[];
   isDynamic?: boolean;
   isHymn?: boolean;
+  isApocrypha?: boolean;
+  passage?: string;
 }
 
 export type LiturgyAudioSection = LiturgySpeechSection;

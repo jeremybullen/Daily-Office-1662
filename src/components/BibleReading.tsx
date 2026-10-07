@@ -10,16 +10,18 @@ interface Passage {
 }
 
 interface BibleReadingProps {
+    key?: string | number;
     id?: string;
     title: string;
     rubric?: ReactNode;
     metadata?: ReactNode;
     passage: string;
     translation: Translation;
+    className?: string;
     onTitleClick?: () => void;
 }
 
-export function BibleReading({ id, title, rubric, metadata, passage, translation, onTitleClick }: BibleReadingProps) {
+export function BibleReading({ id, title, rubric, metadata, passage, translation, className = '', onTitleClick }: BibleReadingProps) {
     const [passages, setPassages] = useState<Passage[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -57,7 +59,7 @@ export function BibleReading({ id, title, rubric, metadata, passage, translation
     }, [passage, translation]);
 
     return (
-        <Section id={id} title={title} rubric={rubric} metadata={metadata} onTitleClick={onTitleClick}>
+        <Section id={id} className={className} title={title} rubric={rubric} metadata={metadata} onTitleClick={onTitleClick}>
             {loading ? (
                 <div className="flex items-center py-4">
                     <div className="animate-pulse flex space-x-2 opacity-50">
@@ -81,7 +83,7 @@ export function BibleReading({ id, title, rubric, metadata, passage, translation
                             <div className="leading-normal scripture-text">
                                 <span dangerouslySetInnerHTML={{ __html: p.text }} />
                             </div>
-                            {title === "The Psalms of the Day" && (
+                            {(title === "The Psalms of the Day" || title.startsWith("Psalm")) && (
                                 <GloriaPatri className="mt-6" />
                             )}
                         </div>

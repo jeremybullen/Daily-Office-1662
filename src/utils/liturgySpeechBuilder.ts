@@ -27,6 +27,7 @@ import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
 import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES, HYMN_AUDIO_CANDIDATES, OPENING_SENTENCE_AUDIO } from './liturgicalAudioManifest';
 import { isApocryphaPassage } from './apocryphaAudioResolver';
+import { parseIndividualPsalms } from './psalmsParser';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -173,31 +174,38 @@ export function buildLiturgySpeechSections({
     });
   }
 
-  // 9. The Psalms of the Day
-  const esvCandidatesPsalms = buildScriptureAudioCandidates(readings.psalms);
-  sections.push({
-    id: 'tts-psalms',
-    title: 'The Psalms of the Day',
-    isDynamic: true,
-    audioSrc: esvCandidatesPsalms[0],
-    audioCandidates: esvCandidatesPsalms,
-    parts: [],
-    getParts: () => {
-      const container = document.getElementById('tts-psalms');
-      const scriptureDiv = container?.querySelector('.scripture-text');
-      if (scriptureDiv) {
-        const text = cleanScriptureHtml(scriptureDiv.innerHTML);
-        if (text) return [{ text, role: 'call' }];
+  // 9. The Psalms of the Day (each psalm is a separate item with singular title e.g. "Psalm 35")
+  const individualPsalms = parseIndividualPsalms(readings.psalms);
+  individualPsalms.forEach(ps => {
+    const esvCandidatesPsalms = buildScriptureAudioCandidates(ps.passage);
+    sections.push({
+      id: ps.id,
+      title: ps.title,
+      passage: ps.passage,
+      isDynamic: true,
+      audioSrc: esvCandidatesPsalms[0],
+      audioCandidates: esvCandidatesPsalms,
+      parts: [],
+      getParts: () => {
+        const container = document.getElementById(ps.id);
+        const scriptureDiv = container?.querySelector('.scripture-text');
+        if (scriptureDiv) {
+          const text = cleanScriptureHtml(scriptureDiv.innerHTML);
+          if (text) return [{ text, role: 'call' }];
+        }
+        return [];
       }
-      return [];
-    }
+    });
   });
 
   // 10. The First Lesson
-  const esvCandidatesFirstLesson = buildScriptureAudioCandidates(readings.firstLesson);
+  const isFirstLessonApocrypha = isApocryphaPassage(readings.firstLesson);
+  const esvCandidatesFirstLesson = isFirstLessonApocrypha ? [] : buildScriptureAudioCandidates(readings.firstLesson);
   sections.push({
     id: 'tts-first-lesson',
     title: 'The First Lesson',
+    passage: readings.firstLesson,
+    isApocrypha: isFirstLessonApocrypha,
     isDynamic: true,
     audioSrc: esvCandidatesFirstLesson[0],
     audioCandidates: esvCandidatesFirstLesson,
@@ -280,10 +288,13 @@ export function buildLiturgySpeechSections({
   }
 
   // 12. Second Lesson
-  const esvCandidatesSecondLesson = buildScriptureAudioCandidates(readings.secondLesson);
+  const isSecondLessonApocrypha = isApocryphaPassage(readings.secondLesson);
+  const esvCandidatesSecondLesson = isSecondLessonApocrypha ? [] : buildScriptureAudioCandidates(readings.secondLesson);
   sections.push({
     id: 'tts-second-lesson',
     title: 'The Second Lesson',
+    passage: readings.secondLesson,
+    isApocrypha: isSecondLessonApocrypha,
     isDynamic: true,
     audioSrc: esvCandidatesSecondLesson[0],
     audioCandidates: esvCandidatesSecondLesson,

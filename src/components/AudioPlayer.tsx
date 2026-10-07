@@ -1,11 +1,12 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Pause, SkipBack, SkipForward, X, Music, Mic } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, X, Music, Mic, Info, BookOpen } from 'lucide-react';
 
 interface AudioPlayerProps {
   isOpen: boolean;
   isPlaying: boolean;
   isPaused: boolean;
   isCurrentHymn?: boolean;
+  isCurrentApocrypha?: boolean;
   serviceMode?: 'spoken' | 'music';
   onToggleServiceMode?: () => void;
   onSelectSpoken?: () => void;
@@ -28,6 +29,7 @@ export function AudioPlayer({
   isPlaying,
   isPaused,
   isCurrentHymn = false,
+  isCurrentApocrypha = false,
   serviceMode = 'spoken',
   onToggleServiceMode,
   onSelectSpoken,
@@ -87,6 +89,12 @@ export function AudioPlayer({
                   Hymn
                 </span>
               )}
+              {isCurrentApocrypha && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-200 font-medium shrink-0 flex items-center gap-1 border border-amber-500/20">
+                  <BookOpen size={10} />
+                  Apocrypha
+                </span>
+              )}
             </div>
 
             <button
@@ -101,6 +109,31 @@ export function AudioPlayer({
               <X size={14} />
             </button>
           </div>
+
+          {/* Integrated Notice for Apocryphal Readings */}
+          {isCurrentApocrypha && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center justify-between gap-2.5 px-3 py-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/25 dark:border-amber-400/25 text-amber-950 dark:text-amber-100 text-xs font-serif"
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <Info size={14} className="shrink-0 text-amber-700 dark:text-amber-300" />
+                <span className="leading-tight">
+                  <strong className="font-semibold">Apocrypha audio is not available.</strong> Paused to read. Click skip to proceed.
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={onNext}
+                title="Skip to next item"
+                className="shrink-0 px-2 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-sans text-[11px] font-semibold flex items-center gap-1 transition-colors cursor-pointer shadow-xs active:scale-95"
+              >
+                <span>Skip</span>
+                <SkipForward size={11} />
+              </button>
+            </motion.div>
+          )}
 
           {/* Controls row */}
           <div className="flex items-center justify-between pt-0.5">
@@ -128,11 +161,29 @@ export function AudioPlayer({
 
               <button
                 type="button"
-                onClick={isPlaying && !isPaused ? onPause : onPlay}
-                title={isPlaying && !isPaused ? 'Pause' : 'Play'}
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-md transition-all active:scale-95 cursor-pointer"
+                onClick={() => {
+                  if (isCurrentApocrypha) {
+                    onNext();
+                  } else if (isPlaying && !isPaused) {
+                    onPause();
+                  } else {
+                    onPlay();
+                  }
+                }}
+                title={isCurrentApocrypha ? "Skip to next item (Apocrypha audio is not available)" : isPlaying && !isPaused ? 'Pause' : 'Play'}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md ${
+                  isCurrentApocrypha
+                    ? 'bg-amber-600 hover:bg-amber-700 text-white'
+                    : 'bg-black text-white dark:bg-white dark:text-black hover:opacity-90'
+                }`}
               >
-                {isPlaying && !isPaused ? <Pause size={18} /> : <Play size={18} className="translate-x-0.5" />}
+                {isCurrentApocrypha ? (
+                  <SkipForward size={18} />
+                ) : isPlaying && !isPaused ? (
+                  <Pause size={18} />
+                ) : (
+                  <Play size={18} className="translate-x-0.5" />
+                )}
               </button>
 
               <button

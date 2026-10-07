@@ -211,6 +211,21 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     requestWakeLock();
     ensureKeepAlive();
 
+    // Apocrypha readings have no audio: pause playback so user can read along
+    if (section.isApocrypha) {
+      stopAudio();
+      setIsPlaying(false);
+      setIsPaused(true);
+      stateRef.current.isPlaying = false;
+      stateRef.current.isPaused = true;
+      if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.playbackState = 'paused';
+        } catch (e) {}
+      }
+      return;
+    }
+
     const candidateUrls: string[] = [];
     if (section.audioCandidates && section.audioCandidates.length > 0) {
       candidateUrls.push(...section.audioCandidates);
@@ -316,6 +331,17 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
   const play = useCallback(() => {
     ensureKeepAlive();
     requestWakeLock();
+
+    const currentSec = stateRef.current.sections[stateRef.current.sectionIdx];
+    if (currentSec?.isApocrypha) {
+      // User clicked play while on Apocrypha reading; advance to next section
+      setIsPaused(false);
+      setIsPlaying(true);
+      stateRef.current.isPaused = false;
+      stateRef.current.isPlaying = true;
+      playSection(stateRef.current.sectionIdx + 1);
+      return;
+    }
 
     if (stateRef.current.isPaused) {
       setIsPaused(false);
@@ -477,6 +503,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
     isPlaying,
     isPaused,
     isCurrentHymn,
+    isCurrentApocrypha: !!currentSection?.isApocrypha,
     currentSectionIndex,
     currentSectionId: currentSection?.id,
     currentSectionTitle: currentSection?.title || '',
