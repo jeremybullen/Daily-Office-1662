@@ -26,7 +26,7 @@ import {
 import { DailyReadings } from './lectionary';
 import { AppSettings, OfficeType } from '../types';
 import { LITURGICAL_AUDIO_FILES, LITURGICAL_AUDIO_CANDIDATES, HYMN_AUDIO_CANDIDATES, OPENING_SENTENCE_AUDIO } from './liturgicalAudioManifest';
-import { isApocryphaPassage, resolveApocryphaAudioUrl } from './apocryphaAudioResolver';
+import { isApocryphaPassage } from './apocryphaAudioResolver';
 
 interface BuilderOptions {
   office: OfficeType;
@@ -41,9 +41,7 @@ interface BuilderOptions {
   hymnMode?: Record<string, boolean>;
 }
 
-// Helper to generate resilient Scripture audio candidates:
-// 1. For Apocrypha: Public domain human audio stream from Internet Archive CDN
-// 2. For Canonical 66-books: Official ESV audio stream from Crossway CDN
+// Helper to generate resilient Scripture audio candidates (all non-apocrypha lessons and psalms are ESV):
 function buildScriptureAudioCandidates(passage?: string): string[] {
   if (!passage || typeof passage !== 'string') return [];
   const cleanPassage = passage
@@ -55,14 +53,12 @@ function buildScriptureAudioCandidates(passage?: string): string[] {
 
   if (!cleanPassage) return [];
 
-  // Check if book is Apocrypha
+  // Apocrypha readings have no audio
   if (isApocryphaPassage(cleanPassage)) {
-    const directUrl = resolveApocryphaAudioUrl(cleanPassage);
-    const proxyUrl = `/api/apocrypha-audio?passage=${encodeURIComponent(cleanPassage)}`;
-    return directUrl ? [proxyUrl, directUrl] : (proxyUrl ? [proxyUrl] : []);
+    return [];
   }
 
-  // Canonical 66 books: ESV audio proxy and direct HearTheWord CDN fallback
+  // Canonical non-apocrypha lessons and psalms: Official ESV audio stream from Crossway CDN
   const proxyUrl = `/api/esv-audio?passage=${encodeURIComponent(cleanPassage)}`;
   const directCdnUrl = `https://audio.esv.org/hw/${encodeURIComponent(cleanPassage)}.mp3`;
 
@@ -374,14 +370,16 @@ export function buildLiturgySpeechSections({
     sections.push({
       id: 'tts-creed',
       title: "The Apostles' Creed",
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-creed-apostles'],
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-creed-apostles'] || LITURGICAL_AUDIO_FILES['tts-creed'],
+      audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-creed-apostles'] || LITURGICAL_AUDIO_CANDIDATES['tts-creed'],
       parts: [{ text: apostlesCreed, role: 'call' }]
     });
   } else {
     sections.push({
       id: 'tts-creed',
       title: 'The Creed of Saint Athanasius',
-      audioSrc: LITURGICAL_AUDIO_FILES['tts-creed-athanasian'],
+      audioSrc: LITURGICAL_AUDIO_FILES['tts-creed-athanasian'] || LITURGICAL_AUDIO_FILES['tts-creed'],
+      audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-creed-athanasian'] || LITURGICAL_AUDIO_CANDIDATES['tts-creed'],
       parts: athanasianCreed.map(verse => ({ text: verse, role: 'call' as const }))
     });
   }
@@ -391,6 +389,7 @@ export function buildLiturgySpeechSections({
     id: 'tts-lesser-litany',
     title: 'The Lesser Litany',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-lesser-litany'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-lesser-litany'],
     parts: [
       { text: 'The Lord be with you.', role: 'call' },
       { text: 'And with thy spirit.', role: 'response' },
@@ -406,6 +405,7 @@ export function buildLiturgySpeechSections({
     id: 'tts-lords-prayer-2',
     title: "The Lord's Prayer",
     audioSrc: LITURGICAL_AUDIO_FILES['tts-lords-prayer-2'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-lords-prayer-2'],
     parts: [{ text: lordsPrayerNoDoxology, role: 'call' }]
   });
 
@@ -414,6 +414,7 @@ export function buildLiturgySpeechSections({
     id: 'tts-suffrages',
     title: 'The Suffrages',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-suffrages'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-suffrages'],
     parts: suffrages.flatMap(s => [
       { text: s.v, role: 'call' as const },
       { text: s.r, role: 'response' as const }
@@ -435,10 +436,12 @@ export function buildLiturgySpeechSections({
     ? "O God, who art the author of peace and lover of concord, in knowledge of whom standeth our eternal life, whose service is perfect freedom: Defend us thy humble servants in all assaults of our enemies; that we, surely trusting in thy defence, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen."
     : "O God, from whom all holy desires, all good counsels, and all just works do proceed: Give unto thy servants that peace which the world cannot give; that both our hearts may be set to obey thy commandments, and also that by thee we being defended from the fear of our enemies may pass our time in rest and quietness; through the merits of Jesus Christ our Saviour. Amen.";
 
+  const secondCollectKey = office === 'morning' ? 'tts-collect-peace-morning' : 'tts-collect-peace-evening';
   sections.push({
     id: 'tts-collect-second',
     title: 'The Second Collect',
-    audioSrc: office === 'morning' ? LITURGICAL_AUDIO_FILES['tts-collect-peace-morning'] : LITURGICAL_AUDIO_FILES['tts-collect-peace-evening'],
+    audioSrc: LITURGICAL_AUDIO_FILES[secondCollectKey] || LITURGICAL_AUDIO_FILES['tts-collect-second'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES[secondCollectKey] || LITURGICAL_AUDIO_CANDIDATES['tts-collect-second'],
     parts: [{ text: secondCollect, role: 'call' }]
   });
 
@@ -447,10 +450,12 @@ export function buildLiturgySpeechSections({
     ? "O Lord, our heavenly Father, Almighty and everlasting God, who hast safely brought us to the beginning of this day: Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings may be ordered by thy governance, to do always that is righteous in thy sight; through Jesus Christ our Lord. Amen."
     : "Lighten our darkness, we beseech thee, O Lord; and by thy great mercy defend us from all perils and dangers of this night; for the love of thy only Son, our Saviour, Jesus Christ. Amen.";
 
+  const thirdCollectKey = office === 'morning' ? 'tts-collect-grace-morning' : 'tts-collect-aid-evening';
   sections.push({
     id: 'tts-collect-third',
     title: 'The Third Collect',
-    audioSrc: office === 'morning' ? LITURGICAL_AUDIO_FILES['tts-collect-grace-morning'] : LITURGICAL_AUDIO_FILES['tts-collect-aid-evening'],
+    audioSrc: LITURGICAL_AUDIO_FILES[thirdCollectKey] || LITURGICAL_AUDIO_FILES['tts-collect-third'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES[thirdCollectKey] || LITURGICAL_AUDIO_CANDIDATES['tts-collect-third'],
     parts: [{ text: thirdCollect, role: 'call' }]
   });
 
@@ -459,6 +464,7 @@ export function buildLiturgySpeechSections({
     id: 'tts-prayer-president',
     title: 'A Prayer for the President',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-prayer-president'] || LITURGICAL_AUDIO_FILES['tts-state-prayers'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-prayer-president'] || LITURGICAL_AUDIO_CANDIDATES['tts-state-prayers'],
     parts: [{ text: statePrayers.president, role: 'call' }]
   });
 
@@ -467,22 +473,25 @@ export function buildLiturgySpeechSections({
     id: 'tts-prayer-clergy',
     title: 'A Prayer for the Clergy and People',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-prayer-clergy'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-prayer-clergy'],
     parts: [{ text: statePrayers.clergyAndPeople, role: 'call' }]
   });
 
-  // 22. Prayer of Saint Chrysostom
+  // 23. Prayer of Saint Chrysostom
   sections.push({
     id: 'tts-st-chrysostom',
     title: 'A Prayer of Saint Chrysostom',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-st-chrysostom'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-st-chrysostom'],
     parts: [{ text: stChrysostom, role: 'call' }]
   });
 
-  // 23. The Grace
+  // 24. The Grace
   sections.push({
     id: 'tts-the-grace',
     title: 'The Grace',
     audioSrc: LITURGICAL_AUDIO_FILES['tts-the-grace'],
+    audioCandidates: LITURGICAL_AUDIO_CANDIDATES['tts-the-grace'],
     parts: [{ text: theGrace, role: 'call' }]
   });
 

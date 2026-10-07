@@ -104,24 +104,15 @@ export function AudioPlayer({
 
           {/* Controls row */}
           <div className="flex items-center justify-between pt-0.5">
-            {/* Speed toggle: locked to 1x during hymns */}
-            {isCurrentHymn ? (
-              <span
-                title="Hymn audio plays at natural tempo (1.0x)"
-                className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-amber-500/15 text-amber-800 dark:text-amber-200 border border-amber-500/30 flex items-center gap-1 cursor-default select-none"
-              >
-                1x
-              </span>
-            ) : (
-              <button
-                type="button"
-                onClick={cycleSpeed}
-                title="Click to cycle speed (1x, 1.25x, 1.5x, 2x)"
-                className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors cursor-pointer"
-              >
-                {rate.toFixed(2).replace(/\.?0+$/, '')}x
-              </button>
-            )}
+            {/* Speed toggle */}
+            <button
+              type="button"
+              onClick={cycleSpeed}
+              title="Click to cycle speed (1x, 1.25x, 1.5x, 2x)"
+              className="px-2.5 py-1 text-[11px] font-semibold tracking-wider rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 opacity-80 hover:opacity-100 transition-colors cursor-pointer"
+            >
+              {rate.toFixed(2).replace(/\.?0+$/, '')}x
+            </button>
 
             {/* Playback Controls */}
             <div className="flex items-center gap-2">

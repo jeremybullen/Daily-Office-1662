@@ -202,34 +202,22 @@ export async function fetchPassages(passage: string, translation: string = "ESV"
     const bookId = bookMap[bookName];
     const isApocrypha = bookId && bookId >= 67;
 
-    const trans = translation.toString().toLowerCase();
-
-    if (trans === 'esv' && !isApocrypha) {
+    if (!isApocrypha) {
+      // All non-apocrypha lessons and psalms are strictly ESV
       try {
         // Tier 1: Official Crossway ESV API server proxy (clean HTML, verse numbers, headings)
         text = await fetchFromEsvApi(sub);
       } catch (esvErr: any) {
-        console.warn("ESV API fetch failed, falling back to Bolls:", esvErr);
-        try {
-          // Tier 2: Bolls ESV mirror (handles Jude 1:6-15, etc.)
-          text = await fetchFromBollsApi(sub, trans);
-        } catch (bollsErr: any) {
-          console.warn("Bolls ESV failed, falling back to BibleApi:", bollsErr);
-          // Tier 3: BibleApi KJV fallback
-          text = await fetchFromBibleApi(sub, 'kjv');
-        }
+        console.warn("Crossway ESV API fetch failed, falling back to Bolls ESV mirror:", esvErr);
+        // Tier 2: Bolls ESV mirror (handles verse ranges & mirrors)
+        text = await fetchFromBollsApi(sub, 'esv');
       }
-    } else if (isApocrypha) {
+    } else {
+      // Apocrypha books are not in the ESV Protestant canon; use KJV Apocrypha text
       try {
         text = await fetchFromBollsApi(sub, 'kjv');
       } catch (err: any) {
         text = await fetchFromBibleApi(sub, 'kjv');
-      }
-    } else {
-      try {
-        text = await fetchFromBibleApi(sub, trans);
-      } catch (err: any) {
-        text = await fetchFromBollsApi(sub, 'kjv');
       }
     }
     passages.push({ reference: rawSub, text });

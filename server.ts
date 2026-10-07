@@ -5,7 +5,7 @@ import { Readable } from "stream";
 import { createServer as createViteServer } from "vite";
 import fetch from "node-fetch"; // we'll just use global fetch in Node 20+
 import dotenv from "dotenv";
-import { resolveApocryphaAudioUrl, isApocryphaPassage } from "./src/utils/apocryphaAudioResolver";
+import { isApocryphaPassage } from "./src/utils/apocryphaAudioResolver";
 
 dotenv.config();
 
@@ -128,37 +128,6 @@ async function startServer() {
     }
   }
 
-  // API Route for Public Domain Human Audio of Apocrypha chapters (Internet Archive LibriVox CDN)
-  app.get("/api/apocrypha-audio", async (req, res) => {
-    try {
-      const { passage } = req.query;
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
-      res.setHeader("Access-Control-Allow-Headers", "Range");
-      res.setHeader("Access-Control-Expose-Headers", "Content-Range, Content-Length, Accept-Ranges");
-
-      if (req.method === "OPTIONS") {
-        return res.status(204).end();
-      }
-
-      if (!passage || typeof passage !== "string") {
-        return res.status(400).json({ error: "Missing passage query parameter." });
-      }
-
-      const streamUrl = resolveApocryphaAudioUrl(passage);
-      if (!streamUrl) {
-        return res.status(404).json({ error: `Audio recording not found for ${passage}` });
-      }
-
-      return proxyAudioStream(streamUrl, req, res);
-    } catch (err: any) {
-      console.error("Apocrypha Audio Proxy error:", err);
-      if (!res.headersSent) {
-        res.status(500).json({ error: err.message || "Failed to retrieve Apocrypha audio." });
-      }
-    }
-  });
-
   // API Route for ESV Passage Audio Proxy
   app.get("/api/esv-audio", async (req, res) => {
     try {
@@ -180,11 +149,7 @@ async function startServer() {
 
       // Check if passage contains an Apocryphal book
       if (isApocryphaPassage(passage)) {
-        const apocryphaStream = resolveApocryphaAudioUrl(passage);
-        if (apocryphaStream) {
-          return proxyAudioStream(apocryphaStream, req, res);
-        }
-        return res.status(404).json({ error: "Apocryphal books are not available in ESV audio." });
+        return res.status(404).json({ error: "Apocryphal books do not have audio." });
       }
 
       if (!apiKey) {
@@ -271,7 +236,7 @@ async function startServer() {
   // API Route for Bible Readings
   app.get("/api/bible", async (req, res) => {
     try {
-      const { passage, translation = "KJV" } = req.query;
+      const { passage, translation = "ESV" } = req.query;
       
       if (!passage || typeof passage !== "string") {
         return res.status(400).json({ error: "Missing passage query parameter." });

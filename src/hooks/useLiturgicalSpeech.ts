@@ -14,7 +14,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [isCurrentHymn, setIsCurrentHymn] = useState(false);
 
-  const [rate, setRate] = useState<number>(() => {
+  const initialRate = (() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('bcp-audio-rate');
       if (saved) {
@@ -23,13 +23,15 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       }
     }
     return 1.0;
-  });
+  })();
+
+  const [rate, setRate] = useState<number>(initialRate);
 
   const stateRef = useRef({
     isPlaying: false,
     isPaused: false,
     sectionIdx: 0,
-    rate: 1.0,
+    rate: initialRate,
     isCurrentHymn: false,
     sections: [] as LiturgySpeechSection[],
     office: 'morning' as 'morning' | 'evening',
@@ -68,6 +70,9 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
         existing.style.pointerEvents = 'none';
         document.body.appendChild(existing);
       }
+      const initialActiveRate = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
+      existing.defaultPlaybackRate = initialActiveRate;
+      existing.playbackRate = initialActiveRate;
       audioElementRef.current = existing;
       return existing;
     }
@@ -236,11 +241,30 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       stateRef.current.isCurrentHymn = isHymn;
       setIsCurrentHymn(isHymn);
 
+      const targetRate = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
+
       audio.onended = null;
       audio.onerror = null;
+      audio.onplay = null;
+      audio.onplaying = null;
+      audio.onloadedmetadata = null;
       audio.src = encodedPath;
       audio.currentTime = 0;
-      audio.playbackRate = isHymn ? 1.0 : Math.max(0.5, Math.min(2.0, stateRef.current.rate || 1.0));
+      audio.defaultPlaybackRate = targetRate;
+      audio.playbackRate = targetRate;
+
+      // Always re-apply user's speed whenever metadata loads or playback starts
+      const enforceRate = () => {
+        const activeRate = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
+        audio.defaultPlaybackRate = activeRate;
+        if (Math.abs(audio.playbackRate - activeRate) > 0.01) {
+          audio.playbackRate = activeRate;
+        }
+      };
+
+      audio.onloadedmetadata = enforceRate;
+      audio.onplay = enforceRate;
+      audio.onplaying = enforceRate;
 
       audio.onended = () => {
         if (!stateRef.current.isPlaying || stateRef.current.isPaused) return;
@@ -248,6 +272,7 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       };
 
       audio.ontimeupdate = () => {
+        enforceRate();
         if (typeof navigator !== 'undefined' && 'mediaSession' in navigator && (navigator.mediaSession as any).setPositionState) {
           try {
             if (!isNaN(audio.duration) && audio.duration > 0) {
@@ -267,15 +292,21 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
         isFailed = true;
         audio.onerror = null;
         audio.onended = null;
+        audio.onplay = null;
+        audio.onplaying = null;
+        audio.onloadedmetadata = null;
         tryPlayCandidate(candIdx + 1);
       };
 
       audio.onerror = failAndNext;
       audio.load();
 
+      // audio.load() resets playbackRate to defaultPlaybackRate per HTML spec, so enforce immediately
+      enforceRate();
+
       const playPromise = audio.play();
       if (playPromise !== undefined) {
-        playPromise.catch(failAndNext);
+        playPromise.then(enforceRate).catch(failAndNext);
       }
     };
 
@@ -299,10 +330,17 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
       }
 
       const audio = getOrCreateAudioElement();
+      const activeRate = Math.max(0.5, Math.min(2.5, stateRef.current.rate || 1.0));
+      audio.defaultPlaybackRate = activeRate;
+      audio.playbackRate = activeRate;
       if (audio.src && !audio.ended && audio.currentTime > 0) {
         const p = audio.play();
         if (p !== undefined) {
-          p.catch(() => {
+          p.then(() => {
+            if (Math.abs(audio.playbackRate - activeRate) > 0.01) {
+              audio.playbackRate = activeRate;
+            }
+          }).catch(() => {
             playSection(stateRef.current.sectionIdx);
           });
         }
@@ -376,17 +414,15 @@ export function useLiturgicalSpeech({ sections, office = 'morning', dayTitle }: 
   }, [playSection, scrollToSection]);
 
   const changeRate = useCallback((newRate: number) => {
-    setRate(newRate);
-    stateRef.current.rate = newRate;
+    const clamped = Math.max(0.5, Math.min(2.5, newRate));
+    setRate(clamped);
+    stateRef.current.rate = clamped;
     if (typeof window !== 'undefined') {
-      localStorage.setItem('bcp-audio-rate', newRate.toString());
+      localStorage.setItem('bcp-audio-rate', clamped.toString());
     }
     if (audioElementRef.current) {
-      if (!stateRef.current.isCurrentHymn) {
-        audioElementRef.current.playbackRate = newRate;
-      } else {
-        audioElementRef.current.playbackRate = 1.0;
-      }
+      audioElementRef.current.defaultPlaybackRate = clamped;
+      audioElementRef.current.playbackRate = clamped;
     }
   }, []);
 

@@ -248,6 +248,21 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/athanasian-creed.mp3',
     '/audio/creeds/athanasian-creed.mp3'
   ],
+  'tts-creed-apostles': [
+    '/audio/Apostles Creed.mp3',
+    "/audio/Apostles' Creed.mp3",
+    '/audio/The Apostles Creed.mp3',
+    "/audio/The Apostles' Creed.mp3",
+    '/audio/Creed.mp3',
+    '/audio/apostles-creed.mp3',
+    '/audio/creeds/apostles-creed.mp3'
+  ],
+  'tts-creed-athanasian': [
+    '/audio/Athanasian Creed.mp3',
+    '/audio/The Athanasian Creed.mp3',
+    '/audio/athanasian-creed.mp3',
+    '/audio/creeds/athanasian-creed.mp3'
+  ],
 
   // Lesser Litany & Suffrages
   'tts-lesser-litany': [
@@ -277,6 +292,19 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/collect-peace-evening.mp3',
     '/audio/evening/collect-peace.mp3'
   ],
+  'tts-collect-peace-morning': [
+    '/audio/Collect for Peace.mp3',
+    '/audio/Second Collect Peace.mp3',
+    '/audio/Second Collect.mp3',
+    '/audio/collect-peace.mp3',
+    '/audio/morning/collect-peace.mp3'
+  ],
+  'tts-collect-peace-evening': [
+    '/audio/Evening Collect for Peace.mp3',
+    '/audio/Collect for Peace Evening.mp3',
+    '/audio/collect-peace-evening.mp3',
+    '/audio/evening/collect-peace.mp3'
+  ],
 
   // Third Collect (Grace / Aid)
   'tts-collect-third': [
@@ -285,6 +313,20 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/Third Collect.mp3',
     '/audio/collect-grace.mp3',
     '/audio/morning/collect-grace.mp3',
+    '/audio/Collect for Aid.mp3',
+    '/audio/Aid Against Perils.mp3',
+    '/audio/Third Collect Aid.mp3',
+    '/audio/collect-aid.mp3',
+    '/audio/evening/collect-aid.mp3'
+  ],
+  'tts-collect-grace-morning': [
+    '/audio/Collect for Grace.mp3',
+    '/audio/Third Collect Grace.mp3',
+    '/audio/Third Collect.mp3',
+    '/audio/collect-grace.mp3',
+    '/audio/morning/collect-grace.mp3'
+  ],
+  'tts-collect-aid-evening': [
     '/audio/Collect for Aid.mp3',
     '/audio/Aid Against Perils.mp3',
     '/audio/Third Collect Aid.mp3',
