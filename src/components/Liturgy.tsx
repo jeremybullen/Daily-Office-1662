@@ -211,7 +211,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
     }, [office, dateKey, speech]);
 
     const getHighlightClass = (sectionId: string, baseClass: string = '') => {
-        const isCurrent = isAudioPlayerOpen && speech.currentSectionId === sectionId;
+        const isCurrent = (isAudioPlayerOpen || speech.isPlaying) && speech.currentSectionId === sectionId;
         return `${baseClass} transition-all duration-300 ${
             isCurrent 
                 ? 'bg-amber-500/10 dark:bg-amber-400/10 p-4 -mx-4 rounded-2xl ring-1.5 ring-amber-500/40 dark:ring-amber-400/40 shadow-xs' 
@@ -393,38 +393,28 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              )}
 
              {/* Psalms of the Day */}
-             {individualPsalms.length > 1 ? (
-                 <div className="mb-12 md:mb-16">
-                     <div className="mb-6 md:mb-8 text-center md:text-left">
-                         <h2 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-60 font-serif">
-                             The Psalms of the Day
-                         </h2>
-                     </div>
-                     <div className="space-y-6 md:space-y-10">
-                         {individualPsalms.map((ps) => (
-                             <BibleReading 
-                                 key={ps.id}
-                                 id={ps.id}
-                                 className={getHighlightClass(ps.id)}
-                                 title={ps.title} 
-                                 passage={ps.passage} 
-                                 translation={translation} 
-                             />
-                         ))}
-                     </div>
-                 </div>
-             ) : (
-                 individualPsalms.map((ps) => (
-                     <BibleReading 
-                         key={ps.id}
-                         id={ps.id}
-                         className={getHighlightClass(ps.id)}
-                         title={ps.title} 
-                         passage={ps.passage} 
-                         translation={translation} 
-                     />
-                 ))
-             )}
+             {individualPsalms.map((ps, index) => (
+                 <BibleReading 
+                     key={ps.id}
+                     id={ps.id}
+                     className={getHighlightClass(ps.id)}
+                     headerPrefix={index === 0 ? (
+                         <div className="mb-4">
+                             <h2 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-80">
+                                 The Psalms of the Day
+                             </h2>
+                             {readings.psalms && (
+                                 <div className="text-xs md:text-sm opacity-60 font-serif italic mt-0.5">
+                                     {readings.psalms.trim().endsWith('.') ? readings.psalms.trim().slice(0, -1) : readings.psalms}
+                                 </div>
+                             )}
+                         </div>
+                     ) : undefined}
+                     title={ps.title} 
+                     passage={ps.passage} 
+                     translation={translation} 
+                 />
+             ))}
 
              {/* First Lesson */}
              <BibleReading 
@@ -508,6 +498,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
                  onTitleClick={readings.secondLessonAlt ? () => setUseSecondAlt(prev => !prev) : undefined}
              />
              <Section 
+                 id="tts-canticle-2"
+                 className={getHighlightClass('tts-canticle-2')}
                  title={office === 'morning' ? (useAlternativeCanticle2 ? "Jubilate Deo" : "Benedictus") : (useAlternativeCanticle2 ? "Deus Misereatur" : "Nunc Dimittis")}
                  metadata={office === 'morning' ? (useAlternativeCanticle2 ? "Psalm 100." : "Luke 1:68.") : (useAlternativeCanticle2 ? "Psalm 67." : "Luke 2:29.")}
                  onTitleClick={() => setUseAlternativeCanticle2(!useAlternativeCanticle2)}
@@ -567,6 +559,8 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
 
              {/* Creed */}
              <Section 
+                 id="tts-creed"
+                 className={getHighlightClass('tts-creed')}
                  title={isAthanasian ? "The Creed of Saint Athanasius" : "The Apostles' Creed"}
                  metadata={isAthanasian ? "Quicunque vult." : ""}
                  rubric="standing."
@@ -585,7 +579,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
 
              {/* Lesser Litany */}
-             <Section title="The Lesser Litany">
+             <Section id="tts-lesser-litany" className={getHighlightClass('tts-lesser-litany')} title="The Lesser Litany">
                  <div className="space-y-4">
                      <VersiclePair v="The Lord be with you." r="And with thy spirit." />
                      <div className="space-y-1">
@@ -601,7 +595,7 @@ export function Liturgy({ office, translation, selectedDate, completedData, onTo
              </Section>
              
              {/* Lord's Prayer 2 */}
-             <Section title="The Lord's Prayer">
+             <Section id="tts-lords-prayer-2" className={getHighlightClass('tts-lords-prayer-2')} title="The Lord's Prayer">
                  <div className="animate-in fade-in duration-500">
                      <P className="liturgical-prose"><DropCapText text={lordsPrayerNoDoxology} /></P>
                  </div>

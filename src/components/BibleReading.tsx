@@ -15,13 +15,15 @@ interface BibleReadingProps {
     title: string;
     rubric?: ReactNode;
     metadata?: ReactNode;
+    headerPrefix?: ReactNode;
     passage: string;
     translation: Translation;
     className?: string;
     onTitleClick?: () => void;
+    embedded?: boolean;
 }
 
-export function BibleReading({ id, title, rubric, metadata, passage, translation, className = '', onTitleClick }: BibleReadingProps) {
+export function BibleReading({ id, title, rubric, metadata, headerPrefix, passage, translation, className = '', onTitleClick, embedded = false }: BibleReadingProps) {
     const [passages, setPassages] = useState<Passage[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -58,38 +60,57 @@ export function BibleReading({ id, title, rubric, metadata, passage, translation
         };
     }, [passage, translation]);
 
-    return (
-        <Section id={id} className={className} title={title} rubric={rubric} metadata={metadata} onTitleClick={onTitleClick}>
-            {loading ? (
-                <div className="flex items-center py-4">
-                    <div className="animate-pulse flex space-x-2 opacity-50">
-                        <div className="w-1.5 h-1.5 bg-[var(--text-color)] rounded-full"></div>
-                        <div className="w-1.5 h-1.5 bg-[var(--text-color)] rounded-full"></div>
-                        <div className="w-1.5 h-1.5 bg-[var(--text-color)] rounded-full"></div>
-                    </div>
+    const content = (
+        loading ? (
+            <div className="flex items-center py-4">
+                <div className="animate-pulse flex space-x-2 opacity-50">
+                    <div className="w-1.5 h-1.5 bg-[var(--text-color)] rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-[var(--text-color)] rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-[var(--text-color)] rounded-full"></div>
                 </div>
-            ) : error ? (
-                <div>
-                    <p className="text-red-500 font-semibold mb-2">Error loading reading:</p>
-                    <p className="opacity-80">{error}</p>
-                </div>
-            ) : (
-                <div className="space-y-8">
-                    {passages.map((p, i) => (
-                        <div key={i}>
-                            {passages.length > 1 && (
-                                <h4 className="font-bold text-lg mb-4 opacity-70">{p.reference}</h4>
-                            )}
-                            <div className="leading-normal scripture-text">
-                                <span dangerouslySetInnerHTML={{ __html: p.text }} />
-                            </div>
-                            {(title === "The Psalms of the Day" || title.startsWith("Psalm")) && (
-                                <GloriaPatri className="mt-6" />
-                            )}
+            </div>
+        ) : error ? (
+            <div>
+                <p className="text-red-500 font-semibold mb-2">Error loading reading:</p>
+                <p className="opacity-80">{error}</p>
+            </div>
+        ) : (
+            <div className="space-y-8">
+                {passages.map((p, i) => (
+                    <div key={i}>
+                        {passages.length > 1 && (
+                            <h4 className="font-bold text-lg mb-4 opacity-70">{p.reference}</h4>
+                        )}
+                        <div className="leading-normal scripture-text">
+                            <span dangerouslySetInnerHTML={{ __html: p.text }} />
                         </div>
-                    ))}
-                </div>
-            )}
+                        {(title === "The Psalms of the Day" || title.startsWith("Psalm")) && (
+                            <GloriaPatri className="mt-6" />
+                        )}
+                    </div>
+                ))}
+            </div>
+        )
+    );
+
+    if (embedded) {
+        return (
+            <div id={id} className={`scroll-mt-24 ${className}`}>
+                {title && (
+                    <div className="pb-1.5 mb-3 border-b border-black/10 dark:border-white/10">
+                        <h4 className="font-semibold text-xs md:text-sm uppercase tracking-widest opacity-80">
+                            {title}
+                        </h4>
+                    </div>
+                )}
+                {content}
+            </div>
+        );
+    }
+
+    return (
+        <Section id={id} className={className} title={title} headerPrefix={headerPrefix} rubric={rubric} metadata={metadata} onTitleClick={onTitleClick}>
+            {content}
         </Section>
     );
 }
