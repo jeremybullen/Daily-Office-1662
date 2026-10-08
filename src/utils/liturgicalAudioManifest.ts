@@ -154,6 +154,16 @@ export const LITURGICAL_AUDIO_CANDIDATES: Record<string, string[]> = {
     '/audio/general/versicles.mp3'
   ],
 
+  // Gloria Patri
+  'tts-gloria-patri': [
+    '/audio/Spoken Gloria Patri.mp3',
+    '/audio/spoken%20Gloria%20Patri.mp3',
+    '/audio/Gloria Patri.mp3',
+    '/audio/Gloria%20Patri.mp3',
+    '/audio/gloria-patri.mp3',
+    '/audio/general/gloria-patri.mp3'
+  ],
+
   // Canticles (Spoken defaults)
   'tts-venite': [
     '/audio/Venite.mp3',

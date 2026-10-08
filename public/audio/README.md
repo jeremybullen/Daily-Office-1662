@@ -27,6 +27,7 @@ When the Daily Office audio player is in **"Hybrid Mode"** (default):
 - `amen.mp3` — Choral congregational "Amen."
 - `lords-prayer.mp3` — The Lord's Prayer ("Our Father, which art in heaven...")
 - `versicles.mp3` — Initial Versicles & Gloria Patri
+- `Spoken Gloria Patri.mp3` / `Gloria Patri.mp3` — Gloria Patri ("Glory be to the Father, and to the Son...")
 - `lesser-litany.mp3` — Lesser Litany ("The Lord be with you...", "Lord, have mercy upon us...")
 - `suffrages.mp3` — The Preces and Suffrages
 - `st-chrysostom.mp3` — A Prayer of Saint Chrysostom
